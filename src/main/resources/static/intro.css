@@ -1,0 +1,37 @@
+.intro_context {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.intro_context {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.medium_text {
+    margin-top: -10px;
+    font-size: 20px;
+}
+
+.button_and_image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.medium_button {
+    background-color: #79C8EC;
+    width: 250px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    box-shadow: 2px 5px lightgray;
+}
+
+
