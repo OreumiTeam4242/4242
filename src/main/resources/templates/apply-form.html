@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>신청 폼 페이지</title>
+    <link rel="stylesheet" href="../static/apply-form.css">
+</head>
+<body>
+<nav class="navbar">
+    <div>
+        <img id="logo" src="../static/logo.png" alt="로고 이미지"/>
+    </div>
+    <div id="nav-r">
+        <a class='nav-a' href="">로그아웃</a>
+        <a class='nav-a' href="">내 정보</a>
+    </div>
+
+</nav>
+<main>
+    <div id="main-wrapper">
+        <div>
+            <a href="">뒤로가기</a>
+            <h2 id="apply">스터디 / 프로젝트 신청</h2>
+            <hr/>
+        </div>
+        <div id="title-wrapper">
+            <label class="label-1" for="title">제목</label><br>
+            <textarea id="title" name="motivation"></textarea>
+        </div>
+        <div>
+            <label class="label-1" for="motivation">신청 동기</label><br>
+            <textarea id="motivation" name="motivation"></textarea>
+        </div>
+        <div id="file-wrapper">
+        <div>
+            <input type="file" name="file" id="file">
+        </div>
+            <div>
+                <p>포트폴리오, 작업물 등을 자유롭게 첨부해보세요!</p>
+            </div>
+        </div>
+        <div>
+            <label class="label-1" >활동 가능 요일</label><br>
+            <div class="day-check">
+            <input type="checkbox" id="monday" name="day[]" value="monday">
+            <label for="monday">월요일</label>
+            <input type="checkbox" id="tuesday" name="day[]" value="tuesday">
+            <label for="tuesday">화요일</label>
+            <input type="checkbox" id="wednesday" name="day[]" value="wednesday">
+            <label for="wednesday">수요일</label>
+            <input type="checkbox" id="thursday" name="day[]" value="thursday">
+            <label for="thursday">목요일</label>
+            <input type="checkbox" id="friday" name="day[]" value="friday">
+            <label for="friday">금요일</label>
+            <input type="checkbox" id="saturday" name="day[]" value="saturday">
+            <label for="saturday">토요일</label>
+            <input type="checkbox" id="sunday" name="day[]" value="sunday">
+            <label for="sunday">일요일</label>
+            </div>
+        </div>
+        <div>
+            <label class="label-1">활동 가능 시간</label><br>
+            <div class="time-check">
+            <input type="checkbox" id="morning" name="time[]" value="morning">
+            <label for="morning">아침 시간대 (05:00 ~ 10:59)</label>
+            <input type="checkbox" id="lunch" name="time[]" value="lunch">
+            <label for="lunch">점심 시간대 (11:00 ~ 16:59)</label>
+            <input type="checkbox" id="dinner" name="time[]" value="dinner">
+            <label for="dinner">저녁 시간대 (17:00 ~ 22:59)</label>
+            <input type="checkbox" id="etc" name="time[]" value="etc">
+            <label for="etc">그 외 (23:00 ~ 04:59)</label>
+            </div>
+        </div>
+        <div>
+            <button id="submit-button" type="button">제출하기</button>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="footer-more">
+        <a class="footer-a">이용약관</a>
+        <a class="footer-a">서비스 소개</a>
+        <a class="footer-a">4242</a>
+    </div>
+</footer>
+</body>
+</html>
