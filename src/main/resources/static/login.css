@@ -1,0 +1,58 @@
+.login_all_context {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.login_image {
+    width: 708.04px;
+    height: 710px;
+}
+
+.login_main {
+    position: relative;
+}
+
+.login_context {
+    position: absolute;
+    margin-top: 230px;
+}
+
+.email_text {
+    margin-left: -320px;
+    font-size: 25px;
+    font-weight: 550;
+}
+
+.password_text {
+    margin-left: -300px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+#login-form > input {
+    width: 400px;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #D9D9D9;
+}
+
+.login_button {
+    background-color: #79C8EC;
+    width: 150px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    margin-right: -380px;
+    margin-top: 70px;
+}
+
+
