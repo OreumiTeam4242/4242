@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>개인정보 페이지</title>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <a class="logo_top" href="">
+      <img src="../static/image/logo.png" alt="사이사이 로고">
+    </a>
+  </div>
+  <nav class="menu_top">
+    <button class="login_top" type="button">로그인</button>
+    <button class="logout_top" type="button">로그아웃</button>
+    <button class="mypage" type="button">내 정보</button>
+  </nav>
+</header>
+
+<nav class="left_side_nav">
+  <span>회원 정보</span>
+  <ul>
+    <li><a href="">진행중인 스터디 / 프로젝트</a></li>
+    <li><a href="">내가 모집중인 스터디 / 프로젝트</a></li>
+    <li><a href="">스크랩한 스터디 / 프로젝트</a></li>
+    <li><a href="">종료된 스터디 / 프로젝트</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="info_row1">
+    <h2>회원 정보</h2>
+    <div class="personal_info">
+      <img src="" alt="나의 프로필 사진">
+      <div>
+        <h3>닉네임: 사이사이</h3>
+        <p>등급: 뉴비 / 주니어 / 시니어</p>
+        <p>이메일 : abcde@gmail.com</p>
+      </div>
+      <button class="edit" type="button">수정</button>
+    </div>
+  </div>
+
+  <div class="info_row2">
+    <h2>진행중인 스터디 / 프로젝트</h2>
+    <button type="button" class="go_left">
+      <img src="" alt="왼쪽으로 보여주기">
+    </button>
+    <div class="row2_col1">
+      <a href="">
+        <h3>수학 스터디</h3>
+        <p>스터디장: 닉네임</p>
+      </a>
+      <button class="is_closed" type="button">종료</button>
+    </div>
+    <div class="row2_col2">
+      <a href="">row2_col2</a>
+    </div>
+    <div class="row2_col3">
+      <a href="">row2_col3</a>
+    </div>
+    <button type="button" class="go_right">
+      <img src="" alt="오른쪽으로 보여주기">
+    </button>
+  </div>
+
+  <div class="info_row3">
+    <h2>내가 모집중인 스터디 / 프로젝트</h2>
+    <button type="button" class="go_left">
+      <img src="" alt="왼쪽으로 보여주기">
+    </button>
+    <div class="row3_col1">
+      <a href="">
+        <h3>수학 스터디</h3>
+        <p>스터디장: 닉네임</p>
+      </a>
+    </div>
+    <div class="row3_col2">
+      <a href="">row3_col2</a>
+    </div>
+    <div class="row3_col3">
+      <a href="">row3_col3</a>
+    </div>
+    <button type="button" class="go_right">
+      <img src="" alt="오른쪽으로 보여주기">
+    </button>
+  </div>
+
+  <div class="info_row4">
+    <h2>스크랩한 스터디 / 프로젝트</h2>
+    <button type="button" class="go_left">
+      <img src="" alt="왼쪽으로 보여주기">
+    </button>
+    <button type="button" class="favorite">
+      <img src="" alt="프로젝트 즐겨찾기">
+    </button>
+    <div class="row4_col1">
+      <a href="">
+        <h3>수학 스터디</h3>
+        <p>스터디장: 닉네임</p>
+      </a>
+    </div>
+    <div class="row4_col2">
+      <a href="">row4_col2</a>
+    </div>
+    <div class="row4_col3">
+      <a href="">row4_col3</a>
+    </div>
+    <button type="button" class="go_right">
+      <img src="" alt="오른쪽으로 보여주기">
+    </button>
+  </div>
+
+  <div class="info_row5">
+    <h2>종료된 스터디 / 프로젝트</h2>
+    <button type="button" class="go_left">
+      <img src="" alt="왼쪽으로 보여주기">
+    </button>
+    <div class="row5_col1">
+      <a href="">
+        <h3>수학 스터디</h3>
+        <p>스터디장: 닉네임</p>
+      </a>
+    </div>
+    <div class="row5_col2">
+      <a href="">row5_col2</a>
+    </div>
+    <div class="row5_col3">
+      <a href="">row5_col3</a>
+    </div>
+    <button type="button" class="go_right">
+      <img src="" alt="오른쪽으로 보여주기">
+    </button>
+  </div>
+  <button type="button" class="scroll_top">
+    <img src="" alt="맨 위로 올라가기">
+  </button>
+</main>
+
+<footer>
+  <nav class="menu_end">
+    <button class="site_info" type="button">이용약관</button>
+    <button class="service_desc" type="button">서비스 소개</button>
+    <button class="about_4242" type="button">4242</button>
+  </nav>
+</footer>
+
+<!--모달 창 1, 2-->
+<section class="modal">
+  <div class="modal_1">
+    <img src="../static/image/Info.png" alt="정보 아이콘">
+    <p>진행중인 스터디 / 프로젝트를<br>종료하시겠습니까?</p>
+    <img src="../static/image/Ok_red.png" alt="확인 버튼">
+  </div>
+
+  <div class="modal_2">
+    <p>아직 진행중인 스터디 / 프로젝트가 없네요 ㅠㅠ<br>새로운 스터디 / 프로젝트를 시작해보세요!</p>
+    <button type="button" class="go_to_main">
+      모집중인 스터디 / 프로젝트 보러가기
+    </button>
+  </div>
+</section>
+</body>
+</html>
