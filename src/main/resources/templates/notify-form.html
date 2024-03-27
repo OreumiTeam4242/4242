@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>신고 페이지</title>
+    <link rel="stylesheet" href="../static/notify-form.css">
+</head>
+<body>
+<nav class="navbar">
+    <div>
+        <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+    </div>
+    <div id="nav-r">
+        <a class='nav-a' href="">로그아웃</a>
+        <a class='nav-a' href="">내 정보</a>
+    </div>
+
+</nav>
+<main>
+    <div id="main-wrapper">
+        <div>
+            <a href="">뒤로가기</a>
+            <h2 id="apply">신고합니다</h2>
+            <hr/>
+        </div>
+        <div id="title-wrapper">
+            <label class="label-1" for="title">제목</label><br>
+            <textarea id="title" name="motivation"></textarea>
+        </div>
+        <div>
+            <label class="label-1" for="notify-user">신고 유저</label><br>
+            <textarea id="notify-user" name="notify-user"></textarea>
+        </div>
+        <div>
+            <label class="label-1" for="motivation">신고 사유</label><br>
+            <textarea id="motivation" name="motivation"></textarea>
+        </div>
+        <div id="file-wrapper">
+            <div>
+                <input type="file" name="file" id="file">
+            </div>
+            <div>
+                <p>신고 사유에 대한 파일을 첨부해주세요.</p>
+            </div>
+        </div>
+
+        <div>
+            <button id="submit-button" type="button">제출하기</button>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="footer-more">
+        <a class="footer-a">이용약관</a>
+        <a class="footer-a">서비스 소개</a>
+        <a class="footer-a">4242</a>
+    </div>
+</footer>
+</body>
+</html>
