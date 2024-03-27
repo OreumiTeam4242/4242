@@ -1,0 +1,145 @@
+/*reset css*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*본문-헤더*/
+header {
+    margin: 17px 32px 0;
+}
+
+header .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*로그인, 로그아웃 버튼 스위칭하기: 디스플레이 안되게 설정*/
+.logo .logout_top {
+    display: none;
+}
+
+button {
+    all: unset;
+    margin-right: 12px;
+}
+/*메인*/
+
+main {
+    margin: 0 185px;
+}
+
+.go_back {
+    margin-top: 87px;
+    margin-bottom: 11px;
+}
+
+.main_title h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-right: 65px;
+    margin-bottom: 8px;
+}
+
+.main_title {
+    display: flex;
+    align-items: center;
+}
+
+.main_title > p {
+    font-size: 20px;
+}
+
+.register_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.register_list a {
+    all: unset;
+    display: inline-block;
+    border: 5px solid #7AC8EC;
+    border-radius: 60px;
+    width: 300px;
+    height: 193px;
+    margin-top: 70px;
+    text-align: center;
+    line-height: 100px;
+}
+
+.register_list h1 {
+    display: block;
+    font-size: 20px;
+}
+
+.register_list h2 {
+    display: inline-block;
+}
+
+.register_h2 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.main_paging {
+    margin: 104px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+/*푸터*/
+footer {
+    background-color: #77A7EE;
+    height: 127px;
+}
+
+.menu_end {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 75px;
+    padding-right: 30px;
+}
+
+.menu_end button {
+    margin-left: 60px;
+}
