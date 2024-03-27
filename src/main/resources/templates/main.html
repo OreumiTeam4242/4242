@@ -3,56 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/main.css">
-    <title>Title</title>
+    <title>메인 페이지</title>
 </head>
 <body>
-<div class="main-context">
+<button class="btn-to-top">
+    <img src="../static/image/keyboard_arrow_up.png" alt="위로가기 버튼">
+</button>
 <header>
-    <img class="logo-image" src="../static/image/logo.png" alt="상단 4242 로고">
-    <div class="logout-and-mydata">
-    <button class="logout">로그아웃</button>
-    <button class="mydata">내 정보</button>
-    </div>
+    <img src="../static/image/4242-logo.png" alt="4242 로고">
+
+    <ul class="header-nav">
+        <li><a>로그아웃</a></li>
+        <li><a>내 정보</a></li>
+    </ul>
 </header>
+<div class="main-context">
 <main>
     <div class="main-box">
         <p class="box-text">내 관심분야는?</p>
-        <div class="sub-box"><input type="button" class="search-toggle"></div>
+        <div class="post-type-select">
+            <select id="post-type" name="post-type">
+                <option value="all">전체</option>
+                <option value="society">인문사회</option>
+                <option value="science">자연과학</option>
+                <option value="engineering">정보공학</option>
+                <option value="ai">AI</option>
+            </select>
+        </div>
     </div>
     <div class="hot">
         <p class="hot-text"><span style="color:red">HOT</span> 스터디 / 프로젝트 모집</p>
         <div class="hot-box">
-            <div class="hot-box1"></div>
-            <div class="hot-box2"></div>
-            <div class="hot-box3"></div>
+            <div class="hot-box-content">
+                <div class="box-top-content">
+                    <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                    <img class="heart" src="../static/image/filled-heart.png" alt="채워진 하트 이미지"/>
+                </div>
+                <div class="box-text-content">
+                    <p class="author">글쓴이</p>
+                    <p>조회수 30</p>
+                    <p>댓글 33</p>
+                </div>
+            </div>
+            <div class="hot-box-content">
+                <div class="box-top-content">
+                    <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                    <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                </div>
+                <div class="box-text-content">
+                    <p class="author">글쓴이</p>
+                    <p>조회수 30</p>
+                    <p>댓글 33</p>
+                </div>
+            </div>
+            <div class="hot-box-content">
+                <div class="box-top-content">
+                    <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                    <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                </div>
+                <div class="box-text-content">
+                    <p class="author">글쓴이</p>
+                    <p>조회수 30</p>
+                    <p>댓글 33</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="find">
         <p class="find-text">모집중인 스터디 / 프로젝트</p>
         <div class="find-box">
-            <div class="first-boxes">
-                <div class="find-box1"></div>
-                <div class="find-box2"></div>
-                <div class="find-box3"></div>
+            <div class="boxes">
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/filled-heart.png" alt="채워진 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/filled-heart.png" alt="채워진 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
             </div>
-            <div class="second-boxes">
-                <div class="find-box4"></div>
-                <div class="find-box5"></div>
-                <div class="find-box6"></div>
+            <div class="boxes">
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
             </div>
-            <div class="third-boxes">
-                <div class="find-box7"></div>
-                <div class="find-box8"></div>
-                <div class="find-box9"></div>
+            <div class="boxes">
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
+                <div class="find-box-content">
+                    <div class="box-top-content">
+                        <p class="box-in-text">수학 공부 하실 분 모집합니다!</p>
+                        <img class="heart" src="../static/image/empty-heart.png" alt="빈 하트 이미지"/>
+                    </div>
+                    <div class="box-text-content-2">
+                        <p class="author">글쓴이</p>
+                        <p>조회수 30</p>
+                        <p>댓글 33</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
 <footer>
     <div class="footer-more">
-        <a class="footer-a">이용약관</a>
-        <a class="footer-a">서비스 소개</a>
-        <a class="footer-a">4242</a>
+        <button class="footer-a">이용약관</button>
+        <button class="footer-a">서비스 소개</button>
+        <button class="footer-a">4242</button>
     </div>
 </footer>
 </div>
