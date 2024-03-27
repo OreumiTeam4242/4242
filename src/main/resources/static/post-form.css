@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    height: 111px;
+    margin-bottom: 80px;
+    padding:25px 20px 0 20px;
+}
+#logo{
+    width: 111px;
+    height: 106px;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+#nav-r{
+    margin-top: 25px;
+}
+.nav-a{
+    margin-left:10px;
+    font-size: 12px;
+}
+
+main{
+    display:flex;
+    justify-content: center;
+    width:100%;
+}
+#main-wrapper{
+    margin: 0 auto;
+    width: 1065px;
+}
+#apply{
+    font-size: 40px;
+    letter-spacing: -1px;
+    line-height: 0.8;
+}
+.label-1{
+    font-weight: 500;
+    font-size: 34px;
+}
+#title-wrapper{
+    margin-top:65px;
+    margin-bottom: 40px;
+
+}
+#title{
+    margin-top:10px;
+    width: 1044px;
+    height: 43px;
+    border: 2px solid #D9D9D9;
+    border-radius: 15px;
+    font-size: 20px;
+    padding : 10px;
+}
+select{
+    border-radius: 5px;
+    margin-top:10px;
+    width: 200px;
+    height: 39px;
+}
+#member-cnt{
+    border-radius: 5px;
+    margin-top:10px;
+    width: 200px;
+    height: 39px;
+}
+.input-box{
+    display: flex;
+    /*flex-direction: row;*/
+    justify-content: space-between;
+    padding-bottom: 100px;
+}
+hr{
+    margin-bottom: 40px;
+    border:none ;
+    height: 2px;
+    background-color: #D9D9D9;
+}
+.input-down-box{
+    margin-bottom: 60px;
+}
+.input-group{
+    font-weight: 600;
+    font-size: 24px;
+    color: #625D5D;
+    width: 240px;
+}
+.l-time{
+    font-size: 18px;
+    color: black;
+}
+#date-box{
+    margin-top: 70px;
+}
+#end-label{
+    margin-top: 20px;
+}
+#introduce{
+    margin-top:10px;
+    width: 1044px;
+    height: 419px;
+    border: 2px solid #D9D9D9;
+    border-radius: 15px;
+    font-size: 20px;
+    padding : 10px;
+}
+#file-wrapper{
+    margin-top:40px;
+    display:flex;
+    color: #8A8A8A;
+    margin-bottom: 60px;
+}
+input[type=file]::file-selector-button{
+    width: 152px;
+    height: 45px;
+    border-radius: 20px;
+    border-style: none;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #77A7EE;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    width: 27px;
+    height: 25px;
+}
+
+#submit-button{
+    margin-bottom: 120px;
+    float: right;
+    width: 152px;
+    height: 45px;
+    border-radius: 20px;
+    border-style: none;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+    background: #77A7EE;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+footer{
+    position: relative;
+    height: 139px;
+    background-color: #77A7EE;
+}
+.footer-more{
+    position: absolute;
+    bottom: 0;
+    right: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    float: right;
+}
+.footer-a{
+    font-size: 12px;
+    margin-left: 20px;
+}
