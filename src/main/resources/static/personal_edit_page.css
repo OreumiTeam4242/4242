@@ -121,17 +121,51 @@ main h2 {
     border: 5px solid #77A7EE;
     border-radius: 40px;
     width: 972px;
-    height: 269px;
+    height: 549px;
     display: flex;
+    justify-content: space-around;
     align-items: center;
 }
 
 .personal_info img {
     margin: 47px 72px;
+    position: relative;
+    top: 50px;
+    padding-left: 60px;
+}
+
+.profile_img h3 {
+    position: relative;
+    top: 25px;
+    left: 160px;
+}
+
+.profile_img button {
+    position: relative;
+    left: 135px;
+    bottom: 160px;
 }
 
 h3 {
     font-size: 25px;
+}
+
+form > h3 {
+    margin: 10px 0;
+}
+
+form > input {
+    all: unset;
+    margin-bottom: 13px;
+    background-color: #D9D9D9;
+    width: 338px;
+    height: 47px;
+    border-radius: 20px;
+}
+
+.profile_desc {
+    margin-right: 280px;
+    margin-bottom: 30px;
 }
 
 .profile_desc > h3, p{
@@ -142,7 +176,7 @@ button {
     all: unset;
 }
 
-button.edit {
+.edit {
     width: 120px;
     height: 45px;
     border-radius: 20px;
@@ -151,11 +185,23 @@ button.edit {
     text-align: center;
     color: #FFFFFF;
     position: relative;
-    top: 80px;
-    right: -150px;
+    bottom: 251px;
+    left: 730px;
 }
 
-button.is_closed {
+.cancel {
+    border: 3px solid #77A7EE;
+    width: 116px;
+    height: 41px;
+    border-radius: 20px;
+    font-size: 25px;
+    text-align: center;
+    position: relative;
+    left: 550px;
+    bottom: 80px;
+}
+
+.save {
     width: 120px;
     height: 45px;
     border-radius: 20px;
@@ -164,53 +210,8 @@ button.is_closed {
     text-align: center;
     color: #FFFFFF;
     position: relative;
-    top: -100px;
-    left: 20px;
-}
-
-.go_left {
-    position: relative;
-    top: 140px;
-    left: -30px;
-}
-
-.go_right {
-    position: relative;
-    top: -133px;
-    left: 945px;
-}
-
-.row2, .row3, .row4, .row5 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.row2 a, .row3 a, .row4 a, .row5 a {
-    all: unset;
-    display: inline-block;
-    border: 5px solid #77A7EE;
-    border-radius: 60px;
-    width: 300px;
-    height: 157px;
-    text-align: center;
-    padding-top: 36px;
-}
-
-.row2 p {
-    margin-bottom: 50px;
-}
-
-.favorite {
-    position: relative;
-    top: 85px;
-    left: 150px;
-}
-
-.scroll_top {
-    margin-bottom: 18px;
-    position: relative;
-    right: -1000px;
+    left: 570px;
+    bottom: 80px;
 }
 
 /*푸터*/
@@ -230,12 +231,7 @@ footer {
     margin-left: 60px;
 }
 
-/*모달 창 1, 2*/
-/*display: none 처리*/
-.modal_1_all {
-    display: none;
-}
-
+/*modal_1, display: none 상태*/
 .modal_1 {
     width: 877px;
     height: 192px;
@@ -246,44 +242,20 @@ footer {
     font-weight: bold;
     display: flex;
     align-items: center;
+    padding-left: 20px;
+    display: none;
 }
 
-.modal_1 p, .modal_2 p {
-    margin: 0 30px;
+.modal_info {
+    padding-left: 60px;
+}
+
+.modal_1 p {
+    margin-left: 30px;
 }
 
 .modal_1_close {
     position: relative;
-    top: 75px;
-    left: 800px;
-}
-
-/*display: none 처리*/
-.modal_2 {
-    width: 972px;
-    height: 269px;
-    border: 5px solid #77A7EE;
-    border-radius: 40px;
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 45px;
-    display: none;
-}
-
-.modal_2 .make_space{
-    margin-top: 25px;
-}
-
-.modal_2 .go_to_main {
-    margin-top: 47px;
-    width: 447px;
-    height: 67px;
-    background-color: #77A7EE;
-    color: #FFFFFF;
-    font-size: 25px;
-    border-radius: 20px;
+    bottom: 50px;
+    left: 20px;
 }
