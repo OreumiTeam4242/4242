@@ -185,3 +185,40 @@ footer{
     width : 60px;
     height : 60px;
 }
+
+/* mddal */
+
+.modal-box {
+    border : 5px #77A7EE solid;
+    background: #FFFFFF;
+    border-radius: 50px;
+    width : 877px;
+    height : 192px;
+    padding : 12px 23px 0 0;
+    position : absolute;
+    top : 120%;
+    left : 20%;
+
+}
+
+.modal-box button {
+    padding : 0;
+    background-color: #FFFFFF;
+    border: none;
+    float : right;
+
+}
+
+.modal-box p {
+    font-size : 40px;
+    font-weight: 600;
+    margin : 0 60px 0 0;
+}
+
+.modal-inner {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top : 6%;
+    justify-content: center;
+    align-items: center;
+}
