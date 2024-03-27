@@ -14,10 +14,18 @@
         <th>이하영</th>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-	      <td></td>
+        <td>
+		<img src="https://github.com/OreumiTeam4242/4242/assets/82970714/ba863461-efc1-4198-8b68-187de0fb0810" width="500px">
+	</td>
+        <td>
+		<img src="https://github.com/OreumiTeam4242/4242/assets/82970714/5ddf563d-d46a-458b-b295-962e00c3959a" width="500px">
+	</td>
+        <td>
+		<img src="https://github.com/OreumiTeam4242/4242/assets/82970714/cf7e1b69-b1a7-4826-98de-c458d7cfa75e" width="500px">
+	</td>
+        <td>
+	        <img src="https://github.com/OreumiTeam4242/4242/assets/82970714/fa53b2a5-5f54-48e6-838c-6abf88895a66" width="500px">
+        </td>
     </tr>
     <tr>
 	<td>
