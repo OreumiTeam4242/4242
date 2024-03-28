@@ -39,4 +39,10 @@ public class PostController {
         Post updatedPost = postService.update(id, request);
         return ResponseEntity.ok(updatedPost);
     }
+
+    @GetMapping("/api/post/{id}")
+    public ResponseEntity<PostResponseDto> showPost(@PathVariable Long id) {
+        Post post = postService.findById(id);
+        return ResponseEntity.ok(post.toResponse());
+    }
 }
