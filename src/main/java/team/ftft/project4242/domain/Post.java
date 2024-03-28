@@ -1,11 +1,12 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.PostResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -77,4 +78,18 @@ public class Post {
 
     @Column(name="end_date")
     private Date end_date;
+
+
+    @Builder
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public PostResponseDto toResponse() {
+        return PostResponseDto.builder()
+                .title(title)
+                .content(content)
+                .build();
+    }
 }
