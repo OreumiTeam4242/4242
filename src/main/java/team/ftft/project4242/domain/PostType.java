@@ -11,7 +11,7 @@ public class PostType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_id", updatable = false)
-    private String type_id;
+    private Long type_id;
 
     @Column(name="type_nm")
     private String type_nm;

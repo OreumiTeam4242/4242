@@ -11,7 +11,7 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id", updatable = false)
-    private String team_id;
+    private Long team_id;
 
     @Column(name="is_completed")
     private boolean is_completed;

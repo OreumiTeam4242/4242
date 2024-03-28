@@ -16,7 +16,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id", updatable = false)
-    private String member_id;
+    private Long member_id;
 
     @Column(name="email", nullable = false)
     private String email;

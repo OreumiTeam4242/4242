@@ -11,7 +11,7 @@ public class PostMajor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "major_id", updatable = false)
-    private String major_id;
+    private Long major_id;
 
     @Column(name="major_nm")
     private String major_nm;

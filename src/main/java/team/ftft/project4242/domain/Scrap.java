@@ -11,7 +11,7 @@ public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "scrap_id", updatable = false)
-    private String scrap_id;
+    private Long scrap_id;
 
     @Column(name="post_id")
     private String post_id;
