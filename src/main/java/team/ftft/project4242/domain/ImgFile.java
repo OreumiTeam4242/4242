@@ -11,7 +11,7 @@ public class ImgFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "img_id", updatable = false)
-    private String img_id;
+    private Long img_id;
 
     @Column(name="img_nm", nullable = false)
     private String img_nm;

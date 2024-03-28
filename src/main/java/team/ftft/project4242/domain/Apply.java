@@ -15,7 +15,7 @@ public class Apply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "apply_id", updatable = false)
-    private String apply_id;
+    private Long apply_id;
 
     @Column(name="title", nullable = false)
     private String title;

@@ -11,7 +11,7 @@ public class AvailableTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "time_id", updatable = false)
-    private String time_id;
+    private Long time_id;
 
     @Column(name="time_nm")
     private String time_nm;

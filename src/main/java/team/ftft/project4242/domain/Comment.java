@@ -14,7 +14,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id", updatable = false)
-    private String comment_id;
+    private Long comment_id;
 
     @CreatedDate
     @Column(name = "created_at")

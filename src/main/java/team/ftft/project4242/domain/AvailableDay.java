@@ -11,7 +11,7 @@ public class AvailableDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "day_id", updatable = false)
-    private String day_id;
+    private Long day_id;
 
     @Column(name="day_nm")
     private String day_nm;
