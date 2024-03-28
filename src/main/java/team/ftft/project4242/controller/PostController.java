@@ -26,9 +26,9 @@ public class PostController {
     }
 
     @GetMapping ("/api/post")
-    public ResponseEntity<List<PostResponseDto>> showArticle() {
-        List<Post> articleList = postService.findAll();
-        List<PostResponseDto> responseList = articleList.stream()
+    public ResponseEntity<List<PostResponseDto>> showPost() {
+        List<Post> postList = postService.findAll();
+        List<PostResponseDto> responseList = postList.stream()
                 .map(PostResponseDto::new)
                 .toList();
         return ResponseEntity.ok(responseList);
@@ -41,7 +41,7 @@ public class PostController {
     }
 
     @GetMapping("/api/post/{id}")
-    public ResponseEntity<PostResponseDto> showPost(@PathVariable Long id) {
+    public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long id) {
         Post post = postService.findById(id);
         return ResponseEntity.ok(post.toResponse());
     }
