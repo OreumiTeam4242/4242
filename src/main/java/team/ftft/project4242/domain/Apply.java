@@ -32,7 +32,7 @@ public class Apply {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "member_id") // post_id 매핑이 안되네요
     private Member member;
 
     @Column(name="file_id")
