@@ -16,6 +16,8 @@ public class PostType {
     @Column(name="type_nm")
     private String type_nm;
 
-    @Column(name="post_id")
-    private String post_id;
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
 }

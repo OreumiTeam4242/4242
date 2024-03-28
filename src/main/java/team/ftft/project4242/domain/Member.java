@@ -7,6 +7,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -40,4 +42,20 @@ public class Member {
 
     @Column(name="img_id")
     private UUID img_id;
+
+    @OneToMany(mappedBy = "member")
+    private List<Post> postList = new ArrayList<Post>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Scrap> scrapList = new ArrayList<Scrap>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Team> teamList = new ArrayList<Team>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Comment> commentList = new ArrayList<Comment>();
+
+    @OneToOne
+    @JoinColumn(name="permission_id")
+    private Role role;
 }

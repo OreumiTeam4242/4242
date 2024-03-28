@@ -23,12 +23,14 @@ public class Comment {
     @Column(name="content")
     private String content;
 
-    @Column(name="post_id")
-    private String post_id;
-
     @Column(name="use_yn")
     private boolean use_yn;
 
-    @Column(name="member_id")
-    private String member_id;
+    @ManyToOne
+    @JoinColumn(name="post_id")
+    private Post post;
+
+    @ManyToOne
+    @JoinColumn(name="member_id")
+    private Member member;
 }
