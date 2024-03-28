@@ -45,4 +45,10 @@ public class PostController {
         Post post = postService.findById(id);
         return ResponseEntity.ok(post.toResponse());
     }
+
+    @DeleteMapping("/api/post/{id}")
+    public ResponseEntity<Void> deletedPost(@PathVariable Long id) {
+        postService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -35,4 +35,8 @@ public class PostService {
 
         return post;
     }
+
+    public void deleteById(Long id) {
+        postRepository.deleteById(id);
+    }
 }
