@@ -13,9 +13,10 @@ public class Scrap {
     @Column(name = "scrap_id", updatable = false)
     private Long scrap_id;
 
-    @Column(name="post_id")
-    private String post_id;
-
-    @Column(name="member_id")
-    private String member_id;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }

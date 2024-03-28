@@ -16,11 +16,13 @@ public class Team {
     @Column(name="is_completed")
     private boolean is_completed;
 
-    @Column(name="post_id")
-    private String post_id;
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @Column(name="member_id")
-    private String member_id;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name="leader_id")
     private String leader_id;

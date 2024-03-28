@@ -27,12 +27,20 @@ public class Apply {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name="post_id")
-    private String post_id;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @Column(name="member_id")
-    private String member_id;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Member member;
 
     @Column(name="file_id")
     private UUID file_id;
+
+    @Column(name="available_time")
+    private String available_time;
+
+    @Column(name="available_day")
+    private String available_day;
 }

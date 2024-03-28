@@ -16,6 +16,8 @@ public class PostMajor {
     @Column(name="major_nm")
     private String major_nm;
 
-    @Column(name="post_id")
-    private String post_id;
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
 }
