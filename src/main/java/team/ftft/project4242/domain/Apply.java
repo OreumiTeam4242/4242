@@ -49,7 +49,8 @@ public class Apply {
     private String available_day;
 
     @Builder
-    public Apply(String title, String content, Post post, Member member, String available_time, String available_day) {
+    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day) {
+        this.apply_id = apply_id;
         this.title = title;
         this.content = content;
         this.post = post;
@@ -62,8 +63,6 @@ public class Apply {
         return AddApplyResponse.builder()
                 .title(title)
                 .content(content)
-                .post(post)
-                .member(member)
                 .available_time(available_time)
                 .available_day(available_day)
                 .build();

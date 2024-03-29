@@ -14,16 +14,12 @@ public class AddApplyResponse {
     // 신청글 아이디, 제목, 신청 내용, [모집글 아이디], [회원 아이디], 파일 아이디(매핑 전), 가능 시간, 가능 요일
     private String title;
     private String content;
-    private Post post;
-    private Member member;
     private String available_time;
     private String available_day;
 
     public AddApplyResponse(Apply apply) {
         title = apply.getTitle();
         content = apply.getContent();
-        post = apply.getPost();
-        member = apply.getMember();
         available_time = apply.getAvailable_time();
         available_day = apply.getAvailable_day();
 
