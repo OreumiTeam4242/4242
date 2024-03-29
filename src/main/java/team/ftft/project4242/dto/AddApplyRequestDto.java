@@ -12,7 +12,7 @@ import team.ftft.project4242.domain.Post;
 @Getter
 @AllArgsConstructor
 @Builder
-public class AddApplyRequest {
+public class AddApplyRequestDto {
     private String title;
     private String content;
     private Post post;

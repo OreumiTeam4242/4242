@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import team.ftft.project4242.dto.AddApplyResponse;
+import team.ftft.project4242.dto.AddApplyResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -59,8 +59,8 @@ public class Apply {
         this.available_day = available_day;
     }
 
-    public AddApplyResponse toResponse() {
-        return AddApplyResponse.builder()
+    public AddApplyResponseDto toResponse() {
+        return AddApplyResponseDto.builder()
                 .title(title)
                 .content(content)
                 .available_time(available_time)

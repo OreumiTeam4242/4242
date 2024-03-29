@@ -2,7 +2,7 @@ package team.ftft.project4242.service;
 
 import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.Apply;
-import team.ftft.project4242.dto.AddApplyRequest;
+import team.ftft.project4242.dto.AddApplyRequestDto;
 import team.ftft.project4242.repository.ApplyRepository;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class ApplyService {
     }
 
     // POST : 신청글 생성
-    public Apply saveApply(AddApplyRequest request) {
+    public Apply saveApply(AddApplyRequestDto request) {
         return applyRepository.save(request.toEntity());
     }
 
