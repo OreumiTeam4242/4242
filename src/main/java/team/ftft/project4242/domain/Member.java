@@ -20,13 +20,13 @@ public class Member {
     @Column(name = "member_id", updatable = false)
     private Long member_id;
 
-    @Column(name="email", nullable = false)
+    @Column(name="email")
     private String email;
 
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     private String password;
 
-    @Column(name="nickname", nullable = false)
+    @Column(name="nickname")
     private String nickname;
 
     @Column(name="use_yn")

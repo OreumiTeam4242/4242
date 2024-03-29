@@ -22,10 +22,10 @@ public class Post {
     @Column(name = "post_id", updatable = false)
     private Long post_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title")
     private String title;
 
-    @Column(name="content", nullable = false)
+    @Column(name="content")
     private String content;
 
     @CreatedDate

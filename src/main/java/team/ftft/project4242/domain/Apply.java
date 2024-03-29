@@ -17,10 +17,10 @@ public class Apply {
     @Column(name = "apply_id", updatable = false)
     private Long apply_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title")
     private String title;
 
-    @Column(name="content", nullable = false)
+    @Column(name="content")
     private String content;
 
     @CreatedDate
@@ -32,7 +32,7 @@ public class Apply {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @Column(name="file_id")
