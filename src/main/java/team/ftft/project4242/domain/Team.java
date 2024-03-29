@@ -28,4 +28,8 @@ public class Team {
 
     @Column(name="leader_id")
     private String leader_id;
+
+//    @ManyToOne
+//    @JoinColumn(name="member_id")
+//    private Member member;
 }

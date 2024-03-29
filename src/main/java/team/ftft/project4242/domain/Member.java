@@ -49,8 +49,8 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Scrap> scrapList = new ArrayList<Scrap>();
 
-    @OneToMany(mappedBy = "member")
-    private List<Team> teamList = new ArrayList<Team>();
+//    @OneToMany(mappedBy = "member")
+//    private List<Team> teamList = new ArrayList<Team>();
 
     @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<Comment>();
@@ -61,4 +61,11 @@ public class Member {
     @OneToOne
     @JoinColumn(name="permission_id")
     private Role role;
+
+    @OneToMany(mappedBy = "post_member")
+    private List<Notify> post_memberList = new ArrayList<Notify>();
+
+    @OneToMany(mappedBy = "notify_member")
+    private List<Notify> notify_memberidList = new ArrayList<Notify>();
+
 }

@@ -1,6 +1,7 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -32,7 +33,7 @@ public class Apply {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @Column(name="file_id")
@@ -43,4 +44,5 @@ public class Apply {
 
     @Column(name="available_day")
     private String available_day;
+
 }
