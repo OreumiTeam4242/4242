@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.dto.AddMemberRequest;
+import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.dto.LoginRequest;
 
@@ -20,9 +21,9 @@ public class MemberController {
         if (memberService.isEmailExists(request.getEmail())) {
             return ResponseEntity.badRequest().body("Email already exists");
         }
-
-        Member registeredMember = memberService.registerMember(request);
-        return ResponseEntity.ok(registeredMember);
+        Member member = memberService.registerMember(request);
+        MemberResponseDto responseDto = member.toResponse();
+        return ResponseEntity.ok(responseDto);
     }
 
     @PostMapping("/login")
