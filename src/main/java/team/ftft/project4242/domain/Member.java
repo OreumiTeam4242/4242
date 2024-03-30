@@ -55,6 +55,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<Comment>();
 
+    @OneToMany(mappedBy = "member")
+    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+
     @OneToOne
     @JoinColumn(name="permission_id")
     private Role role;

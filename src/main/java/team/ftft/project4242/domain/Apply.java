@@ -41,6 +41,6 @@ public class Apply {
     @Column(name="available_time")
     private String available_time;
 
-    @Column(name="available_day")
+
     private String available_day;
 }

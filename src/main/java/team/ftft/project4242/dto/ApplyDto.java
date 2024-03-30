@@ -12,6 +12,6 @@ public class ApplyDto {
     private String title;
     private String content;
     private LocalDateTime createdAt;
-    private PostDto post;
+    private PostRequestDto post;
     private MemberDto member;
 }

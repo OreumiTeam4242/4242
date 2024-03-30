@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import team.ftft.project4242.dto.AddTeamResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -23,9 +26,8 @@ public class Team {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @OneToMany(mappedBy = "team")
+    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
 
     @Column(name="leader_id")
     private String leader_id;

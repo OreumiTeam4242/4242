@@ -10,7 +10,7 @@ public class CommentDto {
     private String commentId;
     private LocalDateTime createAt;
     private LocalDateTime updatedAt;
-    private PostDto post;
+    private PostRequestDto post;
     private Boolean useYN;
     private MemberDto member;
 }

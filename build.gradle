@@ -24,9 +24,21 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Tika
+    implementation group: 'org.apache.tika', name: 'tika-core', version: '1.24'
+
+    //aws s3
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.518'
+    testImplementation 'com.amazonaws:aws-java-sdk-s3:1.12.518'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //  @ConfigurationProperties를 활용 -> 변수사용 최적
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
