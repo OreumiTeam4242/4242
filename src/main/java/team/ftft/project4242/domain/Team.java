@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import team.ftft.project4242.dto.AddTeamResponseDto;
+import team.ftft.project4242.dto.TeamResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +51,8 @@ public class Team {
     public Team() {
     }
 
-    public AddTeamResponseDto toResponse() {
-        return AddTeamResponseDto.builder()
+    public TeamResponseDto toResponse() {
+        return TeamResponseDto.builder()
                 .is_completed(is_completed)
                 .use_yn(use_yn)
                 .post(post)
