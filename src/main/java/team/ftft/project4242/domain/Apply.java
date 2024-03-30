@@ -32,7 +32,7 @@ public class Apply {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "member_id") // post_id 매핑이 안되네요
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @Column(name="file_id")
@@ -41,6 +41,6 @@ public class Apply {
     @Column(name="available_time")
     private String available_time;
 
-    @Column(name="available_day")
+
     private String available_day;
 }
