@@ -15,7 +15,7 @@ public class AddTeamResponseDto {
     private boolean is_completed;
     private Post post;
     private Member member;
-    private String leader_id;
+    private Long leader_id;
     private boolean use_yn;
 
     public AddTeamResponseDto(Team team) {

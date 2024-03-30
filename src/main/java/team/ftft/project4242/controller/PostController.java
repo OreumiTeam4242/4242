@@ -25,10 +25,8 @@ public class PostController {
     }
 
     @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDto> addPost(@RequestBody PostTeamRequestDto request) {
+    public ResponseEntity<PostResponseDto> addPost(@RequestBody PostRequestDto request) {
         Post post = postService.save(request);
-        Team team = teamService.save(request);
-
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(post.toResponse());
     }
