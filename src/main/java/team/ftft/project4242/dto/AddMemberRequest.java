@@ -11,11 +11,13 @@ import team.ftft.project4242.domain.Member;
 public class AddMemberRequest {
     private String email;
     private String password;
+    private String nickname;
 
     public Member toEntity() {
         Member member = new Member();
         member.setEmail(email);
         member.setPassword(password);
+        member.setNickname(nickname);
         return member;
     }
 }
