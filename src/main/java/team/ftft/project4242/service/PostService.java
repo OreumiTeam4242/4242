@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.dto.PostRequestDto;
+import team.ftft.project4242.dto.PostTeamRequestDto;
 import team.ftft.project4242.repository.PostRepository;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post save(PostRequestDto request) {
-        return postRepository.save(request.toEntity());
+    public Post save(PostTeamRequestDto request) {
+        return postRepository.save(request.toPostEntity());
     }
 
     public List<Post> findAll() {

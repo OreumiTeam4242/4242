@@ -23,13 +23,13 @@ public class Member {
     @Column(name = "member_id", updatable = false)
     private Long member_id;
 
-    @Column(name="email", nullable = false)
+    @Column(name="email")
     private String email;
 
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     private String password;
 
-    @Column(name="nickname", nullable = false)
+    @Column(name="nickname")
     private String nickname;
 
     @Column(name="use_yn")
@@ -51,9 +51,6 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Scrap> scrapList = new ArrayList<Scrap>();
-
-    @OneToMany(mappedBy = "member")
-    private List<Team> teamList = new ArrayList<Team>();
 
     @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<Comment>();
