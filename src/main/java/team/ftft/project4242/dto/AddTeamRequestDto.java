@@ -19,8 +19,6 @@ public class AddTeamRequestDto {
     public Team toEntity() {
         return Team.builder() // 생성자를 사용해 객체 생성
                 .is_completed(is_completed)
-                .leader_id(leader_id)
-                .use_yn(use_yn)
                 .build();
     }
 }

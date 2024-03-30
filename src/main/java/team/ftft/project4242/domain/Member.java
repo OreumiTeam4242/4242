@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.MemberResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
 public class Member {
@@ -62,4 +62,26 @@ public class Member {
     @JoinColumn(name="permission_id")
     private Role role;
 
+    @Builder
+    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.use_yn = use_yn;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+    public MemberResponseDto toResponse(){
+        return MemberResponseDto
+                .builder().
+                member_id(member_id)
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .use_yn(use_yn)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .img_id(img_id)
+                .build();
+    }
 }

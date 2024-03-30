@@ -4,11 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.Team;
-import team.ftft.project4242.dto.AddTeamRequestDto;
+
 import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.dto.PostResponseDto;
-import team.ftft.project4242.dto.PostTeamRequestDto;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
 
