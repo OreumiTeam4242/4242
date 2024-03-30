@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-//하영: 엔터티 나열한 것. @Column으로 DB 테이블과 연결
-//생성자? @Builder로 필드 값 업데이트하는 생성자
+
 @Getter
 @Entity
 @NoArgsConstructor
@@ -56,8 +55,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<Comment>();
 
-//    @JoinColumn(name="permission_id") 기존 코드
+    @OneToMany(mappedBy = "member")
+    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+
     @OneToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name="permission_id")
     private Role role;
 }
