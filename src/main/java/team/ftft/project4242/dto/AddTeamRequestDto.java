@@ -6,11 +6,9 @@ import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.domain.Team;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class AddTeamResponse {
+public class AddTeamRequestDto {
     // 팀 아이디, 종료 여부, [모집글 아이디], [팀 회원], 팀장 아이디, 사용가능 여부
     private boolean is_completed;
     private Post post;
@@ -18,11 +16,11 @@ public class AddTeamResponse {
     private String leader_id;
     private boolean use_yn;
 
-    public AddTeamResponse(Team team) {
-        is_completed = team.is_completed();
-        post = team.getPost();
-        member = team.getMember();
-        leader_id = team.getLeader_id();
-        use_yn = team.isUse_yn();
+    public Team toEntity() {
+        return Team.builder() // 생성자를 사용해 객체 생성
+                .is_completed(is_completed)
+                .leader_id(leader_id)
+                .use_yn(use_yn)
+                .build();
     }
 }

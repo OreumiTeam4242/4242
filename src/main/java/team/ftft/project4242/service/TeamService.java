@@ -3,7 +3,8 @@ package team.ftft.project4242.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.Team;
-import team.ftft.project4242.dto.AddTeamRequest;
+import team.ftft.project4242.dto.AddTeamRequestDto;
+import team.ftft.project4242.dto.PostTeamRequestDto;
 import team.ftft.project4242.dto.UpdateTeamRequest;
 import team.ftft.project4242.repository.TeamRepository;
 
@@ -15,7 +16,11 @@ public class TeamService {
             this.teamRepository = teamRepository;
         }
 
-        public Team saveTeam(AddTeamRequest request) {
+    public Team save(PostTeamRequestDto request) {
+        return teamRepository.save(request.toTeamEntity());
+    }
+
+        public Team saveTeam(AddTeamRequestDto request) {
             return teamRepository.save(request.toEntity());
         }
 

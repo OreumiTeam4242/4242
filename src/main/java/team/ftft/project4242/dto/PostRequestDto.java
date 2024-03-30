@@ -1,6 +1,7 @@
 package team.ftft.project4242.dto;
 
 import lombok.*;
+import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
 
 import java.time.LocalDateTime;

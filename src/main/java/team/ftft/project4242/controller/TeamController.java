@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.Team;
-import team.ftft.project4242.dto.AddTeamRequest;
-import team.ftft.project4242.dto.AddTeamResponse;
+import team.ftft.project4242.dto.AddTeamRequestDto;
+import team.ftft.project4242.dto.AddTeamResponseDto;
 import team.ftft.project4242.dto.UpdateTeamRequest;
 import team.ftft.project4242.dto.UpdateTeamResponse;
 import team.ftft.project4242.service.TeamService;
@@ -18,9 +18,9 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    // POST : 스터디 팀 생성 - leader_id 부여하고 팀원들은 leader_id가 null
+    // POST : 스터디 팀 추가 (리스트에 팀원들 한 명씩 추가하기)
     @PostMapping( "/api/team")
-    public ResponseEntity<AddTeamResponse> addTeam(@RequestBody AddTeamRequest request) {
+    public ResponseEntity<AddTeamResponseDto> addTeam(@RequestBody AddTeamRequestDto request) {
         Team team = teamService.saveTeam(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(team.toResponse());
