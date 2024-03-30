@@ -3,43 +3,32 @@ package team.ftft.project4242.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.Team;
-import team.ftft.project4242.dto.AddTeamRequestDto;
-import team.ftft.project4242.dto.PostTeamRequestDto;
-import team.ftft.project4242.dto.UpdateTeamRequest;
+import team.ftft.project4242.dto.TeamRequestDto;
 import team.ftft.project4242.repository.TeamRepository;
 
 @Service
 public class TeamService {
-        private final TeamRepository teamRepository;
+    private final TeamRepository teamRepository;
 
-        public TeamService(TeamRepository teamRepository) {
-            this.teamRepository = teamRepository;
-        }
-
-    public Team save(PostTeamRequestDto request) {
-        return teamRepository.save(request.toTeamEntity());
+    public TeamService(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
     }
 
-        public Team saveTeam(AddTeamRequestDto request) {
-            return teamRepository.save(request.toEntity());
-        }
+    public Team save(Team team) {
+        return teamRepository.save(team);
+    }
 
-        @Transactional
-        public Team updateIscompleted(Long team_id, UpdateTeamRequest request) {
-            Team team = teamRepository.findById(team_id)
-                    .orElseThrow(() -> new IllegalArgumentException("not found " + team_id));
+    public Team saveTeam(TeamRequestDto request) {
+        return teamRepository.save(request.toEntity());
+    }
 
-            // 로그 추가 - false -> true 결과 변환 확인용
-            System.out.println("Original is_completed value: " + team.is_completed());
-            System.out.println("Request is_completed value: " + request.is_completed());
-
-            team.updateIscompleted(request.is_completed());
-
-            // 로그 추가 - false -> true 결과 변환 확인용
-            System.out.println("Updated is_completed value: " + team.is_completed());
-
-            return teamRepository.save(team);
-        }
+    @Transactional
+    public Team updateIscompleted(Long team_id) {
+        Team team = teamRepository.findById(team_id)
+                .orElseThrow(() -> new IllegalArgumentException("not found " + team_id));
+        team.updateIscompleted();
+        return team;
+    }
 
 }
 

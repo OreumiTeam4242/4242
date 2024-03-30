@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateTeamResponse {
-    private boolean is_completed;
+public class LoginRequest {
+    private String email;
+    private String password;
 }

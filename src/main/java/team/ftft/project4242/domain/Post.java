@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.PostResponseDto;
-import team.ftft.project4242.dto.PostTeamRequestDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -85,22 +84,17 @@ public class Post {
     @JoinColumn(name = "post_id")
     private Team team;
 
-    // toEntity()를 위한 Column 추가 - 현진
-    @Column(name = "is_completed")
-    private boolean is_completed;
-
     @Column(name = "leader_id")
-    private String leader_id;
-    //
+    private Long leader_id;
 
     @Builder
-    public Post(String title, String content, boolean is_completed, String leader_id, boolean use_yn) {
+    public Post(String title, String content,boolean use_yn,Member member,boolean is_closed) {
         this.title = title;
         this.content = content;
-        this.is_completed = is_completed;
-        this.leader_id = leader_id;
+        this.member = member;
+        this.leader_id = member.getMember_id();
         this.use_yn = use_yn;
-
+        this.is_closed = is_closed;
     }
 
     public PostResponseDto toResponse() {

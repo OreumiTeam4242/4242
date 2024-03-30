@@ -14,16 +14,15 @@ import java.time.LocalDateTime;
 public class PostRequestDto {
     private String title;
     private String content;
-    private MemberDto member;
-    private Boolean isClosed;
-    private Boolean useYN;
+    private Member member;
 
-    public Post toEntity() {
+    public Post toEntity(Member member) {
         return Post.builder()
                 .title(title)
                 .content(content)
                 .use_yn(true)
-                .is_completed(false)
+                .is_closed(false)
+                .member(member)
                 .build();
     }
 }
