@@ -97,7 +97,6 @@ public class Post {
     public Post(String title, String content, boolean is_completed, String leader_id, boolean use_yn) {
         this.title = title;
         this.content = content;
-
         this.is_completed = is_completed;
         this.leader_id = leader_id;
         this.use_yn = use_yn;
