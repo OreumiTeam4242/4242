@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+//디비 테이블을 객체화하여 나열
 @Getter
 @Setter
 @NoArgsConstructor
