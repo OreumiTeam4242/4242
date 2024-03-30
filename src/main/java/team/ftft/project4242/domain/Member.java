@@ -50,9 +50,6 @@ public class Member {
     private List<Scrap> scrapList = new ArrayList<Scrap>();
 
     @OneToMany(mappedBy = "member")
-    private List<Team> teamList = new ArrayList<Team>();
-
-    @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<Comment>();
 
     @OneToMany(mappedBy = "member")
