@@ -1,5 +1,6 @@
 package team.ftft.project4242.controller;
 
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,10 @@ public class PostController {
 
     @GetMapping ("/api/post")
     public ResponseEntity<List<PostResponseDto>> showPost() {
-        List<Post> postList = postService.findAll();
+        List<Post> postList = postService.findAllAble();
+        if (postList == null || postList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
         List<PostResponseDto> responseList = postList.stream()
                 .map(PostResponseDto::new)
                 .toList();
@@ -46,9 +50,10 @@ public class PostController {
         return ResponseEntity.ok(post.toResponse());
     }
 
-    @DeleteMapping("/api/post/{id}")
-    public ResponseEntity<Void> deletedPost(@PathVariable Long id) {
-        postService.deleteById(id);
+    @Transactional
+    @PutMapping("/api/post/{id}/disable")
+    public ResponseEntity<Void> disablePostById(@PathVariable Long id) {
+        postService.disablePostById(id);
         return ResponseEntity.ok().build();
     }
 }

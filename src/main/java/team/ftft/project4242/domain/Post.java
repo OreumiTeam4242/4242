@@ -41,7 +41,7 @@ public class Post {
     private boolean is_closed;
 
     @Column(name="use_yn")
-    private boolean use_yn;
+    private boolean use_yn = true;
 
     @OneToOne
     @JoinColumn(name = "major_id")

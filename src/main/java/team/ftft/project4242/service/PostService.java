@@ -20,8 +20,8 @@ public class PostService {
         return postRepository.save(request.toEntity());
     }
 
-    public List<Post> findAll() {
-        return postRepository.findAll();
+    public List<Post> findAllAble() {
+        return postRepository.findAllAble();
     }
 
     public Post findById(Long id) {
@@ -36,7 +36,7 @@ public class PostService {
         return post;
     }
 
-    public void deleteById(Long id) {
-        postRepository.deleteById(id);
+    public void disablePostById(Long id) {
+        postRepository.disablePostById(id);
     }
 }
