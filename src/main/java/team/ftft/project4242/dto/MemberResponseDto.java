@@ -5,7 +5,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-//디비 테이블을 객체화하여 나열
 @Getter
 @Builder
 public class MemberResponseDto {

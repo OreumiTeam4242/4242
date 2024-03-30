@@ -6,9 +6,6 @@ import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.dto.AddMemberRequest;
 import team.ftft.project4242.repository.MemberRepository;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Service
 public class MemberService {
 
