@@ -1,9 +1,11 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import team.ftft.project4242.dto.CommentResponseDto;
 
 import java.time.LocalDateTime;
 
@@ -33,4 +35,24 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="member_id")
     private Member member;
+
+    @Builder
+    public Comment(String content, Post post, Member member) {
+        this.createdAt = LocalDateTime.now();
+        this.content = content;
+        this.use_yn = true;
+        this.post = post;
+        this.member = member;
+    }
+    public CommentResponseDto toResponse(){
+        return CommentResponseDto.builder()
+                .content(content)
+                .nickname(member.getNickname())
+                .created_at(createdAt)
+                .use_yn(use_yn)
+                .build();
+    }
+    public void deleteComment(){
+        this.use_yn = false;
+    }
 }
