@@ -13,7 +13,7 @@ public class ImgFile {
     @Column(name = "img_id", updatable = false)
     private Long img_id;
 
-    @Column(name="img_nm", nullable = false)
+    @Column(name="img_nm")
     private String img_nm;
 
     public ImgFile(String s3FilePath) {

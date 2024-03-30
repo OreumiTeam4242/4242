@@ -23,10 +23,10 @@ public class Post {
     @Column(name = "post_id", updatable = false)
     private Long post_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title")
     private String title;
 
-    @Column(name="content", nullable = false)
+    @Column(name="content")
     private String content;
 
     @CreatedDate
@@ -79,11 +79,22 @@ public class Post {
     @Column(name="end_date")
     private Date end_date;
 
+    // 팀 생성을 위한 post, team 매핑 - 현진
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Team team;
+
+    @Column(name = "leader_id")
+    private Long leader_id;
 
     @Builder
-    public Post(String title, String content) {
+    public Post(String title, String content,boolean use_yn,Member member) {
         this.title = title;
         this.content = content;
+        this.member = member;
+        this.leader_id = member.getMember_id();
+        this.use_yn = use_yn;
+
     }
 
     public PostResponseDto toResponse() {
