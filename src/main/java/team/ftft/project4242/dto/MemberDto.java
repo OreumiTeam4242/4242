@@ -3,6 +3,7 @@ package team.ftft.project4242.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 //디비 테이블을 객체화하여 나열
 @Getter
@@ -16,4 +17,5 @@ public class MemberDto {
     private Boolean useYN;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private UUID img_id;
 }

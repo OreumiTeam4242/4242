@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import team.ftft.project4242.domain.Member;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member,Long> {
-
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    Member findByEmail(String email);
+    Member findByEmailAndPassword(String email, String password);
 }

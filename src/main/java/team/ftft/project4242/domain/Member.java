@@ -1,8 +1,10 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class Member {
@@ -58,4 +61,5 @@ public class Member {
     @OneToOne
     @JoinColumn(name="permission_id")
     private Role role;
+
 }
