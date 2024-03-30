@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import team.ftft.project4242.dto.AddTeamResponseDto;
-import team.ftft.project4242.dto.PostTeamRequestDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +26,6 @@ public class Team {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    // toEntity()를 위한 Column 추가 - 현진
-    @Column(name="title")
-    private String title;
-
-    @Column(name="content")
-    private String content;
-    //
-
     @ManyToOne
     @JoinColumn(name="member_id")
     private Member member;
@@ -43,22 +34,18 @@ public class Team {
     private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
 
     @Column(name="leader_id")
-    private String leader_id;
+    private Long leader_id;
 
     @Column(name="use_yn")
     private boolean use_yn;
 
     @Builder
-    public Team(boolean is_completed, String leader_id, boolean use_yn, Post post, Member member, String title, String content) {
+    public Team(boolean is_completed, Post post, Member member) {
         this.is_completed = is_completed;
-        this.leader_id = leader_id;
-        this.use_yn = use_yn;
+        this.leader_id = post.getLeader_id();
+        this.use_yn = true;
         this.post = post;
         this.member = member;
-
-        this.title = title;
-        this.content = content;
-
     }
 
     public Team() {
@@ -67,15 +54,14 @@ public class Team {
     public AddTeamResponseDto toResponse() {
         return AddTeamResponseDto.builder()
                 .is_completed(is_completed)
-                .leader_id(leader_id)
                 .use_yn(use_yn)
                 .post(post)
                 .member(member)
                 .build();
     }
 
-    public void updateIscompleted(boolean is_completed) {
-        this.is_completed = is_completed;
+    public void updateIscompleted() {
+        this.is_completed = false;
     }
 
 }
