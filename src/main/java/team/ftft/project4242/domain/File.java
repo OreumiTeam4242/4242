@@ -15,7 +15,7 @@ public class File {
     @Column(name = "file_id", updatable = false)
     private Long file_id;
 
-    @Column(name="file_nm", nullable = false)
+    @Column(name="file_nm")
     private String file_nm;
 
     public File(String s3FilePath) {
