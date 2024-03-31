@@ -88,13 +88,13 @@ public class Post {
     private Long leader_id;
 
     @Builder
-    public Post(String title, String content,boolean use_yn,Member member) {
+    public Post(String title, String content,boolean use_yn,Member member,boolean is_closed) {
         this.title = title;
         this.content = content;
         this.member = member;
         this.leader_id = member.getMember_id();
         this.use_yn = use_yn;
-
+        this.is_closed = is_closed;
     }
 
     public PostResponseDto toResponse() {
