@@ -20,6 +20,8 @@ public class PostRequestDto {
         return Post.builder()
                 .title(title)
                 .content(content)
+                .use_yn(true)
+                .is_closed(false)
                 .member(member)
                 .build();
     }
