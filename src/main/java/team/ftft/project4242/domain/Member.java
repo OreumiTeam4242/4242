@@ -93,4 +93,8 @@ public class Member {
             this.img_id = imgId;
         }
     }
+
+    public void disabled(){
+        this.use_yn = false;
+    }
 }
