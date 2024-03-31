@@ -31,7 +31,7 @@ public class Team {
     private Member member;
 
     @OneToMany(mappedBy = "team")
-    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+    private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @Column(name="leader_id")
     private Long leader_id;
