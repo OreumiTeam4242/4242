@@ -21,10 +21,10 @@ public class Apply {
     @Column(name = "apply_id", updatable = false)
     private Long apply_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title")
     private String title;
 
-    @Column(name="content", nullable = false)
+    @Column(name="content")
     private String content;
 
     @CreatedDate
@@ -45,7 +45,7 @@ public class Apply {
     @Column(name="available_time")
     private String available_time;
 
-    @Column(name="available_day")
+
     private String available_day;
 
     @Builder

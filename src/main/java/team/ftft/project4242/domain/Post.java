@@ -1,11 +1,12 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.PostResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class Post {
     @Column(name = "post_id", updatable = false)
     private Long post_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title")
     private String title;
 
-    @Column(name="content", nullable = false)
+    @Column(name="content")
     private String content;
 
     @CreatedDate
@@ -77,4 +78,34 @@ public class Post {
 
     @Column(name="end_date")
     private Date end_date;
+
+    // 팀 생성을 위한 post, team 매핑 - 현진
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Team team;
+
+    @Column(name = "leader_id")
+    private Long leader_id;
+
+    @Builder
+    public Post(String title, String content,boolean use_yn,Member member) {
+        this.title = title;
+        this.content = content;
+        this.member = member;
+        this.leader_id = member.getMember_id();
+        this.use_yn = use_yn;
+
+    }
+
+    public PostResponseDto toResponse() {
+        return PostResponseDto.builder()
+                .title(title)
+                .content(content)
+                .build();
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
