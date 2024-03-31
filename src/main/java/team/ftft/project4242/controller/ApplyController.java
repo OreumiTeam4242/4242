@@ -4,18 +4,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.Apply;
+import team.ftft.project4242.domain.Post;
+import team.ftft.project4242.domain.TeamMember;
 import team.ftft.project4242.dto.ApplyRequestDto;
 import team.ftft.project4242.dto.ApplyResponseDto;
+import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.service.ApplyService;
+import team.ftft.project4242.service.TeamMemberService;
 
 import java.util.List;
 
 @RestController
 public class ApplyController {
     private ApplyService applyService;
+    private TeamMemberService teamMemberService;
 
-    public ApplyController(ApplyService applyService) {
+    public ApplyController(ApplyService applyService, TeamMemberService teamMemberService) {
         this.applyService = applyService;
+        this.teamMemberService = teamMemberService;
     }
 
     // POST : 신청글 생성
@@ -44,6 +50,11 @@ public class ApplyController {
         return ResponseEntity.ok(apply.toResponse());
     }
 
-
-
+    // POST : 스터디 팀원 추가
+    @PostMapping("/api/apply/{apply_id}/accept")
+    public ResponseEntity<TeamMember> PostTeamMember(@PathVariable Long apply_id) {
+        TeamMember teamMember = teamMemberService.findById(apply_id);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(teamMember);
+    }
 }
