@@ -23,10 +23,10 @@ public class Post {
     @Column(name = "post_id", updatable = false)
     private Long post_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title")
     private String title;
 
-    @Column(name="content", nullable = false)
+    @Column(name="content")
     private String content;
 
     @CreatedDate
@@ -79,8 +79,14 @@ public class Post {
     @Column(name="end_date")
     private Date end_date;
 
+    // 팀 생성을 위한 post, team 매핑 - 현진
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Team team;
 
-    @Builder
+    @Column(name = "leader_id")
+    private Long leader_id;
+
     public Post(String title, String content, int member_cnt, String postMajorName, String postTypeName, String process_type) {
         this.title = title;
         this.content = content;
@@ -95,6 +101,7 @@ public class Post {
 
         this.is_closed = false;
         this.use_yn = true;
+
     }
 
     public PostResponseDto toResponse() {
