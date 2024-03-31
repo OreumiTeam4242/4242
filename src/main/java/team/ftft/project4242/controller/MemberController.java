@@ -1,10 +1,12 @@
 package team.ftft.project4242.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.*;
 import team.ftft.project4242.dto.AddMemberRequest;
+import team.ftft.project4242.dto.CommentResponseDto;
 import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.repository.PostRepository;
@@ -78,10 +80,10 @@ public class MemberController {
 
     @PutMapping("/{member_id}/update")
     public ResponseEntity<?> updateMemberInfo(
-            @PathVariable("member_id") Long memberId,
+            @PathVariable("member_id") Long member_id,
             @RequestBody Map<String, Object> updateInfo) {
 
-        Optional<Member> memberOptional = memberRepository.findById(memberId);
+        Optional<Member> memberOptional = memberRepository.findById(member_id);
 
         if (!memberOptional.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -98,5 +100,20 @@ public class MemberController {
         memberRepository.save(member);
 
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{member_id}/disabled")
+    public ResponseEntity<MemberResponseDto> disabled(@PathVariable("member_id") Long member_id){
+        MemberResponseDto response = memberService.disabled(member_id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @PutMapping("/{member_id}/enable")
+    public ResponseEntity<?> enable(
+            @PathVariable("member_id") Long member_id) {
+        MemberResponseDto response = memberService.enable(member_id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(response);
     }
 }
