@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 public class PostResponseDto {
     private String title;
     private String content;
-    private int member_cnt;
-    private PostType postType;
-    private PostMajor postMajor;
+//    private int member_cnt;
+
+    private Long type_id;
+    private Long major_id;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -25,7 +26,9 @@ public class PostResponseDto {
     public PostResponseDto(Post post) {
         title = post.getTitle();
         content = post.getContent();
-        member_cnt = post.getMember_cnt();
+
+        type_id = post.getPostType().getType_id();
+        major_id = post.getPostMajor().getMajor_id();
 
         createdAt = post.getCreatedAt();
         updatedAt = post.getUpdatedAt();
