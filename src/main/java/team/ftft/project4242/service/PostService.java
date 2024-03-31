@@ -35,8 +35,8 @@ public class PostService {
         return post;
     }
 
-    public List<Post> findAll() {
-        return postRepository.findAll();
+    public List<Post> findAllAble() {
+        return postRepository.findAllAble();
     }
 
     public Post findById(Long id) {
@@ -46,12 +46,20 @@ public class PostService {
     @Transactional
     public Post update(Long id, PostRequestDto request) {
         Post post = findById(id);
-        post.update(request.getTitle(), request.getContent());
+        post.update(request.getTitle(), request.getContent(), request.getUpdatedAt());
 
         return post;
     }
 
-    public void deleteById(Long id) {
-        postRepository.deleteById(id);
+    public void disablePostById(Long id) {
+        postRepository.disablePostById(id);
+    }
+
+    public List<Post> findStudyPostAll() {
+        return postRepository.findStudyPostAll();
+    }
+
+    public List<Post> findProjectPostAll() {
+        return postRepository.findProjectPostAll();
     }
 }

@@ -1,6 +1,7 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,12 @@ public class PostMajor {
     @Column(name="major_nm")
     private String major_nm;
 
-    @OneToOne
-    @JoinColumn(name = "post_id")
+    @OneToOne(mappedBy = "postMajor")
     private Post post;
 
+    @Builder
+    public PostMajor(String major_nm) {
+        this.major_nm = major_nm;
+    }
 }
+

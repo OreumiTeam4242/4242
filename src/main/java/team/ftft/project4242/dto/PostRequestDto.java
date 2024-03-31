@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 public class PostRequestDto {
     private String title;
     private String content;
+    private int member_cnt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Member member;
 
     public Post toEntity(Member member) {
