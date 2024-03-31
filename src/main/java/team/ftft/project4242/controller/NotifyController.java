@@ -27,7 +27,7 @@ public class NotifyController {
     }
 
     // GET : 신고글 목록 조회 - 관리자 권한 부여해야함
-    @GetMapping("/api/notify")
+    @GetMapping("/api/notifies")
     public ResponseEntity<List<AddNotifyResponseDto>> showAllNotify() {
         List<Notify> notifyList = notifyService.findAllNotify();
         List<AddNotifyResponseDto> notifyResponseList = notifyList.stream()
