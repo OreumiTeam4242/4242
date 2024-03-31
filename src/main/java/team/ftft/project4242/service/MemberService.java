@@ -36,4 +36,11 @@ public class MemberService {
         member.disabled();
         return member.toResponse();
     }
+
+    public MemberResponseDto enable(Long member_id) {
+        Member member = memberRepository.findById(member_id)
+                .orElseThrow(() -> new IllegalArgumentException("member_id doesn't exist"));
+        member.enable();  // use_yn 값을 true로 변경
+        return member.toResponse();
+    }
 }

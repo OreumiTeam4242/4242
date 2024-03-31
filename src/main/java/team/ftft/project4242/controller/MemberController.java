@@ -108,4 +108,12 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
+
+    @PutMapping("/{member_id}/enable")
+    public ResponseEntity<?> enable(
+            @PathVariable("member_id") Long member_id) {
+        MemberResponseDto response = memberService.enable(member_id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(response);
+    }
 }

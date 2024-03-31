@@ -97,4 +97,8 @@ public class Member {
     public void disabled(){
         this.use_yn = false;
     }
+
+    public void enable() {
+        this.use_yn = true;
+    }
 }
