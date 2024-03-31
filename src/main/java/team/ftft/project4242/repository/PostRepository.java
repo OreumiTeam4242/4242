@@ -11,10 +11,15 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Modifying
     @Query("select p from Post  p where p.use_yn = true")
     List<Post> findAllAble();
     @Modifying
     @Query("update Post p set p.use_yn = false where p.post_id = :id")
     void disablePostById(Long id);
+
+    @Query("select p from Post  p where p.use_yn = true and p.postType.type_nm = :study")
+    List<Post> findStudyPostAll();
+
+    @Query("select p from Post  p where p.use_yn = true and p.postType.type_nm = :project")
+    List<Post> findProjectPostAll();
 }

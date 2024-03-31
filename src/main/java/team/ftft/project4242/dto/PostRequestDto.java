@@ -13,14 +13,15 @@ import java.time.LocalDateTime;
 public class PostRequestDto {
     private String title;
     private String content;
-    private MemberDto member;
-    private Boolean isClosed;
-    private Boolean useYN;
+    private int member_cnt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Post toEntity() {
         return Post.builder()
                 .title(title)
                 .content(content)
+                .member_cnt(member_cnt)
                 .build();
     }
 }

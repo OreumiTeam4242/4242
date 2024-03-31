@@ -31,12 +31,20 @@ public class PostService {
     @Transactional
     public Post update(Long id, PostRequestDto request) {
         Post post = findById(id);
-        post.update(request.getTitle(), request.getContent());
+        post.update(request.getTitle(), request.getContent(), request.getUpdatedAt());
 
         return post;
     }
 
     public void disablePostById(Long id) {
         postRepository.disablePostById(id);
+    }
+
+    public List<Post> findStudyPostAll() {
+        return postRepository.findStudyPostAll();
+    }
+
+    public List<Post> findProjectPostAll() {
+        return postRepository.findProjectPostAll();
     }
 }

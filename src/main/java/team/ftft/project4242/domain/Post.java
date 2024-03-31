@@ -41,13 +41,13 @@ public class Post {
     private boolean is_closed;
 
     @Column(name="use_yn")
-    private boolean use_yn = true;
+    private boolean use_yn;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "major_id")
     private PostMajor postMajor;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
     private PostType postType;
 
@@ -81,20 +81,37 @@ public class Post {
 
 
     @Builder
-    public Post(String title, String content) {
+    public Post(String title, String content, int member_cnt, String postMajorName, String postTypeName, String process_type) {
         this.title = title;
         this.content = content;
+
+        this.member_cnt = member_cnt;
+        this.postMajor = new PostMajor(postMajorName);
+        this.postType = new PostType(postTypeName);
+        this.process_type = process_type;
+
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+
+        this.is_closed = false;
+        this.use_yn = true;
     }
 
     public PostResponseDto toResponse() {
         return PostResponseDto.builder()
                 .title(title)
                 .content(content)
+                .member_cnt(member_cnt)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .postType(postType)
+                .postMajor(postMajor)
                 .build();
     }
 
-    public void update(String title, String content) {
+    public void update(String title, String content, LocalDateTime updatedAt) {
         this.title = title;
         this.content = content;
+        this.updatedAt = updatedAt;
     }
 }

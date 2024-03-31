@@ -56,4 +56,28 @@ public class PostController {
         postService.disablePostById(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/api/posts/study")
+    public ResponseEntity<List<PostResponseDto>> showStudyPost() {
+        List<Post> studyPostList = postService.findStudyPostAll();
+        if (studyPostList == null || studyPostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = studyPostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
+    @GetMapping("/api/posts/project")
+    public ResponseEntity<List<PostResponseDto>> showProjectPost() {
+        List<Post> projectPostList = postService.findProjectPostAll();
+        if (projectPostList == null || projectPostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = projectPostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
 }

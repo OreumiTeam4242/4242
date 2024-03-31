@@ -1,8 +1,7 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
@@ -16,8 +15,12 @@ public class PostType {
     @Column(name="type_nm")
     private String type_nm;
 
-    @OneToOne
-    @JoinColumn(name = "post_id")
+    @OneToOne(mappedBy = "postType")
     private Post post;
 
+    @Builder
+    public PostType(String type_nm) {
+        this.type_nm = type_nm;
+    }
 }
+
