@@ -1,8 +1,7 @@
 package team.ftft.project4242.service;
 
 import org.springframework.stereotype.Service;
-import team.ftft.project4242.domain.Apply;
-import team.ftft.project4242.domain.TeamMember;
+import team.ftft.project4242.domain.*;
 import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.repository.TeamMemberRepository;
 
@@ -16,19 +15,14 @@ public class TeamMemberService {
         this.applyRepository = applyRepository;
     }
 
-    public TeamMember findById(Long member_id) {
-        Apply apply = applyRepository.findById(member_id)
-                .orElseThrow(() -> new IllegalArgumentException("not found id" + member_id));
-        TeamMember teamMember = convertToTeamMember(apply);
-        return teamMemberRepository.save(teamMember.toResponse());
-
-    }
-
-    private TeamMember convertToTeamMember(Apply apply) {
-        TeamMember teamMember = new TeamMember();
-        teamMember.getTeamMemberId();
-        teamMember.getLeader_id();
-        return teamMember;
+    public TeamMember findById(Long apply_id) {
+        Apply apply = applyRepository.findById(apply_id)
+                .orElseThrow(() -> new IllegalArgumentException("not found id" + apply_id));
+        Member member = apply.getMember();
+        Post post = apply.getPost();
+        Team team = post.getTeam();
+        TeamMember teamMember = new TeamMember(member, team);
+        return teamMemberRepository.save(teamMember);
 
     }
 }

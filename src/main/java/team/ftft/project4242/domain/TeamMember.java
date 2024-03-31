@@ -22,19 +22,17 @@ public class TeamMember {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "leader_id")
-    private Long leader_id;
 
     @Builder
-    public TeamMember(Member member, Long leader_id) {
+    public TeamMember(Member member, Team team) {
         this.member = member;
-        this.leader_id = leader_id;
+        this.team = team;
     }
 
     public TeamMember toResponse() {
         return TeamMember.builder()
                 .member(member)
-                .leader_id(leader_id)
+                .team(team)
                 .build();
     }
 }

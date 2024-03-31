@@ -25,13 +25,12 @@ public class PostService {
 
     public Post save(PostRequestDto request) {
         Member member = memberRepository.findById(6L).orElse(null);
-        Post post = postRepository.save(request.toEntity(member));
         Team team = Team.builder()
+                .leader_id(member.getMember_id())
                 .is_completed(false)
-                .post(post)
-                .member(member)
                 .build();
         teamService.save(team);
+        Post post = postRepository.save(request.toEntity(member, team));
         return post;
     }
 

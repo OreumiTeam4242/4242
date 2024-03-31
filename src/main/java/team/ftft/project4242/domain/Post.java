@@ -81,20 +81,17 @@ public class Post {
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "team_id")
     private Team team;
 
-    @Column(name = "leader_id")
-    private Long leader_id;
-
     @Builder
-    public Post(String title, String content,boolean use_yn,Member member,boolean is_closed) {
+    public Post(String title, String content,boolean use_yn,Member member,boolean is_closed, Team team) {
         this.title = title;
         this.content = content;
         this.member = member;
-        this.leader_id = member.getMember_id();
         this.use_yn = use_yn;
         this.is_closed = is_closed;
+        this.team = team;
     }
 
     public PostResponseDto toResponse() {
