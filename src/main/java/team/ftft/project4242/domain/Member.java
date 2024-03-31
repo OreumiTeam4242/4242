@@ -58,7 +58,7 @@ public class Member {
     private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @OneToOne
-    @JoinColumn(name="permission_id")
+    @JoinColumn(name="member_id")
     private Role role;
 
     @Builder
@@ -82,5 +82,22 @@ public class Member {
                 .updatedAt(updatedAt)
                 .img_id(img_id)
                 .build();
+    }
+
+    public void update(String nickname, UUID imgId) {
+        if (nickname != null && !nickname.isEmpty()) {
+            this.nickname = nickname;
+        }
+        if (imgId != null) {
+            this.img_id = imgId;
+        }
+    }
+
+    public void disabled(){
+        this.use_yn = false;
+    }
+
+    public void enable() {
+        this.use_yn = true;
     }
 }
