@@ -17,9 +17,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("update Post p set p.use_yn = false where p.post_id = :id")
     void disablePostById(Long id);
 
-    @Query("select p from Post  p where p.use_yn = true and p.postType.type_nm = :study")
-    List<Post> findStudyPostAll();
+    @Query("select p from Post  p where p.use_yn = true and p.postType.type_id = :type_id")
+    List<Post> findTypePostAll(Long type_id);
 
-    @Query("select p from Post  p where p.use_yn = true and p.postType.type_nm = :project")
-    List<Post> findProjectPostAll();
+    @Query("select p from Post  p where p.use_yn = true and p.postMajor.major_id = :major_id")
+    List<Post> findMajorPostAll(Long major_id);
 }
