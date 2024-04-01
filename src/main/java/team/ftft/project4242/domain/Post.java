@@ -84,6 +84,8 @@ public class Post {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    private Long viewCount;
+
     @Builder
     public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member) {
         this.title = title;
@@ -114,5 +116,9 @@ public class Post {
         this.title = title;
         this.content = content;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
     }
 }
