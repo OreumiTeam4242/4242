@@ -3,6 +3,8 @@ package team.ftft.project4242.dto;
 import lombok.*;
 import team.ftft.project4242.domain.*;
 
+import java.util.Date;
+
 
 @Getter
 @Setter
@@ -14,6 +16,10 @@ public class PostRequestDto {
     private String content;
     private Long type_id;
     private Long major_id;
+    private Date start_date;
+    private Date end_date;
+    private Integer member_cnt;
+    private String process_type;
 
     public Post toEntity(Member member, Team team, PostType postType, PostMajor postMajor) {
         return Post.builder()
@@ -23,6 +29,10 @@ public class PostRequestDto {
                 .postMajor(postMajor)
                 .member(member)
                 .team(team)
+                .start_date(start_date)
+                .end_date(end_date)
+                .member_cnt(member_cnt)
+                .process_type(process_type)
                 .build();
     }
 }
