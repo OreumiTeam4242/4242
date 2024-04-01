@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,10 +16,12 @@ public class NotifyResponseDto {
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private String file_url;
 
     public NotifyResponseDto(Notify notify) {
         title = notify.getTitle();
         content = notify.getContent();
         createdAt = notify.getCreatedAt();
+        file_url = notify.getFile_url();
     }
 }

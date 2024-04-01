@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.*;
 import team.ftft.project4242.dto.MemberRequestDto;
 import team.ftft.project4242.dto.MemberResponseDto;
@@ -51,18 +52,17 @@ public class MemberController {
     }
 
     @PutMapping("/{memberId}/update")
-    public ResponseEntity<MemberResponseDto> updateMemberInfo(
-            @PathVariable Long memberId,
-            @RequestBody MemberRequestDto request) {
-
-            MemberResponseDto response = memberService.update(memberId,request);
+    public ResponseEntity<MemberResponseDto> updateMemberInfo(@PathVariable Long memberId,
+                                                              @RequestPart MemberRequestDto request,
+                                                              @RequestPart(value="img",required = false) MultipartFile file) {
+        MemberResponseDto response = memberService.update(memberId, request,file);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
 
     @DeleteMapping("/{memberId}/disabled")
-    public ResponseEntity<MemberResponseDto> disable(@PathVariable("memberId") Long member_id){
+    public ResponseEntity<MemberResponseDto> disable(@PathVariable("memberId") Long member_id) {
         MemberResponseDto response = memberService.disabled(member_id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);

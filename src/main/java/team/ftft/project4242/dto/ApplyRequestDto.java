@@ -18,6 +18,7 @@ public class ApplyRequestDto {
     private String available_time;
     private String available_day;
     private Member member;
+    private String file_url;
 
     public Apply toEntity(Post post) {
         return Apply.builder()
@@ -27,6 +28,11 @@ public class ApplyRequestDto {
                 .member(member)
                 .available_time(available_time)
                 .available_day(available_day)
+                .file_url(file_url)
                 .build();
+    }
+
+    public void updateFileUrl(String file_url){
+        this.file_url = file_url;
     }
 }

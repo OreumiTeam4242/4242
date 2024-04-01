@@ -20,7 +20,7 @@ public class PostRequestDto {
     private Date end_date;
     private Integer member_cnt;
     private String process_type;
-
+    private String file_url;
     public Post toEntity(Member member, Team team, PostType postType, PostMajor postMajor) {
         return Post.builder()
                 .title(title)
@@ -33,6 +33,10 @@ public class PostRequestDto {
                 .end_date(end_date)
                 .member_cnt(member_cnt)
                 .process_type(process_type)
+                .file_url(file_url)
                 .build();
+    }
+    public void updateFileUrl(String file_url){
+        this.file_url = file_url;
     }
 }

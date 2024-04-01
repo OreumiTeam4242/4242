@@ -42,8 +42,8 @@ public class Member {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name="img_id")
-    private UUID img_id;
+    @Column(name="img_url")
+    private String img_url;
 
     @OneToMany(mappedBy = "member")
     private List<Post> postList = new ArrayList<Post>();
@@ -62,13 +62,14 @@ public class Member {
     private Role role;
 
     @Builder
-    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.use_yn = use_yn;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.img_url = img_url;
     }
     public MemberResponseDto toResponse(){
         return MemberResponseDto
@@ -80,13 +81,16 @@ public class Member {
                 .use_yn(use_yn)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
-                .img_id(img_id)
+                .img_url(img_url)
                 .build();
     }
 
-    // TODO : 이미지 변경 추가
     public void update(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void updateimageUrl(String img_url){
+        this.img_url = img_url;
     }
 
     public void disabled(){
