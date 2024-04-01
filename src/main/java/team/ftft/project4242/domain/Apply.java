@@ -51,7 +51,7 @@ public class Apply {
     private String available_day;
 
     @Builder
-    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day) {
+    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day, LocalDateTime createdAt) {
         this.apply_id = apply_id;
         this.title = title;
         this.content = content;
@@ -59,6 +59,7 @@ public class Apply {
         this.member = member;
         this.available_time = available_time;
         this.available_day = available_day;
+        this.createdAt = LocalDateTime.now();
     }
 
     public ApplyResponseDto toResponse() {
