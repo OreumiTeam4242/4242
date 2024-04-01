@@ -3,14 +3,12 @@ package team.ftft.project4242.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.*;
-import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostRequestDto;
-import team.ftft.project4242.repository.MemberRepository;
-import team.ftft.project4242.repository.PostMajorRepository;
-import team.ftft.project4242.repository.PostRepository;
-import team.ftft.project4242.repository.PostTypeRepository;
-
+import team.ftft.project4242.dto.PostResponseDto;
+import team.ftft.project4242.repository.*;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -20,12 +18,16 @@ public class PostService {
     private final MemberRepository memberRepository;
     private final TeamService teamService;
 
-    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository,MemberRepository memberRepository,TeamService teamService) {
+    private final ScrapRepository scrapRepository;
+
+    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository, MemberRepository memberRepository, TeamService teamService, ScrapRepository scrapRepository) {
         this.postRepository = postRepository;
         this.postTypeRepository = postTypeRepository;
         this.postMajorRepository = postMajorRepository;
         this.memberRepository = memberRepository;
         this.teamService = teamService;
+        this.scrapRepository = scrapRepository;
+
     }
 
     public Post save(PostRequestDto request) {
@@ -36,14 +38,14 @@ public class PostService {
                 .is_completed(false)
                 .build();
         teamService.save(team);
-      
+
         PostType postType = postTypeRepository.findById(request.getType_id())
                 .orElseThrow(() -> new IllegalArgumentException("not found type id"));
         PostMajor postMajor = postMajorRepository.findById(request.getMajor_id())
                 .orElseThrow(() -> new IllegalArgumentException("not found major id"));
 
-        Post post = postRepository.save(request.toEntity(member, team, postType,postMajor));
-     
+        Post post = postRepository.save(request.toEntity(member, team, postType, postMajor));
+
         return post;
     }
 
@@ -79,11 +81,24 @@ public class PostService {
         return postRepository.findTop3PostsByViewCount();
     }
 
+
+    public List<PostResponseDto> findAllScrap(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("member doesn't exist"));
+        List<Scrap> scrapList = scrapRepository.findAllByMember(member)
+                .orElse(Collections.emptyList());
+
+        return scrapList.stream()
+                .map(scrap -> new PostResponseDto(scrap.getPost()))
+                .collect(Collectors.toList());
+    }
+  
     public List<Post> findOnGoingPostAll() {
         return postRepository.findOnGoingPostAll();
     }
 
     public List<Post> findFinishPostAll() {
         return postRepository.findFinishPostAll();
+
     }
 }
