@@ -23,10 +23,10 @@ public class Post {
     @Column(name = "post_id", updatable = false)
     private Long post_id;
 
-    @Column(name="title")
+    @Column(name="title", nullable = false)
     private String title;
 
-    @Column(name="content")
+    @Column(name="content", nullable = false)
     private String content;
 
     @CreatedDate
@@ -43,11 +43,11 @@ public class Post {
     @Column(name="use_yn")
     private boolean use_yn;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "major_id")
     private PostMajor postMajor;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
     private PostType postType;
 
@@ -85,12 +85,18 @@ public class Post {
     private Team team;
 
     @Builder
-    public Post(String title, String content,boolean use_yn,Member member,boolean is_closed, Team team) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team) {
         this.title = title;
         this.content = content;
-        this.member = member;
-        this.use_yn = use_yn;
-        this.is_closed = is_closed;
+
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = null;
+
+        this.postType = postType;
+        this.postMajor = postMajor;
+
+        this.is_closed = false;
+        this.use_yn = true;
         this.team = team;
     }
 
@@ -98,11 +104,14 @@ public class Post {
         return PostResponseDto.builder()
                 .title(title)
                 .content(content)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
                 .build();
     }
 
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+        this.updatedAt = LocalDateTime.now();
     }
 }

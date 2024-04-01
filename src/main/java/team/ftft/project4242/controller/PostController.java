@@ -1,5 +1,6 @@
 package team.ftft.project4242.controller;
 
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class PostController {
     }
 
     @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDto> addPost(@RequestBody PostRequestDto request) {
+    public ResponseEntity<PostResponseDto> addPost( @RequestBody PostRequestDto request) {
         Post post = postService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(post.toResponse());
@@ -32,28 +33,57 @@ public class PostController {
 
     @GetMapping ("/api/post")
     public ResponseEntity<List<PostResponseDto>> showPost() {
-        List<Post> postList = postService.findAll();
+        List<Post> postList = postService.findAllAble();
+        if (postList == null || postList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
         List<PostResponseDto> responseList = postList.stream()
                 .map(PostResponseDto::new)
                 .toList();
         return ResponseEntity.ok(responseList);
     }
 
-    @PutMapping("/api/post/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody PostRequestDto request) {
-        Post updatedPost = postService.update(id, request);
+    @PutMapping("/api/post/{post_id}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long post_id, @RequestBody PostRequestDto request) {
+        Post updatedPost = postService.update(post_id, request);
         return ResponseEntity.ok(updatedPost);
     }
 
-    @GetMapping("/api/post/{id}")
-    public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long id) {
-        Post post = postService.findById(id);
+    @GetMapping("/api/post/{post_id}")
+    public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long post_id) {
+        Post post = postService.findById(post_id);
         return ResponseEntity.ok(post.toResponse());
     }
 
-    @DeleteMapping("/api/post/{id}")
-    public ResponseEntity<Void> deletedPost(@PathVariable Long id) {
-        postService.deleteById(id);
+    @Transactional
+    @PutMapping("/api/post/{post_id}/disable")
+    public ResponseEntity<Void> disablePostById(@PathVariable Long post_id) {
+        postService.disablePostById(post_id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/api/posts/type/{type_id}")
+    public ResponseEntity<List<PostResponseDto>> showTypePost(@PathVariable Long type_id) {
+        List<Post> typePostList = postService.findTypePostAll(type_id);
+        if (typePostList == null || typePostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = typePostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
+    @GetMapping("/api/posts/major/{major_id}")
+    public ResponseEntity<List<PostResponseDto>> showMajorPost(@PathVariable Long major_id) {
+        List<Post> majorPostList = postService.findMajorPostAll(major_id);
+        if (majorPostList == null || majorPostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = majorPostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
 }
