@@ -13,6 +13,7 @@ import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class PostController {
@@ -27,6 +28,7 @@ public class PostController {
     @PostMapping("/api/post")
     public ResponseEntity<PostResponseDto> addPost( @RequestBody PostRequestDto request) {
         Post post = postService.save(request);
+        post.setViewCount(0L);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(post.toResponse());
     }
@@ -52,6 +54,7 @@ public class PostController {
     @GetMapping("/api/post/{post_id}")
     public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long post_id) {
         Post post = postService.findById(post_id);
+        post.setViewCount(post.getViewCount() + 1);
         return ResponseEntity.ok(post.toResponse());
     }
 
@@ -81,6 +84,18 @@ public class PostController {
             return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
         }
         List<PostResponseDto> responseList = majorPostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
+    @GetMapping("/api/posts/hot")
+    public ResponseEntity<List<PostResponseDto>> showHotPost() {
+        List<Post> hotPostList = postService.findTop3PostsByViewCount();
+        if (hotPostList == null || hotPostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = hotPostList.stream()
                 .map(PostResponseDto::new)
                 .toList();
         return ResponseEntity.ok(responseList);

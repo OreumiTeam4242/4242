@@ -30,7 +30,7 @@ public class PostService {
 
     public Post save(PostRequestDto request) {
 
-        Member member = memberRepository.findById(1L).orElse(null);
+        Member member = memberRepository.findById(4L).orElse(null);
         Team team = Team.builder()
                 .leader_id(member.getMember_id())
                 .is_completed(false)
@@ -73,5 +73,9 @@ public class PostService {
 
     public List<Post> findMajorPostAll(Long major_id) {
         return postRepository.findMajorPostAll(major_id);
+    }
+
+    public List<Post> findTop3PostsByViewCount() {
+        return postRepository.findTop3PostsByViewCount();
     }
 }

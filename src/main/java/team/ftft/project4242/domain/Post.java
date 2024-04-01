@@ -1,11 +1,13 @@
 package team.ftft.project4242.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.CommentResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
 
 import java.time.LocalDateTime;
@@ -73,9 +75,11 @@ public class Post {
     @Column(name="process_type")
     private String process_type;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
     private Date start_date;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name="end_date")
     private Date end_date;
 
@@ -84,8 +88,10 @@ public class Post {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    private Long viewCount;
+
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,Date start_date,Date end_date,Integer member_cnt,String process_type) {
         this.title = title;
         this.content = content;
 
@@ -99,14 +105,27 @@ public class Post {
         this.use_yn = true;
         this.team = team;
         this.member = member;
+
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.member_cnt = member_cnt;
+        this.process_type = process_type;
+
     }
 
     public PostResponseDto toResponse() {
         return PostResponseDto.builder()
+                .commentList(commentList.stream().map(CommentResponseDto::new).toList())
                 .title(title)
                 .content(content)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
+                .start_date(start_date)
+                .end_date(end_date)
+                .major_id(postMajor.getMajor_id())
+                .type_id(postType.getType_id())
+                .member_cnt(member_cnt)
+                .process_type(process_type)
                 .build();
     }
 
@@ -114,5 +133,9 @@ public class Post {
         this.title = title;
         this.content = content;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
     }
 }
