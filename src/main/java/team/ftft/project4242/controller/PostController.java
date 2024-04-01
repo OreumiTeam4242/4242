@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
 
 import team.ftft.project4242.dto.PostRequestDto;

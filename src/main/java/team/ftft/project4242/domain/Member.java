@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.MemberResponseDto;
@@ -56,7 +55,7 @@ public class Member {
     private List<Comment> commentList = new ArrayList<Comment>();
 
     @OneToMany(mappedBy = "member")
-    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+    private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @OneToOne
     @JoinColumn(name="member_id")

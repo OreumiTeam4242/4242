@@ -18,10 +18,6 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team saveTeam(TeamRequestDto request) {
-        return teamRepository.save(request.toEntity());
-    }
-
     @Transactional
     public Team updateIscompleted(Long team_id) {
         Team team = teamRepository.findById(team_id)

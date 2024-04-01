@@ -15,12 +15,11 @@ import team.ftft.project4242.domain.Post;
 public class ApplyRequestDto {
     private String title;
     private String content;
-    private Post post;
-    private Member member;
     private String available_time;
     private String available_day;
+    private Member member;
 
-    public Apply toEntity() {
+    public Apply toEntity(Post post) {
         return Apply.builder()
                 .title(title)
                 .content(content)

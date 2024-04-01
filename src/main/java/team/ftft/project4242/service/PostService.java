@@ -25,13 +25,22 @@ public class PostService {
     }
 
     public Post save(PostRequestDto request) {
-        System.out.println(request.getType_id() + ", " + request.getMajor_id());
+
+        Member member = memberRepository.findById(6L).orElse(null);
+        Team team = Team.builder()
+                .leader_id(member.getMember_id())
+                .is_completed(false)
+                .build();
+        teamService.save(team);
+      
         PostType postType = postTypeRepository.findById(request.getType_id())
                 .orElseThrow(() -> new IllegalArgumentException("not found type id"));
         PostMajor postMajor = postMajorRepository.findById(request.getMajor_id())
                 .orElseThrow(() -> new IllegalArgumentException("not found major id"));
-        System.out.println(postType.getType_nm() + ", " + postMajor.getMajor_nm());
-        return postRepository.save(request.toEntity(postType, postMajor));
+
+        Post post = postRepository.save(request.toEntity(member, team, postType,postMajor));
+     
+        return post;
     }
 
     public List<Post> findAllAble() {

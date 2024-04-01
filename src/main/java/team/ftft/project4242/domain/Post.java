@@ -79,9 +79,13 @@ public class Post {
     @Column(name="end_date")
     private Date end_date;
 
+    // 팀 생성을 위한 post, team 매핑 - 현진
+    @OneToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team) {
         this.title = title;
         this.content = content;
 
@@ -93,6 +97,7 @@ public class Post {
 
         this.is_closed = false;
         this.use_yn = true;
+        this.team = team;
     }
 
     public PostResponseDto toResponse() {
