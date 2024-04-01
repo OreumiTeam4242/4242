@@ -23,6 +23,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post  p where p.use_yn = true and p.postMajor.major_id = :major_id")
     List<Post> findMajorPostAll(Long major_id);
 
-    @Query("select p from Post p order by p.viewCount desc")
+    @Query("select p from Post p order by p.viewCount desc limit 3")
     List<Post> findTop3PostsByViewCount();
 }
