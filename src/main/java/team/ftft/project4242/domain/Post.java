@@ -1,11 +1,12 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.PostResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,11 +43,11 @@ public class Post {
     @Column(name="use_yn")
     private boolean use_yn;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "major_id")
     private PostMajor postMajor;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
     private PostType postType;
 
@@ -77,4 +78,41 @@ public class Post {
 
     @Column(name="end_date")
     private Date end_date;
+
+    // 팀 생성을 위한 post, team 매핑 - 현진
+    @OneToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @Builder
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member) {
+        this.title = title;
+        this.content = content;
+
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = null;
+
+        this.postType = postType;
+        this.postMajor = postMajor;
+
+        this.is_closed = false;
+        this.use_yn = true;
+        this.team = team;
+        this.member = member;
+    }
+
+    public PostResponseDto toResponse() {
+        return PostResponseDto.builder()
+                .title(title)
+                .content(content)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .build();
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.updatedAt = LocalDateTime.now();
+    }
 }

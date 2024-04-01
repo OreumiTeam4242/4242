@@ -1,8 +1,10 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -16,8 +18,7 @@ public class PostType {
     @Column(name="type_nm")
     private String type_nm;
 
-    @OneToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
-
+    @OneToMany(mappedBy = "postType")
+    private List<Post> postList = new ArrayList<Post>();
 }
+

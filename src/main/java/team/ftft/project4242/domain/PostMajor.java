@@ -1,8 +1,12 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -16,8 +20,7 @@ public class PostMajor {
     @Column(name="major_nm")
     private String major_nm;
 
-    @OneToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
-
+    @OneToMany(mappedBy = "postMajor")
+    private List<Post> postList = new ArrayList<Post>();
 }
+

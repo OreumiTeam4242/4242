@@ -1,10 +1,12 @@
 package team.ftft.project4242.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.MemberResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,13 +22,13 @@ public class Member {
     @Column(name = "member_id", updatable = false)
     private Long member_id;
 
-    @Column(name="email", nullable = false)
+    @Column(name="email")
     private String email;
 
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     private String password;
 
-    @Column(name="nickname", nullable = false)
+    @Column(name="nickname")
     private String nickname;
 
     @Column(name="use_yn")
@@ -49,23 +51,53 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Scrap> scrapList = new ArrayList<Scrap>();
 
-//    @OneToMany(mappedBy = "member")
-//    private List<Team> teamList = new ArrayList<Team>();
-
     @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<Comment>();
 
     @OneToMany(mappedBy = "member")
-    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+    private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @OneToOne
-    @JoinColumn(name="permission_id")
+    @JoinColumn(name="member_id")
     private Role role;
 
-    @OneToMany(mappedBy = "post_member")
-    private List<Notify> post_memberList = new ArrayList<Notify>();
+    @Builder
+    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.use_yn = use_yn;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+    public MemberResponseDto toResponse(){
+        return MemberResponseDto
+                .builder().
+                member_id(member_id)
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .use_yn(use_yn)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .img_id(img_id)
+                .build();
+    }
 
-    @OneToMany(mappedBy = "notify_member")
-    private List<Notify> notify_memberidList = new ArrayList<Notify>();
+    public void update(String nickname, UUID imgId) {
+        if (nickname != null && !nickname.isEmpty()) {
+            this.nickname = nickname;
+        }
+        if (imgId != null) {
+            this.img_id = imgId;
+        }
+    }
 
+    public void disabled(){
+        this.use_yn = false;
+    }
+
+    public void enable() {
+        this.use_yn = true;
+    }
 }
