@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.dto.PostResponseDto;
@@ -20,8 +21,9 @@ public class PostController {
     }
 
     @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDto> addPost( @RequestBody PostRequestDto request) {
-        Post post = postService.save(request);
+    public ResponseEntity<PostResponseDto> addPost(@RequestPart PostRequestDto request
+                                                   ,@RequestPart MultipartFile file) {
+        Post post = postService.save(request,file);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(post.toResponse());
     }
@@ -39,8 +41,10 @@ public class PostController {
     }
 
     @PutMapping("/api/post/{post_id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long post_id, @RequestBody PostRequestDto request) {
-        Post updatedPost = postService.update(post_id, request);
+    public ResponseEntity<Post> updatePost(@PathVariable Long post_id,
+                                           @RequestPart PostRequestDto request,
+                                           @RequestPart(value="file",required = false) MultipartFile file) {
+        Post updatedPost = postService.update(post_id, request,file);
         return ResponseEntity.ok(updatedPost);
     }
 

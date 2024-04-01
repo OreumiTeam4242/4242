@@ -41,8 +41,8 @@ public class Apply {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name="file_id")
-    private UUID file_id;
+    @Column(name="file_url")
+    private String file_url;
 
     @Column(name="available_time")
     private String available_time;
@@ -51,7 +51,7 @@ public class Apply {
     private String available_day;
 
     @Builder
-    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day, LocalDateTime createdAt) {
+    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day, LocalDateTime createdAt,String file_url) {
         this.apply_id = apply_id;
         this.title = title;
         this.content = content;
@@ -60,6 +60,7 @@ public class Apply {
         this.available_time = available_time;
         this.available_day = available_day;
         this.createdAt = LocalDateTime.now();
+        this.file_url = file_url;
     }
 
     public ApplyResponseDto toResponse() {
@@ -68,6 +69,7 @@ public class Apply {
                 .content(content)
                 .available_time(available_time)
                 .available_day(available_day)
+                .file_url(file_url)
                 .build();
     }
 }

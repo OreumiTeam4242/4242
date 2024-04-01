@@ -7,6 +7,8 @@ import java.util.UUID;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberResponseDto {
     private Long member_id;
     private String email;
@@ -15,5 +17,5 @@ public class MemberResponseDto {
     private Boolean use_yn;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private UUID img_id;
+    private String img_url;
 }

@@ -17,9 +17,9 @@ import java.util.UUID;
 public class NotifyRequestDto {
     private String title;
     private String content;
-    private UUID file_id;
     private Member postMember;
     private Member notifyMember;
+    private String file_url;
 
     public Notify toEntity() {
         return Notify.builder()
@@ -27,6 +27,10 @@ public class NotifyRequestDto {
                 .content(content)
                 .postMember(postMember)
                 .notifyMember(notifyMember)
+                .file_url(file_url)
                 .build();
+    }
+    public void updateFileUrl(String file_url){
+        this.file_url = file_url;
     }
 }

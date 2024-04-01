@@ -23,6 +23,7 @@ public class PostResponseDto {
     private Date end_date;
     private Integer member_cnt;
     private String process_type;
+    private String file_url;
 
     public PostResponseDto(Post post) {
         title = post.getTitle();
@@ -36,5 +37,6 @@ public class PostResponseDto {
         end_date = post.getEnd_date();
         member_cnt = post.getMember_cnt();
         process_type = post.getProcess_type();
+        file_url = post.getFile_url();
     }
 }
