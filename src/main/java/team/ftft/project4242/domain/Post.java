@@ -66,8 +66,8 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Scrap> scrapList = new ArrayList<Scrap>();
 
-    @Column(name="file_id")
-    private UUID file_id;
+    @Column(name="file_url")
+    private String file_url;
 
     @Column(name="member_cnt")
     private Integer member_cnt;
@@ -91,7 +91,7 @@ public class Post {
     private Long viewCount;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,Date start_date,Date end_date,Integer member_cnt,String process_type) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,Date start_date,Date end_date,Integer member_cnt,String process_type,String file_url) {
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -107,7 +107,7 @@ public class Post {
         this.member_cnt = member_cnt;
         this.process_type = process_type;
         this.viewCount = 0L;
-
+        this.file_url = file_url;
     }
 
     public PostResponseDto toResponse() {
@@ -123,6 +123,7 @@ public class Post {
                 .type_id(postType.getType_id())
                 .member_cnt(member_cnt)
                 .process_type(process_type)
+                .file_url(file_url)
                 .build();
     }
 
@@ -130,6 +131,10 @@ public class Post {
         this.title = title;
         this.content = content;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void updateFileUrl(String file_url){
+        this.file_url = file_url;
     }
 
     public void setViewCount(Long viewCount) {
