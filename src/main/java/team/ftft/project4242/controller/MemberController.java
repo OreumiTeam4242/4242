@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.*;
 import team.ftft.project4242.dto.AddMemberRequest;
-import team.ftft.project4242.dto.CommentResponseDto;
 import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.repository.PostRepository;
