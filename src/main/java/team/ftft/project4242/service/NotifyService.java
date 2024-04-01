@@ -3,10 +3,8 @@ package team.ftft.project4242.service;
 import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import team.ftft.project4242.domain.File;
 import team.ftft.project4242.domain.Notify;
 import team.ftft.project4242.dto.NotifyRequestDto;
-import team.ftft.project4242.repository.FileRepository;
 import team.ftft.project4242.repository.NotifyRepository;
 import team.ftft.project4242.service.file.AwsS3Service;
 
