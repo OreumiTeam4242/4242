@@ -74,4 +74,8 @@ public class PostService {
     public List<Post> findMajorPostAll(Long major_id) {
         return postRepository.findMajorPostAll(major_id);
     }
+
+    public List<Post> findTop3PostsByViewCount() {
+        return postRepository.findTop3PostsByViewCount();
+    }
 }
