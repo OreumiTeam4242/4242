@@ -1,3 +1,26 @@
+.btn-to-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+}
+
+#logout {
+    border: none;
+    outline: none;
+    background-color: inherit ;
+    cursor: pointer;
+}
+
+#my-info {
+    border: none;
+    outline: none;
+    background-color: inherit ;
+    cursor: pointer;
+}
+
 .main-context {
     display: flex;
     flex-direction: column;
@@ -12,6 +35,14 @@ ul {
     display : flex;
     flex-wrap: wrap;
     align-content: space-around;
+}
+
+.btn-to-top {
+    cursor: pointer;
+}
+
+.box-top-content {
+    cursor: pointer;
 }
 
 /* header */
@@ -56,6 +87,7 @@ header {
     height: 237.51px;
     background-color: #79C8EC;
     border: none;
+    margin-top: -100px;
     border-radius: 80px;
     box-shadow: 2px 5px lightgray;
 
