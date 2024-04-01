@@ -60,6 +60,9 @@ public class Member {
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name="post_count")
+    private Integer postCount;
     @Builder
     public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url,Role role) {
         this.email = email;
@@ -70,6 +73,7 @@ public class Member {
         this.updatedAt = updatedAt;
         this.img_url = img_url;
         this.role = role;
+        this.postCount = 0;
     }
     public MemberResponseDto toResponse(){
         return MemberResponseDto
@@ -99,5 +103,15 @@ public class Member {
 
     public void enable() {
         this.use_yn = true;
+    }
+    public void increasePostCount(){
+        this.postCount++;
+    }
+    public void checkAndUpgradeRole(){
+        if(this.postCount >=2&&this.postCount<6){
+            this.role = Role.ROLE_JUNIOR;
+        } else if (this.postCount >=6) {
+            this.role = Role.ROLE_SENIOR;
+        }
     }
 }
