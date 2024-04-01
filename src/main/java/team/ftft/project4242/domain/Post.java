@@ -94,22 +94,19 @@ public class Post {
     public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,Date start_date,Date end_date,Integer member_cnt,String process_type) {
         this.title = title;
         this.content = content;
-
         this.createdAt = LocalDateTime.now();
         this.updatedAt = null;
-
         this.postType = postType;
         this.postMajor = postMajor;
-
         this.is_closed = false;
         this.use_yn = true;
         this.team = team;
         this.member = member;
-
         this.start_date = start_date;
         this.end_date = end_date;
         this.member_cnt = member_cnt;
         this.process_type = process_type;
+        this.viewCount = 0L;
 
     }
 

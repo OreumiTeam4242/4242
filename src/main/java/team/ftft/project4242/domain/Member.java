@@ -84,13 +84,9 @@ public class Member {
                 .build();
     }
 
-    public void update(String nickname, UUID imgId) {
-        if (nickname != null && !nickname.isEmpty()) {
-            this.nickname = nickname;
-        }
-        if (imgId != null) {
-            this.img_id = imgId;
-        }
+    // TODO : 이미지 변경 추가
+    public void update(String nickname) {
+        this.nickname = nickname;
     }
 
     public void disabled(){
