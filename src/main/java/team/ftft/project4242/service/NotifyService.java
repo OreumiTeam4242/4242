@@ -2,7 +2,7 @@ package team.ftft.project4242.service;
 
 import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.Notify;
-import team.ftft.project4242.dto.AddNotifyRequestDto;
+import team.ftft.project4242.dto.NotifyRequestDto;
 import team.ftft.project4242.repository.NotifyRepository;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class NotifyService {
     }
 
     // POST : 신고글 생성
-    public Notify saveNotify(AddNotifyRequestDto request) {
+    public Notify saveNotify(NotifyRequestDto request) {
         return notifyRepository.save(request.toEntity());
     }
 

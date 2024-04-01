@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import team.ftft.project4242.dto.AddNotifyResponseDto;
+import team.ftft.project4242.dto.NotifyResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -31,26 +31,27 @@ public class Notify {
 
     @ManyToOne
     @JoinColumn(name ="post_member_id")
-    private Member post_member;
+    private Member postMember;
 
     @ManyToOne
     @JoinColumn(name="notify_member_id")
-    private Member notify_member;
+    private Member notifyMember;
 
     @Column(name="file_id")
     private UUID file_id;
 
     @Builder
-    public Notify(String title, String content, LocalDateTime createdAt, Member post_member, Member notify_member) {
+    public Notify(String title, String content, Member postMember, Member notifyMember, UUID file_id) {
         this.title = title;
         this.content = content;
-        this.createdAt = createdAt;
-        this.post_member = post_member;
-        this.notify_member = notify_member;
+        this.createdAt = LocalDateTime.now();
+        this.postMember = postMember;
+        this.notifyMember = notifyMember;
+        this.file_id = file_id;
     }
 
-    public AddNotifyResponseDto toResponse() {
-        return AddNotifyResponseDto.builder()
+    public NotifyResponseDto toResponse() {
+        return NotifyResponseDto.builder()
                 .title(title)
                 .content(content)
                 .createdAt(createdAt)

@@ -5,21 +5,20 @@ import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Notify;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddNotifyResponseDto {
+public class NotifyResponseDto {
     // 신고글 아이디, 제목, 사유, 생성일시, [작성자], [신고유저], 파일 아이디
     private String title;
     private String content;
     private LocalDateTime createdAt;
-    private Member post_member;
-    private Member notify_member;
 
-    public AddNotifyResponseDto(Notify notify) {
+    public NotifyResponseDto(Notify notify) {
         title = notify.getTitle();
         content = notify.getContent();
         createdAt = notify.getCreatedAt();

@@ -8,23 +8,25 @@ import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Notify;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
 @Builder
-public class AddNotifyRequestDto {
+public class NotifyRequestDto {
     private String title;
     private String content;
-    private LocalDateTime createdAt;
-    private Member post_member;
-    private Member notify_member;
+    private UUID file_id;
+    private Member postMember;
+    private Member notifyMember;
 
     public Notify toEntity() {
         return Notify.builder()
                 .title(title)
                 .content(content)
-                .createdAt(createdAt)
+                .postMember(postMember)
+                .notifyMember(notifyMember)
                 .build();
     }
 }
