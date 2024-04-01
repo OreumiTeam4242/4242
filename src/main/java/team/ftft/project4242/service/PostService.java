@@ -78,4 +78,12 @@ public class PostService {
     public List<Post> findTop3PostsByViewCount() {
         return postRepository.findTop3PostsByViewCount();
     }
+
+    public List<Post> findOnGoingPostAll() {
+        return postRepository.findOnGoingPostAll();
+    }
+
+    public List<Post> findFinishPostAll() {
+        return postRepository.findFinishPostAll();
+    }
 }
