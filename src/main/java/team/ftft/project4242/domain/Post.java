@@ -1,11 +1,13 @@
 package team.ftft.project4242.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import team.ftft.project4242.dto.CommentResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
 
 import java.time.LocalDateTime;
@@ -23,10 +25,10 @@ public class Post {
     @Column(name = "post_id", updatable = false)
     private Long post_id;
 
-    @Column(name="title")
+    @Column(name="title", nullable = false)
     private String title;
 
-    @Column(name="content")
+    @Column(name="content", nullable = false)
     private String content;
 
     @CreatedDate
@@ -43,11 +45,11 @@ public class Post {
     @Column(name="use_yn")
     private boolean use_yn;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "major_id")
     private PostMajor postMajor;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
     private PostType postType;
 
@@ -73,52 +75,64 @@ public class Post {
     @Column(name="process_type")
     private String process_type;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
     private Date start_date;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name="end_date")
     private Date end_date;
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "team_id")
     private Team team;
 
-    @Column(name = "leader_id")
-    private Long leader_id;
+    private Long viewCount;
 
-    public Post(String title, String content, int member_cnt, String postMajorName, String postTypeName, String process_type) {
+    @Builder
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,Date start_date,Date end_date,Integer member_cnt,String process_type) {
         this.title = title;
         this.content = content;
-
-        this.member_cnt = member_cnt;
-        this.postMajor = new PostMajor(postMajorName);
-        this.postType = new PostType(postTypeName);
-        this.process_type = process_type;
-
         this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-
+        this.updatedAt = null;
+        this.postType = postType;
+        this.postMajor = postMajor;
         this.is_closed = false;
         this.use_yn = true;
+        this.team = team;
+        this.member = member;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.member_cnt = member_cnt;
+        this.process_type = process_type;
+        this.viewCount = 0L;
 
     }
 
     public PostResponseDto toResponse() {
         return PostResponseDto.builder()
+                .commentList(commentList.stream().map(CommentResponseDto::new).toList())
                 .title(title)
                 .content(content)
-                .member_cnt(member_cnt)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
-                .postType(postType)
-                .postMajor(postMajor)
+                .start_date(start_date)
+                .end_date(end_date)
+                .major_id(postMajor.getMajor_id())
+                .type_id(postType.getType_id())
+                .member_cnt(member_cnt)
+                .process_type(process_type)
                 .build();
     }
 
-    public void update(String title, String content, LocalDateTime updatedAt) {
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.updatedAt = updatedAt;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
     }
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.MemberResponseDto;
@@ -56,7 +55,7 @@ public class Member {
     private List<Comment> commentList = new ArrayList<Comment>();
 
     @OneToMany(mappedBy = "member")
-    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+    private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @OneToOne
     @JoinColumn(name="member_id")
@@ -85,13 +84,9 @@ public class Member {
                 .build();
     }
 
-    public void update(String nickname, UUID imgId) {
-        if (nickname != null && !nickname.isEmpty()) {
-            this.nickname = nickname;
-        }
-        if (imgId != null) {
-            this.img_id = imgId;
-        }
+    // TODO : 이미지 변경 추가
+    public void update(String nickname) {
+        this.nickname = nickname;
     }
 
     public void disabled(){

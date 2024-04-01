@@ -2,36 +2,48 @@ package team.ftft.project4242.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import team.ftft.project4242.domain.Member;
-import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.Team;
+import team.ftft.project4242.domain.*;
+import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.repository.MemberRepository;
+import team.ftft.project4242.repository.PostMajorRepository;
 import team.ftft.project4242.repository.PostRepository;
+import team.ftft.project4242.repository.PostTypeRepository;
 
 import java.util.List;
 
 @Service
 public class PostService {
     private final PostRepository postRepository;
-    private final TeamService teamService;
+    private final PostTypeRepository postTypeRepository;
+    private final PostMajorRepository postMajorRepository;
     private final MemberRepository memberRepository;
+    private final TeamService teamService;
 
-    public PostService(PostRepository postRepository,TeamService teamService,MemberRepository memberRepository) {
+    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository,MemberRepository memberRepository,TeamService teamService) {
         this.postRepository = postRepository;
-        this.teamService = teamService;
+        this.postTypeRepository = postTypeRepository;
+        this.postMajorRepository = postMajorRepository;
         this.memberRepository = memberRepository;
+        this.teamService = teamService;
     }
 
     public Post save(PostRequestDto request) {
-        Member member = memberRepository.findById(6L).orElse(null);
-        Post post = postRepository.save(request.toEntity(member));
+
+        Member member = memberRepository.findById(4L).orElse(null);
         Team team = Team.builder()
+                .leader_id(member.getMember_id())
                 .is_completed(false)
-                .post(post)
-                .member(member)
                 .build();
         teamService.save(team);
+      
+        PostType postType = postTypeRepository.findById(request.getType_id())
+                .orElseThrow(() -> new IllegalArgumentException("not found type id"));
+        PostMajor postMajor = postMajorRepository.findById(request.getMajor_id())
+                .orElseThrow(() -> new IllegalArgumentException("not found major id"));
+
+        Post post = postRepository.save(request.toEntity(member, team, postType,postMajor));
+     
         return post;
     }
 
@@ -46,7 +58,7 @@ public class PostService {
     @Transactional
     public Post update(Long id, PostRequestDto request) {
         Post post = findById(id);
-        post.update(request.getTitle(), request.getContent(), request.getUpdatedAt());
+        post.update(request.getTitle(), request.getContent());
 
         return post;
     }
@@ -55,11 +67,15 @@ public class PostService {
         postRepository.disablePostById(id);
     }
 
-    public List<Post> findStudyPostAll() {
-        return postRepository.findStudyPostAll();
+    public List<Post> findTypePostAll(Long type_id) {
+        return postRepository.findTypePostAll(type_id);
     }
 
-    public List<Post> findProjectPostAll() {
-        return postRepository.findProjectPostAll();
+    public List<Post> findMajorPostAll(Long major_id) {
+        return postRepository.findMajorPostAll(major_id);
+    }
+
+    public List<Post> findTop3PostsByViewCount() {
+        return postRepository.findTop3PostsByViewCount();
     }
 }

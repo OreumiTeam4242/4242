@@ -1,10 +1,10 @@
 package team.ftft.project4242.dto;
 
 import lombok.*;
-import team.ftft.project4242.domain.Member;
-import team.ftft.project4242.domain.Post;
+import team.ftft.project4242.domain.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Getter
 @Setter
@@ -14,18 +14,25 @@ import java.time.LocalDateTime;
 public class PostRequestDto {
     private String title;
     private String content;
-    private int member_cnt;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private Member member;
+    private Long type_id;
+    private Long major_id;
+    private Date start_date;
+    private Date end_date;
+    private Integer member_cnt;
+    private String process_type;
 
-    public Post toEntity(Member member) {
+    public Post toEntity(Member member, Team team, PostType postType, PostMajor postMajor) {
         return Post.builder()
                 .title(title)
                 .content(content)
-                .use_yn(true)
-                .is_closed(false)
+                .postType(postType)
+                .postMajor(postMajor)
                 .member(member)
+                .team(team)
+                .start_date(start_date)
+                .end_date(end_date)
+                .member_cnt(member_cnt)
+                .process_type(process_type)
                 .build();
     }
 }

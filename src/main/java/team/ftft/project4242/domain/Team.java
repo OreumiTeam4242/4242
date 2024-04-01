@@ -23,15 +23,10 @@ public class Team {
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
-    @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name="member_id")
-    private Member member;
-
     @OneToMany(mappedBy = "team")
-    private List<Team_Member> teamMemberList = new ArrayList<Team_Member>();
+    private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @Column(name="leader_id")
     private Long leader_id;
@@ -40,12 +35,10 @@ public class Team {
     private boolean use_yn;
 
     @Builder
-    public Team(boolean is_completed, Post post, Member member) {
+    public Team(boolean is_completed, Long leader_id) {
         this.is_completed = is_completed;
-        this.leader_id = post.getLeader_id();
+        this.leader_id = leader_id;
         this.use_yn = true;
-        this.post = post;
-        this.member = member;
     }
 
     public Team() {
@@ -56,7 +49,6 @@ public class Team {
                 .is_completed(is_completed)
                 .use_yn(use_yn)
                 .post(post)
-                .member(member)
                 .build();
     }
 

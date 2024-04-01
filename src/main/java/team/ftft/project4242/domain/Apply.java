@@ -35,6 +35,8 @@ public class Apply {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    // todo team 매핑하기!!
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;

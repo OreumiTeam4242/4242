@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @NoArgsConstructor
@@ -17,12 +20,7 @@ public class PostMajor {
     @Column(name="major_nm")
     private String major_nm;
 
-    @OneToOne(mappedBy = "postMajor")
-    private Post post;
-
-    @Builder
-    public PostMajor(String major_nm) {
-        this.major_nm = major_nm;
-    }
+    @OneToMany(mappedBy = "postMajor")
+    private List<Post> postList = new ArrayList<Post>();
 }
 
