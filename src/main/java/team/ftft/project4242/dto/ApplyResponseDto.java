@@ -4,7 +4,6 @@ import lombok.*;
 import team.ftft.project4242.domain.Apply;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -14,12 +13,13 @@ public class ApplyResponseDto {
     private String content;
     private String available_time;
     private String available_day;
+    private String file_url;
 
     public ApplyResponseDto(Apply apply) {
         title = apply.getTitle();
         content = apply.getContent();
         available_time = apply.getAvailable_time();
         available_day = apply.getAvailable_day();
-
+        file_url = apply.getFile_url();
     }
 }

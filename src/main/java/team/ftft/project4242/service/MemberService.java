@@ -1,17 +1,25 @@
 package team.ftft.project4242.service;
 
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.dto.MemberRequestDto;
 import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.repository.MemberRepository;
+import team.ftft.project4242.service.file.AwsS3Service;
 
 @Service
 public class MemberService {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
+    private final AwsS3Service awsS3Service;
+
+    public MemberService(MemberRepository memberRepository, AwsS3Service awsS3Service) {
+        this.memberRepository = memberRepository;
+        this.awsS3Service = awsS3Service;
+    }
 
     public Member registerMember(MemberRequestDto request) {
         // DTO에서 엔터티로 변환
@@ -30,9 +38,13 @@ public class MemberService {
         return member.toResponse();
     }
 
-    public MemberResponseDto update(Long memberId, MemberRequestDto request){
+    public MemberResponseDto update(Long memberId, MemberRequestDto request, @Nullable MultipartFile file){
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()->new IllegalArgumentException("member doesn't exist"));
+        if(file != null){
+            String s3FilePath = awsS3Service.uploadImageBucket(file);
+            member.updateimageUrl(s3FilePath);
+        }
         member.update(request.getNickname());
 
         return member.toResponse();

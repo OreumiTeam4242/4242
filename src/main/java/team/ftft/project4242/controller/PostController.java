@@ -4,31 +4,26 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import team.ftft.project4242.domain.Member;
+import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Post;
-
 import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class PostController {
     private final PostService postService;
-    private final TeamService teamService;
 
-    public PostController(PostService postService, TeamService teamService) {
+    public PostController(PostService postService) {
         this.postService = postService;
-        this.teamService = teamService;
     }
 
     @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDto> addPost( @RequestBody PostRequestDto request) {
-        Post post = postService.save(request);
-        post.setViewCount(0L);
+    public ResponseEntity<PostResponseDto> addPost(@RequestPart PostRequestDto request
+                                                   ,@RequestPart MultipartFile file) {
+        Post post = postService.save(request,file);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(post.toResponse());
     }
@@ -46,8 +41,10 @@ public class PostController {
     }
 
     @PutMapping("/api/post/{post_id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long post_id, @RequestBody PostRequestDto request) {
-        Post updatedPost = postService.update(post_id, request);
+    public ResponseEntity<Post> updatePost(@PathVariable Long post_id,
+                                           @RequestPart PostRequestDto request,
+                                           @RequestPart(value="file",required = false) MultipartFile file) {
+        Post updatedPost = postService.update(post_id, request,file);
         return ResponseEntity.ok(updatedPost);
     }
 
@@ -98,6 +95,13 @@ public class PostController {
         List<PostResponseDto> responseList = hotPostList.stream()
                 .map(PostResponseDto::new)
                 .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
+    @GetMapping("/api/posts/scrap")
+    public ResponseEntity<List<PostResponseDto>> showScrapPost(){
+        Long memberId= 6L;
+        List<PostResponseDto> responseList  = postService.findAllScrap(memberId);
         return ResponseEntity.ok(responseList);
     }
 
