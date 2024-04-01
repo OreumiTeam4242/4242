@@ -25,4 +25,11 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p order by p.viewCount desc limit 3")
     List<Post> findTop3PostsByViewCount();
+
+    @Query("select p from Post p where p.use_yn = true and p.is_closed = true and p.team.is_completed = false")
+    List<Post> findOnGoingPostAll();
+
+    @Query("select p from Post p where p.use_yn = true and p.is_closed = true and p.team.is_completed = true")
+    List<Post> findFinishPostAll();
+
 }

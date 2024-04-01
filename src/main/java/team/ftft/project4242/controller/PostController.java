@@ -100,4 +100,29 @@ public class PostController {
         List<PostResponseDto> responseList  = postService.findAllScrap(memberId);
         return ResponseEntity.ok(responseList);
     }
+
+    @GetMapping("/api/posts/on-going")
+    public ResponseEntity<List<PostResponseDto>> showOnGoingPost() {
+        List<Post> onGoingPostList = postService.findOnGoingPostAll();
+        if (onGoingPostList == null || onGoingPostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = onGoingPostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
+    @GetMapping("/api/posts/finish")
+    public ResponseEntity<List<PostResponseDto>> showFinishPost() {
+        List<Post> finishPostList = postService.findFinishPostAll();
+        if (finishPostList == null || finishPostList.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
+        }
+        List<PostResponseDto> responseList = finishPostList.stream()
+                .map(PostResponseDto::new)
+                .toList();
+        return ResponseEntity.ok(responseList);
+    }
+
 }
