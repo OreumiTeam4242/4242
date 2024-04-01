@@ -21,6 +21,7 @@ public class CustomUserDetails implements UserDetails {
         return auth;
     }
 
+    public Long getMemberId(){return member.getMember_id();}
     @Override
     public String getPassword() {
         return member.getPassword();

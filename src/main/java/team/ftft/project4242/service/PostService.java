@@ -34,9 +34,9 @@ public class PostService {
         this.awsS3Service = awsS3Service;
     }
 
-    public Post save(PostRequestDto request, @Nullable MultipartFile file) {
+    public Post save(PostRequestDto request, @Nullable MultipartFile file,Long memberId) {
 
-        Member member = memberRepository.findById(4L).orElse(null);
+        Member member = memberRepository.findById(memberId).orElse(null);
         Team team = Team.builder()
                 .leader_id(member.getMember_id())
                 .is_completed(false)
