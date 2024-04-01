@@ -57,12 +57,11 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
-    @OneToOne
-    @JoinColumn(name="member_id")
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private Role role;
-
     @Builder
-    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url) {
+    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url,Role role) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
@@ -70,6 +69,7 @@ public class Member {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.img_url = img_url;
+        this.role = role;
     }
     public MemberResponseDto toResponse(){
         return MemberResponseDto
