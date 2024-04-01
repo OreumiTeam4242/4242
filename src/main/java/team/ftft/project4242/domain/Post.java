@@ -85,7 +85,7 @@ public class Post {
     private Team team;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member) {
         this.title = title;
         this.content = content;
 
@@ -98,6 +98,7 @@ public class Post {
         this.is_closed = false;
         this.use_yn = true;
         this.team = team;
+        this.member = member;
     }
 
     public PostResponseDto toResponse() {

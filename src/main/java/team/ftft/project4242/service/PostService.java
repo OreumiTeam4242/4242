@@ -2,10 +2,10 @@ package team.ftft.project4242.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.PostMajor;
-import team.ftft.project4242.domain.PostType;
+import team.ftft.project4242.domain.*;
+import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostRequestDto;
+import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.repository.PostMajorRepository;
 import team.ftft.project4242.repository.PostRepository;
 import team.ftft.project4242.repository.PostTypeRepository;
@@ -17,16 +17,20 @@ public class PostService {
     private final PostRepository postRepository;
     private final PostTypeRepository postTypeRepository;
     private final PostMajorRepository postMajorRepository;
+    private final MemberRepository memberRepository;
+    private final TeamService teamService;
 
-    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository) {
+    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository,MemberRepository memberRepository,TeamService teamService) {
         this.postRepository = postRepository;
         this.postTypeRepository = postTypeRepository;
         this.postMajorRepository = postMajorRepository;
+        this.memberRepository = memberRepository;
+        this.teamService = teamService;
     }
 
     public Post save(PostRequestDto request) {
 
-        Member member = memberRepository.findById(6L).orElse(null);
+        Member member = memberRepository.findById(1L).orElse(null);
         Team team = Team.builder()
                 .leader_id(member.getMember_id())
                 .is_completed(false)
