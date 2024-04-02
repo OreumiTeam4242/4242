@@ -70,3 +70,52 @@ document.getElementById('logout').addEventListener('click', function () {
             alert(error.message);
         });
 });
+
+// ------------------ 관심분야 선택 부분
+function getPostsByMajor() {
+    var selectedMajor = document.getElementById("post-type").value;
+    fetch(`/api/posts/major/${major_id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("서버 응답 오류");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error("오류:", error);
+        });
+}
+
+// todo 이 아래로는 수정 예정..
+// ------------------ 스터디 / 프로젝트 모집 구분 부분
+document.addEventListener("DOMContentLoaded", function() {
+    // 스터디 버튼 클릭 이벤트
+    document.querySelector(".study-button").addEventListener("click", function() {
+        showPostByType("study"); // 스터디 게시물 요청
+    });
+
+    // 프로젝트 버튼 클릭 이벤트
+    document.querySelector(".project-button").addEventListener("click", function() {
+        showPostByType("project"); // 프로젝트 게시물 요청
+    });
+
+    // 특정 타입의 게시물을 서버에 요청하는 함수
+    function showPostByType(type) {
+        fetch(`/api/posts/type/${type_id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("서버 응답 오류");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("오류:", error);
+            });
+    }
+});
