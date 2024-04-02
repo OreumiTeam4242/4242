@@ -17,10 +17,9 @@ public class ApplyRequestDto {
     private String content;
     private String available_time;
     private String available_day;
-    private Member member;
     private String file_url;
 
-    public Apply toEntity(Post post) {
+    public Apply toEntity(Post post,Member member) {
         return Apply.builder()
                 .title(title)
                 .content(content)

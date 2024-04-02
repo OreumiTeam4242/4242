@@ -2,7 +2,9 @@ package team.ftft.project4242.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import team.ftft.project4242.commons.security.CustomUserDetails;
 import team.ftft.project4242.domain.Comment;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.dto.CommentRequestDto;
@@ -19,8 +21,9 @@ public class CommentController {
 
     @PostMapping("/api/posts/{postId}/comments")
     public ResponseEntity<CommentResponseDto> addComment(@PathVariable Long postId,
-                                                         @RequestBody CommentRequestDto request){
-        Long memberId = 6L;
+                                                         @RequestBody CommentRequestDto request,
+                                                        @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        Long memberId = customUserDetails.getMemberId();
         CommentResponseDto response = commentService.saveComment(request,postId,memberId);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);

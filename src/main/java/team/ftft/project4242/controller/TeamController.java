@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.ftft.project4242.domain.Team;
-import team.ftft.project4242.dto.TeamRequestDto;
 import team.ftft.project4242.dto.TeamResponseDto;
 import team.ftft.project4242.service.TeamService;
 
