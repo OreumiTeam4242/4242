@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import team.ftft.project4242.dto.TeamResponseDto;
 
 import java.util.ArrayList;
@@ -12,6 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@SQLDelete(sql = "UPDATE team SET use_yn = false WHERE team_id = ?")
+@SQLRestriction("use_yn = true")
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +29,7 @@ public class Team {
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     @OneToMany(mappedBy = "team")
