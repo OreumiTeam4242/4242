@@ -3,8 +3,10 @@ package team.ftft.project4242.controller;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import team.ftft.project4242.commons.security.CustomUserDetails;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.dto.PostResponseDto;
@@ -22,8 +24,10 @@ public class PostController {
 
     @PostMapping("/api/post")
     public ResponseEntity<PostResponseDto> addPost(@RequestPart PostRequestDto request
-                                                   ,@RequestPart MultipartFile file) {
-        Post post = postService.save(request,file);
+                                                   , @RequestPart MultipartFile file
+                                                    , @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getMemberId();
+        Post post = postService.save(request,file,memberId);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(post.toResponse());
     }

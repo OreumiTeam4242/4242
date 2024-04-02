@@ -2,8 +2,10 @@ package team.ftft.project4242.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import team.ftft.project4242.commons.security.CustomUserDetails;
 import team.ftft.project4242.domain.Notify;
 import team.ftft.project4242.dto.NotifyRequestDto;
 import team.ftft.project4242.dto.NotifyResponseDto;
@@ -21,8 +23,10 @@ public class NotifyController {
     // POST : 신고글 생성
     @PostMapping("/api/notify")
     public ResponseEntity<NotifyResponseDto> addNotify (@RequestPart NotifyRequestDto request,
-                                                        @RequestPart(value="file",required = false) MultipartFile file) {
-        Notify notify = notifyService.saveNotify(request,file);
+                                                        @RequestPart(value="file",required = false) MultipartFile file
+                                                        ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getMemberId();
+        Notify notify = notifyService.saveNotify(request,file,memberId);
         NotifyResponseDto response = notify.toResponse();
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
