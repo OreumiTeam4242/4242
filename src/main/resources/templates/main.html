@@ -36,9 +36,9 @@
 
         <div class="hot">
             <p class="hot-text"><span style="color:red">HOT</span>한
-                <button class="study-button">스터디</button> /
-                <button class="project-button">프로젝트</button>
-                모집공고를 확인해보세요!</p>
+                <button class="study-button" data-type="1">스터디</button> /
+                <button class="project-button" data-type="2">프로젝트</button></p>
+            </p>
             <div class="hot-box">
                 <div class="hot-box-content" th:each="post : ${hotPostList}">
                     <div class="box-top-content">
@@ -47,7 +47,7 @@
 
                     </div>
                     <div class="box-text-content">
-                        <p class="author" th:text="${post.member.nickname}">글쓴이</p>
+<!--                        <p class="author" th:text="${post.member.nickname}">글쓴이</p>-->
                         <p th:text="'조회수 ' + ${post.viewCount}"></p>
                         <p th:text="'댓글 ' + ${post.commentList.size()}"></p>
                     </div>
@@ -56,8 +56,8 @@
         </div>
         <div class="find">
             <p class="find-text">모집중인
-                <button class="study-button">스터디</button> /
-                <button class="project-button">프로젝트</button></p>
+                <button class="study-button" data-type="1">스터디</button> /
+                <button class="project-button" data-type="2">프로젝트</button></p>
             <div class="find-box">
                 <div class="boxes">
                     <div class="find-box-content" th:each="post : ${postList}">
@@ -66,7 +66,7 @@
                             <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
                         </div>
                         <div class="box-text-content-2">
-                            <p class="author" th:text="${post.member.nickname}">글쓴이</p>
+<!--                            <p class="author" th:text="${post.member.nickname}">글쓴이</p>-->
                             <p th:text="'조회수 ' + ${post.viewCount}"></p>
                             <p th:text="'댓글 ' + ${post.commentList.size()}"></p>
                         </div>

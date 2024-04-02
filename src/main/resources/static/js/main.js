@@ -7,23 +7,40 @@ $topBtn.onclick = () => {
 
 document.addEventListener('DOMContentLoaded', function () {
     var boxTopContents = document.querySelectorAll('.box-top-content');
+    var boxFindContents = document.querySelectorAll('.find-box-content');
 
-    // 각 요소에 클릭 이벤트 추가
+    // boxTopContents에 대한 클릭 이벤트 등록
     boxTopContents.forEach(function(boxTopContent) {
         boxTopContent.addEventListener('click', function() {
-            // 클릭된 요소의 정보를 기반으로 포스트 ID 가져오기
-            const postId = boxTopContent.dataset.postId; // 가정: 데이터셋에 postId가 있음
-
-            // 포스트 ID를 이용하여 상세 페이지로 이동
-            window.location.href = `/page/recruitPostDetail?id=${postId}`;
+            const postId = boxTopContent.dataset.post_id;
+            fetchAndDisplayPostDetail(postId);
         });
     });
+
+    // boxFindContents에 대한 클릭 이벤트 등록
+    boxFindContents.forEach(function(boxFindContent) {
+        boxFindContent.addEventListener('click', function() {
+            const postId = boxFindContent.dataset.post_id;
+            fetchAndDisplayPostDetail(postId);
+        });
+    });
+
+    function fetchAndDisplayPostDetail(postId) {
+        fetch(`/api/post/${postId}`)
+            .then(response => response.json())
+            .then(post => {
+                window.location.href = `/page/recruitPostDetail?id=${post.id}`;
+            })
+            .catch(error => console.error('Error fetching post by ID:', error));
+    }
 });
 
-// 내 정보 버튼 클릭 시
+
+
+// ------------------내 정보 버튼 클릭 시
 document.getElementById('my-info').addEventListener('click', function () {
     // REST API 호출
-    fetch('/page/personal_page', {
+    fetch("/api/members", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -46,10 +63,10 @@ document.getElementById('my-info').addEventListener('click', function () {
         });
 });
 
-// 로그아웃 버튼 클릭 시
+// ------------------로그아웃 버튼 클릭 시
 document.getElementById('logout').addEventListener('click', function () {
     // REST API 호출
-    fetch('/page/logout', {
+    fetch("/api/auth/logout", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -58,9 +75,8 @@ document.getElementById('logout').addEventListener('click', function () {
         .then(function(response) {
             // 응답 처리
             if (response.ok) {
-                // 성공 시 로그인 페이지로 리다이렉트
-                window.location.href = '/page/login';
-                // todo 로그아웃되는 기능도 넣어줘야됨 나중에!!
+                // 성공 시 인트로 페이지로 리다이렉트
+                window.location.href = '/page/intro';
             } else {
                 // 실패 시 에러 처리
                 throw new Error('로그아웃에 실패했습니다.');
@@ -73,7 +89,7 @@ document.getElementById('logout').addEventListener('click', function () {
         });
 });
 
-
+// ------------------모집분야별
 // todo 이 아래로는 줄곧 수정 예정..
 
 // 이전에 선택된 major_id를 저장할 변수
@@ -121,7 +137,6 @@ async function fetchAndDisplayPosts() {
                     <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
                 </div>
                 <div class="box-text-content-2">
-                    <p class="author">${post.member ? post.member.nickname : 'Unknown'}</p>
                     <p>조회수 ${post.viewCount}</p>
                     <p>댓글 ${post.commentList.length}</p>
                 </div>
@@ -146,10 +161,41 @@ document.getElementById('post-type').addEventListener('change', () => {
     fetchAndDisplayPosts();
 });
 
+// ------------------ 스터디 / 프로젝트 모집 구분
+//  버튼 클릭 이벤트 리스너
+document.querySelector('.study-button').addEventListener('click', async () => {
+    try {
+        const response = await fetch('/api/posts/type/1');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const posts = await response.json();
+        displayPosts(posts);
+    } catch (error) {
+        console.error('Error fetching study posts:', error);
+    }
+});
 
+// 프로젝트 버튼 클릭 이벤트 리스너
+document.querySelector('.project-button').addEventListener('click', async () => {
+    try {
+        const response = await fetch('/api/posts/type/2');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const posts = await response.json();
+        displayPosts(posts);
+    } catch (error) {
+        console.error('Error fetching project posts:', error);
+    }
+});
 
-
-// ------------------ 스터디 / 프로젝트 모집 구분 부분
+// 게시물을 표시하는 함수
+function displayPosts(posts) {
+    // 게시물을 표시하는 코드 작성
+}
 
 
 // ------------------ 스크랩 GET
+
+

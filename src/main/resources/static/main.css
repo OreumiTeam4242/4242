@@ -159,7 +159,7 @@ header {
 
 .hot-box {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .hot-box-content {
