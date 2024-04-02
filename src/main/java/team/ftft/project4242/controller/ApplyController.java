@@ -30,7 +30,7 @@ public class ApplyController {
     public ResponseEntity<ApplyResponseDto> addApply (@RequestPart ApplyRequestDto request,
                                                       @RequestPart(value="file",required = false) MultipartFile file,
                                                       @PathVariable Long post_id) {
-        Apply apply = applyService.saveApply(request, post_id,file);
+        Apply apply = applyService.saveApply(request, post_id, file);
         ApplyResponseDto response = apply.toResponse();
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);

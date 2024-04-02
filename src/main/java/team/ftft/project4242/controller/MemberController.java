@@ -21,6 +21,7 @@ public class MemberController {
     @Autowired
     private PostRepository postRepository;
 
+//    회원가입
     @PostMapping("/register")
     public ResponseEntity<?> registerMember(@RequestBody MemberRequestDto request) {
         if (memberService.isEmailExists(request.getEmail())) {
@@ -43,6 +44,7 @@ public class MemberController {
         return ResponseEntity.ok("Login successful");
     }
 
+//    개인정보 조회
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberResponseDto> getMemberInfo(@PathVariable Long memberId) {
         MemberResponseDto response = memberService.findById(memberId);
@@ -51,6 +53,7 @@ public class MemberController {
                 .body(response);
     }
 
+//    개인정보 수정
     @PutMapping("/{memberId}/update")
     public ResponseEntity<MemberResponseDto> updateMemberInfo(@PathVariable Long memberId,
                                                               @RequestPart MemberRequestDto request,
@@ -61,6 +64,7 @@ public class MemberController {
                 .body(response);
     }
 
+//    신고 유저 정지
     @DeleteMapping("/{memberId}/disabled")
     public ResponseEntity<MemberResponseDto> disable(@PathVariable("memberId") Long member_id) {
         MemberResponseDto response = memberService.disabled(member_id);
@@ -68,6 +72,7 @@ public class MemberController {
                 .body(response);
     }
 
+//    신고 유저 정지 풀기
     @PutMapping("/{memberId}/enable")
     public ResponseEntity<MemberResponseDto> enable(
             @PathVariable Long memberId) {
