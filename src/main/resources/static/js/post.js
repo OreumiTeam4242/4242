@@ -52,17 +52,3 @@ modalCheckButton.addEventListener('click', () => {
 });
 
 
-const goToTopButton = document.querySelector(".btn-to-top");
-
-window.addEventListener('scroll', () => {
-    if(document.documentElement.scrollTop > 150 ||
-        document.body.scrollTop > 150) {
-        goToTopButton.style.display = 'block';
-    } else {
-        goToTopButton.style.display = 'none';
-    }
-});
-
-goToTopButton.addEventListener('click', () => {
-    window.scrollTo({top : 0, behavior : "smooth"});
-});

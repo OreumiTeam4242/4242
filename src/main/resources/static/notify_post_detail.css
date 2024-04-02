@@ -20,6 +20,7 @@ p {
 
 .header-nav li {
     padding : 0 10px;
+    cursor: pointer;
 }
 
 header {
@@ -61,6 +62,7 @@ main {
 
 .msg-go-back {
     font-size : 20px;
+    cursor : pointer;
 }
 
 .notified-user-info {
@@ -113,6 +115,7 @@ main {
     font-weight: 600;
     float : right;
     margin-right : 2.5%;
+    cursor : pointer;
 }
 
 /*footer*/
@@ -138,6 +141,7 @@ footer{
 /*to top button*/
 
 .btn-to-top {
+    display: none;
     position: fixed;
     border : 3px #C8C8C8 solid;
     border-radius: 100px;
@@ -147,6 +151,7 @@ footer{
     top : 85%;
     left : 95%;
     opacity: 60%;
+    cursor : pointer;
 }
 
 .btn-to-top img {
