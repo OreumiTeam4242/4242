@@ -24,7 +24,7 @@ public class PostController {
 
     @PostMapping("/api/post")
     public ResponseEntity<PostResponseDto> addPost(@RequestPart PostRequestDto request
-                                                   , @RequestPart MultipartFile file
+                                                   , @RequestPart(value = "file", required = false) MultipartFile file
                                                     , @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
         Post post = postService.save(request,file,memberId);
@@ -63,7 +63,7 @@ public class PostController {
     }
 
     @Transactional
-    @PutMapping("/api/post/{post_id}/disable")
+    @DeleteMapping("/api/post/{post_id}/disable")
     public ResponseEntity<Void> disablePostById(@PathVariable Long post_id) {
         postService.disablePostById(post_id);
         return ResponseEntity.ok().build();
@@ -106,8 +106,8 @@ public class PostController {
     }
 
     @GetMapping("/api/posts/scrap")
-    public ResponseEntity<List<PostResponseDto>> showScrapPost(){
-        Long memberId= 6L;
+    public ResponseEntity<List<PostResponseDto>> showScrapPost(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        Long memberId= customUserDetails.getMemberId();
         List<PostResponseDto> responseList  = postService.findAllScrap(memberId);
         return ResponseEntity.ok(responseList);
     }

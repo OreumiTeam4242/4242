@@ -10,11 +10,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import team.ftft.project4242.commons.security.CustomUserDetails;
 import team.ftft.project4242.commons.security.UserDetailService;
 import team.ftft.project4242.domain.*;
 import team.ftft.project4242.dto.LoginRequestDto;
@@ -38,6 +40,7 @@ public class MemberController {
         this.authenticationManager = authenticationManager;
     }
 
+//    회원가입
     @PostMapping("/api/members/register")
     public ResponseEntity<?> registerMember(@RequestBody MemberRequestDto request) {
         if (memberService.isEmailExists(request.getEmail())) {
@@ -48,6 +51,7 @@ public class MemberController {
         return ResponseEntity.ok(responseDto);
     }
 
+//    로그인
     @PostMapping("/api/auth/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response,
                                    @RequestBody LoginRequestDto loginRequestDto) {
@@ -75,7 +79,8 @@ public class MemberController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    
+//    로그아웃
     @PostMapping("/api/auth/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
@@ -93,36 +98,65 @@ public class MemberController {
 
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/api/members/{memberId}")
-    public ResponseEntity<MemberResponseDto> getMemberInfo(@PathVariable Long memberId) {
+
+//    개인정보 조회
+
+    @GetMapping("/api/members")
+    public ResponseEntity<MemberResponseDto> getMemberInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getMemberId();
+      
         MemberResponseDto response = memberService.findById(memberId);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
 
-    @PutMapping("/api/members/{memberId}/update")
-    public ResponseEntity<MemberResponseDto> updateMemberInfo(@PathVariable Long memberId,
-                                                              @RequestPart MemberRequestDto request,
-                                                              @RequestPart(value="img",required = false) MultipartFile file) {
+//    개인정보 수정
+    @PutMapping("/api/members/update")
+    public ResponseEntity<MemberResponseDto> updateMemberInfo(@RequestPart MemberRequestDto request,
+                                                              @RequestPart(value="img",required = false) MultipartFile file
+                                                                ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getMemberId();
         MemberResponseDto response = memberService.update(memberId, request,file);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
 
-    @DeleteMapping("/api/members/{memberId}/disabled")
+    // 정지
+    @PutMapping("/api/members/{memberId}/disabled")
     public ResponseEntity<MemberResponseDto> disable(@PathVariable("memberId") Long member_id) {
         MemberResponseDto response = memberService.disabled(member_id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
 
+//    신고 유저 정지 해제
     @PutMapping("/api/members/{memberId}/enable")
     public ResponseEntity<MemberResponseDto> enable(
             @PathVariable Long memberId) {
         MemberResponseDto response = memberService.enable(memberId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
+    }
+    // 탈퇴
+    @DeleteMapping("/api/members/delete")
+    public ResponseEntity<?> disable(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                        HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        Long member_id = customUserDetails.getMemberId();
+        memberService.delete(member_id);
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setDomain("localhost");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok().build();
     }
 }

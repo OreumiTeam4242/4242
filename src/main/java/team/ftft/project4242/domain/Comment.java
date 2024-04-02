@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.*;
 import org.springframework.data.annotation.CreatedDate;
 import team.ftft.project4242.dto.CommentResponseDto;
 
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE comment SET use_yn = false WHERE comment_id = ?")
+@SQLRestriction("use_yn = true")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +33,12 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name="post_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     @ManyToOne
     @JoinColumn(name="member_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
     @Builder
@@ -51,8 +56,5 @@ public class Comment {
                 .created_at(createdAt)
                 .use_yn(use_yn)
                 .build();
-    }
-    public void deleteComment(){
-        this.use_yn = false;
     }
 }
