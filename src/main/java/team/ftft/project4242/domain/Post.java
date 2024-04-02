@@ -66,13 +66,13 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<Comment>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Apply> applyList = new ArrayList<Apply>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Scrap> scrapList = new ArrayList<Scrap>();
 
     @Column(name="file_url")

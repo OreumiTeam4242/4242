@@ -32,7 +32,7 @@ public class Team {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE)
     private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
 
     @Column(name="leader_id")

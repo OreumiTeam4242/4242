@@ -33,7 +33,7 @@ public class MemberService {
                 .email(request.getEmail())
                 .nickname(request.getNickname())
                 .password(endcoder.encode(request.getPassword()))
-                .img_url(null) // 기본 이미지 설정
+                .img_url("https://eunji-web-bucket.s3.ap-northeast-2.amazonaws.com/4cb67e60-0bbb-4701-b248-2460e0082fab.jpg") // 기본 이미지 설정
                 .use_yn(true)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
