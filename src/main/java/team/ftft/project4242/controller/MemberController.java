@@ -40,6 +40,7 @@ public class MemberController {
         this.authenticationManager = authenticationManager;
     }
 
+//    회원가입
     @PostMapping("/api/members/register")
     public ResponseEntity<?> registerMember(@RequestBody MemberRequestDto request) {
         if (memberService.isEmailExists(request.getEmail())) {
@@ -50,6 +51,7 @@ public class MemberController {
         return ResponseEntity.ok(responseDto);
     }
 
+//    로그인
     @PostMapping("/api/auth/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response,
                                    @RequestBody LoginRequestDto loginRequestDto) {
@@ -77,7 +79,8 @@ public class MemberController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    
+//    로그아웃
     @PostMapping("/api/auth/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
@@ -95,15 +98,20 @@ public class MemberController {
 
         return ResponseEntity.ok().build();
     }
+
+//    개인정보 조회
+
     @GetMapping("/api/members")
     public ResponseEntity<MemberResponseDto> getMemberInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
+      
         MemberResponseDto response = memberService.findById(memberId);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
 
+//    개인정보 수정
     @PutMapping("/api/members/update")
     public ResponseEntity<MemberResponseDto> updateMemberInfo(@RequestPart MemberRequestDto request,
                                                               @RequestPart(value="img",required = false) MultipartFile file
@@ -114,6 +122,7 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
+
     // 정지
     @PutMapping("/api/members/{memberId}/disabled")
     public ResponseEntity<MemberResponseDto> disable(@PathVariable("memberId") Long member_id) {
@@ -122,6 +131,7 @@ public class MemberController {
                 .body(response);
     }
 
+//    신고 유저 정지 해제
     @PutMapping("/api/members/{memberId}/enable")
     public ResponseEntity<MemberResponseDto> enable(
             @PathVariable Long memberId) {
