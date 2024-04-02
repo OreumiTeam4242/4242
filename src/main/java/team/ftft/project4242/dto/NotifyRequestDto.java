@@ -17,11 +17,10 @@ import java.util.UUID;
 public class NotifyRequestDto {
     private String title;
     private String content;
-    private Member postMember;
-    private Member notifyMember;
+    private String notifyMemberName;
     private String file_url;
 
-    public Notify toEntity() {
+    public Notify toEntity(Member postMember,Member notifyMember) {
         return Notify.builder()
                 .title(title)
                 .content(content)

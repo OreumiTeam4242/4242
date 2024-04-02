@@ -2,6 +2,7 @@ package team.ftft.project4242.service;
 
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Member;
@@ -10,25 +11,39 @@ import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.service.file.AwsS3Service;
 
+import java.time.LocalDateTime;
+
+import static team.ftft.project4242.domain.Role.ROLE_NEW_BIE;
+
 @Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
     private final AwsS3Service awsS3Service;
+    private BCryptPasswordEncoder endcoder;
 
-    public MemberService(MemberRepository memberRepository, AwsS3Service awsS3Service) {
+    public MemberService(MemberRepository memberRepository, AwsS3Service awsS3Service,BCryptPasswordEncoder endcoder) {
         this.memberRepository = memberRepository;
         this.awsS3Service = awsS3Service;
+        this.endcoder = endcoder;
     }
 
     public Member registerMember(MemberRequestDto request) {
-        // DTO에서 엔터티로 변환
-        Member member = request.toEntity();
+        Member member = Member.builder()
+                .email(request.getEmail())
+                .nickname(request.getNickname())
+                .password(endcoder.encode(request.getPassword()))
+                .img_url(null) // 기본 이미지 설정
+                .use_yn(true)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .role(ROLE_NEW_BIE)
+                .build();
         return memberRepository.save(member);
     }
 
     public boolean isEmailExists(String email) {
-        return memberRepository.findByEmail(email) != null;
+        return memberRepository.findByEmail(email).isPresent();
     }
 
     public MemberResponseDto findById(Long memberId){

@@ -1,22 +1,18 @@
 package team.ftft.project4242.domain;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+public enum Role {
+    ROLE_NEW_BIE("ROLE_NEW_BIE"),
+    ROLE_JUNIOR("ROLE_JUNIOR"),
+    ROLE_SENIOR("ROLE_SENIOR"),
+    ROLE_ADMIN("ROLE_ADMIN");
 
-@Getter
-@Entity
-@NoArgsConstructor
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "permission_id", updatable = false)
-    private Long permission_id;
+    String role;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    Role(String role) {
+        this.role = role;
+    }
 
-    @Column(name="permission_status")
-    private String permission_status;
+    public String value() {
+        return role;
+    }
 }

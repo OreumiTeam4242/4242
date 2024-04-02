@@ -15,15 +15,4 @@ public class MemberRequestDto {
     private String password;
     private String nickname;
 
-    public Member toEntity() {
-        Member member = Member.builder()
-                .email(email)
-                .password(password)
-                .nickname(nickname)
-                .use_yn(true)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .build();
-        return member;
-    }
 }
