@@ -93,7 +93,6 @@ public class PostService {
         return postRepository.findTop3PostsByViewCount();
     }
 
-
     public List<PostResponseDto> findAllScrap(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("member doesn't exist"));
@@ -104,13 +103,12 @@ public class PostService {
                 .map(scrap -> new PostResponseDto(scrap.getPost()))
                 .collect(Collectors.toList());
     }
-  
+
     public List<Post> findOnGoingPostAll() {
         return postRepository.findOnGoingPostAll();
     }
 
     public List<Post> findFinishPostAll() {
         return postRepository.findFinishPostAll();
-
     }
 }

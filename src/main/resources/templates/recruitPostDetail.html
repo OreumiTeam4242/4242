@@ -6,7 +6,7 @@
 </head>
 <body>
     <header>
-        <img src="../static/image/4242-logo.png" alt="4242 로고">
+        <img src="/image/4242-logo.png" alt="4242 로고">
 
         <ul class="header-nav">
             <li><a>로그아웃</a></li>
@@ -40,8 +40,7 @@
                     </ul>
                 </div>
                 <div class="btn-scrap-box">
-                    <button class="btn-not-scrap"><img src="../static/image/empty-heart.png" alt="빈 하트"></button>
-                    <button class="btn-scrap"><img src="../static/image/filled-heart.png" alt="꽉 찬 하트"></button>
+                    <button class="btn-scrap"><img src="/image/empty-heart.png" alt="스크랩 하트 버튼" id = "image"></button>
                 </div>
             </div>
         </section>
@@ -100,7 +99,7 @@
     <section class="comments-group">
         <section class="comment-register">
             <p class="comment-info">댓글</p>
-            <input class="comment-input" type="text" placeholder="댓글을 입력해주세요.">
+            <textarea class="comment-input" placeholder="댓글을 입력해주세요."></textarea>
             <button class="btn btn-comment-register">댓글 등록</button>
         </section>
         <section class="comment-exist">
@@ -128,20 +127,21 @@
     </footer>
 
     <button class="btn-to-top">
-        <img src="../static/image/keyboard_arrow_up.png" alt="위로가기 버튼">
+        <img src="/image/keyboard_arrow_up.png" alt="위로가기 버튼">
     </button>
 
-    <section class="model-comment-delete">
+    <section class="modal-comment-delete">
         <div class="modal-box">
-            <button><img src="../static/image/Close.png" alt="모달창 닫기 버튼"></button>
+            <button><img src="/image/Close.png" alt="모달창 닫기 버튼" class="modal-close"></button>
             <div class="modal-inner">
-                <img src="../static/image/Info.png" alt="정보 아이콘">
+                <img src="/image/Info.png" alt="정보 아이콘">
                 <p>댓글을 삭제하시겠습니까?</p>
-                <button><img src="../static/image/Ok.png" alt="체크 버튼"></button>
+                <button><img src="/image/Ok.png" alt="체크 버튼" class="modal-check"></button>
             </div>
         </div>
     </section>
 
-<link rel="stylesheet" href="../static/recruitPostDetail.css">
+<link rel="stylesheet" href="/recruitPostDetail.css">
+<script src="/js/post.js"></script>
 </body>
 </html>

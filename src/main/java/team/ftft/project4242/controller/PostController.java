@@ -32,7 +32,7 @@ public class PostController {
                 .body(post.toResponse());
     }
 
-    @GetMapping ("/api/post")
+    @GetMapping ("/api/posts")
     public ResponseEntity<List<PostResponseDto>> showPost() {
         List<Post> postList = postService.findAllAble();
         if (postList == null || postList.isEmpty()) {

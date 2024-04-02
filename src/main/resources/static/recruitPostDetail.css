@@ -74,6 +74,7 @@ main, .comments-group {
 
 .msg-go-back {
     font-size : 20px;
+    cursor: pointer;
 }
 
 .recruit-post-title {
@@ -93,18 +94,13 @@ main, .comments-group {
     font-weight : 600;
 }
 
-.btn-not-scrap {
-    /*display: none;*/
-    position : relative;
-    left : 60px;
-}
-
-.btn-not-scrap, .btn-scrap {
+.btn-scrap {
     background-color: white;
     border : none;
+    cursor: pointer;
 }
 
-.btn-not-scrap img, .btn-scrap img {
+.btn-scrap img {
     width : 50px;
     height : 50px;
 }
@@ -171,12 +167,14 @@ main, .comments-group {
     background-color : #FFFFFF;
     border-radius: 10px;
     margin-bottom : 75px;
+    cursor: pointer;
 }
 
 .btn-apply {
     /*display : none;*/
     margin : 0 2.5% 60px 0;
     float : right;
+    cursor: pointer;
 }
 
 .btn-apply-end {
@@ -199,23 +197,22 @@ main, .comments-group {
 }
 
 .comment-input {
-    width : 95%;
+    width : 92%;
     height : 100px;
     margin-left : 2%;
     border-radius: 20px;
     border : 2px #A0A0A0 solid;
     margin-bottom : 40px;
-}
-
-.comment-input::placeholder {
-    padding-left : 20px;
+    padding : 20px;
     font-size : 20px;
+    resize : none;
 }
 
 .btn-comment-register {
     font-size : 20px;
     margin-right : 2.5%;
     float : right;
+    cursor: pointer;
 }
 
 .comment-detail {
@@ -251,6 +248,7 @@ main, .comments-group {
     float : right;
     margin-right: 3%;
     margin-top : -3%;
+    cursor: pointer;
 }
 
 footer{
@@ -269,6 +267,7 @@ footer{
 .footer-service-use, .footer-service-introduce, .footer-service-name {
     font-size: 12px;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .btn-to-top {
@@ -281,6 +280,7 @@ footer{
     top : 85%;
     left : 95%;
     opacity: 60%;
+    cursor: pointer;
 }
 
 .btn-to-top img {
@@ -289,8 +289,9 @@ footer{
     height : 60px;
 }
 
-.model-comment-delete {
+.modal-comment-delete {
     position : absolute;
+    display : none;
     top : 250%;
     left : 20%;
 }
@@ -309,7 +310,7 @@ footer{
     background-color: #FFFFFF;
     border: none;
     float : right;
-
+    cursor: pointer;
 }
 
 .modal-box p {
