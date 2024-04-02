@@ -83,6 +83,7 @@ header {
     font-weight: 600;
     padding: 100px 300px 30px 40px;
     margin-left: -400px;
+    margin-top: -10px;
 
 }
 
@@ -101,25 +102,30 @@ header {
 }
 
 .main-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 1025px;
     height: 237.51px;
     background-color: #79C8EC;
     border: none;
-    margin-top: -100px;
     border-radius: 80px;
     box-shadow: 2px 5px lightgray;
+    margin: 0 auto;
 
 }
 
 .hot-text {
     font-size: 30px;
     font-weight: 600;
-    margin-left: -200px;
+    margin-left: -600px;
     margin-top: 80px;
 }
 
 .box-top-content {
     display: flex;
+
 }
 
 .box-in-text {
@@ -169,11 +175,13 @@ header {
 .find-text {
     font-size: 30px;
     font-weight: 600;
-    margin-left: -570px;
+    margin-left: -900px;
     margin-top: 80px;
 }
 
 .find-box-content {
+    display: flex;
+    flex-direction: column;
     width: 299.56px;
     height: 192.49px;
     border: 5px solid #7AC8EC;

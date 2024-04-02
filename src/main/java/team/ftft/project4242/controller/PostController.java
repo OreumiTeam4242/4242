@@ -35,6 +35,8 @@ public class PostController {
     @GetMapping ("/api/posts")
     public ResponseEntity<List<PostResponseDto>> showPost() {
         List<Post> postList = postService.findAllAble();
+        System.out.println("PostList size: " + postList.size());
+
         if (postList == null || postList.isEmpty()) {
             return ResponseEntity.noContent().build(); // 빈 목록일 경우 noContent 상태 코드 반환
         }
@@ -43,6 +45,7 @@ public class PostController {
                 .toList();
         return ResponseEntity.ok(responseList);
     }
+
 
     @PutMapping("/api/post/{post_id}")
     public ResponseEntity<Post> updatePost(@PathVariable Long post_id,
