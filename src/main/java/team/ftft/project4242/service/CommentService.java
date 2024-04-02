@@ -37,7 +37,7 @@ public class CommentService {
         // TODO : 삭제가 아닌 use_yn value 변경
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(()->new IllegalArgumentException("comment doesn't exist"));
-        comment.deleteComment();
+        commentRepository.delete(comment);
         return comment.toResponse();
     }
 }

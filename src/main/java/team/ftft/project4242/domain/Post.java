@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.CommentResponseDto;
@@ -19,6 +23,8 @@ import java.util.UUID;
 @Getter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE post SET use_yn = false WHERE post_id = ?")
+@SQLRestriction("use_yn = true")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,14 +53,17 @@ public class Post {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "major_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PostMajor postMajor;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PostType postType;
 
     @ManyToOne
     @JoinColumn(name="member_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
     @OneToMany(mappedBy = "post")

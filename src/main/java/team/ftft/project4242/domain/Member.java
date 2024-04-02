@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.MemberResponseDto;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @NoArgsConstructor
+@SQLRestriction("use_yn = true")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,5 +115,8 @@ public class Member {
         } else if (this.postCount >=6) {
             this.role = Role.ROLE_SENIOR;
         }
+    }
+    public void deleteMember(){
+        this.use_yn = false;
     }
 }

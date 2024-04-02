@@ -80,4 +80,11 @@ public class MemberService {
         member.enable();  // use_yn 값을 true로 변경
         return member.toResponse();
     }
+
+    public MemberResponseDto delete(Long memberId){
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(()->new IllegalArgumentException("member_id doesn't exist"));
+        memberRepository.delete(member);
+        return member.toResponse();
+    }
 }
