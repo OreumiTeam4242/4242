@@ -31,9 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     showDuplicateNicknameModal();
                 } else {
                     // 기타 오류 처리
-                    window.location.href = '/page/main';
-                    // todo 오류때문에 일단 오류나면 main 로 이동하게끔 했음 반드시 변경필요!!
-                    // throw new Error('회원가입에 실패했습니다. 다시 시도해주세요.');
+                    throw new Error('회원가입에 실패했습니다. 다시 시도해주세요.');
 
                 }
             })
