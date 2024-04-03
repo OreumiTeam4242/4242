@@ -25,59 +25,61 @@
             <h2 id="apply">스터디 / 프로젝트 신청</h2>
             <hr/>
         </div>
-        <div id="title-wrapper">
-            <label class="label-1" for="title">제목</label><br>
-            <textarea id="title" name="motivation" th:value="${title}"></textarea>
-        </div>
-        <div>
-            <label class="label-1" for="motivation">신청 동기</label><br>
-            <textarea id="motivation" name="motivation" th:value="${content}"></textarea>
-        </div>
-        <div id="file-wrapper">
-            <div>
-                <input type="file" name="file" id="file" th:value="${file_url}">
-                <!--                엔터티 이름 반영-->
+        <form id="applyForm" action="/apply-form" method="post">
+            <div id="title-wrapper">
+                <label class="label-1" for="title">제목</label><br>
+                <textarea id="title" name="motivation" th:value="${title}"></textarea>
             </div>
             <div>
-                <p>포트폴리오, 작업물 등을 자유롭게 첨부해보세요!</p>
+                <label class="label-1" for="motivation">신청 동기</label><br>
+                <textarea id="motivation" name="motivation" th:value="${content}"></textarea>
             </div>
-        </div>
-        <div>
-            <label class="label-1" >활동 가능 요일</label><br>
-            <div class="day-check">
-                <!--                엔터티 이름 반영-->
-                <input type="checkbox" id="monday" name="day[]" value="monday" th:checked="${available_day.contains('monday')}">
-                <label for="monday">월요일</label>
-                <input type="checkbox" id="tuesday" name="day[]" value="tuesday" th:checked="${available_day.contains('tuesday')}">
-                <label for="tuesday">화요일</label>
-                <input type="checkbox" id="wednesday" name="day[]" value="wednesday" th:checked="${available_day.contains('wednesday')}">
-                <label for="wednesday">수요일</label>
-                <input type="checkbox" id="thursday" name="day[]" value="thursday" th:checked="${available_day.contains('thursday')}">
-                <label for="thursday">목요일</label>
-                <input type="checkbox" id="friday" name="day[]" value="friday" th:checked="${available_day.contains('friday')}">
-                <label for="friday">금요일</label>
-                <input type="checkbox" id="saturday" name="day[]" value="saturday" th:checked="${available_day.contains('saturday')}">
-                <label for="saturday">토요일</label>
-                <input type="checkbox" id="sunday" name="day[]" value="sunday" th:checked="${available_day.contains('sunday')}">
-                <label for="sunday">일요일</label>
+            <div id="file-wrapper">
+                <div>
+                    <input type="file" name="file" id="file" th:value="${file_url}">
+                    <!--                엔터티 이름 반영-->
+                </div>
+                <div>
+                    <p>포트폴리오, 작업물 등을 자유롭게 첨부해보세요!</p>
+                </div>
             </div>
-        </div>
-        <div>
-            <label class="label-1">활동 가능 시간</label><br>
-            <div class="time-check">
-                <input type="checkbox" id="morning" name="time[]" value="morning" th:checked="${times.contains('morning')}">
-                <label for="morning">아침 시간대 (05:00 ~ 10:59)</label>
-                <input type="checkbox" id="lunch" name="time[]" value="lunch" th:checked="${times.contains('lunch')}">
-                <label for="lunch">점심 시간대 (11:00 ~ 16:59)</label>
-                <input type="checkbox" id="dinner" name="time[]" value="dinner" th:checked="${times.contains('dinner')}">
-                <label for="dinner">저녁 시간대 (17:00 ~ 22:59)</label>
-                <input type="checkbox" id="etc" name="time[]" value="etc" th:checked="${times.contains('etc')}">
-                <label for="etc">그 외 (23:00 ~ 04:59)</label>
+            <div>
+                <label class="label-1" >활동 가능 요일</label><br>
+                <div class="day-check">
+                    <!--                엔터티 이름 반영-->
+                    <input type="checkbox" id="monday" name="day[]" value="monday" th:checked="${available_day.contains('monday')}">
+                    <label for="monday">월요일</label>
+                    <input type="checkbox" id="tuesday" name="day[]" value="tuesday" th:checked="${available_day.contains('tuesday')}">
+                    <label for="tuesday">화요일</label>
+                    <input type="checkbox" id="wednesday" name="day[]" value="wednesday" th:checked="${available_day.contains('wednesday')}">
+                    <label for="wednesday">수요일</label>
+                    <input type="checkbox" id="thursday" name="day[]" value="thursday" th:checked="${available_day.contains('thursday')}">
+                    <label for="thursday">목요일</label>
+                    <input type="checkbox" id="friday" name="day[]" value="friday" th:checked="${available_day.contains('friday')}">
+                    <label for="friday">금요일</label>
+                    <input type="checkbox" id="saturday" name="day[]" value="saturday" th:checked="${available_day.contains('saturday')}">
+                    <label for="saturday">토요일</label>
+                    <input type="checkbox" id="sunday" name="day[]" value="sunday" th:checked="${available_day.contains('sunday')}">
+                    <label for="sunday">일요일</label>
+                </div>
             </div>
-        </div>
-        <div>
-            <button id="submit-button" type="button">제출하기</button>
-        </div>
+            <div>
+                <label class="label-1">활동 가능 시간</label><br>
+                <div class="time-check">
+                    <input type="checkbox" id="morning" name="time[]" value="morning" th:checked="${times.contains('morning')}">
+                    <label for="morning">아침 시간대 (05:00 ~ 10:59)</label>
+                    <input type="checkbox" id="lunch" name="time[]" value="lunch" th:checked="${times.contains('lunch')}">
+                    <label for="lunch">점심 시간대 (11:00 ~ 16:59)</label>
+                    <input type="checkbox" id="dinner" name="time[]" value="dinner" th:checked="${times.contains('dinner')}">
+                    <label for="dinner">저녁 시간대 (17:00 ~ 22:59)</label>
+                    <input type="checkbox" id="etc" name="time[]" value="etc" th:checked="${times.contains('etc')}">
+                    <label for="etc">그 외 (23:00 ~ 04:59)</label>
+                </div>
+            </div>
+            <div>
+                <button id="submit-button" type="button">제출하기</button>
+            </div>
+        </form>
     </div>
 </main>
 <footer>

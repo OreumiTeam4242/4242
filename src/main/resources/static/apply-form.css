@@ -183,6 +183,10 @@ footer{
     margin-left: 40px;
 }
 
+.modal-box button :hover {
+    cursor: pointer;
+}
+
 #question{
     text-align: center;
 }
