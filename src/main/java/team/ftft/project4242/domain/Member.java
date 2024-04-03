@@ -93,6 +93,7 @@ public class Member {
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .img_url(img_url)
+                .role(role.value())
                 .build();
     }
 

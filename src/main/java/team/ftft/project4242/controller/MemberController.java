@@ -102,17 +102,6 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-//    개인정보 조회
-
-    @GetMapping("/api/members")
-    public ResponseEntity<MemberResponseDto> getMemberInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long memberId = customUserDetails.getMemberId();
-      
-        MemberResponseDto response = memberService.findById(memberId);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(response);
-    }
 
 //    개인정보 수정
     @PutMapping("/api/members/update")

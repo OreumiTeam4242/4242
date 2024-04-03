@@ -113,4 +113,6 @@ public class PostService {
     public List<Post> findFinishPostAll() {
         return postRepository.findFinishPostAll();
     }
+
+    public List<Post> findMyPosts(Long memberId){return postRepository.findAllByMemberId(memberId);}
 }

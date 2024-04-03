@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../static/personal_edit_page.css">
+  <link rel="stylesheet" href="/personal_edit_page.css">
   <title>개인정보 수정 페이지</title>
 </head>
 <body>
 <header>
   <div class="logo">
     <a class="logo_top" href="">
-      <img src="../static/image/logo.png" alt="사이사이 로고">
+      <img src="/image/logo.png" alt="사이사이 로고">
     </a>
     <nav class="menu_top">
       <button class="login_top" type="button">로그인</button>
@@ -35,17 +36,17 @@
       <h2>회원 정보</h2>
       <div class="personal_info">
         <div class="profile_img">
-            <img src="../static/image/profile_img.png" alt="나의 프로필 사진">
-            <h3>등급 : 뉴비</h3>
+            <img th:src="${img_url}" alt="나의 프로필 사진">
+            <h3 th:text="${role}">등급 : 뉴비</h3>
           <button type="button">
-            <img src="../static/image/profile_upload.png" alt="프로필 사진 수정">
+            <img src="/image/profile_upload.png" alt="프로필 사진 수정">
           </button>
         </div>
         <div class="profile_desc">
           <form>
             <h3>이메일</h3>
             <input type="text" value="abced@gmail.com">
-            <h3>닉네임</h3>
+            <h3 th:text="${nickname}">닉네임</h3>
             <input type="text">
           </form>
         </div>
@@ -74,5 +75,7 @@
     <img class="modal_1_close" src="../static/image/close.png" alt="닫기 버튼">
   </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/personal_edit_page.js"></script>
 </body>
 </html>
