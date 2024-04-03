@@ -19,7 +19,6 @@ public class PostResponseDto {
     private Long id;
     private String title;
     private String content;
-    private Member member;
     private Long type_id;
     private Long major_id;
     private LocalDateTime createdAt;
@@ -30,14 +29,17 @@ public class PostResponseDto {
     private Integer member_cnt;
     private String process_type;
     private String file_url;
+    private String leader;
+    private String type;
+    private String major;
+    private String nickname;
 
     public PostResponseDto(Post post) {
         id = post.getPost_id();
         title = post.getTitle();
         content = post.getContent();
-        member = post.getMember();
-        type_id = post.getPostType().getType_id();
-        major_id = post.getPostMajor().getMajor_id();
+        type = post.getPostType().getType_nm();
+        major = post.getPostMajor().getMajor_nm();
         createdAt = post.getCreatedAt();
         updatedAt = post.getUpdatedAt();
         commentList = post.getCommentList().stream().map(CommentResponseDto::new).toList();
@@ -46,6 +48,7 @@ public class PostResponseDto {
         member_cnt = post.getMember_cnt();
         process_type = post.getProcess_type();
         file_url = post.getFile_url();
+        nickname = post.getMember().getNickname();
     }
 
     public String getTypeNameById(Long type_id) {

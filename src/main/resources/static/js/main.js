@@ -120,10 +120,7 @@ async function fetchAndDisplayPosts() {
         }
 
         // find-box-content를 제거
-        const existingPosts = document.querySelectorAll('.find-box-content');
-        existingPosts.forEach(post => {
-            post.remove();
-        });
+        findBox.innerHTML = ''; // 기존 게시물을 모두 제거
 
         posts.forEach(post => {
             const postDiv = document.createElement('div');
@@ -134,6 +131,7 @@ async function fetchAndDisplayPosts() {
                     <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
                 </div>
                 <div class="box-text-content-2">
+                    <p>${post.nickname}</p>
                     <p>조회수 ${post.viewCount}</p>
                     <p>댓글 ${post.commentList.length}</p>
                 </div>
@@ -158,7 +156,6 @@ document.getElementById('post-type').addEventListener('change', () => {
 
 
 
-
 // ------------------ 스터디 / 프로젝트 모집 구분
 //  버튼 클릭 이벤트 리스너
 document.querySelector('.study-button').addEventListener('click', async () => {
@@ -172,7 +169,9 @@ document.querySelector('.study-button').addEventListener('click', async () => {
     } catch (error) {
         console.error('Error fetching study posts:', error);
     }
-});
+}
+
+);
 
 // 프로젝트 버튼 클릭 이벤트 리스너
 document.querySelector('.project-button').addEventListener('click', async () => {

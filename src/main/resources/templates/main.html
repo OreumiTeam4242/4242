@@ -47,7 +47,7 @@
 
                     </div>
                     <div class="box-text-content">
-<!--                        <p class="author" th:text="${post.member.nickname}">글쓴이</p>-->
+                        <p class="author" th:text="${post.getMember().getNickname()}">글쓴이</p>
                         <p th:text="'조회수 ' + ${post.viewCount}"></p>
                         <p th:text="'댓글 ' + ${post.commentList.size()}"></p>
                     </div>
@@ -66,7 +66,7 @@
                             <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
                         </div>
                         <div class="box-text-content-2">
-<!--                            <p class="author" th:text="${post.member.nickname}">글쓴이</p>-->
+                            <p class="author" th:text="${post.getMember().getNickname()}">글쓴이</p>
                             <p th:text="'조회수 ' + ${post.viewCount}"></p>
                             <p th:text="'댓글 ' + ${post.commentList.size()}"></p>
                         </div>
