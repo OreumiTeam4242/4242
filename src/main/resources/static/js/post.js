@@ -38,7 +38,7 @@ const modalCheckButton = document.querySelector(".modal-check");
 
 commentDeleteButtons.forEach(button => {
     button.addEventListener('click', () => {
-        commentModal.style.display = "block";
+        commentModal.style.display = "flex";
     });
 });
 

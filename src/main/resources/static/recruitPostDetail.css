@@ -298,8 +298,9 @@ footer{
 .modal-comment-delete {
     position : absolute;
     display : none;
-    top : 250%;
-    left : 20%;
+    top: 180%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal-box {

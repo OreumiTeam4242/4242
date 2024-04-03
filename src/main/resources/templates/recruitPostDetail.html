@@ -96,17 +96,13 @@
             <button class="btn btn-comment-register">댓글 등록</button>
         </section>
         <section class="comment-exist">
-            <div class="comment-detail">
-                <p class="comment-nickname">김땡땡</p>
-                <p class="comment-time">2024-03-23 21:03:30</p>
-                <p class="comment-content">초등학생도 신청 가능한가요?</p>
-                <button class="btn-comment-delete">삭제</button>
-            </div>
-            <div class="comment-detail">
-                <p class="comment-nickname">김본인</p>
-                <p class="comment-time">2024-03-23 21:08:21</p>
-                <p class="comment-content">수학 못해도 신청 가능한가요?</p>
-                <button class="btn-comment-delete">삭제</button>
+            <div class="comment-detail" th:each="comment:${post.commentList}">
+                <p class="comment-nickname" th:text="${comment.nickname}"></p>
+                <p class="comment-time" th:text="${#temporals.format(comment.created_at, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                <p class="comment-content" th:text="${comment.content}"></p>
+                <button class="btn-comment-delete" class="btn-writer-delete"
+
+                >삭제</button>
             </div>
         </section>
     </section>
