@@ -198,7 +198,7 @@ footer{
     position : absolute;
     top : 120%;
     left : 20%;
-
+    display: none;
 }
 
 .modal-box button {
