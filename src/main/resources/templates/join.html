@@ -13,11 +13,11 @@
   <div class="join_context">
     <form id="join-form" th:action="@{/register}", method="post">
       <p class="email_text">이메일</p>
-      <input class="input_email" type="text" th:name="email" placeholder="Email">
+      <input class="input_email" type="email" th:name="email" placeholder="이메일을 입력해주세요." required>
       <p class="password_text">비밀번호</p>
-      <input class="input_password" type="password" th:name="password" placeholder="Password">
+      <input class="input_password" type="password" th:name="password" placeholder="비밀번호를 입력해주세요." required>
       <p class="nickname_text">닉네임</p>
-      <input class="input_nickname" type="text" th:name="nickname" placeholder="Nickname">
+      <input class="input_nickname" type="text" th:name="nickname" placeholder="사용하실 닉네임을 입력해주세요." required>
       <button class="join_button" type="button">회원가입</button>
     </form>
 

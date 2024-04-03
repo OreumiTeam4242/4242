@@ -36,12 +36,7 @@ public class PostPageController {
         return "recruitPostDetail";
     }
 
-//    //    메인페이지 조회
-//    @GetMapping("/page/main")
-//    public String showMain(){
-//        return "main";
-//    }
-
+    // 메인 페이지 조회
     @GetMapping("/page/main")
     public String showMain(Model model) {
         List<Post> postList = postService.findAllAble();
@@ -49,7 +44,6 @@ public class PostPageController {
 
         List<Post> hotPostList = postService.findTop3PostsByViewCount();
         model.addAttribute("hotPostList", hotPostList);
-
 
         return "main";
     }

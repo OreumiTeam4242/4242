@@ -46,6 +46,10 @@ public class MemberService {
         return memberRepository.findByEmail(email).isPresent();
     }
 
+    public boolean isNicknameExists(String nickname) {
+        return memberRepository.findByNickname(nickname).isPresent();
+    }
+
     public MemberResponseDto findById(Long memberId){
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()->new IllegalArgumentException("member doesn't exist"));

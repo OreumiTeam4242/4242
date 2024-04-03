@@ -99,13 +99,11 @@ let previousSelectedValue = null;
 async function fetchAndDisplayPosts() {
     try {
         const postTypeSelect = document.getElementById('post-type');
-        let selectedValue = postTypeSelect.value.trim(); // 공백 제거
+        let selectedValue = postTypeSelect.value.trim();
 
         const findBox = document.querySelector('.find-box .boxes');
 
         let url = '/api/posts';
-
-        // 전체를 선택한 경우에는 major_id를 보내지 않음
         if (selectedValue !== '') {
             url += `/major/${selectedValue}`;
         }
@@ -115,7 +113,6 @@ async function fetchAndDisplayPosts() {
             throw new Error('Network response was not ok');
         }
 
-        // JSON 데이터를 파싱하고, 비어있는 경우에 대한 처리
         const posts = await response.json();
         if (!posts || posts.length === 0) {
             findBox.innerHTML = '<p>해당 분야의 게시물이 없습니다.</p>';
@@ -143,9 +140,6 @@ async function fetchAndDisplayPosts() {
             `;
             findBox.appendChild(postDiv);
         });
-
-        // 현재 선택된 major_id를 이전에 선택된 major_id에 저장
-        previousSelectedValue = selectedValue;
     } catch (error) {
         console.error('Error fetching posts:', error);
     }
@@ -160,6 +154,10 @@ document.getElementById('post-type').addEventListener('change', () => {
     previousSelectedValue = document.getElementById('post-type').value.trim();
     fetchAndDisplayPosts();
 });
+
+
+
+
 
 // ------------------ 스터디 / 프로젝트 모집 구분
 //  버튼 클릭 이벤트 리스너
