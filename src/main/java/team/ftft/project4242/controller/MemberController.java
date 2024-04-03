@@ -46,6 +46,9 @@ public class MemberController {
         if (memberService.isEmailExists(request.getEmail())) {
             return ResponseEntity.badRequest().body("Email already exists"+request.getEmail());
         }
+        if (memberService.isNicknameExists(request.getNickname())) {
+            return ResponseEntity.badRequest().body("Nickname already exists"+request.getNickname());
+        }
         Member member = memberService.registerMember(request);
         MemberResponseDto responseDto = member.toResponse();
         return ResponseEntity.ok(responseDto);

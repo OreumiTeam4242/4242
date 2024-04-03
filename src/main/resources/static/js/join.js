@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var userPassword = document.querySelector('.input_password').value;
         var userNickname = document.querySelector('.input_nickname').value;
 
+        // 모든 필드가 입력되었는지 확인
+        if (!userEmail || !userPassword || !userNickname) {
+            alert('모든 항목을 입력해주세요.');
+            return; // 폼 제출을 중단
+        }
+
         // JSON 데이터 준비
         var data = {
             email: userEmail,
@@ -14,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         // 서버로 POST 요청
-        fetch('/register', {
+        fetch('/api/members/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     // 기타 오류 처리
                     throw new Error('회원가입에 실패했습니다. 다시 시도해주세요.');
-
                 }
             })
             .catch(function(error) {
