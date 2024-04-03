@@ -17,9 +17,9 @@
 <main>
     <section class="register-post-header">
         <a class="msg-go-back">뒤로가기</a>
-        <div class="register-post-header-box">
+        <div class="register-post-header-box" th:object="${apply}">
 <!--            <p class="register-post-title">수학 스터디 신청합니다</p>-->
-            <p th:text="${title}"></p>
+            <p class="register-post-title" th:text="*{title}"></p>
         </div>
         <div class="writer-info">
             <ul>
@@ -34,7 +34,8 @@
 
             <ul>
                 <li>작성일시 : </li>
-                <li class="bold-text">2024.03.23</li>
+                <li class="bold-text" th:text="${#temporals.format(today, 'yyyy-MM-dd')}"></li>
+<!--                <li class="bold-text">2024.03.23</li>-->
             </ul>
         </div>
     </section>
