@@ -12,6 +12,7 @@ import team.ftft.project4242.service.file.AwsS3Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,12 +63,13 @@ public class PostService {
     }
 
     public Post findById(Long id) {
-        return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found id : " + id));
+        postRepository.incrementViewCountForActivePost(id);
+        return postRepository.findByIdAble(id);
     }
 
     @Transactional
     public Post update(Long id, PostRequestDto request,MultipartFile file) {
-        Post post = findById(id);
+        Post post = postRepository.findByIdAble(id);
         if(file != null){
             String s3FilePath = awsS3Service.uploadFileBucket(file);
             post.updateFileUrl(s3FilePath);

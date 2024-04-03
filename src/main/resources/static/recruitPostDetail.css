@@ -32,6 +32,12 @@ header ul {
     float : right;
 }
 
+.header-nav-logout,
+.header-nav-info {
+    cursor: pointer;
+}
+
+
 .btn, .study-recruit {
     background-color: #77A7EE;
     border : none;
@@ -292,8 +298,9 @@ footer{
 .modal-comment-delete {
     position : absolute;
     display : none;
-    top : 250%;
-    left : 20%;
+    top: 180%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal-box {

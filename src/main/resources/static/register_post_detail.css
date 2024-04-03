@@ -68,8 +68,22 @@ main {
     padding-right : 20px;
 }
 
+.header-nav-logout,
+.header-nav-info,
+.btn-comment-delete,
+.btn-to-top,
+.btn-register-accept ,
+.btn-register-refuse ,
+.btn-apply,
+.btn-apply-end,
+.btn-modal-close,
+.upload-files button {
+    cursor : pointer;
+}
+
 .msg-go-back {
     font-size : 20px;
+    cursor : pointer;
 }
 
 .register-post-title {
@@ -169,6 +183,7 @@ footer{
 /*to top button*/
 
 .btn-to-top {
+    display: none;
     position: fixed;
     border : 3px #C8C8C8 solid;
     border-radius: 100px;
@@ -186,7 +201,11 @@ footer{
     height : 60px;
 }
 
-/* mddal */
+/* modal */
+
+.modal-register-accept {
+    display : none;
+}
 
 .modal-box {
     border : 5px #77A7EE solid;
