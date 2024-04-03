@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE scrap SET use_yn = false WHERE scrap_id = ?")
+@SQLRestriction("use_yn = true")
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +25,10 @@ public class Scrap {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    private Boolean use_yn;
     public Scrap(Post post, Member member) {
         this.post = post;
         this.member = member;
+        this.use_yn = true;
     }
 }

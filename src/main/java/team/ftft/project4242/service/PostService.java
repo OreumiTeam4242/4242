@@ -49,7 +49,7 @@ public class PostService {
         PostMajor postMajor = postMajorRepository.findById(request.getMajor_id())
                 .orElseThrow(() -> new IllegalArgumentException("not found major id"));
 
-        if(!file.isEmpty()){
+        if(file!=null){
             String s3FilePath = awsS3Service.uploadFileBucket(file);
             request.updateFileUrl(s3FilePath);
         }
@@ -80,7 +80,7 @@ public class PostService {
     }
 
     public void disablePostById(Long id) {
-        postRepository.disablePostById(id);
+        postRepository.deleteById(id);
     }
 
     public List<Post> findTypePostAll(Long type_id) {

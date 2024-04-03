@@ -9,10 +9,13 @@ import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
 
+import java.util.List;
+
+
 @Controller
 public class PostPageController {
 
-    private PostService postService;
+    private final PostService postService;
 
     public PostPageController(PostService postService) {
         this.postService = postService;
@@ -33,9 +36,21 @@ public class PostPageController {
         return "recruitPostDetail";
     }
 
-    //    메인페이지 조회
+//    //    메인페이지 조회
+//    @GetMapping("/page/main")
+//    public String showMain(){
+//        return "main";
+//    }
+
     @GetMapping("/page/main")
-    public String showMain(){
+    public String showMain(Model model) {
+        List<Post> postList = postService.findAllAble();
+        model.addAttribute("postList", postList);
+
+        List<Post> hotPostList = postService.findTop3PostsByViewCount();
+        model.addAttribute("hotPostList", hotPostList);
+
+
         return "main";
     }
 }

@@ -59,13 +59,14 @@
     border-radius: 20px;
     margin-right: -380px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 /*닉네임 중복 알림 팝업창*/
 
 .modal{
     position:fixed;
-    display:none;
+    display:flex;
     justify-content: center;
     top:0;
     left:0;

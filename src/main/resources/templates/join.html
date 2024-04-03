@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../static/join.css">
+  <link rel="stylesheet" href="/join.css">
   <title>회원가입 페이지</title>
 </head>
 <body>
 <div class="join_all_context">
   <div class="join_main">
-    <img class="join_image" src="../static/image/login_image.png" alt="4242 큰 로고 이미지">
+    <img class="join_image" src="/image/login_image.png" alt="4242 큰 로고 이미지">
   </div>
   <div class="join_context">
-    <form action="post" action="서버url" id="join-form">
+    <form id="join-form" th:action="@{/register}", method="post">
       <p class="email_text">이메일</p>
-      <input class="input_email" type="text" name="userEmail" placeholder="Email">
+      <input class="input_email" type="text" th:name="email" placeholder="Email">
       <p class="password_text">비밀번호</p>
-      <input class="input_password" type="password" name="userPassword" placeholder="Password">
+      <input class="input_password" type="password" th:name="password" placeholder="Password">
       <p class="nickname_text">닉네임</p>
-      <input class="input_nickname" type="nickname" name="userNickname" placeholder="Nickname">
-      <button class=join_button>회원가입</button>
+      <input class="input_nickname" type="text" th:name="nickname" placeholder="Nickname">
+      <button class="join_button" type="button">회원가입</button>
     </form>
 
-    <!--닉네임 중복 알림 팝업창-->
-    <section class="modal">
+    <!-- 닉네임 중복 알림 팝업창 -->
+    <section class="modal" style="display: none;">
       <div class="modal-content">
-        <img class="modal-notice-img" src="../static/image/info.png" alt="팝업창 알림 아이콘 이미지">
+        <img class="modal-notice-img" src="/image/info.png" alt="팝업창 알림 아이콘 이미지">
         <p class="model-content-text">이미 존재하는 닉네임입니다.</p>
-        <input type="button" class="modal-close-img">
+        <input type="button" class="modal-close-img" value="닫기">
       </div>
     </section>
   </div>
-
 </div>
 </body>
+<script src="/js/join.js"></script>
 </html>

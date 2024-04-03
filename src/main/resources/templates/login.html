@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="/login.css">
     <title>로그인 페이지</title>
 </head>
 <body>
 <div class="login_all_context">
     <div class="login_main">
-        <img class="login_image" src="../static/image/login_image.png" alt="4242 큰 로고 이미지">
+        <img class="login_image" src="/image/login_image.png" alt="4242 큰 로고 이미지">
     </div>
     <div class="login_context">
-    <form action="post" action="서버url" id="login-form">
-        <p class="email_text">이메일</p>
-        <input class="input_email" type="text" name="userEmail" placeholder="Email">
-        <p class="password_text">비밀번호</p>
-        <input class="input_password" type="password" name="userPassword" placeholder="Password">
-        <button class=login_button>로그인</button>
-        <button class=join_button>회원가입</button>
-    </form>
+        <form id="login-form" action="/api/auth/login" method="post">
+            <p class="email_text">이메일</p>
+            <input class="input_email" type="email" name="email" placeholder="이메일을 입력해주세요.">
+            <p class="password_text">비밀번호</p>
+            <input class="input_password" type="password" name="password" placeholder="비밀번호를 입력해주세요.">
+            <button class="login_button" type="submit">로그인</button>
+            <button class="join_button" type="button">회원가입</button>
+        </form>
     </div>
-
 </div>
+<script src="/js/login.js"></script>
 </body>
 </html>

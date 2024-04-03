@@ -8,18 +8,20 @@
 <body>
 <nav class="navbar">
     <div>
-        <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+        <a href="main.html">
+            <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+        </a>
     </div>
     <div id="nav-r">
-        <a class='nav-a' href="">로그아웃</a>
-        <a class='nav-a' href="">내 정보</a>
+        <a class='nav-a' href="#">로그아웃</a>
+        <a class='nav-a' href="personal_page.html">내 정보</a>
     </div>
 
 </nav>
 <main>
     <div id="main-wrapper">
         <div>
-            <a href="">뒤로가기</a>
+            <a class="goBack" href="">뒤로가기</a>
             <h2 id="apply">신고합니다</h2>
             <hr/>
         </div>
@@ -51,14 +53,14 @@
 </main>
 <footer>
     <div class="footer-more">
-        <a class="footer-a">이용약관</a>
-        <a class="footer-a">서비스 소개</a>
-        <a class="footer-a">4242</a>
+        <a class="footer-a" href="#">이용약관</a>
+        <a class="footer-a" href="#">서비스 소개</a>
+        <a class="footer-a" href="#">4242</a>
     </div>
 </footer>
 <section class="modal">
     <div class="modal-box">
-        <button><img src="../static/image/close.png" alt="모달창 닫기 버튼"></button>
+        <button><img id="modal_close" src="../static/image/close.png" alt="모달창 닫기 버튼"></button>
         <div class="modal-inner">
             <img src="../static/image/info.png" alt="정보 아이콘">
             <div id="question">
@@ -66,9 +68,11 @@
                 <p>제출하겠습니까?</p>
             </div>
 
-            <button><img src="../static/image/Ok.png" alt="체크 버튼"></button>
+            <button><img id="modal_confirm" src="../static/image/Ok.png" alt="체크 버튼"></button>
         </div>
     </div>
 </section>
+
+<script src="../static/js/notify-form.js"></script>
 </body>
 </html>

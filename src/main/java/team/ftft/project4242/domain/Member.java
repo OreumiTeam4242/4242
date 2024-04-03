@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.MemberResponseDto;
@@ -16,6 +18,8 @@ import java.util.UUID;
 @Getter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE member SET use_yn = false WHERE member_id = ?")
+@SQLRestriction("use_yn = true")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,14 +49,17 @@ public class Member {
     @Column(name="img_url")
     private String img_url;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Post> postList = new ArrayList<Post>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Scrap> scrapList = new ArrayList<Scrap>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<Comment>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Apply> applyList = new ArrayList<Apply>();
 
     @OneToMany(mappedBy = "member")
     private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
@@ -114,4 +121,12 @@ public class Member {
             this.role = Role.ROLE_SENIOR;
         }
     }
+    public void deleteMember(){
+        this.use_yn = false;
+    }
+
+    public boolean isPasswordMatch(String inputPassword) {
+        return this.password.equals(inputPassword);
+    }
+
 }

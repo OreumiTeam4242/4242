@@ -9,14 +9,13 @@ import org.springframework.stereotype.Repository;
 import team.ftft.project4242.domain.Post;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post  p where p.use_yn = true")
     List<Post> findAllAble();
-
+  
     @Transactional
     @Modifying
     @Query("UPDATE Post p SET p.viewCount = p.viewCount + 1 WHERE p.post_id = :id AND p.use_yn = true")

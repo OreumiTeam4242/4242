@@ -15,7 +15,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import team.ftft.project4242.commons.security.CustomAuthenticationFailureHandler;
 import team.ftft.project4242.commons.security.UserDetailService;
+
+import java.util.Collections;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -64,5 +67,4 @@ public class SecurityConfig {
         provider.setPasswordEncoder(bCryptPasswordEncoder());
         return new ProviderManager(provider);
     }
-
 }

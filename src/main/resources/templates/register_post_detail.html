@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>신청글 상세 조회</title>
@@ -18,7 +18,8 @@
     <section class="register-post-header">
         <a class="msg-go-back">뒤로가기</a>
         <div class="register-post-header-box">
-            <p class="register-post-title">수학 스터디 신청합니다</p>
+<!--            <p class="register-post-title">수학 스터디 신청합니다</p>-->
+            <p th:text="${title}"></p>
         </div>
         <div class="writer-info">
             <ul>
@@ -40,7 +41,7 @@
 
     <section class="register-post-detail">
         <p class="register-post-introduce">신청 동기</p>
-        <div class="register-post-text">
+        <div class="register-post-text" th:text="${content}">
             수학 공부가 너무 하고싶어요
             수학수학수학
 
@@ -54,6 +55,7 @@
             <li>작업물1.pdf</li>
             <li>(683.4KB)</li>
             <li><button>다운로드</button></li>
+            <li th:text="${file_url}"></li>
         </ul>
     </section>
 
@@ -61,10 +63,12 @@
         <div class="available-day">
             <p class="available-day-text">활동 가능 요일</p>
             <p class="available-day-list">월, 화, 목, 토</p>
+            <p class="available-day-list" th:text="${available_day}"></p>
         </div>
         <div class="available-time">
             <p class="available-time-text">활동 가능 시간</p>
             <p class="available-time-list">아침 시간대 (05:00 ~ 10:59), 점심 시간대 (11:00 ~ 16:59)</p>
+            <p th:text="${available_time}">
         </div>
 
         <button class="btn btn-register-accept">수락</button>
