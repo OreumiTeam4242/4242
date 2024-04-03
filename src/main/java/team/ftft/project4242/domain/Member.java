@@ -124,4 +124,9 @@ public class Member {
     public void deleteMember(){
         this.use_yn = false;
     }
+
+    public boolean isPasswordMatch(String inputPassword) {
+        return this.password.equals(inputPassword);
+    }
+
 }

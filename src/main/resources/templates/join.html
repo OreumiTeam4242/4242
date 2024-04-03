@@ -11,7 +11,7 @@
     <img class="join_image" src="/image/login_image.png" alt="4242 큰 로고 이미지">
   </div>
   <div class="join_context">
-    <form id="join-form">
+    <form id="join-form" th:action="@{/register}", method="post">
       <p class="email_text">이메일</p>
       <input class="input_email" type="text" th:name="email" placeholder="Email">
       <p class="password_text">비밀번호</p>

@@ -11,16 +11,16 @@
         <img class="login_image" src="/image/login_image.png" alt="4242 큰 로고 이미지">
     </div>
     <div class="login_context">
-        <form id="login-form" th:action="@{/login}" method="post">
+        <form id="login-form" action="/api/auth/login" method="post">
             <p class="email_text">이메일</p>
-            <input class="input_email" type="text" th:name="userEmail" placeholder="Email">
+            <input class="input_email" type="email" name="email" placeholder="이메일을 입력해주세요.">
             <p class="password_text">비밀번호</p>
-            <input class="input_password" type="password" th:name="userPassword" placeholder="Password">
+            <input class="input_password" type="password" name="password" placeholder="비밀번호를 입력해주세요.">
             <button class="login_button" type="submit">로그인</button>
-            <button class="join_button" type="button" th:href="@{/join}">회원가입</button>
+            <button class="join_button" type="button">회원가입</button>
         </form>
     </div>
 </div>
-</body>
 <script src="/js/login.js"></script>
+</body>
 </html>
