@@ -52,6 +52,7 @@ label{
     margin-bottom: 40px;
 
 }
+/*title과 motivation textarea 영역 resize 못하게 바꿨습니다.*/
 #title{
     margin-top:10px;
     width: 1044px;
@@ -60,6 +61,7 @@ label{
     border-radius: 15px;
     font-size: 20px;
     padding : 10px;
+    resize: none;
 }
 
 #motivation{
@@ -70,6 +72,7 @@ label{
     border-radius: 15px;
     font-size: 20px;
     padding : 10px;
+    resize: none;
 }
 #file-wrapper{
     margin-top:40px;
@@ -131,6 +134,13 @@ footer{
     font-size: 12px;
     margin-left: 20px;
 }
+
+.modal-box button {
+    background-color: #FFFFFF;
+    border: none;
+    float : right;
+}
+
 .modal{
     display: none;
     position: fixed;
@@ -158,28 +168,21 @@ footer{
 
 }
 
-.modal-box button {
-    background-color: #FFFFFF;
-    border: none;
-    float : right;
-
-}
-
 .modal-box p {
     font-size : 40px;
     font-weight: 600;
-    margin : 0 60px 0 0;
+    margin : 0 30px 0 0;
 }
 
 .modal-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin-top : 6%;
     align-items: center;
-    margin-left: 50px;
-    padding-right: 50px;
+    margin-left: 40px;
 }
+
 #question{
     text-align: center;
 }

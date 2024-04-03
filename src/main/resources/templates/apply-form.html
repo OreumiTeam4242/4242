@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>신청 폼 페이지</title>
@@ -8,32 +8,35 @@
 <body>
 <nav class="navbar">
     <div>
-        <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+        <a href="main.html">
+            <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+        </a>
     </div>
     <div id="nav-r">
-        <a class='nav-a' href="">로그아웃</a>
-        <a class='nav-a' href="">내 정보</a>
+        <a class='nav-a' href="#">로그아웃</a>
+        <a class='nav-a' href="personal_page.html">내 정보</a>
     </div>
 
 </nav>
 <main>
     <div id="main-wrapper">
         <div>
-            <a href="">뒤로가기</a>
+            <a id="goBack" href="#">뒤로가기</a>
             <h2 id="apply">스터디 / 프로젝트 신청</h2>
             <hr/>
         </div>
         <div id="title-wrapper">
             <label class="label-1" for="title">제목</label><br>
-            <textarea id="title" name="motivation"></textarea>
+            <textarea id="title" name="motivation" th:value="${title}"></textarea>
         </div>
         <div>
             <label class="label-1" for="motivation">신청 동기</label><br>
-            <textarea id="motivation" name="motivation"></textarea>
+            <textarea id="motivation" name="motivation" th:value="${content}"></textarea>
         </div>
         <div id="file-wrapper">
             <div>
-                <input type="file" name="file" id="file">
+                <input type="file" name="file" id="file" th:value="${file_url}">
+                <!--                엔터티 이름 반영-->
             </div>
             <div>
                 <p>포트폴리오, 작업물 등을 자유롭게 첨부해보세요!</p>
@@ -42,32 +45,33 @@
         <div>
             <label class="label-1" >활동 가능 요일</label><br>
             <div class="day-check">
-                <input type="checkbox" id="monday" name="day[]" value="monday">
+                <!--                엔터티 이름 반영-->
+                <input type="checkbox" id="monday" name="day[]" value="monday" th:checked="${available_day.contains('monday')}">
                 <label for="monday">월요일</label>
-                <input type="checkbox" id="tuesday" name="day[]" value="tuesday">
+                <input type="checkbox" id="tuesday" name="day[]" value="tuesday" th:checked="${available_day.contains('tuesday')}">
                 <label for="tuesday">화요일</label>
-                <input type="checkbox" id="wednesday" name="day[]" value="wednesday">
+                <input type="checkbox" id="wednesday" name="day[]" value="wednesday" th:checked="${available_day.contains('wednesday')}">
                 <label for="wednesday">수요일</label>
-                <input type="checkbox" id="thursday" name="day[]" value="thursday">
+                <input type="checkbox" id="thursday" name="day[]" value="thursday" th:checked="${available_day.contains('thursday')}">
                 <label for="thursday">목요일</label>
-                <input type="checkbox" id="friday" name="day[]" value="friday">
+                <input type="checkbox" id="friday" name="day[]" value="friday" th:checked="${available_day.contains('friday')}">
                 <label for="friday">금요일</label>
-                <input type="checkbox" id="saturday" name="day[]" value="saturday">
+                <input type="checkbox" id="saturday" name="day[]" value="saturday" th:checked="${available_day.contains('saturday')}">
                 <label for="saturday">토요일</label>
-                <input type="checkbox" id="sunday" name="day[]" value="sunday">
+                <input type="checkbox" id="sunday" name="day[]" value="sunday" th:checked="${available_day.contains('sunday')}">
                 <label for="sunday">일요일</label>
             </div>
         </div>
         <div>
             <label class="label-1">활동 가능 시간</label><br>
             <div class="time-check">
-                <input type="checkbox" id="morning" name="time[]" value="morning">
+                <input type="checkbox" id="morning" name="time[]" value="morning" th:checked="${times.contains('morning')}">
                 <label for="morning">아침 시간대 (05:00 ~ 10:59)</label>
-                <input type="checkbox" id="lunch" name="time[]" value="lunch">
+                <input type="checkbox" id="lunch" name="time[]" value="lunch" th:checked="${times.contains('lunch')}">
                 <label for="lunch">점심 시간대 (11:00 ~ 16:59)</label>
-                <input type="checkbox" id="dinner" name="time[]" value="dinner">
+                <input type="checkbox" id="dinner" name="time[]" value="dinner" th:checked="${times.contains('dinner')}">
                 <label for="dinner">저녁 시간대 (17:00 ~ 22:59)</label>
-                <input type="checkbox" id="etc" name="time[]" value="etc">
+                <input type="checkbox" id="etc" name="time[]" value="etc" th:checked="${times.contains('etc')}">
                 <label for="etc">그 외 (23:00 ~ 04:59)</label>
             </div>
         </div>
@@ -78,22 +82,25 @@
 </main>
 <footer>
     <div class="footer-more">
-        <a class="footer-a">이용약관</a>
-        <a class="footer-a">서비스 소개</a>
-        <a class="footer-a">4242</a>
+        <a class="footer-a" href="#">이용약관</a>
+        <a class="footer-a" href="#">서비스 소개</a>
+        <a class="footer-a" href="#">4242</a>
     </div>
 </footer>
+
 <section class="modal">
     <div class="modal-box">
-        <button><img src="../static/image/close.png" alt="모달창 닫기 버튼"></button>
+        <button><img id="modal_close" src="../static/image/close.png" alt="모달창 닫기 버튼"></button>
         <div class="modal-inner">
             <img src="../static/image/info.png" alt="정보 아이콘">
             <div id="question">
                 <p>신청글을 제출하겠습니까?</p>
             </div>
-            <button><img src="../static/image/green_check.png" alt="체크 버튼"></button>
+            <button><img id="modal_confirm" src="../static/image/green_check.png" alt="체크 버튼"></button>
         </div>
     </div>
 </section>
+
+<script src="../static/js/apply-form.js"></script>
 </body>
 </html>
