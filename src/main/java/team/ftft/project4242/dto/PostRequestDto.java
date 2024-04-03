@@ -3,6 +3,7 @@ package team.ftft.project4242.dto;
 import lombok.*;
 import team.ftft.project4242.domain.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -16,8 +17,8 @@ public class PostRequestDto {
     private String content;
     private Long type_id;
     private Long major_id;
-    private Date start_date;
-    private Date end_date;
+    private LocalDateTime start_date;
+    private LocalDateTime end_date;
     private Integer member_cnt;
     private String process_type;
     private String file_url;

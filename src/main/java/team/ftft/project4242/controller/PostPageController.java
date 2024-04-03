@@ -3,10 +3,14 @@ package team.ftft.project4242.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import team.ftft.project4242.domain.Post;
+import team.ftft.project4242.dto.MemberResponseDto;
+import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
 
 import java.util.List;
+
 
 @Controller
 public class PostPageController {
@@ -24,8 +28,11 @@ public class PostPageController {
     }
 
     //    모집글 상세 조회
-    @GetMapping("/page/recruitPostDetail")
-    public String postDetail(){
+    @GetMapping("/page/post/{id}")
+    public String postDetail(@PathVariable Long id, Model model){
+        Post post = postService.findById(id);
+        model.addAttribute("post", new PostResponseDto(post));
+
         return "recruitPostDetail";
     }
 
