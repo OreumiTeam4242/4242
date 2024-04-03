@@ -77,11 +77,11 @@ public class Post {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
-    private Date start_date;
+    private LocalDateTime start_date;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name="end_date")
-    private Date end_date;
+    private LocalDateTime end_date;
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
@@ -91,7 +91,7 @@ public class Post {
     private Long viewCount;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,Date start_date,Date end_date,Integer member_cnt,String process_type,String file_url) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,LocalDateTime start_date,LocalDateTime end_date,Integer member_cnt,String process_type,String file_url) {
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -113,8 +113,10 @@ public class Post {
     public PostResponseDto toResponse() {
         return PostResponseDto.builder()
                 .commentList(commentList.stream().map(CommentResponseDto::new).toList())
+                .id(post_id)
                 .title(title)
                 .content(content)
+                .member(member)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .start_date(start_date)
@@ -140,4 +142,5 @@ public class Post {
     public void setViewCount(Long viewCount) {
         this.viewCount = viewCount;
     }
+
 }
