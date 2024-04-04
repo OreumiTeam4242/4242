@@ -7,21 +7,21 @@ $topBtn.onclick = () => {
 
 // --------------------- 상세 페이지로 이동
 document.addEventListener('DOMContentLoaded', function () {
-    var boxTopContents = document.querySelectorAll('.box-top-content');
-
-    // boxTopContents에 대한 클릭 이벤트 등록
-    boxTopContents.forEach(function(boxTopContent) {
-        boxTopContent.addEventListener('click', function() {
-            const postId = boxTopContent.dataset.postId;
+    // .hot-box-content와 .boxes의 하위 요소에 대한 클릭 이벤트를 처리할 수 있도록 상위 요소에 이벤트를 등록
+    document.querySelector('.main-context').addEventListener('click', function(event) {
+        // 클릭된 요소가 .hot-box-content 또는 .boxes 클래스를 포함하고 있는지 확인
+        if (event.target.closest('.hot-box-content') || event.target.closest('.boxes')) {
+            const postId = event.target.closest('.box-top-content').dataset.postId;
             if (postId) {
-                // postId를 사용하여 해당 상세 페이지로 이동
                 window.location.href = `/page/post/${postId}`;
             } else {
                 console.error('Post ID is undefined');
             }
-        });
+        }
     });
 });
+
+
 
 
 // ------------------내 정보 버튼 클릭 시
