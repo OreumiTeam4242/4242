@@ -45,6 +45,7 @@ public class PostResponseDto {
         process_type = post.getProcess_type();
         file_url = post.getFile_url();
         nickname = post.getMember().getNickname();
+
     }
 
 }

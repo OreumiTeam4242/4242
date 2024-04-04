@@ -19,6 +19,7 @@ public class TeamResponseDto {
     private String type;
     private String major;
 
+
     public TeamResponseDto(Team team) {
         this.team_id = team.getTeam_id();
         this.is_completed = team.is_completed();
@@ -27,4 +28,5 @@ public class TeamResponseDto {
         this.type = team.getPost().getPostType().getType_nm();
         this.major = team.getPost().getPostMajor().getMajor_nm();
     }
+
 }

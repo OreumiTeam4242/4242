@@ -29,6 +29,7 @@ public class Team {
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
+    @JoinColumn(name = "post_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
@@ -42,10 +43,12 @@ public class Team {
     private boolean use_yn;
 
 
+
     @Builder
-    public Team(boolean is_completed, Long leader_id) {
+    public Team(boolean is_completed, Long leader_id,Post post) {
         this.is_completed = is_completed;
         this.leader_id = leader_id;
+        this.post = post;
         this.use_yn = true;
     }
 
@@ -54,6 +57,9 @@ public class Team {
 
     public TeamResponseDto toResponse() {
         return TeamResponseDto.builder()
+                .type(post.getPostType().getType_nm())
+                .major(post.getPostMajor().getMajor_nm())
+                .leader(post.getMember().getNickname())
                 .is_completed(is_completed)
                 .use_yn(use_yn)
                 .team_id(team_id)
