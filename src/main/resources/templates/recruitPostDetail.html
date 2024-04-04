@@ -21,8 +21,7 @@
             <input type="hidden" id="post-id" th:value="${post.id}">
             <div class="recruit-post-header-box">
                 <p class="recruit-post-title" th:text="${post.title}">수학 스터디 모집합니다</p>
-                <div class="study-recruit">모집중입니다</div>
-                <div class="study-recruit-end">모집이 마감되었습니다</div>
+                <div class="study-recruit" th:text="${now.isAfter(post.start_date) ? '모집이 마감되었습니다' : '모집중입니다'}"></div>
             </div>
             <div class="under-title">
                 <div class="writer-info">
@@ -43,10 +42,10 @@
                         , 'yyyy. MM. dd. HH:mm')}"></li>
                     </ul>
                 </div>
-                <div class="btn-scrap-box">
-                    <button class="btn-edit">수정</button>
-                    <button class="btn-edit-complete" style="display: none">완료</button>
-                    <button class="btn-edit-cancel" style="display: none">취소</button>
+                <div class="btn-scrap-and-edit">
+                    <button class="btn btn-edit" th:if="${}">수정</button>
+                    <button class="btn btn-edit-complete" style="display: none">완료</button>
+                    <button class="btn btn-edit-cancel" style="display: none">취소</button>
                     <button class="btn-scrap"><img src="/image/empty-heart.png" alt="스크랩 하트 버튼" id = "image"></button>
                 </div>
             </div>
