@@ -18,4 +18,6 @@ public class MemberResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String img_url;
+
+    private String role;
 }

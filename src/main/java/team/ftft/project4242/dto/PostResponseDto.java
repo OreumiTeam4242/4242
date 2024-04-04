@@ -1,13 +1,11 @@
 package team.ftft.project4242.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.PostMajor;
-import team.ftft.project4242.domain.PostType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -36,7 +34,6 @@ public class PostResponseDto {
     private Long viewCount;
 
     public PostResponseDto(Post post) {
-
         id = post.getPost_id();
         title = post.getTitle();
         content = post.getContent();
