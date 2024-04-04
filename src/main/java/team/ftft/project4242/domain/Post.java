@@ -99,13 +99,12 @@ public class Post {
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
-    @JoinColumn(name = "team_id")
     private Team team;
 
     private Long viewCount;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type,String file_url) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Member member,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type,String file_url) {
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -114,7 +113,6 @@ public class Post {
         this.postMajor = postMajor;
         this.is_closed = false;
         this.use_yn = true;
-        this.team = team;
         this.member = member;
         this.start_date = start_date;
         this.end_date = end_date;

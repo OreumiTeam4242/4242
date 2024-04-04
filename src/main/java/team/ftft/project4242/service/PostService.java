@@ -12,7 +12,6 @@ import team.ftft.project4242.service.file.AwsS3Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,8 +23,9 @@ public class PostService {
     private final TeamService teamService;
     private final ScrapRepository scrapRepository;
     private final AwsS3Service awsS3Service;
+    private final TeamMemberRepository teamMemberRepository;
 
-    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository, MemberRepository memberRepository, TeamService teamService, ScrapRepository scrapRepository,AwsS3Service awsS3Service) {
+    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository, PostMajorRepository postMajorRepository, MemberRepository memberRepository, TeamService teamService, ScrapRepository scrapRepository, AwsS3Service awsS3Service, TeamMemberRepository teamMemberRepository) {
         this.postRepository = postRepository;
         this.postTypeRepository = postTypeRepository;
         this.postMajorRepository = postMajorRepository;
@@ -33,17 +33,13 @@ public class PostService {
         this.teamService = teamService;
         this.scrapRepository = scrapRepository;
         this.awsS3Service = awsS3Service;
+        this.teamMemberRepository = teamMemberRepository;
     }
 
     public Post save(PostRequestDto request, @Nullable MultipartFile file,Long memberId) {
 
-        Member member = memberRepository.findById(memberId).orElse(null);
-        Team team = Team.builder()
-                .leader_id(member.getMember_id())
-                .is_completed(false)
-                .build();
-        teamService.save(team);
-
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("not found type id"));
         PostType postType = postTypeRepository.findById(request.getType_id())
                 .orElseThrow(() -> new IllegalArgumentException("not found type id"));
         PostMajor postMajor = postMajorRepository.findById(request.getMajor_id())
@@ -53,8 +49,19 @@ public class PostService {
             String s3FilePath = awsS3Service.uploadFileBucket(file);
             request.updateFileUrl(s3FilePath);
         }
-        Post post = postRepository.save(request.toEntity(member, team, postType, postMajor));
+        Post post = postRepository.save(request.toEntity(member, postType, postMajor));
 
+        Team team = Team.builder()
+                .leader_id(memberId)
+                .post(post)
+                .is_completed(false)
+                .build();
+        teamService.save(team);
+        TeamMember teamMember = TeamMember.builder()
+                .team(team)
+                .member(member)
+                .build();
+        teamMemberRepository.save(teamMember);
         return post;
     }
 

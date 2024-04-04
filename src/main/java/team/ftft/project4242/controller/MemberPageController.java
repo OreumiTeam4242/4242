@@ -13,6 +13,7 @@ import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
 
+
 import java.util.List;
 
 @Controller
@@ -56,6 +57,9 @@ public class MemberPageController {
         MemberResponseDto userInfo = memberService.findById(memberId);
         //진행중인 스터디/프로젝트 팀
         List<TeamResponseDto> onGoingTeam = teamService.findOnGoingTeamAll(memberId);
+        for(TeamResponseDto team : onGoingTeam){
+            System.out.println(team.getTeam_id());
+        }
         // 내가 쓴 post
         List<Post> myPostList = postService.findMyPosts(memberId);
         List<PostResponseDto> myList = myPostList.stream()
@@ -72,6 +76,7 @@ public class MemberPageController {
         model.addAttribute("myPostList",myList);
         model.addAttribute("scrapList",scrapList);
         model.addAttribute("finishedTeamList",finishedTeam);
+
 
         return "personal_page";
     }
