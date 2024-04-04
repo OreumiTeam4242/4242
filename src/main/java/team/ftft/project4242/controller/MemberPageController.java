@@ -52,14 +52,11 @@ public class MemberPageController {
     public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails
                                     , Model model){
 //        Long memberId = customUserDetails.getMemberId();
-        Long memberId = 18L;
+        Long memberId = customUserDetails.getMemberId();
         // userInfo
         MemberResponseDto userInfo = memberService.findById(memberId);
         //진행중인 스터디/프로젝트 팀
         List<TeamResponseDto> onGoingTeam = teamService.findOnGoingTeamAll(memberId);
-        for(TeamResponseDto team : onGoingTeam){
-            System.out.println(team.getTeam_id());
-        }
         // 내가 쓴 post
         List<Post> myPostList = postService.findMyPosts(memberId);
         List<PostResponseDto> myList = myPostList.stream()

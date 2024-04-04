@@ -19,16 +19,27 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => {
                 if (response.ok) {
-                    window.location.href = '/page/main';
+                    // 로그인이 성공한 경우의 처리
+                    // 예: 리다이렉트 혹은 다른 작업 수행
+                    window.location.href = '/page/main'; // 성공 페이지로 리다이렉트 예시
+                } else if (response.status === 401) {
+                    // 401 에러가 발생한 경우의 처리
+                    alert("비밀번호가 틀렸습니다");
+                    window.location.href = '/page/login';
                 } else {
-                    response.text().then(errorMessage => {
-                        alert(errorMessage); // 실패한 경우 에러 메시지를 경고창으로 표시
-                    });
+                    // 기타 다른 에러가 발생한 경우의 처리
+                    alert("로그인에 실패했습니다. 다시 시도해주세요.");
+                    window.location.href = '/page/login';
                 }
             })
             .catch(error => {
+                // 네트워크 오류 등의 경우의 처리
                 console.error('Error:', error);
+                alert("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
+                window.location.href = '/page/login';
             });
+
+
     });
 
     // 회원가입 버튼 이벤트 리스너

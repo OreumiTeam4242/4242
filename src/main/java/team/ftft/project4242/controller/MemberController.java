@@ -1,12 +1,9 @@
 package team.ftft.project4242.controller;
 
 import jakarta.servlet.http.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -24,6 +21,7 @@ import team.ftft.project4242.dto.MemberRequestDto;
 import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.service.MemberService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
@@ -31,7 +29,6 @@ public class MemberController {
 
     private final MemberService memberService;
     private final UserDetailService userDetailService;
-
     private final AuthenticationManager authenticationManager;
 
     public MemberController(MemberService memberService, UserDetailService userDetailService, AuthenticationManager authenticationManager) {
@@ -57,7 +54,7 @@ public class MemberController {
 //    로그인
     @PostMapping("/api/auth/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response,
-                                   @RequestBody LoginRequestDto loginRequestDto) {
+                                   @RequestBody LoginRequestDto loginRequestDto) throws IOException {
         UserDetails userDetails = userDetailService.loadUserByUsername(loginRequestDto.getEmail());
         // 인증 객체 생성
         Authentication authentication
@@ -65,7 +62,7 @@ public class MemberController {
         try {
             authenticationManager.authenticate(authentication);
         } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid Id or password");
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         // SecurityContextHolder : Authentication을 감싸는 객체
         SecurityContextHolder.getContext().setAuthentication(authentication);
