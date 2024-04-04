@@ -201,15 +201,33 @@ button.is_closed {
     text-align: center;
     padding-top: 36px;
 }
+.scrapItem{
+    padding-top:15px;
+    height: 178px;
+}
+.scrapItem h3 {
+    margin-top : 45px;
+}
+.scrapItem p {
+    margin-top : 35px;
+}
+.finishedTeamItem p {
+    margin-top : 35px;
+}
 
 .row2 p {
     margin-bottom: 25px;
 }
 
 .favorite {
+    float : right;
     position: relative;
-    top: 85px;
-    left: 150px;
+    top: 0px;
+    right: 10px;
+}
+.favorite img{
+    width : 40px;
+    height: 40px;
 }
 
 .scroll_top {
