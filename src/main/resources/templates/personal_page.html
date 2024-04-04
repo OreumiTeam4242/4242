@@ -66,10 +66,14 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row3">
+<<<<<<< Updated upstream
         <div th:each="post : ${myPostList}" class="studyItem" th:href="@{//{id}(id=${post.id})}">
-          <h3 th:text="|${post.major} ${post.type}|">수학 스터디</h3>
-          <p th:text="|스터디장 : ${post.nickname}|">스터디장: 닉네임</p>
+          <h3 th:text="${post.title}">수학 스터디</h3>
+          <p th:text="|${post.major} ${post.type}|">수학 스터디</p>
+          <p th:text ="|마감 기한 : ${post.end_date}|">모집 마감 기한 : 2024-02-01</p>
+<!--          <p th:text="|스터디장 : ${post.nickname}|">스터디장: 닉네임</p>-->
         </div>
+
       </div>
       <button type="button" id="go_right2" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
@@ -82,7 +86,8 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row4">
-        <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem" th:href="@{//{id}(id=${post.id})}">
+<!--          th:href="@{//{id}(id=${post.id})}"-->
+        <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem" >
           <button type="button" class="favorite">
             <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">
           </button>
@@ -148,5 +153,6 @@
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/personal_page.js" ></script>
+
 </body>
 </html>

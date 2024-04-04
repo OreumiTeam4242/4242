@@ -7,26 +7,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import team.ftft.project4242.commons.security.CustomAuthenticationFailureHandler;
 import team.ftft.project4242.commons.security.UserDetailService;
-
-import java.util.Collections;
-
-import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-    @Autowired
-    private AuthenticationFailureHandler customAuthenticationFailureHandler;
     @Autowired
     private UserDetailService userDetailService;
     @Bean
@@ -48,8 +39,7 @@ public class SecurityConfig {
 //                                .anyRequest().authenticated())
                                 .anyRequest().permitAll())
                 .formLogin(auth -> auth.loginPage("/page/login")// 폼 기반 로그인 설정
-                        .failureHandler(customAuthenticationFailureHandler)
-                        .defaultSuccessUrl("/page/main", true))
+                        .defaultSuccessUrl("/page/main"))
                 .logout(auth -> auth.logoutSuccessUrl("/page/login") // 로그아웃 설정
                         .invalidateHttpSession(true))
                 .build();

@@ -140,7 +140,7 @@ h3 {
 }
 
 .profile_desc > h3, p{
-    margin: 20px 72px;
+    margin: 20px 50px;
 }
 
 button {
@@ -168,9 +168,10 @@ button.is_closed {
     font-size: 25px;
     text-align: center;
     color: #FFFFFF;
-    position: relative;
-    top: -100px;
-    left: 20px;
+    margin-bottom: 25px;
+    /*position: relative;*/
+    /*top: -100px;*/
+    /*left: 20px;*/
 }
 
 .go_left {
@@ -202,7 +203,7 @@ button.is_closed {
 }
 
 .row2 p {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 .favorite {
