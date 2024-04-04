@@ -17,6 +17,8 @@ public class PostResponseDto {
     private Long id;
     private String title;
     private String content;
+    private Long type_id;
+    private Long major_id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<CommentResponseDto> commentList;
@@ -29,6 +31,7 @@ public class PostResponseDto {
     private String type;
     private String major;
     private String nickname;
+    private Long viewCount;
 
     public PostResponseDto(Post post) {
         id = post.getPost_id();
@@ -45,7 +48,12 @@ public class PostResponseDto {
         process_type = post.getProcess_type();
         file_url = post.getFile_url();
         nickname = post.getMember().getNickname();
-        
+        viewCount = post.getViewCount();
+
+    }
+
+    public String getTypeNameById(Long type_id) {
+        return type_id == 1 ? "스터디" : "프로젝트";
     }
 
 }

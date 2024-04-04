@@ -6,96 +6,57 @@ $topBtn.onclick = () => {
 }
 
 // --------------------- 상세 페이지로 이동
-
 document.addEventListener('DOMContentLoaded', function () {
     var boxTopContents = document.querySelectorAll('.box-top-content');
-    var boxFindContents = document.querySelectorAll('.find-box-content');
 
     // boxTopContents에 대한 클릭 이벤트 등록
     boxTopContents.forEach(function(boxTopContent) {
         boxTopContent.addEventListener('click', function() {
-            const post_id = boxTopContent.dataset.post_id;
-            fetchAndDisplayPostDetail(post_id);
+            const postId = boxTopContent.dataset.postId;
+            if (postId) {
+                // postId를 사용하여 해당 상세 페이지로 이동
+                window.location.href = `/page/post/${postId}`;
+            } else {
+                console.error('Post ID is undefined');
+            }
         });
     });
-
-    // boxFindContents에 대한 클릭 이벤트 등록
-    boxFindContents.forEach(function(boxFindContent) {
-        boxFindContent.addEventListener('click', function() {
-            const post_id = boxFindContent.dataset.post_id;
-            fetchAndDisplayPostDetail(post_id);
-        });
-    });
-
-    function fetchAndDisplayPostDetail(post_id) {
-        fetch(`/api/post/${post_id}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(post => {
-                window.location.href = `/page/recruitPostDetail?id=${post_id}`;
-            })
-            .catch(error => console.error('Error fetching post by ID:', error));
-    }
 });
 
 
-
 // ------------------내 정보 버튼 클릭 시
-// 내 정보 버튼 클릭 시
+
 document.getElementById('my-info').addEventListener('click', function () {
-    // REST API 호출
-    fetch("/api/members", {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(function(response) {
-            // 응답 처리
-            if (response.ok) {
-                // 성공 시 내 정보 페이지로 리다이렉트
-                window.location.href = '/page/personal_page';
-            } else {
-                // 실패 시 에러 처리
-                throw new Error('내 정보 불러오기에 실패했습니다.');
-            }
-        })
-        .catch(function(error) {
-            // 에러 처리
-            console.error('Error:', error);
-            alert(error.message);
-        });
+    // 내 정보 페이지로 리다이렉트
+    window.location.href = '/page/my_page';
 });
 
 
 // ------------------로그아웃 버튼 클릭 시
-document.getElementById('logout').addEventListener('click', function () {
-    // REST API 호출
-    fetch("/api/auth/logout", {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(function(response) {
-            // 응답 처리
-            if (response.ok) {
-                // 성공 시 인트로 페이지로 리다이렉트
-                window.location.href = '/page/intro';
-            } else {
-                // 실패 시 에러 처리
-                throw new Error('로그아웃에 실패했습니다.');
-            }
-        })
-        .catch(function(error) {
-            // 에러 처리
-            console.error('Error:', error);
-            alert(error.message);
+// main.js
+document.addEventListener("DOMContentLoaded", function() {
+    var logoutButton = document.getElementById("logout");
+    if (logoutButton) {
+        logoutButton.addEventListener("click", function() {
+            // 서버의 로그아웃 엔드포인트 호출
+            fetch("/api/auth/logout", {
+                method: "POST",
+                credentials: "same-origin" // 쿠키를 함께 전송
+            })
+                .then(function(response) {
+                    if (response.ok) {
+                        // 로그아웃 성공 시 세션 및 쿠키 삭제 후 로그인 페이지로 리다이렉션
+                        sessionStorage.clear(); // 세션 데이터 삭제
+                        window.location.href = "/page/login"; // 로그인 페이지 URL로 이동
+                    } else {
+                        console.error("로그아웃 요청이 실패하였습니다.");
+                    }
+                })
+                .catch(function(error) {
+                    console.error("로그아웃 요청 중 오류가 발생하였습니다:", error);
+                });
         });
+    }
 });
 
 // ------------------모집분야별
