@@ -49,7 +49,7 @@ public class SecurityConfig {
                                 .anyRequest().permitAll())
                 .formLogin(auth -> auth.loginPage("/page/login")// 폼 기반 로그인 설정
                         .failureHandler(customAuthenticationFailureHandler)
-                        .defaultSuccessUrl("/page/main"))
+                        .defaultSuccessUrl("/page/main", true))
                 .logout(auth -> auth.logoutSuccessUrl("/page/login") // 로그아웃 설정
                         .invalidateHttpSession(true))
                 .build();

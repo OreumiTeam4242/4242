@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     window.location.href = '/page/main';
                 } else {
-                    response.text().then(errorMessage => {
-                        alert(errorMessage); // 실패한 경우 에러 메시지를 경고창으로 표시
+                    response.json().then(data => {
+                        alert(data.error); // 서버에서 반환한 오류 메시지 표시
+                    }).catch(error => {
+                        console.error('Error parsing response body:', error);
                     });
                 }
             })

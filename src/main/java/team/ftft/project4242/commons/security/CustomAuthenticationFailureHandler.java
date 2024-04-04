@@ -2,6 +2,7 @@ package team.ftft.project4242.commons.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -23,7 +24,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         // 실패한 이유에 따라 적절한 처리를 추가할 수 있습니다.
         String errorMessage;
         if (exception instanceof BadCredentialsException) {
-            errorMessage = "잘못된 사용자 이름 또는 비밀번호입니다.";
+            errorMessage = "잘못된 이메일 또는 비밀번호입니다.";
         } else if (exception instanceof DisabledException) {
             errorMessage = "계정이 비활성화되었습니다.";
         } else {
