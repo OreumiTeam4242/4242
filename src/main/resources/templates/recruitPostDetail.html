@@ -28,7 +28,7 @@
                 <div class="writer-info">
                     <ul>
                         <li>작성자 : </li>
-                        <li class="bold-text" th:text="${post.getMember().nickname}">닉네임</li>
+                        <li class="bold-text" th:text="${post.nickname}">닉네임</li>
                     </ul>
 
                     <ul>
@@ -51,7 +51,7 @@
             <div class="recruit-post-info-top">
                 <div>
                     <p class="info-option">모집 구분</p>
-                    <p th:text="${post.getTypeNameById(post.getType_id())}"></p>
+                    <p th:text="${post.type_id}"></p>
                 </div>
                 <div>
                     <p class="info-option">모집 인원</p>

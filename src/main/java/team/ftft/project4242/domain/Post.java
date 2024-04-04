@@ -138,6 +138,8 @@ public class Post {
                 .member_cnt(member_cnt)
                 .process_type(process_type)
                 .file_url(file_url)
+                .type_id(postType.getType_id())
+                .major_id(postMajor.getMajor_id())
                 .build();
     }
 

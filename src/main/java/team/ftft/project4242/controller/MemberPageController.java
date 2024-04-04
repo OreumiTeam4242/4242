@@ -49,37 +49,42 @@ public class MemberPageController {
 
     //    개인정보 조회
     @GetMapping("/page/my_page")
-    public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails
-                                    , Model model){
-//        Long memberId = customUserDetails.getMemberId();
-        Long memberId = 18L;
-        // userInfo
+    public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+        Long memberId = customUserDetails.getMemberId();
+
         MemberResponseDto userInfo = memberService.findById(memberId);
-        //진행중인 스터디/프로젝트 팀
+
+        // 진행중인 팀 정보 조회
         List<TeamResponseDto> onGoingTeam = teamService.findOnGoingTeamAll(memberId);
-        for(TeamResponseDto team : onGoingTeam){
-            System.out.println(team.getTeam_id());
+        if (onGoingTeam != null) {
+            for (TeamResponseDto team : onGoingTeam) {
+                System.out.println(team.getTeam_id());
+            }
+            model.addAttribute("onGoingTeamList", onGoingTeam);
+        } else {
+            // 진행중인 팀 정보가 없는 경우에 대한 처리
+            // 예를 들어, 오류 메시지를 설정하거나 필요에 따라 다른 동작을 수행할 수 있습니다.
+            // model.addAttribute("errorMessage", "진행중인 팀 정보를 가져올 수 없습니다.");
         }
+
         // 내가 쓴 post
         List<Post> myPostList = postService.findMyPosts(memberId);
         List<PostResponseDto> myList = myPostList.stream()
                 .map(PostResponseDto::new)
                 .toList();
         // 스크랩한 글
-        List<PostResponseDto> scrapList  = postService.findAllScrap(memberId);
-        //종료된 스터디 팀
+        List<PostResponseDto> scrapList = postService.findAllScrap(memberId);
+        // 종료된 스터디 팀
         List<TeamResponseDto> finishedTeam = teamService.findFinishedTeam(memberId);
 
-
-        model.addAttribute("userInfo",userInfo);
-        model.addAttribute("onGoingTeamList",onGoingTeam);
-        model.addAttribute("myPostList",myList);
-        model.addAttribute("scrapList",scrapList);
-        model.addAttribute("finishedTeamList",finishedTeam);
-
+        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("myPostList", myList);
+        model.addAttribute("scrapList", scrapList);
+        model.addAttribute("finishedTeamList", finishedTeam);
 
         return "personal_page";
     }
+
 
     //    개인정보 수정
     @GetMapping("/page/my_edit_page")

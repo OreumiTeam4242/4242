@@ -49,21 +49,11 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row2">
-<<<<<<< Updated upstream
         <div th:each="team : ${onGoingTeamList}" class="ingTeamItem">
             <h3 th:text="|${team.major} ${team.type}|">수학 스터디</h3>
             <p th:text="|스터디장 : ${team.leader}|">스터디장: 닉네임</p>
           <button class="is_closed" type="button">종료</button>
         </div>
-=======
-        <div th:each="onGoingpost, iterStat : ${onGoingPostList}" class="teamItem">
-            <h3 th:text="|${onGoingPost.} ${nowTeam.type}|">수학 스터디</h3>
-            <p th:text="|스터디장 : ${onGoingpost.leader}|">스터디장: 닉네임</p>
-          </a>
-        </div>
-        <a href="">row2_col2</a>
-        <a href="">row2_col3</a>
->>>>>>> Stashed changes
       </div>
       <button type="button" id="go_right1" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
@@ -76,20 +66,10 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row3">
-<<<<<<< Updated upstream
         <div th:each="post : ${myPostList}" class="studyItem" th:href="@{//{id}(id=${post.id})}">
           <h3 th:text="|${post.major} ${post.type}|">수학 스터디</h3>
           <p th:text="|스터디장 : ${post.nickname}|">스터디장: 닉네임</p>
         </div>
-
-=======
-        <a th:href="@{//{id}(id=${post.id})}">
-          <h3>스터디</h3>
-          <p>스터디장:</p>
-        </a>
-        <a href="">row3_col2</a>
-        <a href="">row3_col3</a>
->>>>>>> Stashed changes
       </div>
       <button type="button" id="go_right2" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
@@ -167,10 +147,6 @@
   </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<<<<<<< Updated upstream
 <script type="text/javascript" src="/js/personal_page.js" ></script>
-=======
-<script src="/personal_page.js"></script>
->>>>>>> Stashed changes
 </body>
 </html>
