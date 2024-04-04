@@ -31,7 +31,8 @@ public class PostPageController {
     @GetMapping("/page/post/{id}")
     public String postDetail(@PathVariable Long id, Model model){
         Post post = postService.findById(id);
-        model.addAttribute("post", new PostResponseDto(post));
+        PostResponseDto postResponseDto = new PostResponseDto(post);
+        model.addAttribute("post", postResponseDto);
 
         return "recruitPostDetail";
     }
@@ -40,10 +41,16 @@ public class PostPageController {
     @GetMapping("/page/main")
     public String showMain(Model model) {
         List<Post> postList = postService.findAllAble();
-        model.addAttribute("postList", postList);
+        List<PostResponseDto> allpostList = postList.stream()
+                        .map(PostResponseDto::new)
+                                .toList();
+        model.addAttribute("postList", allpostList);
 
         List<Post> hotPostList = postService.findTop3PostsByViewCount();
-        model.addAttribute("hotPostList", hotPostList);
+        List<PostResponseDto> allhotPostList = hotPostList.stream()
+                        .map(PostResponseDto::new)
+                                .toList();
+        model.addAttribute("hotPostList", allhotPostList);
 
         return "main";
     }

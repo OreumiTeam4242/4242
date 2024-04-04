@@ -151,8 +151,4 @@ public class Post {
         this.file_url = file_url;
     }
 
-    public void setViewCount(Long viewCount) {
-        this.viewCount = viewCount;
-    }
-
 }

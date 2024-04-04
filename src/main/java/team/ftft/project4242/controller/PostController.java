@@ -53,12 +53,11 @@ public class PostController {
         return ResponseEntity.ok(updatedPost);
     }
 
-    @GetMapping("/api/post/{post_id}")
-    public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long post_id) {
-        Post post = postService.findById(post_id);
-        post.setViewCount(post.getViewCount() + 1);
-        return ResponseEntity.ok(post.toResponse());
-    }
+//    @GetMapping("/api/post/{post_id}")
+//    public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long post_id) {
+//        Post post = postService.findById(post_id);
+//        return ResponseEntity.ok(post.toResponse());
+//    }
 
     @Transactional
     @DeleteMapping("/api/post/{post_id}/disable")

@@ -154,7 +154,7 @@ header {
 }
 
 .author {
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 .hot-box {
@@ -170,14 +170,23 @@ header {
     border: 5px solid #7AC8EC;
     border-radius: 60px;
     background-color: #FFFFFF;
+    margin: 15px 15px 15px 15px;
 }
 
 .find-text {
     font-size: 30px;
     font-weight: 600;
-    margin-left: -900px;
+    margin-left: -550px;
     margin-top: 80px;
 }
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
 
 .find-box-content {
     display: flex;
@@ -187,6 +196,7 @@ header {
     border: 5px solid #7AC8EC;
     border-radius: 60px;
     background-color: #FFFFFF;
+    margin: 15px 15px 15px 15px;
 }
 
 .boxes {
