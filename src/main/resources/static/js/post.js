@@ -1,29 +1,72 @@
 // 뒤로 가기
 const goBackButton = document.querySelector(".msg-go-back");
 
-if(goBackButton) {
-    goBackButton.addEventListener('click', () =>
-        location.replace(`/page/main`)
-    );
+if (goBackButton) {
+    goBackButton.addEventListener('click', () => {
+        window.location.href = "/page/main"
+    });
 }
 
-// 스크랩 버튼
-const ScrapButton = document.querySelector(".btn-scrap");
-const image = document.getElementById("image");
 
-ScrapButton.addEventListener('click', function() {
+
+// 스크랩 버튼
+const scrapButton = document.querySelector(".btn-scrap");
+const image = document.getElementById("image");
+const postId = document.getElementById("post-id").value;
+
+// 서버로부터 스크랩 상태를 가져와 UI를 업데이트합니다.
+async function updateScrapStatus() {
+    try {
+        const response = await fetch(`/api/posts/${postId}/scraps/status`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const isScrapped = await response.json();
+        image.src = isScrapped ? '/image/filled-heart.png' : '/image/empty-heart.png';
+
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+scrapButton.addEventListener('click', async function() {
     const currentSrc = image.src;
 
-    let newSrc; // 새로운 경로 저장용
-    if (currentSrc.includes('empty-heart.png')) {
-        newSrc = '/image/filled-heart.png';
-    } else {
-        newSrc = '/image/empty-heart.png';
+    let scrapStatusChanged = false; // 스크랩 상태가 변경되었는지 여부
+
+    // 스크랩 상태 변경 요청을 보냅니다.
+    try {
+        const response = await fetch(`/api/posts/${postId}/scraps`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: currentSrc.includes('empty-heart.png') ? JSON.stringify({}) : null
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        scrapStatusChanged = true;
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
     }
 
-    image.src = newSrc;
-
+    // 스크랩 상태가 변경되었을 때만 이미지 소스를 업데이트합니다.
+    if (scrapStatusChanged) {
+        await updateScrapStatus();
+    }
 });
+
+updateScrapStatus();
 
 // 수정하기 버튼
 const editButton = document.querySelector(".btn-edit");
@@ -42,19 +85,6 @@ if(editButton) {
         completeButton.style.display = "block";
         cancelButton.style.display = "block";
         editTextArea.style.display = "block";
-
-        alert(contentAreaInner);
-
-        // 페이지에서 내용 바로 수정
-        // const contentArea = document.querySelector(".register-post-text");
-        // // const beforeContent = contentDiv.textContent.trim();
-        // //
-        // // const contentTextarea = document.createElement('textarea');
-        // // contentTextarea.value = beforeContent;
-        // contentArea.replaceWith('<textarea>' + $('.register-post-text').html() +'</textarea>'); // div를 textarea로 교체
-
-
-        // contentArea.replaceWith('<textarea>' + $('.register-post-text').html() +'</textarea>'); // div를 textarea로 교체
 
         completeButton.addEventListener('click', () => {
             editButton.style.display = "block";
