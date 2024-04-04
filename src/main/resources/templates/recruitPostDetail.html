@@ -101,9 +101,7 @@
                 <p class="comment-nickname" th:text="${comment.nickname}"></p>
                 <p class="comment-time" th:text="${#temporals.format(comment.created_at, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 <p class="comment-content" th:text="${comment.content}"></p>
-                <button class="btn-comment-delete" class="btn-writer-delete"
-
-                >삭제</button>
+                <button class="btn-comment-delete">삭제</button>
             </div>
         </section>
     </section>

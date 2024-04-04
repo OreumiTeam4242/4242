@@ -1,6 +1,9 @@
 package team.ftft.project4242.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +29,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE post SET use_yn = false WHERE post_id = ?")
 @SQLRestriction("use_yn = true")
+
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
