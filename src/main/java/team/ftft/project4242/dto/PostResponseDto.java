@@ -1,7 +1,10 @@
 package team.ftft.project4242.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import team.ftft.project4242.domain.Post;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,8 +22,9 @@ public class PostResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<CommentResponseDto> commentList;
-    private LocalDateTime start_date;
-    private LocalDateTime end_date;
+
+    private LocalDate start_date;
+    private LocalDate end_date;
     private Integer member_cnt;
     private String process_type;
     private String file_url;

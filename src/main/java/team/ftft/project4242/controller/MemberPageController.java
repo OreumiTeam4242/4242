@@ -50,7 +50,8 @@ public class MemberPageController {
     @GetMapping("/page/my_page")
     public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails
                                     , Model model){
-        Long memberId = customUserDetails.getMemberId();
+//        Long memberId = customUserDetails.getMemberId();
+        Long memberId = 18L;
         // userInfo
         MemberResponseDto userInfo = memberService.findById(memberId);
         //진행중인 스터디/프로젝트 팀

@@ -69,26 +69,28 @@ header .logo {
 }
 
 .left_side_nav {
+    top: 60px;
+    left: 0; /* 화면의 왼쪽에 고정 */
+    z-index: 100; /* 다른 요소보다 위에 표시되도록 설정 */
+    overflow-y: auto; /* 세로 스크롤이 필요한 경우에만 스크롤 표시 */
     margin: 57px 0 25px 25px;
     border: 5px solid #77A7EE;
     border-radius: 40px;
-    width: 305px;
+    width: 250px;
     height: 465px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    text-align: center;
 }
 
-.nav_and_main span {
-    margin-left: 30px;
-    margin-top: 45px;
+.left_side_nav  a:hover {
     background-color: #77A7EE50;
-    width: 111px;
     height: 38px;
     border-radius: 20px;
     text-align: center;
     line-height: 36px;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
     font-weight: bold;
 }
 
@@ -128,6 +130,9 @@ main h2 {
 
 .personal_info img {
     margin: 47px 72px;
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
 }
 
 h3 {
@@ -185,8 +190,7 @@ button.is_closed {
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-.row2 a, .row3 a, .row4 a, .row5 a {
+.studyItem, .finishedTeamItem , .scrapItem, .ingTeamItem {
     all: unset;
     display: inline-block;
     border: 5px solid #77A7EE;
@@ -208,6 +212,8 @@ button.is_closed {
 }
 
 .scroll_top {
+    display: none;
+    cursor: pointer;
     margin-bottom: 18px;
     position: relative;
     right: -1000px;
