@@ -5,6 +5,8 @@ $topBtn.onclick = () => {
     window.scrollTo({top: 0, behavior: "smooth"});
 }
 
+// --------------------- 상세 페이지로 이동
+
 document.addEventListener('DOMContentLoaded', function () {
     var boxTopContents = document.querySelectorAll('.box-top-content');
     var boxFindContents = document.querySelectorAll('.find-box-content');
@@ -12,24 +14,29 @@ document.addEventListener('DOMContentLoaded', function () {
     // boxTopContents에 대한 클릭 이벤트 등록
     boxTopContents.forEach(function(boxTopContent) {
         boxTopContent.addEventListener('click', function() {
-            const postId = boxTopContent.dataset.post_id;
-            fetchAndDisplayPostDetail(postId);
+            const post_id = boxTopContent.dataset.post_id;
+            fetchAndDisplayPostDetail(post_id);
         });
     });
 
     // boxFindContents에 대한 클릭 이벤트 등록
     boxFindContents.forEach(function(boxFindContent) {
         boxFindContent.addEventListener('click', function() {
-            const postId = boxFindContent.dataset.post_id;
-            fetchAndDisplayPostDetail(postId);
+            const post_id = boxFindContent.dataset.post_id;
+            fetchAndDisplayPostDetail(post_id);
         });
     });
 
-    function fetchAndDisplayPostDetail(postId) {
-        fetch(`/api/post/${postId}`)
-            .then(response => response.json())
+    function fetchAndDisplayPostDetail(post_id) {
+        fetch(`/api/post/${post_id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(post => {
-                window.location.href = `/page/recruitPostDetail?id=${post.id}`;
+                window.location.href = `/page/recruitPostDetail?id=${post_id}`;
             })
             .catch(error => console.error('Error fetching post by ID:', error));
     }
@@ -38,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ------------------내 정보 버튼 클릭 시
+// 내 정보 버튼 클릭 시
 document.getElementById('my-info').addEventListener('click', function () {
     // REST API 호출
     fetch("/api/members", {
@@ -62,6 +70,7 @@ document.getElementById('my-info').addEventListener('click', function () {
             alert(error.message);
         });
 });
+
 
 // ------------------로그아웃 버튼 클릭 시
 document.getElementById('logout').addEventListener('click', function () {
@@ -120,10 +129,7 @@ async function fetchAndDisplayPosts() {
         }
 
         // find-box-content를 제거
-        const existingPosts = document.querySelectorAll('.find-box-content');
-        existingPosts.forEach(post => {
-            post.remove();
-        });
+        findBox.innerHTML = ''; // 기존 게시물을 모두 제거
 
         posts.forEach(post => {
             const postDiv = document.createElement('div');
@@ -134,6 +140,7 @@ async function fetchAndDisplayPosts() {
                     <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
                 </div>
                 <div class="box-text-content-2">
+                    <p>${post.nickname}</p>
                     <p>조회수 ${post.viewCount}</p>
                     <p>댓글 ${post.commentList.length}</p>
                 </div>
@@ -158,39 +165,55 @@ document.getElementById('post-type').addEventListener('change', () => {
 
 
 
-
 // ------------------ 스터디 / 프로젝트 모집 구분
-//  버튼 클릭 이벤트 리스너
-document.querySelector('.study-button').addEventListener('click', async () => {
-    try {
-        const response = await fetch('/api/posts/type/1');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const posts = await response.json();
-        displayPosts(posts);
-    } catch (error) {
-        console.error('Error fetching study posts:', error);
-    }
-});
+// 버튼 클릭 이벤트 리스너 등록
+document.querySelectorAll('.study-button, .project-button').forEach(button => {
+    button.addEventListener('click', async () => {
+        try {
+            // 버튼의 데이터 타입 가져오기
+            const dataType = button.getAttribute('data-type');
 
-// 프로젝트 버튼 클릭 이벤트 리스너
-document.querySelector('.project-button').addEventListener('click', async () => {
-    try {
-        const response = await fetch('/api/posts/type/2');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+            // API 요청을 위한 URL 생성
+            const url = `/api/posts/type/${dataType}`;
+
+            // API 요청 및 응답 처리
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const posts = await response.json();
+
+            // 해당 버튼에 따라 게시물을 표시하는 함수 호출
+            displayPosts(posts);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
         }
-        const posts = await response.json();
-        displayPosts(posts);
-    } catch (error) {
-        console.error('Error fetching project posts:', error);
-    }
+    });
 });
 
 // 게시물을 표시하는 함수
 function displayPosts(posts) {
-    // 게시물을 표시하는 코드 작성
+    // find-box-content를 제거
+    const findBox = document.querySelector('.find-box .boxes');
+    findBox.innerHTML = ''; // 기존 게시물을 모두 제거
+
+    posts.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.classList.add('find-box-content');
+        postDiv.innerHTML = `
+            <div class="box-top-content" data-post-id="${post.id}">
+                <p class="box-in-text">${post.title}</p>
+                <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
+            </div>
+            <div class="box-text-content-2">
+                <p>${post.nickname}</p>
+                <p>조회수 ${post.viewCount}</p>
+                <p>댓글 ${post.commentList.length}</p>
+            </div>
+        `;
+        findBox.appendChild(postDiv);
+    });
 }
 
 

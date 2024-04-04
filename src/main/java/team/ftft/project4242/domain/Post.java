@@ -1,6 +1,9 @@
 package team.ftft.project4242.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +17,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.CommentResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +29,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE post SET use_yn = false WHERE post_id = ?")
 @SQLRestriction("use_yn = true")
+
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,21 +91,20 @@ public class Post {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
-    private LocalDateTime start_date;
+    private LocalDate start_date;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name="end_date")
-    private LocalDateTime end_date;
+    private LocalDate end_date;
 
     // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
-    @JoinColumn(name = "team_id")
     private Team team;
 
     private Long viewCount;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Team team,Member member,LocalDateTime start_date,LocalDateTime end_date,Integer member_cnt,String process_type,String file_url) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Member member,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type,String file_url) {
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -109,7 +113,6 @@ public class Post {
         this.postMajor = postMajor;
         this.is_closed = false;
         this.use_yn = true;
-        this.team = team;
         this.member = member;
         this.start_date = start_date;
         this.end_date = end_date;

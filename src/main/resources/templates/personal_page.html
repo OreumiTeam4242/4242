@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/personal_page.css">
+  <link rel="stylesheet" th:href="@{/personal_page.css}">
   <title>개인정보 페이지</title>
 </head>
 <body>
@@ -21,101 +21,113 @@
 
 <section class="nav_and_main">
   <nav class="left_side_nav">
-    <span>회원 정보</span>
     <ul>
-      <li><a href="">진행중인 스터디 / 프로젝트</a></li>
-      <li><a href="">내가 모집중인 스터디 / 프로젝트</a></li>
-      <li><a href="">스크랩한 스터디 / 프로젝트</a></li>
-      <li><a href="">종료된 스터디 / 프로젝트</a></li>
+      <li><a href="#info_row1">회원정보</a> </li>
+      <li><a href="#info_row2">진행중인 스터디 / 프로젝트</a></li>
+      <li><a href="#info_row3">내가 모집중인 스터디 / 프로젝트</a></li>
+      <li><a href="#info_row4">스크랩한 스터디 / 프로젝트</a></li>
+      <li><a href="#info_row5">종료된 스터디 / 프로젝트</a></li>
     </ul>
   </nav>
-
   <main>
-    <div class="info_row1">
+    <div id="info_row1" class="info_row1">
       <h2>회원 정보</h2>
       <div class="personal_info">
-        <img src="/image/profile_img.png" alt="나의 프로필 사진">
+        <img th:src="${userInfo.img_url}" alt="나의 프로필 사진">
         <div class="profile_desc">
-          <h3>닉네임: 사이사이</h3>
-          <p>등급: 뉴비 / 주니어 / 시니어</p>
+          <h3 th:text="|닉네임 : ${userInfo.nickname}|">닉네임: 사이사이</h3>
+          <p th:text="|등급 : ${userInfo.role}|">등급: 뉴비 / 주니어 / 시니어</p>
           <p>이메일 : abcde@gmail.com</p>
         </div>
-        <button class="edit" type="button">수정</button>
+        <button class="edit" type="button" th:href="@{/page/my_edit_page}">수정</button>
       </div>
     </div>
 
-    <div class="info_row2">
+    <div id="info_row2" class="info_row2">
       <h2>진행중인 스터디 / 프로젝트</h2>
-      <button type="button" class="go_left">
+      <button type="button" id="go_left1" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row2">
-        <a href="">
-          <h3>수학 스터디</h3>
-          <p>스터디장: 닉네임</p>
-        </a>
+<<<<<<< Updated upstream
+        <div th:each="team : ${onGoingTeamList}" class="ingTeamItem">
+            <h3 th:text="|${team.major} ${team.type}|">수학 스터디</h3>
+            <p th:text="|스터디장 : ${team.leader}|">스터디장: 닉네임</p>
+          <button class="is_closed" type="button">종료</button>
+        </div>
+=======
+        <div th:each="onGoingpost, iterStat : ${onGoingPostList}" class="teamItem">
+            <h3 th:text="|${onGoingPost.} ${nowTeam.type}|">수학 스터디</h3>
+            <p th:text="|스터디장 : ${onGoingpost.leader}|">스터디장: 닉네임</p>
+          </a>
+        </div>
         <a href="">row2_col2</a>
         <a href="">row2_col3</a>
+>>>>>>> Stashed changes
       </div>
-      <button type="button" class="go_right">
+      <button type="button" id="go_right1" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
       </button>
-      <button class="is_closed" type="button">종료</button>
     </div>
 
-    <div class="info_row3">
+    <div id="info_row3" class="info_row3">
       <h2>내가 모집중인 스터디 / 프로젝트</h2>
-      <button type="button" class="go_left">
+      <button type="button" id="go_left2" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row3">
-        <a href="">
-          <h3>수학 스터디</h3>
-          <p>스터디장: 닉네임</p>
+<<<<<<< Updated upstream
+        <div th:each="post : ${myPostList}" class="studyItem" th:href="@{//{id}(id=${post.id})}">
+          <h3 th:text="|${post.major} ${post.type}|">수학 스터디</h3>
+          <p th:text="|스터디장 : ${post.nickname}|">스터디장: 닉네임</p>
+        </div>
+
+=======
+        <a th:href="@{//{id}(id=${post.id})}">
+          <h3>스터디</h3>
+          <p>스터디장:</p>
         </a>
         <a href="">row3_col2</a>
         <a href="">row3_col3</a>
+>>>>>>> Stashed changes
       </div>
-      <button type="button" class="go_right">
+      <button type="button" id="go_right2" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
       </button>
     </div>
 
-    <div class="info_row4">
+    <div id="info_row4" class="info_row4">
       <h2>스크랩한 스터디 / 프로젝트</h2>
-      <button type="button" class="go_left">
+      <button type="button" id="go_left3" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
-      <button type="button" class="favorite">
-        <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">
-      </button>
       <div class="row4">
-        <a href="">
-          <h3>수학 스터디</h3>
-          <p>스터디장: 닉네임</p>
-        </a>
-        <a href="">row4_col2</a>
-        <a href="">row4_col3</a>
+        <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem" th:href="@{//{id}(id=${post.id})}">
+          <button type="button" class="favorite">
+            <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">
+          </button>
+          <h3 th:text="|${scrap.major} ${scrap.type}|">수학 스터디</h3>
+          <p th:text="|스터디장 : ${scrap.nickname}|">스터디장: 닉네임</p>
+        </div>
       </div>
-      <button type="button" class="go_right">
+      <button type="button" id="go_right3" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
       </button>
     </div>
 
-    <div class="info_row5">
+    <div id="info_row5" class="info_row5">
       <h2>종료된 스터디 / 프로젝트</h2>
-      <button type="button" class="go_left">
+      <button type="button" id="go_left4" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row5">
-        <a href="">
-          <h3>수학 스터디</h3>
-          <p>스터디장: 닉네임</p>
-        </a>
-        <a href="">row5_col2</a>
-        <a href="">row5_col3</a>
+        <div th:each="team : ${finishedTeamList}" class="finisheTeamItem">
+          <h3 th:text="|${team.major} ${team.type}|">수학 스터디</h3>
+          <p th:text="|스터디장 : ${team.leader}|">스터디장: 닉네임</p>
+        </div>
       </div>
-      <button type="button" class="go_right">
+      </div>
+      <button type="button" id="go_right4" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
       </button>
     </div>
@@ -140,7 +152,7 @@
       <img src="/image/close.png">
     </button>
     <div class="modal_1">
-      <img src="/image/Info.png" alt="정보 아이콘">
+      <img id="" src="/image/Info.png" alt="정보 아이콘">
       <p>진행중인 스터디 / 프로젝트를<br>종료하시겠습니까?</p>
       <img src="/image/Ok_red.png" alt="확인 버튼">
     </div>
@@ -154,5 +166,11 @@
     </button>
   </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<<<<<<< Updated upstream
+<script type="text/javascript" src="/js/personal_page.js" ></script>
+=======
+<script src="/personal_page.js"></script>
+>>>>>>> Stashed changes
 </body>
 </html>
