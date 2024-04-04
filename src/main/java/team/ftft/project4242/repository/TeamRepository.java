@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import team.ftft.project4242.domain.Team;
 
+import java.util.List;
+
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
+
 }

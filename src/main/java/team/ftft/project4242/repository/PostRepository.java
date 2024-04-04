@@ -43,4 +43,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.use_yn = true and p.is_closed = true and p.team.is_completed = true")
     List<Post> findFinishPostAll();
 
+    @Query("select p from Post p where p.use_yn = true and p.member.member_id = :memberId")
+    List<Post> findAllByMemberId(Long memberId);
+
 }

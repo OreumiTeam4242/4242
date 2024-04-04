@@ -1,8 +1,10 @@
 package team.ftft.project4242.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import team.ftft.project4242.domain.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -17,8 +19,12 @@ public class PostRequestDto {
     private String content;
     private Long type_id;
     private Long major_id;
-    private LocalDateTime start_date;
-    private LocalDateTime end_date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    private LocalDate start_date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    private LocalDate end_date;
     private Integer member_cnt;
     private String process_type;
     private String file_url;

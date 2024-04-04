@@ -41,6 +41,7 @@ public class Team {
     @Column(name="use_yn")
     private boolean use_yn;
 
+
     @Builder
     public Team(boolean is_completed, Long leader_id) {
         this.is_completed = is_completed;
@@ -55,7 +56,7 @@ public class Team {
         return TeamResponseDto.builder()
                 .is_completed(is_completed)
                 .use_yn(use_yn)
-                .post(post)
+                .team_id(team_id)
                 .build();
     }
 

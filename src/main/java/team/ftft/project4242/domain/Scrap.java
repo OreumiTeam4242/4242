@@ -10,7 +10,6 @@ import org.hibernate.annotations.SQLRestriction;
 @Getter
 @Entity
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE scrap SET use_yn = false WHERE scrap_id = ?")
 @SQLRestriction("use_yn = true")
 public class Scrap {
     @Id

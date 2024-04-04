@@ -1,13 +1,11 @@
 package team.ftft.project4242.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.PostMajor;
-import team.ftft.project4242.domain.PostType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,17 +17,15 @@ public class PostResponseDto {
     private Long id;
     private String title;
     private String content;
-    private Long type_id;
-    private Long major_id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<CommentResponseDto> commentList;
-    private LocalDateTime start_date;
-    private LocalDateTime end_date;
+
+    private LocalDate start_date;
+    private LocalDate end_date;
     private Integer member_cnt;
     private String process_type;
     private String file_url;
-    private String leader;
     private String type;
     private String major;
     private String nickname;
@@ -51,7 +47,4 @@ public class PostResponseDto {
         nickname = post.getMember().getNickname();
     }
 
-    public String getTypeNameById(Long type_id) {
-        return type_id == 1 ? "스터디" : "프로젝트";
-    }
 }
