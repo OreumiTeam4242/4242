@@ -9,26 +9,21 @@ $topBtn.onclick = () => {
 
 document.addEventListener('DOMContentLoaded', function () {
     var boxTopContents = document.querySelectorAll('.box-top-content');
-    var boxFindContents = document.querySelectorAll('.find-box-content');
 
     // boxTopContents에 대한 클릭 이벤트 등록
     boxTopContents.forEach(function(boxTopContent) {
         boxTopContent.addEventListener('click', function() {
-            const post_id = boxTopContent.dataset.post_id;
-            fetchAndDisplayPostDetail(post_id);
+            const postId = boxTopContent.dataset.postId;
+            if (postId) {
+                fetchAndDisplayPostDetail(postId);
+            } else {
+                console.error('Post ID is undefined');
+            }
         });
     });
 
-    // boxFindContents에 대한 클릭 이벤트 등록
-    boxFindContents.forEach(function(boxFindContent) {
-        boxFindContent.addEventListener('click', function() {
-            const post_id = boxFindContent.dataset.post_id;
-            fetchAndDisplayPostDetail(post_id);
-        });
-    });
-
-    function fetchAndDisplayPostDetail(post_id) {
-        fetch(`/api/post/${post_id}`)
+    function fetchAndDisplayPostDetail(postId) {
+        fetch(`/api/post/${postId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -36,12 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(post => {
-                window.location.href = `/page/recruitPostDetail?id=${post_id}`;
+                if (post.id) {
+                    window.location.href = `/page/post/${post.id}`;
+                } else {
+                    console.error('Post ID is undefined in the response data');
+                }
             })
             .catch(error => console.error('Error fetching post by ID:', error));
     }
 });
-
 
 
 // ------------------내 정보 버튼 클릭 시

@@ -56,7 +56,6 @@ public class PostController {
     @GetMapping("/api/post/{post_id}")
     public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long post_id) {
         Post post = postService.findById(post_id);
-        post.setViewCount(post.getViewCount() + 1);
         return ResponseEntity.ok(post.toResponse());
     }
 

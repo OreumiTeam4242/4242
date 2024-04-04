@@ -10,6 +10,7 @@ import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -40,11 +41,18 @@ public class PostPageController {
     @GetMapping("/page/main")
     public String showMain(Model model) {
         List<Post> postList = postService.findAllAble();
-        model.addAttribute("postList", postList);
+        List<PostResponseDto> postResponseDtoList = postList.stream()
+                .map(PostResponseDto::new)
+                .collect(Collectors.toList());
+        model.addAttribute("postList", postResponseDtoList);
 
         List<Post> hotPostList = postService.findTop3PostsByViewCount();
-        model.addAttribute("hotPostList", hotPostList);
+        List<PostResponseDto> hotPostResponseDtoList = hotPostList.stream()
+                .map(PostResponseDto::new)
+                .collect(Collectors.toList());
+        model.addAttribute("hotPostList", hotPostResponseDtoList);
 
         return "main";
     }
+
 }
