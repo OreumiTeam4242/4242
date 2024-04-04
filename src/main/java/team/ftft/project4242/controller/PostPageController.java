@@ -10,7 +10,6 @@ import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -32,7 +31,8 @@ public class PostPageController {
     @GetMapping("/page/post/{id}")
     public String postDetail(@PathVariable Long id, Model model){
         Post post = postService.findById(id);
-        model.addAttribute("post", new PostResponseDto(post));
+        PostResponseDto postResponseDto = new PostResponseDto(post);
+        model.addAttribute("post", postResponseDto);
 
         return "recruitPostDetail";
     }
@@ -41,18 +41,17 @@ public class PostPageController {
     @GetMapping("/page/main")
     public String showMain(Model model) {
         List<Post> postList = postService.findAllAble();
-        List<PostResponseDto> postResponseDtoList = postList.stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
-        model.addAttribute("postList", postResponseDtoList);
+        List<PostResponseDto> allpostList = postList.stream()
+                        .map(PostResponseDto::new)
+                                .toList();
+        model.addAttribute("postList", allpostList);
 
         List<Post> hotPostList = postService.findTop3PostsByViewCount();
-        List<PostResponseDto> hotPostResponseDtoList = hotPostList.stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
-        model.addAttribute("hotPostList", hotPostResponseDtoList);
+        List<PostResponseDto> allhotPostList = hotPostList.stream()
+                        .map(PostResponseDto::new)
+                                .toList();
+        model.addAttribute("hotPostList", allhotPostList);
 
         return "main";
     }
-
 }

@@ -1,6 +1,5 @@
 package team.ftft.project4242.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import team.ftft.project4242.domain.Post;
 
@@ -22,8 +21,8 @@ public class PostResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<CommentResponseDto> commentList;
-    private LocalDateTime start_date;
-    private LocalDateTime end_date;
+    private LocalDate start_date;
+    private LocalDate end_date;
     private Integer member_cnt;
     private String process_type;
     private String file_url;
@@ -53,6 +52,7 @@ public class PostResponseDto {
     }
 
     public String getTypeNameById(Long type_id) {
-        return type_id != null && type_id == 1 ? "스터디" : "프로젝트";
+        return type_id == 1 ? "스터디" : "프로젝트";
     }
+
 }
