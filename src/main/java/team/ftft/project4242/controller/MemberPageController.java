@@ -56,6 +56,9 @@ public class MemberPageController {
         MemberResponseDto userInfo = memberService.findById(memberId);
         //진행중인 스터디/프로젝트 팀
         List<TeamResponseDto> onGoingTeam = teamService.findOnGoingTeamAll(memberId);
+        for(TeamResponseDto team : onGoingTeam){
+            System.out.println(team.getTeam_id());
+        }
         // 내가 쓴 post
         List<Post> myPostList = postService.findMyPosts(memberId);
         List<PostResponseDto> myList = myPostList.stream()

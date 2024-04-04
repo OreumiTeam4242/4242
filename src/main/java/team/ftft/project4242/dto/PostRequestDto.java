@@ -28,14 +28,13 @@ public class PostRequestDto {
     private Integer member_cnt;
     private String process_type;
     private String file_url;
-    public Post toEntity(Member member, Team team, PostType postType, PostMajor postMajor) {
+    public Post toEntity(Member member, PostType postType, PostMajor postMajor) {
         return Post.builder()
                 .title(title)
                 .content(content)
                 .postType(postType)
                 .postMajor(postMajor)
                 .member(member)
-                .team(team)
                 .start_date(start_date)
                 .end_date(end_date)
                 .member_cnt(member_cnt)
