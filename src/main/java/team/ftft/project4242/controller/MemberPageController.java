@@ -13,6 +13,7 @@ import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
 
+
 import java.util.List;
 
 @Controller
@@ -75,6 +76,7 @@ public class MemberPageController {
         model.addAttribute("myPostList",myList);
         model.addAttribute("scrapList",scrapList);
         model.addAttribute("finishedTeamList",finishedTeam);
+
 
         return "personal_page";
     }
