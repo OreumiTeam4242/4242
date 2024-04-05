@@ -45,4 +45,9 @@ public class ScrapService {
 
     }
 
+    public boolean isScrapped(Long postId, Long memberId) {
+        Scrap scrap = scrapRepository.existsByPostIdAndMemberId(postId, memberId);
+
+        return scrap != null;
+    }
 }

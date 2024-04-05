@@ -3,13 +3,15 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/personal_edit_page.css">
+  <link rel="stylesheet" th:href="@{/personal_edit_page.css}">
+
   <title>개인정보 수정 페이지</title>
 </head>
 <body>
 <header>
   <div class="logo">
-    <a class="logo_top" href="">
+
+    <a class="logo_top" th:href="@{/page/main}">
       <img src="/image/logo.png" alt="사이사이 로고">
     </a>
     <nav class="menu_top">
@@ -36,26 +38,29 @@
       <h2>회원 정보</h2>
       <div class="personal_info">
         <div class="profile_img">
-            <img th:src="${img_url}" alt="나의 프로필 사진">
-            <h3 th:text="${role}">등급 : 뉴비</h3>
-          <button type="button">
+          <img id="user-img"th:src="${userInfo.img_url}" alt="나의 프로필 사진">
+          <h3 th:text="|등급 : ${userInfo.role}|">등급 : 뉴비</h3>
+          <button type="button" class="upload-btn">
             <img src="/image/profile_upload.png" alt="프로필 사진 수정">
           </button>
+          <!-- 파일 업로드 input -->
+          <input type="file" id="fileInput" style="display: none;">
         </div>
         <div class="profile_desc">
           <form>
             <h3>이메일</h3>
-            <input type="text" value="abced@gmail.com">
-            <h3 th:text="${nickname}">닉네임</h3>
-            <input type="text">
+            <input type="text" th:value="${userInfo.email}" disabled>
+            <h3>닉네임</h3>
+            <input type="text" id="nicknameInput" th:value="${userInfo.nickname}">
           </form>
         </div>
       </div>
       <button class="edit" type="button">수정</button>
-      <button class="cancel" type="button">취소</button>
-      <button class="save" type="button">저장</button>
+      <button class="cancel" type="button" style="display: none;">취소</button>
+      <button class="save" type="button" style="display: none;">저장</button>
     </div>
   </main>
+
 
 </section>
 
@@ -76,6 +81,6 @@
   </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/personal_edit_page.js"></script>
+<script type="text/javascript" src="/js/personal_edit_page.js" ></script>
 </body>
 </html>

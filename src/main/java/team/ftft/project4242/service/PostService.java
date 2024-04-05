@@ -36,6 +36,7 @@ public class PostService {
         this.teamMemberRepository = teamMemberRepository;
     }
 
+    @Transactional
     public Post save(PostRequestDto request, @Nullable MultipartFile file,Long memberId) {
 
         Member member = memberRepository.findById(memberId)

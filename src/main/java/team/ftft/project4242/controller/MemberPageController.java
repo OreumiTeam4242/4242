@@ -1,5 +1,6 @@
 package team.ftft.project4242.controller;
 
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,8 @@ import team.ftft.project4242.dto.TeamResponseDto;
 import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
-
+import team.ftft.project4242.service.MemberService;
+import team.ftft.project4242.service.PostService;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class MemberPageController {
         this.memberService = memberService;
         this.postService = postService;
         this.teamService = teamService;
+
     }
 
     //    인트로 페이지
@@ -49,7 +52,8 @@ public class MemberPageController {
 
     //    개인정보 조회
     @GetMapping("/page/my_page")
-    public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+    public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails
+                                    , Model model){
         Long memberId = customUserDetails.getMemberId();
 
         MemberResponseDto userInfo = memberService.findById(memberId);
@@ -79,7 +83,13 @@ public class MemberPageController {
 
     //    개인정보 수정
     @GetMapping("/page/my_edit_page")
-    public String editPersonalPage(){
+    public String editPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                   Model model){
+        //        Long memberId = customUserDetails.getMemberId();
+        Long memberId = customUserDetails.getMemberId();
+        MemberResponseDto userInfo = memberService.findById(memberId);
+        model.addAttribute("userInfo",userInfo);
+
         return "personal_edit_page";
     }
 }

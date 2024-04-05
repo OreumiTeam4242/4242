@@ -8,7 +8,7 @@
 <body>
 <header>
   <div class="logo">
-    <a class="logo_top" href="">
+    <a class="logo_top" th:href="@{/page/main}">
       <img src="/image/logo.png" alt="사이사이 로고">
     </a>
     <nav class="menu_top">
@@ -39,7 +39,8 @@
           <p th:text="|등급 : ${userInfo.role}|">등급: 뉴비 / 주니어 / 시니어</p>
           <p>이메일 : abcde@gmail.com</p>
         </div>
-        <button class="edit" type="button" >수정</button>
+
+        <button class="edit" type="button" th:href="@{/page/my_edit_page}">수정</button>
       </div>
     </div>
 
