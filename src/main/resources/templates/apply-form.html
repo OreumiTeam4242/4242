@@ -18,7 +18,7 @@
     </div>
 
 </nav>
-<main th:text="${postId}">
+<main id="main-post-id" th:value="${postId}">
     <div id="main-wrapper">
         <div>
             <a th:href="@{page/main}">뒤로가기</a>
@@ -47,32 +47,32 @@
                 <label class="label-1" >활동 가능 요일</label><br>
                 <div class="day-check">
                     <!--                엔터티 이름 반영-->
-                    <input type="checkbox" id="monday" name="day[]" value="월 " th:checked="${available_day.contains('monday')}">
+                    <input type="checkbox" id="monday" name="day[]" value="월 " th:checked="월 ">
                     <label for="monday">월요일</label>
-                    <input type="checkbox" id="tuesday" name="day[]" value="화 " th:checked="${available_day.contains('tuesday')}">
+                    <input type="checkbox" id="tuesday" name="day[]" value="화 " th:checked="화 ">
                     <label for="tuesday">화요일</label>
-                    <input type="checkbox" id="wednesday" name="day[]" value="수 " th:checked="${available_day.contains('wednesday')}">
+                    <input type="checkbox" id="wednesday" name="day[]" value="수 " th:checked="수 ">
                     <label for="wednesday">수요일</label>
-                    <input type="checkbox" id="thursday" name="day[]" value="목 " th:checked="${available_day.contains('thursday')}">
+                    <input type="checkbox" id="thursday" name="day[]" value="목 " th:checked="목 ">
                     <label for="thursday">목요일</label>
-                    <input type="checkbox" id="friday" name="day[]" value="금 " th:checked="${available_day.contains('friday')}">
+                    <input type="checkbox" id="friday" name="day[]" value="금 " th:checked="금 ">
                     <label for="friday">금요일</label>
-                    <input type="checkbox" id="saturday" name="day[]" value="토 " th:checked="${available_day.contains('saturday')}">
+                    <input type="checkbox" id="saturday" name="day[]" value="토 " th:checked="토 ">
                     <label for="saturday">토요일</label>
-                    <input type="checkbox" id="sunday" name="day[]" value="일 " th:checked="${available_day.contains('sunday')}">
+                    <input type="checkbox" id="sunday" name="day[]" value="일 " th:checked="일 ">
                     <label for="sunday">일요일</label>
                 </div>
             </div>
             <div>
                 <label class="label-1">활동 가능 시간</label><br>
                 <div class="time-check">
-                    <input type="checkbox" id="morning" name="time[]" value="아침 " th:checked="${times.contains('morning')}">
+                    <input type="checkbox" id="morning" name="time[]" value="아침 " th:checked="아침 ">
                     <label for="morning">아침 시간대 (05:00 ~ 10:59)</label>
-                    <input type="checkbox" id="lunch" name="time[]" value="점심 " th:checked="${times.contains('lunch')}">
+                    <input type="checkbox" id="lunch" name="time[]" value="점심 " th:checked="점심 ">
                     <label for="lunch">점심 시간대 (11:00 ~ 16:59)</label>
-                    <input type="checkbox" id="dinner" name="time[]" value="저녁 " th:checked="${times.contains('dinner')}">
+                    <input type="checkbox" id="dinner" name="time[]" value="저녁 " th:checked="저녁 ">
                     <label for="dinner">저녁 시간대 (17:00 ~ 22:59)</label>
-                    <input type="checkbox" id="etc" name="time[]" value="기타 " th:checked="${times.contains('etc')}">
+                    <input type="checkbox" id="etc" name="time[]" value="기타 " th:checked="기타 ">
                     <label for="etc">그 외 (23:00 ~ 04:59)</label>
                 </div>
             </div>
@@ -92,9 +92,9 @@
 
 <section class="modal">
     <div class="modal-box">
-        <button><img id="modal_close" src="../static/image/close.png" alt="모달창 닫기 버튼"></button>
+        <button><img id="modal_close" src="/image/close.png" alt="모달창 닫기 버튼"></button>
         <div class="modal-inner">
-            <img src="../static/image/info.png" alt="정보 아이콘">
+            <img src="/image/info.png" alt="정보 아이콘">
             <div id="question">
                 <p>신청글을 제출하겠습니까?</p>
             </div>

@@ -25,18 +25,16 @@ public class ApplyPageController {
         this.applyService = applyService;
     }
 
-    // 신청글 생성 처리
-    @PostMapping("/page/post/{postId}/apply")
-    public String processApplyForm(@PathVariable Long postId
-                                    ,Model model) {
-        model.addAttribute(postId);
-        return "register_post_detail";
+    // 신청글 생성
+    @GetMapping("/page/post/{postId}/apply")
+    public String processApplyForm(@PathVariable Long postId, Model model) {
+        return "apply-form";
     }
 
-    //    신청글 생성
+    //    신청글 조회
     @GetMapping("/page/apply-form")
     public String applyForm() {
-        return "apply-form";
+        return "register_post_detail";
     }
 
     //    신청글 목록 조회

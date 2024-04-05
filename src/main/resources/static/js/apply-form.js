@@ -26,17 +26,19 @@ $(document).ready(function() {
 
         // 체크된 요일을 배열에 추가
         $('.day-check input:checked').each(function() {
-            selectedDays.append($(this).val());
+            selectedDays += $(this).val();
         });
         $('.time-check input:checked').each(function() {
-            selectedTimes.append($(this).val());
+            selectedTimes += $(this).val();
         });
+        console.log(selectedTimes);
+        console.log(selectedDays);
 
         var formData = new FormData();
         var request = {
             title: $('#title').val(),
-            available_times: selectedTimes,
-            available_days : selectedDays,
+            available_time: selectedTimes,
+            available_day : selectedDays,
             process_type: $('#process-type').val(),
             content: $('#motivation').val(),
         };
@@ -51,16 +53,16 @@ $(document).ready(function() {
             success: function(response) {
                 console.log("게시물이 성공적으로 추가되었습니다.");
                 // 필요에 따라 추가적인 처리를 할 수 있습니다.
-                window.location.href = '/page/main';
+                window.location.href = '/page/post/'+postId;
             },
             error: function(xhr, status, error) {
                 console.error("게시물 추가에 실패했습니다:", xhr.responseText);
                 alert("게시물 추가에 실패했습니다. 다시 시도해주세요.");
             }
         });
+
     });
 });
-
 function extractPostIdFromUrl() {
     var pathname = window.location.pathname; // 현재 페이지의 경로를 가져옴
     var pathParts = pathname.split('/'); // 경로를 '/'로 나눔
