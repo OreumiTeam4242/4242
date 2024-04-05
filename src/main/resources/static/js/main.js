@@ -177,39 +177,42 @@ function displayPosts(posts) {
 }
 
 //-----------Scrap
-// 서버에서 스크랩 상태 가져오기
-function fetchScrapStatus(postId) {
-    $.ajax({
-        url: `/api/posts/${postId}/scraps/status`,
-        type: 'GET',
-        success: function(response) {
-            // 성공적으로 상태를 받아왔을 때의 처리
-            var heartImage = $(`div.box-top-content[th\\:data-post-id='${postId}'] img.heart`);
+// 스크랩 상태를 가져와 UI를 업데이트하는 함수
+// 페이지 로드 시 실행
+window.onload = function() {
+    updateScrapStatus();
+};
 
-            if (response.scrapped) {
-                heartImage.attr('src', '/image/filled-heart.png'); // 스크랩된 경우 채워진 하트로 변경
-            } else {
-                heartImage.attr('src', '/image/empty-heart.png'); // 스크랩되지 않은 경우 빈 하트로 변경
+// 스크랩 상태를 가져와 UI를 업데이트하는 함수
+async function updateScrapStatus() {
+    const posts = document.querySelectorAll('.box-top-content');
+
+    posts.forEach(async (post) => {
+        const postId = post.getAttribute('data-post-id'); // Thymeleaf 속성을 사용하지 않고 일반적인 속성을 사용
+
+        try {
+            const response = await fetch(`/api/posts/${postId}/scraps/status`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        },
-        error: function(xhr, status, error) {
-            // 요청이 실패하거나 에러 응답을 받았을 때의 처리
-            console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
+
+            const isScrapped = await response.json();
+            const heartImage = post.querySelector('.heart');
+
+            if (isScrapped) {
+                heartImage.src = '/image/filled-heart.png';
+            } else {
+                heartImage.src = '/image/empty-heart.png';
+            }
+
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
         }
     });
 }
-
-// 각 게시물의 스크랩 상태 확인
-$(document).ready(function() {
-    // HOT 게시물 스크랩 상태 확인
-    $('.hot-box .box-top-content').each(function() {
-        var postId = $(this).attr('th:data-post-id');
-        fetchScrapStatus(postId);
-    });
-
-    // 모집중 게시물 스크랩 상태 확인
-    $('.find-box .box-top-content').each(function() {
-        var postId = $(this).attr('th:data-post-id');
-        fetchScrapStatus(postId);
-    });
-});
