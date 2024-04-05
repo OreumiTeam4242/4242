@@ -71,4 +71,5 @@ public class PostPageController {
 
         return "main";
     }
+
 }

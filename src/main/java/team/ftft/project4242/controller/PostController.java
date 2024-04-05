@@ -53,12 +53,6 @@ public class PostController {
         return ResponseEntity.ok(updatedPost);
     }
 
-//    @GetMapping("/api/post/{post_id}")
-//    public ResponseEntity<PostResponseDto> showPostById(@PathVariable Long post_id) {
-//        Post post = postService.findById(post_id);
-//        return ResponseEntity.ok(post.toResponse());
-//    }
-
     @Transactional
     @DeleteMapping("/api/post/{post_id}/disable")
     public ResponseEntity<Void> disablePostById(@PathVariable Long post_id) {
