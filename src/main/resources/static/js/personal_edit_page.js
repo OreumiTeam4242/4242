@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.querySelector('.login_top').addEventListener('click', function () {
+        // 특정 URL로 이동
+        window.location.href = '/page/login'; // 로그인 페이지 URL로 변경
+    });
+
+    // 로그아웃 버튼
+    document.querySelector('.logout_top').addEventListener('click', function () {
+        // 특정 URL로 이동
+        window.location.href = '/page/logout'; // 로그아웃 처리를 담당하는 URL로 변경
+    });
+
+    // 내 정보 버튼
+    document.querySelector('.mypage').addEventListener('click', function () {
+        // 특정 URL로 이동
+        window.location.href = '/page/my_page'; // 내 정보 페이지 URL로 변경
+    });
+})
+
 $(document).ready(function() {
     // 수정 버튼 클릭 시
     $('.edit').click(function() {
