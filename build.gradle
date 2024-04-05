@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -45,7 +46,6 @@ dependencies {
 
     //  @ConfigurationProperties를 활용 -> 변수사용 최적
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
