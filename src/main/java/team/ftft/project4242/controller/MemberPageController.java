@@ -52,7 +52,7 @@ public class MemberPageController {
     public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails
                                     , Model model){
         Long memberId = customUserDetails.getMemberId();
-        // userInfo
+
         MemberResponseDto userInfo = memberService.findById(memberId);
         //진행중인 스터디/프로젝트 팀
         List<TeamResponseDto> onGoingTeam = teamService.findOnGoingTeamAll(memberId);
@@ -76,6 +76,7 @@ public class MemberPageController {
 
         return "personal_page";
     }
+
 
     //    개인정보 수정
     @GetMapping("/page/my_edit_page")

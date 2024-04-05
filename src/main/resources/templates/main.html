@@ -35,8 +35,9 @@
         <div class="hot">
             <p class="hot-text"><span style="color:red">HOT</span>한
                 <button class="study-button">스터디</button> /
-                <button class="project-button">프로젝트</button></p>
+                <button class="project-button">프로젝트</button>
             </p>
+
             <div class="hot-box">
                 <div class="hot-box-content" th:each="post : ${hotPostList}">
                     <div class="box-top-content" th:data-post-id="${post.id}">
@@ -54,7 +55,9 @@
         <div class="find">
             <p class="find-text">모집중인
                 <button class="study-button" data-type="1">스터디</button> /
-                <button class="project-button" data-type="2">프로젝트</button></p>
+                <button class="project-button" data-type="2">프로젝트</button>
+            </p>
+
             <div class="find-box">
                 <div class="boxes">
                     <div class="find-box-content" th:each="post : ${postList}">
