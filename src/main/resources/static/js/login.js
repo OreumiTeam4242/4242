@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = '/page/main'; // 성공 페이지로 리다이렉트 예시
                 } else if (response.status === 401) {
                     // 401 에러가 발생한 경우의 처리
-                    alert("비밀번호가 틀렸습니다");
+                    alert("이메일 또는 비밀번호를 다시 확인해주세요.");
                     window.location.href = '/page/login';
                 } else {
                     // 기타 다른 에러가 발생한 경우의 처리

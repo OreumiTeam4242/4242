@@ -13,6 +13,8 @@
     <img src="/image/4242-logo.png" alt="4242 로고">
 
     <ul class="header-nav">
+        <li><button id="create">모집공고</br>생성</button></li>
+        <li><button id="notify" >신고하기</button></li>
         <li><button id="logout">로그아웃</button></li>
         <li><button id="my-info">내 정보</button></li>
     </ul>
@@ -43,11 +45,12 @@
                     <div class="box-top-content" th:data-post-id="${post.id}">
                         <p class="box-in-text" th:text="${post.title}"></p>
                         <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
+                        <img class="fire" src="/image/fire.png" alt="핫"/>
                     </div>
                     <div class="box-text-content">
                         <p class="author" th:text="${post.nickname}">글쓴이</p>
-                        <p th:text="'조회수 ' + ${post.viewCount}"></p>
-                        <p th:text="'댓글 ' + ${post.commentList.size()}"></p>
+                        <p th:text="'조회수' + ${post.viewCount}"></p>
+                        <p th:text=" '댓글' + ${post.commentList.size()}"></p>
                     </div>
                 </div>
             </div>
@@ -67,8 +70,8 @@
                         </div>
                         <div class="box-text-content-2">
                             <p class="author" th:text="${post.nickname}"></p>
-                            <p th:text="'    조회수 ' + ${post.viewCount}"></p>
-                            <p th:text="'댓글 ' + ${post.commentList.size()}"></p>
+                            <p th:text=" '조회수' + ${post.viewCount}"></p>
+                            <p th:text=" '댓글' + ${post.commentList.size()}"></p>
                         </div>
                     </div>
                 </div>
