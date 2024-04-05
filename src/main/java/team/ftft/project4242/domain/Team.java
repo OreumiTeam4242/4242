@@ -67,7 +67,7 @@ public class Team {
     }
 
     public void updateIscompleted() {
-        this.is_completed = false;
+        this.is_completed = true;
     }
 
 }

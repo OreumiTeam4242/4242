@@ -27,13 +27,16 @@ public class PostPageController {
         return "post-form";
     }
 
-    //    모집글 상세 조회
+    // 모집글 상세 조회 뷰 컨트롤러 수정
     @GetMapping("/page/post/{id}")
     public String postDetail(@PathVariable Long id, Model model){
         Post post = postService.findById(id);
-        PostResponseDto postResponseDto = new PostResponseDto(post);
-        model.addAttribute("post", postResponseDto);
-
+        if (post != null) {
+            PostResponseDto postResponseDto = new PostResponseDto(post);
+            model.addAttribute("post", postResponseDto);
+        } else {
+            // 모집글이 없을 경우 처리
+        }
         return "recruitPostDetail";
     }
 

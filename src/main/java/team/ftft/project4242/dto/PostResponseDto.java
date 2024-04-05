@@ -1,6 +1,5 @@
 package team.ftft.project4242.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import team.ftft.project4242.domain.Post;
 
@@ -49,7 +48,8 @@ public class PostResponseDto {
         file_url = post.getFile_url();
         nickname = post.getMember().getNickname();
         viewCount = post.getViewCount();
-
+        type_id = post.getPostType().getType_id();
+        major_id = post.getPostMajor().getMajor_id();
     }
 
     public String getTypeNameById(Long type_id) {

@@ -21,7 +21,8 @@
             <input type="hidden" id="post-id" th:value="${post.id}">
             <div class="recruit-post-header-box">
                 <p class="recruit-post-title" th:text="${post.title}">수학 스터디 모집합니다</p>
-                <div class="study-recruit" th:text="${now.isAfter(post.start_date) ? '모집이 마감되었습니다' : '모집중입니다'}"></div>
+                <div class="study-recruit">모집중입니다</div>
+                <div class="study-recruit-end">모집이 마감되었습니다</div>
             </div>
             <div class="under-title">
                 <div class="writer-info">
@@ -36,16 +37,11 @@
                     </ul>
 
                     <ul>
-                        <li>작성(수정)일시 : </li>
-                        <li class="bold-text" th:text="${#temporals.format(
-                        (post.updatedAt != null && post.createdAt.isBefore(post.updatedAt) ? post.updatedAt : post.createdAt)
-                        , 'yyyy. MM. dd. HH:mm')}"></li>
+                        <li>작성일시 : </li>
+                        <li class="bold-text" th:text="${#temporals.format(post.createdAt, 'yyyy.MM.dd')}"></li>
                     </ul>
                 </div>
-                <div class="btn-scrap-and-edit">
-                    <button class="btn btn-edit" th:if="${}">수정</button>
-                    <button class="btn btn-edit-complete" style="display: none">완료</button>
-                    <button class="btn btn-edit-cancel" style="display: none">취소</button>
+                <div class="btn-scrap-box">
                     <button class="btn-scrap"><img src="/image/empty-heart.png" alt="스크랩 하트 버튼" id = "image"></button>
                 </div>
             </div>
@@ -55,7 +51,7 @@
             <div class="recruit-post-info-top">
                 <div>
                     <p class="info-option">모집 구분</p>
-                    <p th:text="${post.type}"></p>
+                    <p th:text="${post.type_id}"></p>
                 </div>
                 <div>
                     <p class="info-option">모집 인원</p>
@@ -80,8 +76,9 @@
 
         <section class="recruit-post-detail">
             <p class="recruit-post-introduce">스터디 / 프로젝트 소개</p>
-            <div class="recruit-post-text" th:text="${post.content}"></div>
-            <textarea class="recruit-post-text2" style="display: none" placeholder="수정된 내용을 입력하세요."></textarea>
+            <div class="recruit-post-text" th:text="${post.content}">
+            </div>
+
             <ul class="upload-files">
                 <li>스프링 스터디.pdf</li>
                 <li>(253.1KB)</li>
@@ -96,11 +93,11 @@
     <section class="comments-group">
         <section class="comment-register">
             <p class="comment-info">댓글</p>
-            <textarea class="comment-input" placeholder="댓글을 입력해주세요."></textarea>
+            <input class="comment-input" type="text" placeholder="댓글을 입력해주세요.">
             <button class="btn btn-comment-register">댓글 등록</button>
         </section>
         <section class="comment-exist">
-            <div class="comment-detail" th:each="comment:${post.commentList}" th:if="${comment != null}">
+            <div class="comment-detail" th:each="comment:${post.commentList}">
                 <p class="comment-nickname" th:text="${comment.nickname}"></p>
                 <p class="comment-time" th:text="${#temporals.format(comment.created_at, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 <p class="comment-content" th:text="${comment.content}"></p>

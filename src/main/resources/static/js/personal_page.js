@@ -149,5 +149,61 @@ document.addEventListener("DOMContentLoaded", function() {
     setupSliderForClass( 'finishedTeamItem','go_left4', 'go_right4',5);
 });
 
+$('.is_closed').click(function() {
+    // 버튼의 data-team-id 속성을 통해 팀의 ID를 가져오기
+    var team_id = $(this).attr('data-team-id');
 
+    // AJAX 요청 보내기
+    $.ajax({
+        url: '/api/team/' + team_id,
+        type: 'PUT',
+        success: function(response) {
+            // 성공적으로 요청을 보내고 응답을 받았을 때의 처리
+            console.log(response); // 응답을 로그에 출력하거나 필요한 다른 작업 수행
+        },
+        error: function(xhr, status, error) {
+            // 요청이 실패하거나 에러 응답을 받았을 때의 처리
+            console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
+        }
+    });
+    window.location.href = '/page/my_page';
+});
+$('.favorite').click(function() {
+    // 버튼의 data-team-id 속성을 통해 팀의 ID를 가져오기
+    var scrap_id = $(this).attr('data-scrap-id');
 
+    // AJAX 요청 보내기
+    $.ajax({
+        url: '/api/posts/'+scrap_id+'/scraps',
+        type: 'POST',
+        success: function(response) {
+            // 성공적으로 요청을 보내고 응답을 받았을 때의 처리
+            console.log(response); // 응답을 로그에 출력하거나 필요한 다른 작업 수행
+        },
+        error: function(xhr, status, error) {
+            // 요청이 실패하거나 에러 응답을 받았을 때의 처리
+            console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
+        }
+    });
+    window.location.href = '/page/my_page';
+});
+$('.edit').click(function (){
+    window.location.href = "/page/my_edit_page"
+})
+
+$('.logout_top').click(function (){
+    $.ajax({
+        url: '/api/auth/logout',
+        type: 'POST',
+        success: function(response) {
+            // 성공적으로 로그아웃을 처리한 경우의 처리
+            console.log("로그아웃 성공");
+            // 필요한 작업 수행, 예: 로그아웃 후 리다이렉트 등
+            window.location.href = '/page/login';
+        },
+        error: function(xhr, status, error) {
+            console.error("로그아웃 실패:", xhr.responseText);
+            alert("로그아웃에 실패했습니다. 다시 시도해주세요.");
+        }
+    });
+})
