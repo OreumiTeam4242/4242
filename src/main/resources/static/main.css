@@ -7,7 +7,7 @@
     cursor: pointer;
 }
 
-#logout {
+#logout, #notify {
     border: none;
     outline: none;
     background-color: inherit ;

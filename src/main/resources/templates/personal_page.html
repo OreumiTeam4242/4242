@@ -66,10 +66,8 @@
       <button type="button" id="go_left2" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
-      <!--       TODO : 상세조회로 이동하기-->
       <div class="row3">
-<<<<<<< Updated upstream
-        <div th:each="post : ${myPostList}" class="studyItem" th:href="@{//{id}(id=${post.id})}">
+        <div th:each="post : ${myPostList}" class="studyItem" th:href="@{/page/post/{id}(id=${post.id})}">
           <h3 th:text="${post.title}">수학 스터디</h3>
           <p th:text="|${post.major} ${post.type}|">수학 스터디</p>
           <p th:text ="|마감 기한 : ${post.end_date}|">모집 마감 기한 : 2024-02-01</p>
@@ -88,9 +86,7 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row4">
-<!--       TODO : 상세조회로 이동하기-->
-<!--          th:href="@{//{id}(id=${post.id})}"-->
-        <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem" >
+        <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem"  th:href="@{/page/post/{id}(id=${scrap.id})}" >
           <button type="button" class="favorite" th:data-scrap-id="${scrap.id}" >
             <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">
           </button>

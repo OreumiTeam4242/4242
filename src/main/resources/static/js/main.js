@@ -21,7 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
+// -----------신고하기 버튼 클릭 시
+document.getElementById('notify').addEventListener('click', function () {
+    // 내 정보 페이지로 리다이렉트
+    window.location.href = '/page/notify-form';
+});
 
 
 // ------------------내 정보 버튼 클릭 시
