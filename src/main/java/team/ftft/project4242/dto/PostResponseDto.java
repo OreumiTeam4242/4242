@@ -16,8 +16,8 @@ public class PostResponseDto {
     private Long id;
     private String title;
     private String content;
-    private Long type_id;
-    private Long major_id;
+    private String type;
+    private String major;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<CommentResponseDto> commentList;
@@ -27,8 +27,6 @@ public class PostResponseDto {
     private Integer member_cnt;
     private String process_type;
     private String file_url;
-    private String type;
-    private String major;
     private String nickname;
     private Long viewCount;
 

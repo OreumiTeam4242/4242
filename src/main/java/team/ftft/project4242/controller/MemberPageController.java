@@ -1,5 +1,6 @@
 package team.ftft.project4242.controller;
 
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,8 @@ import team.ftft.project4242.dto.TeamResponseDto;
 import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
-
+import team.ftft.project4242.service.MemberService;
+import team.ftft.project4242.service.PostService;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class MemberPageController {
         this.memberService = memberService;
         this.postService = postService;
         this.teamService = teamService;
+
     }
 
     //    인트로 페이지
