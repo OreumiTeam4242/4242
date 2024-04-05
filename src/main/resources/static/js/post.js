@@ -69,44 +69,90 @@ scrapButton.addEventListener('click', async function() {
 updateScrapStatus();
 
 // 수정하기 버튼
-const editButton = document.querySelector(".btn-edit");
+document.addEventListener('DOMContentLoaded', function () {
+    const editButton = document.querySelector(".btn-edit");
+    const completeButton = document.querySelector(".btn-edit-complete");
+    const cancelButton = document.querySelector(".btn-edit-cancel");
 
-if(editButton) {
+    if (editButton) {
+        editButton.addEventListener('click', handleEditClick);
+    }
 
-    editButton.addEventListener('click', () => {
-        const completeButton = document.querySelector(".btn-edit-complete");
-        const cancelButton = document.querySelector(".btn-edit-cancel");
+    function handleEditClick() {
         const divTextArea = document.querySelector(".recruit-post-text");
         const editTextArea = document.querySelector(".recruit-post-text2");
         const contentAreaInner = divTextArea.textContent.trim();
 
+        // 수정 버튼만 숨김
         editButton.style.display = "none";
-        divTextArea.style.display = "none";
+
+        // 완료 및 취소 버튼은 보이도록 처리
         completeButton.style.display = "block";
         cancelButton.style.display = "block";
+
+        // 편집용 텍스트 영역은 보이도록 처리
+        divTextArea.style.display = "none";
         editTextArea.style.display = "block";
 
         completeButton.addEventListener('click', () => {
-            editButton.style.display = "block";
-            completeButton.style.display = "none";
-            cancelButton.style.display = "none";
-            editTextArea.style.display = "none";
-            divTextArea.style.display = "block";
-
-            divTextArea.textContent = editTextArea.value;
+            applyChanges(contentAreaInner, divTextArea, editTextArea);
         });
 
         cancelButton.addEventListener('click', () => {
-            editButton.style.display = "block";
-            completeButton.style.display = "none";
-            cancelButton.style.display = "none";
-            editTextArea.style.display = "none";
-            divTextArea.style.display = "block";
-
-            divTextArea.textContent = contentAreaInner;
+            cancelEdit(contentAreaInner, divTextArea, editTextArea);
         });
-    });
-}
+    }
+
+    function applyChanges(contentAreaInner, divTextArea, editTextArea) {
+        // 수정된 내용 가져오기
+        const editedContent = document.querySelector(".recruit-post-text2").value;
+        const fileInput = document.getElementById('fileInput').files[0];
+
+        // FormData 객체 생성
+        const formData = new FormData();
+        formData.append('editedContent', editedContent);
+        if (fileInput) {
+            formData.append('file', fileInput);
+        }
+
+        // 서버로 데이터 전송
+        fetch(`/api/post/${postId}`, {
+            method: 'PUT',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data updated successfully:', data);
+                // 성공적으로 업데이트된 데이터를 처리하는 코드 작성
+                alert('수정이 완료되었습니다');
+                location.replace(`/api/post/${postId}`);
+            })
+            .catch(error => {
+                console.error('There was a problem updating the data:', error);
+            });
+
+        editButton.style.display = "block";
+        completeButton.style.display = "none";
+        cancelButton.style.display = "none";
+        editTextArea.style.display = "none";
+        divTextArea.style.display = "block";
+    }
+
+    function cancelEdit(contentAreaInner, divTextArea, editTextArea) {
+        editButton.style.display = "block";
+        completeButton.style.display = "none";
+        cancelButton.style.display = "none";
+        editTextArea.style.display = "none";
+        divTextArea.style.display = "block";
+    }
+});
+
+
 
 // 신청하기 버튼
 const applyButton = document.querySelector(".btn-apply");

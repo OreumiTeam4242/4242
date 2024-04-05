@@ -175,6 +175,7 @@ main, .comments-group {
     font-size : 20px;
     border : 2px #A0A0A0 solid;
     resize : none;
+    display : none;
 }
 
 .upload-files {
