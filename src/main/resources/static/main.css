@@ -61,6 +61,7 @@ ul {
 
 .box-top-content {
     cursor: pointer;
+
 }
 
 /* header */
@@ -130,27 +131,29 @@ header {
 
 .box-in-text {
     font-size: 18px;
-    margin-top: 70px;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
 .heart {
     width: 35px;
     height: 36px;
-    margin-left: -25px;
-    margin-top: 10px;
+    margin-left: 180px;
+    margin-top: 30px;
 }
 
 .box-text-content {
     display: flex;
     justify-content: center;
-    margin-top: 90px;
+    flex-direction: row;
     margin-left: 10px;
+    margin-top: 50px;
 }
 
 .box-text-content-2 {
     display: flex;
     justify-content: center;
+    margin-top: -10px;
 }
 
 .author {

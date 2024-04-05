@@ -32,6 +32,9 @@ public class PostResponseDto {
     private Long type_id;
     private Long major_id;
 
+    private Long type_id;
+    private Long major_id;
+
     public PostResponseDto(Post post) {
         id = post.getPost_id();
         title = post.getTitle();
