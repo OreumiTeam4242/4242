@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>신청 폼 페이지</title>
-    <link rel="stylesheet" href="../static/apply-form.css">
+    <link rel="stylesheet" th:href="@{/apply-form.css}">
 </head>
 <body>
 <nav class="navbar">
     <div>
         <a href="main.html">
-            <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+            <img id="logo" src="/image/logo.png" alt="로고 이미지"/>
         </a>
     </div>
     <div id="nav-r">
-        <a class='nav-a' href="#">로그아웃</a>
-        <a class='nav-a' href="personal_page.html">내 정보</a>
+        <a class='nav-a' th:href="@{page/logout}">로그아웃</a>
+        <a class='nav-a' th:href="@{page/my_page}">내 정보</a>
     </div>
 
 </nav>
-<main>
+<main th:text="${postId}">
     <div id="main-wrapper">
         <div>
-            <a id="goBack" href="#">뒤로가기</a>
+            <a th:href="@{page/main}">뒤로가기</a>
             <h2 id="apply">스터디 / 프로젝트 신청</h2>
             <hr/>
         </div>
         <form id="applyForm" action="/apply-form" method="post">
             <div id="title-wrapper">
                 <label class="label-1" for="title">제목</label><br>
-                <textarea id="title" name="motivation" th:value="${title}"></textarea>
+                <textarea id="title" name="motivation" ></textarea>
             </div>
             <div>
                 <label class="label-1" for="motivation">신청 동기</label><br>
-                <textarea id="motivation" name="motivation" th:value="${content}"></textarea>
+                <textarea id="motivation" name="motivation"></textarea>
             </div>
             <div id="file-wrapper">
                 <div>
-                    <input type="file" name="file" id="file" th:value="${file_url}">
+                    <input type="file" name="file" id="file">
                     <!--                엔터티 이름 반영-->
                 </div>
                 <div>
@@ -47,32 +47,32 @@
                 <label class="label-1" >활동 가능 요일</label><br>
                 <div class="day-check">
                     <!--                엔터티 이름 반영-->
-                    <input type="checkbox" id="monday" name="day[]" value="monday" th:checked="${available_day.contains('monday')}">
+                    <input type="checkbox" id="monday" name="day[]" value="월 " th:checked="${available_day.contains('monday')}">
                     <label for="monday">월요일</label>
-                    <input type="checkbox" id="tuesday" name="day[]" value="tuesday" th:checked="${available_day.contains('tuesday')}">
+                    <input type="checkbox" id="tuesday" name="day[]" value="화 " th:checked="${available_day.contains('tuesday')}">
                     <label for="tuesday">화요일</label>
-                    <input type="checkbox" id="wednesday" name="day[]" value="wednesday" th:checked="${available_day.contains('wednesday')}">
+                    <input type="checkbox" id="wednesday" name="day[]" value="수 " th:checked="${available_day.contains('wednesday')}">
                     <label for="wednesday">수요일</label>
-                    <input type="checkbox" id="thursday" name="day[]" value="thursday" th:checked="${available_day.contains('thursday')}">
+                    <input type="checkbox" id="thursday" name="day[]" value="목 " th:checked="${available_day.contains('thursday')}">
                     <label for="thursday">목요일</label>
-                    <input type="checkbox" id="friday" name="day[]" value="friday" th:checked="${available_day.contains('friday')}">
+                    <input type="checkbox" id="friday" name="day[]" value="금 " th:checked="${available_day.contains('friday')}">
                     <label for="friday">금요일</label>
-                    <input type="checkbox" id="saturday" name="day[]" value="saturday" th:checked="${available_day.contains('saturday')}">
+                    <input type="checkbox" id="saturday" name="day[]" value="토 " th:checked="${available_day.contains('saturday')}">
                     <label for="saturday">토요일</label>
-                    <input type="checkbox" id="sunday" name="day[]" value="sunday" th:checked="${available_day.contains('sunday')}">
+                    <input type="checkbox" id="sunday" name="day[]" value="일 " th:checked="${available_day.contains('sunday')}">
                     <label for="sunday">일요일</label>
                 </div>
             </div>
             <div>
                 <label class="label-1">활동 가능 시간</label><br>
                 <div class="time-check">
-                    <input type="checkbox" id="morning" name="time[]" value="morning" th:checked="${times.contains('morning')}">
+                    <input type="checkbox" id="morning" name="time[]" value="아침 " th:checked="${times.contains('morning')}">
                     <label for="morning">아침 시간대 (05:00 ~ 10:59)</label>
-                    <input type="checkbox" id="lunch" name="time[]" value="lunch" th:checked="${times.contains('lunch')}">
+                    <input type="checkbox" id="lunch" name="time[]" value="점심 " th:checked="${times.contains('lunch')}">
                     <label for="lunch">점심 시간대 (11:00 ~ 16:59)</label>
-                    <input type="checkbox" id="dinner" name="time[]" value="dinner" th:checked="${times.contains('dinner')}">
+                    <input type="checkbox" id="dinner" name="time[]" value="저녁 " th:checked="${times.contains('dinner')}">
                     <label for="dinner">저녁 시간대 (17:00 ~ 22:59)</label>
-                    <input type="checkbox" id="etc" name="time[]" value="etc" th:checked="${times.contains('etc')}">
+                    <input type="checkbox" id="etc" name="time[]" value="기타 " th:checked="${times.contains('etc')}">
                     <label for="etc">그 외 (23:00 ~ 04:59)</label>
                 </div>
             </div>
@@ -98,11 +98,12 @@
             <div id="question">
                 <p>신청글을 제출하겠습니까?</p>
             </div>
-            <button><img id="modal_confirm" src="../static/image/green_check.png" alt="체크 버튼"></button>
+            <button><img id="modal_confirm" src="/image/green_check.png" alt="체크 버튼"></button>
         </div>
     </div>
 </section>
 
-<script src="../static/js/apply-form.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/apply-form.js" ></script>
 </body>
 </html>

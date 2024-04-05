@@ -105,12 +105,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function applyChanges(contentAreaInner, divTextArea, editTextArea) {
         // 수정된 내용 가져오기
-        const editedContent = document.querySelector(".recruit-post-text2").value;
+        // const editedContent = document.querySelector(".recruit-post-text2").value;
         const fileInput = document.getElementById('fileInput').files[0];
 
         // FormData 객체 생성
         const formData = new FormData();
-        formData.append('editedContent', editedContent);
+        var request = {
+            content : $('.recruit-post-text2').val()
+            // content : document.querySelector(".recruit-post-text2").value
+        };
+        formData.append('request', new Blob([JSON.stringify(request)], {type: "application/json"}));
         if (fileInput) {
             formData.append('file', fileInput);
         }
@@ -130,7 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Data updated successfully:', data);
                 // 성공적으로 업데이트된 데이터를 처리하는 코드 작성
                 alert('수정이 완료되었습니다');
-                location.replace(`/api/post/${postId}`);
+                window.location.href = '/page/post/'+postId;
+                // location.replace(`/page/post/${postId}`);
             })
             .catch(error => {
                 console.error('There was a problem updating the data:', error);

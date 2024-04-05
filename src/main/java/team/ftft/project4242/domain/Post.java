@@ -143,8 +143,7 @@ public class Post {
                 .build();
     }
 
-    public void update(String title, String content) {
-        this.title = title;
+    public void update( String content) {
         this.content = content;
         this.updatedAt = LocalDateTime.now();
     }

@@ -18,40 +18,56 @@ modalConfirmButton.addEventListener('click', function() {
     modal.style.display = 'none';
 });
 
-modalConfirmButton.addEventListener('click', function() {
-    // 폼 데이터 가져오기
-    var title = document.getElementById('title').value;
-    var content = document.getElementById('content').value;
-    var available_time = document.getElementById('available_time').value;
-    var available_day = document.getElementById('available_day').value;
-    var file = document.getElementById('file').files[0]; // 파일 객체
+$(document).ready(function() {
+    var postId = extractPostIdFromUrl();
+    $('#modal_confirm').click(function() {
+        var selectedDays ='';
+        var selectedTimes ='';
 
-    var formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('available_time', available_time);
-    formData.append('available_day', available_day);
-    formData.append('file', file);
-
-    // AJAX 요청 보내기
-    fetch('/apply-form', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Authorization': 'Bearer ' + YOUR_ACCESS_TOKEN, // 필요한 경우 토큰 추가
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            // 서버로부터 받은 응답 처리
-            console.log(data);
-            modal.style.display = 'none'; // 모달 닫기
-        })
-        .catch(error => {
-            // 에러 처리
-            console.error('Error 발생하였습니다.:', error);
+        // 체크된 요일을 배열에 추가
+        $('.day-check input:checked').each(function() {
+            selectedDays.append($(this).val());
         });
+        $('.time-check input:checked').each(function() {
+            selectedTimes.append($(this).val());
+        });
+
+        var formData = new FormData();
+        var request = {
+            title: $('#title').val(),
+            available_times: selectedTimes,
+            available_days : selectedDays,
+            process_type: $('#process-type').val(),
+            content: $('#motivation').val(),
+        };
+        formData.append('request', new Blob([JSON.stringify(request)], {type: "application/json"}));
+        formData.append('file', $('#file')[0].files[0]);
+        $.ajax({
+            url: '/api/post/'+postId+'/apply',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log("게시물이 성공적으로 추가되었습니다.");
+                // 필요에 따라 추가적인 처리를 할 수 있습니다.
+                window.location.href = '/page/main';
+            },
+            error: function(xhr, status, error) {
+                console.error("게시물 추가에 실패했습니다:", xhr.responseText);
+                alert("게시물 추가에 실패했습니다. 다시 시도해주세요.");
+            }
+        });
+    });
 });
+
+function extractPostIdFromUrl() {
+    var pathname = window.location.pathname; // 현재 페이지의 경로를 가져옴
+    var pathParts = pathname.split('/'); // 경로를 '/'로 나눔
+    var postIdIndex = pathParts.length - 2; // postId는 뒤에서 두 번째 요소일 것임
+    var postId = pathParts[postIdIndex]; // postId 추출
+    return postId;
+}
 
 
 // 모달 외부 클릭 시 모달 닫기
@@ -61,7 +77,5 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// 뒤로가기 버튼
-document.getElementById('goBack').addEventListener('click', function() {
-    window.history.back();
-});
+
+

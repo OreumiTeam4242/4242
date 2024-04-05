@@ -46,11 +46,11 @@ public class PostController {
 
 
     @PutMapping("/api/post/{post_id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long post_id,
+    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long post_id,
                                            @RequestPart PostRequestDto request,
                                            @RequestPart(value="file",required = false) MultipartFile file) {
         Post updatedPost = postService.update(post_id, request,file);
-        return ResponseEntity.ok(updatedPost);
+        return ResponseEntity.ok(updatedPost.toResponse());
     }
 
     @Transactional
