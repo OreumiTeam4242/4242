@@ -39,7 +39,7 @@
           <p th:text="|등급 : ${userInfo.role}|">등급: 뉴비 / 주니어 / 시니어</p>
           <p>이메일 : abcde@gmail.com</p>
         </div>
-        <button class="edit" type="button" th:href="@{/page/my_edit_page}">수정</button>
+        <button class="edit" type="button" >수정</button>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
         <div th:each="team : ${onGoingTeamList}" class="ingTeamItem">
             <h3 th:text="|${team.major} ${team.type}|">수학 스터디</h3>
             <p th:text="|스터디장 : ${team.leader}|">스터디장: 닉네임</p>
-          <button class="is_closed" type="button">종료</button>
+          <button class="is_closed" type="button" th:data-team-id="${team.team_id}">종료</button>
         </div>
       </div>
       <button type="button" id="go_right1" class="go_right">
@@ -65,6 +65,7 @@
       <button type="button" id="go_left2" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
+      <!--       TODO : 상세조회로 이동하기-->
       <div class="row3">
         <div th:each="post : ${myPostList}" class="studyItem" th:href="@{//{id}(id=${post.id})}">
           <h3 th:text="${post.title}">수학 스터디</h3>
@@ -85,9 +86,10 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row4">
+<!--       TODO : 상세조회로 이동하기-->
 <!--          th:href="@{//{id}(id=${post.id})}"-->
         <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem" >
-          <button type="button" class="favorite">
+          <button type="button" class="favorite" th:data-scrap-id="${scrap.id}" >
             <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">
           </button>
           <h3 th:text="|${scrap.major} ${scrap.type}|">수학 스터디</h3>
@@ -105,7 +107,8 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row5">
-        <div th:each="team : ${finishedTeamList}" class="finisheTeamItem">
+        <div th:each="team : ${finishedTeamList}" class="finishedTeamItem">
+          <br/>
           <h3 th:text="|${team.major} ${team.type}|">수학 스터디</h3>
           <p th:text="|스터디장 : ${team.leader}|">스터디장: 닉네임</p>
         </div>
