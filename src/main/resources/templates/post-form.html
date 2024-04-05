@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>모집 글 생성 페이지</title>
-    <link rel="stylesheet" href="../static/post-form.css">
+    <link rel="stylesheet" th:href="@{/post-form.css}">
 </head>
 <body>
 <nav class="navbar">
     <div>
         <a href="main.html">
-            <img id="logo" src="../static/image/logo.png" alt="로고 이미지"/>
+            <img id="logo" src="/image/logo.png" alt="로고 이미지"/>
         </a>
     </div>
     <div id="nav-r">
-        <a class='nav-a' href="#">로그아웃</a>
-        <a class='nav-a' href="personal_page.html">내 정보</a>
+        <a class='nav-a' th:href="@{page/logout}">로그아웃</a>
+        <a class='nav-a' th:href="@{page/my_page}">내 정보</a>
     </div>
 
 </nav>
 <main>
     <div id="main-wrapper">
         <div>
-            <a href="">뒤로가기</a>
+            <a th:href="@{page/main}">뒤로가기</a>
             <h2 id="apply">스터디 / 프로젝트 생성</h2>
             <hr/>
         </div>
@@ -36,8 +36,8 @@
                     <label for="post-type">모집 구분</label>
                     <select id="post-type" name="post-type">
                         <option value="" disabled selected>선택하세요</option>
-                        <option value="study">스터디</option>
-                        <option value="project">프로젝트</option>
+                        <option value=1>스터디</option>
+                        <option value=2>프로젝트</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -48,8 +48,11 @@
                     <label for="post-major">모집 분야</label>
                     <select id="post-major" name="post-major">
                         <option value="" disabled selected>선택하세요</option>
-                        <option value="math">수학</option>
-                        <option value="science">자연 과학</option>
+                        <option value=1>수학</option>
+                        <option value=2>과학</option>
+                        <option value=3>영어</option>
+                        <option value=4>코딩</option>
+                        <option value=5>요소</option>
                         <!-- 추가 분야 -->
                     </select>
                 </div>
@@ -102,19 +105,20 @@
 </footer>
 <section class="modal">
     <div class="modal-box">
-        <button><img id="modal_close" src="../static/image/close.png" alt="모달창 닫기 버튼"></button>
+        <button><img id="modal_close" src="/image/close.png" alt="모달창 닫기 버튼"></button>
         <div class="modal-inner">
-            <img src="../static/image/info.png" alt="정보 아이콘">
+            <img src="/image/info.png" alt="정보 아이콘">
             <div id="question">
                 <p>모집 공고를</p>
                 <p>제출하겠습니까?</p>
             </div>
             <button>
-                <img id="modal_confirm" src="../static/image/green_check.png" alt="체크 버튼">
+                <img id="modal_confirm" src="/image/green_check.png" alt="체크 버튼">
             </button>
         </div>
     </div>
 </section>
-<script src="../static/js/post-form.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/post-form.js" ></script>
 </body>
 </html>
