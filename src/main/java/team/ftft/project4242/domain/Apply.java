@@ -13,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 import team.ftft.project4242.dto.ApplyResponseDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter

@@ -82,8 +82,7 @@ public class PostService {
             String s3FilePath = awsS3Service.uploadFileBucket(file);
             post.updateFileUrl(s3FilePath);
         }
-        post.update(request.getTitle(), request.getContent());
-
+        post.update(request.getContent());
         return post;
     }
 
