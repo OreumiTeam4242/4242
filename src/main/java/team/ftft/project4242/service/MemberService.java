@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.dto.MemberRequestDto;
@@ -57,6 +58,7 @@ public class MemberService {
         return member.toResponse();
     }
 
+    @Transactional
     public MemberResponseDto update(Long memberId, MemberRequestDto request, @Nullable MultipartFile file){
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()->new IllegalArgumentException("member doesn't exist"));
@@ -65,7 +67,6 @@ public class MemberService {
             member.updateimageUrl(s3FilePath);
         }
         member.update(request.getNickname());
-
         return member.toResponse();
 
     }

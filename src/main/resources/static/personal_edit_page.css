@@ -127,23 +127,26 @@ main h2 {
     align-items: center;
 }
 
-.personal_info img {
+#user-img {
     margin: 47px 72px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
     position: relative;
-    top: 50px;
-    padding-left: 60px;
+    left: 40px;
+
 }
 
 .profile_img h3 {
     position: relative;
-    top: 25px;
-    left: 160px;
+    bottom: 35px;
+    left: 130px;
 }
 
 .profile_img button {
     position: relative;
-    left: 135px;
-    bottom: 160px;
+    left: 220px;
+    bottom: 120px;
 }
 
 h3 {

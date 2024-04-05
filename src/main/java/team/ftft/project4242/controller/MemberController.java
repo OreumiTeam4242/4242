@@ -107,7 +107,6 @@ public class MemberController {
                                                                 ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
         MemberResponseDto response = memberService.update(memberId, request,file);
-
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }

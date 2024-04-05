@@ -51,7 +51,6 @@ public class MemberPageController {
     @GetMapping("/page/my_page")
     public String showPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails
                                     , Model model){
-//        Long memberId = customUserDetails.getMemberId();
         Long memberId = customUserDetails.getMemberId();
         // userInfo
         MemberResponseDto userInfo = memberService.findById(memberId);
@@ -80,7 +79,13 @@ public class MemberPageController {
 
     //    개인정보 수정
     @GetMapping("/page/my_edit_page")
-    public String editPersonalPage(){
+    public String editPersonalPage(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                   Model model){
+        //        Long memberId = customUserDetails.getMemberId();
+        Long memberId = customUserDetails.getMemberId();
+        MemberResponseDto userInfo = memberService.findById(memberId);
+        model.addAttribute("userInfo",userInfo);
+
         return "personal_edit_page";
     }
 }
