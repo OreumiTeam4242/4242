@@ -1,13 +1,16 @@
 package team.ftft.project4242.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import team.ftft.project4242.commons.security.CustomUserDetails;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
+import team.ftft.project4242.service.ScrapService;
 
 import java.util.List;
 
@@ -16,9 +19,11 @@ import java.util.List;
 public class PostPageController {
 
     private final PostService postService;
+    private final ScrapService scrapService;
 
-    public PostPageController(PostService postService) {
+    public PostPageController(PostService postService, ScrapService scrapService) {
         this.postService = postService;
+        this.scrapService = scrapService;
     }
 
     //    모집글 생성
@@ -57,4 +62,5 @@ public class PostPageController {
 
         return "main";
     }
+
 }

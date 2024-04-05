@@ -44,4 +44,5 @@ public class ScrapService {
         scrapRepository.delete(scrap);
 
     }
+
 }
