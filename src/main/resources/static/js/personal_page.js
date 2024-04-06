@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 emptyItem.style.alignItems = 'center';
                 emptyItem.style.fontSize = '23px';
                 emptyItem.style.lineHeight = "28px";
-                emptyItem.innerHTML = "진행중인 스터디가 <br/> 없ㅔㅁ요 ㅜㅜ"; // 아이템이 없을 때의 메시지
+                emptyItem.innerHTML = "진행중인 스터디가 <br/> 없네요 ㅜㅜ"; // 아이템이 없을 때의 메시지
                 document.querySelector('.row' +row ).appendChild(emptyItem);
 
                 const addButton = document.createElement('button');
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 addButton.style.left = '20px';
                 addButton.style.marginTop = "20px";
                 addButton.addEventListener('click', function() {
-                    window.location.href = '/page/add/post';
+                    window.location.href = '/page/post-form';
                 });
                 document.querySelector('.empty'+className ).appendChild(addButton);
                 for (let i =0; i < 2; i++) {
@@ -160,13 +160,13 @@ $('.is_closed').click(function() {
         success: function(response) {
             // 성공적으로 요청을 보내고 응답을 받았을 때의 처리
             console.log(response); // 응답을 로그에 출력하거나 필요한 다른 작업 수행
+            window.location.href = '/page/my_page';
         },
         error: function(xhr, status, error) {
             // 요청이 실패하거나 에러 응답을 받았을 때의 처리
             console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
         }
     });
-    window.location.href = '/page/my_page';
 });
 $('.favorite').click(function() {
     // 버튼의 data-team-id 속성을 통해 팀의 ID를 가져오기
@@ -179,13 +179,13 @@ $('.favorite').click(function() {
         success: function(response) {
             // 성공적으로 요청을 보내고 응답을 받았을 때의 처리
             console.log(response); // 응답을 로그에 출력하거나 필요한 다른 작업 수행
+            window.location.href = '/page/my_page';
         },
         error: function(xhr, status, error) {
             // 요청이 실패하거나 에러 응답을 받았을 때의 처리
             console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
         }
     });
-    window.location.href = '/page/my_page';
 });
 $('.edit').click(function (){
     window.location.href = "/page/my_edit_page"

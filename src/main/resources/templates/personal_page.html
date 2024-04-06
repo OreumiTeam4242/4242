@@ -24,7 +24,7 @@
     <ul>
       <li><a href="#info_row1">회원정보</a> </li>
       <li><a href="#info_row2">진행중인 스터디 / 프로젝트</a></li>
-      <li><a href="#info_row3">내가 모집중인 스터디 / 프로젝트</a></li>
+      <li><a href="#info_row3">모집중인 스터디 / 프로젝트</a></li>
       <li><a href="#info_row4">스크랩한 스터디 / 프로젝트</a></li>
       <li><a href="#info_row5">종료된 스터디 / 프로젝트</a></li>
     </ul>
@@ -67,12 +67,12 @@
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
       <div class="row3">
-        <div th:each="post : ${myPostList}" class="studyItem" th:href="@{/page/post/{id}(id=${post.id})}">
+        <a th:each="post : ${myPostList}" class="studyItem" th:href="@{/page/post/{id}(id=${post.id})}">
           <h3 th:text="${post.title}">수학 스터디</h3>
           <p th:text="|${post.major} ${post.type}|">수학 스터디</p>
           <p th:text ="|마감 기한 : ${post.end_date}|">모집 마감 기한 : 2024-02-01</p>
 <!--          <p th:text="|스터디장 : ${post.nickname}|">스터디장: 닉네임</p>-->
-        </div>
+        </a>
 
       </div>
       <button type="button" id="go_right2" class="go_right">
@@ -85,14 +85,14 @@
       <button type="button" id="go_left3" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
-      <div class="row">
-        <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem"  th:href="@{/page/post/{id}(id=${scrap.id})}" >
+      <div class="row4">
+        <a th:each="scrap : ${scrapList}" class="scrapItem"  th:href="@{/page/post/{id}(id=${scrap.id})}" >
           <button type="button" class="favorite" th:data-scrap-id="${scrap.id}" >
             <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">
           </button>
           <h3 th:text="|${scrap.major} ${scrap.type}|">수학 스터디</h3>
           <p th:text="|스터디장 : ${scrap.nickname}|">스터디장: 닉네임</p>
-        </div>
+        </a>
       </div>
       <button type="button" id="go_right3" class="go_right">
         <img src="/image/to_right.png" alt="오른쪽으로 보여주기">
