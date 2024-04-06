@@ -60,6 +60,9 @@ public class Notify {
                 .content(content)
                 .createdAt(createdAt)
                 .file_url(file_url)
+                .id(notify_id)
+                .notifyNickname(notifyMember.getNickname())
+                .postNickname(postMember.getNickname())
                 .build();
     }
 }
