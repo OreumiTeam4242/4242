@@ -1,7 +1,7 @@
 const postId = document.getElementById("post-id").value;
 
 // 로고 클릭
-const logoImage = document.querySelector(".logo_top");
+const logoImage = document.querySelector(".logo-top");
 
 if(logoImage) {
     logoImage.addEventListener('click', () => {
@@ -25,10 +25,10 @@ let image = document.querySelector(".scrap-heart");
 document.addEventListener('DOMContentLoaded', async function() {
     const scrapButton = document.querySelector(".btn-scrap");
 
-    // 서버로부터 스크랩 상태를 가져와 UI를 업데이트합니다.
+    // DB의 스크랩 상태 반영
     async function updateScrapStatus() {
         try {
-            if (!image) { // 이미지가 없는 경우에만 이미지를 찾습니다.
+            if (!image) {
                 console.error('Image element not found');
                 return;
             }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             let scrapStatusChanged = false; // 스크랩 상태가 변경되었는지 여부
 
-            // 스크랩 상태 변경 요청을 보냅니다.
+            // 스크랩 상태 변경 요청
             try {
                 const response = await fetch(`/api/posts/${postId}/scraps`, {
                     method: 'POST',
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 console.error('There was a problem with the fetch operation:', error);
             }
 
-            // 스크랩 상태가 변경되었을 때만 이미지 소스를 업데이트합니다.
+            // 스크랩 상태가 변경 시에 이미지 업데이트
             if (scrapStatusChanged) {
                 await updateScrapStatus();
             }
@@ -126,14 +126,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function applyChanges(contentAreaInner, divTextArea, editTextArea) {
         // 수정된 내용 가져오기
-        // const editedContent = document.querySelector(".recruit-post-text2").value;
         const fileInput = document.getElementById('fileInput').files[0];
 
         // FormData 객체 생성
         const formData = new FormData();
         let request = {
             content : $('.recruit-post-text2').val()
-            // content : document.querySelector(".recruit-post-text2").value
         };
         formData.append('request', new Blob([JSON.stringify(request)], {type: "application/json"}));
         if (fileInput) {
@@ -189,78 +187,97 @@ if(applyButton) {
 // 댓글 등록 버튼
 const commentRegisterButton = document.querySelector(".btn-comment-register");
 
-commentRegisterButton.addEventListener('click', event => {
-    let commentContent = document.querySelector(".comment-input").value;
+commentRegisterButton.addEventListener('click', async event => {
+    try {
+        let commentContent = document.querySelector(".comment-input").value;
 
-    if(commentContent.trim() !== '') {
-        let newComment = document.createElement('div');
-        newComment.classList.add('comment-detail');
+        if (commentContent.trim() !== '') {
+            // 댓글 등록 API 호출
+            const response = await fetch(`/api/posts/${postId}/comments`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: commentContent })
+            });
 
-        // 닉네임
-        let nicknameParagraph = document.createElement('p');
-        nicknameParagraph.classList.add('comment-nickname');
-        nicknameParagraph.textContent = "현재 로그인한 멤버의 닉네임";
-        newComment.appendChild(nicknameParagraph);
+            if (!response.ok) {
+                throw new Error('Failed to add comment');
+            }
 
-        // 작성 시간
-        let timeParagraph = document.createElement('p');
-        timeParagraph.classList.add('comment-time');
-        let currentTime = new Date();
-        const options = {
-            hour12 : false,
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
-        timeParagraph.textContent = currentTime.toLocaleString('ko-KR', options).replace(/\./g, '. ');
-        newComment.appendChild(timeParagraph);
+            alert('댓글이 등록되었습니다.');
+            window.location.href = `/page/post/`+postId;
 
-        let contentParagraph = document.createElement('p');
-        contentParagraph.classList.add('comment-content');
-        contentParagraph.textContent = commentContent;
-        newComment.appendChild(contentParagraph);
-
-        // 삭제 버튼
-        let deleteButton = document.createElement('button');
-        deleteButton.classList.add('btn-comment-delete');
-        deleteButton.textContent = "삭제";
-        newComment.appendChild(deleteButton);
-
-        // 새로운 댓글 추가
-        document.querySelector('.comment-exist').appendChild(newComment);
-
-        // 댓글 입력 창 지우기
-        document.querySelector('.comment-input').value = '';
-    } else {
-        alert("댓글이 입력되지 않았습니다.");
+        } else {
+            alert("댓글이 입력되지 않았습니다.");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('댓글 등록에 실패했습니다.');
     }
 });
 
+
 // 댓글 삭제 버튼 및 댓글 삭제 모달창 버튼
+const commentList = document.querySelectorAll(".comment-detail");
 const commentDeleteButtons = document.querySelectorAll(".btn-comment-delete");
 const commentModal = document.querySelector('.modal-comment-delete');
 const modalCloseButton = document.querySelector(".modal-close");
 const modalCheckButton = document.querySelector(".modal-check");
+const commentWriterIds = Array.from(document.querySelectorAll(".comment-member-id")).map(element => element.value);
+const nowUserId = document.querySelector(".userInfo-id").value;
+let commentIndex;
 
-commentDeleteButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        commentModal.style.display = "flex";
+commentDeleteButtons.forEach((button, index) => {
+    button.addEventListener('click', event => {
+        const commentElement = event.target.parentNode; // 클릭된 삭제 버튼의 부모 요소인 comment-detail 요소
+        commentIndex = Array.from(commentList).indexOf(commentElement); // 삭제 버튼을 포함하는 댓글 요소의 인덱스
+        console.log("댓글 인덱스:", commentIndex);
+        console.log("댓글 작성자 id:", commentWriterIds[commentIndex].toString());
+        console.log("현재 유저 id: " + nowUserId);
+        console.log(commentWriterIds[commentIndex].toString() === nowUserId);
+
+        if(commentWriterIds[commentIndex].toString() === nowUserId) {
+
+            commentModal.style.display = "block";
+        }
     });
 });
-
 
 // 모달 닫힘 버튼
 modalCloseButton.addEventListener('click', () => {
     commentModal.style.display = "none";
 });
 
-modalCheckButton.addEventListener('click', () => {
-    commentModal.style.display = "none";
+// 댓글 삭제 체크 버튼
+modalCheckButton.addEventListener('click', async () => {
+    try {
+        commentModal.style.display = "none";
+
+        const commentIdList = Array.from(document.querySelectorAll(".comment-id")).map(element => element.value);
+        const commentId = commentIdList[commentIndex];
+
+        // 댓글 삭제 API 호출
+        const response = await fetch(`/api/posts/${postId}/comments/${commentId}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            console.log(response.status);
+            throw new Error('Failed to delete comment');
+        }
+
+        // 댓글 삭제되면 새로고침
+        window.location.href = `/page/post/`+postId;
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('댓글 삭제에 실패했습니다.');
+    }
 });
 
-// is_closed를 위한 호출
+
+
 
 
 

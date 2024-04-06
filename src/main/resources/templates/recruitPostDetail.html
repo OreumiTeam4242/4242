@@ -103,11 +103,15 @@
             <button class="btn btn-comment-register">댓글 등록</button>
         </section>
         <section class="comment-exist">
-            <div class="comment-detail" th:each="comment:${post.commentList}">
+            <input type="hidden" class="user-info-nickname" th:value="${userInfo.nickname}">
+            <div class="comment-detail" th:each="comment, commentIndex : ${post.commentList}">
                 <p class="comment-nickname" th:text="${comment.nickname}"></p>
                 <p class="comment-time" th:text="${#temporals.format(comment.created_at, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 <p class="comment-content" th:text="${comment.content}"></p>
-                <button class="btn-comment-delete" th:if="${comment.nickname} != ${userInfo.nickname}" style="display:none">삭제</button>
+                <button class="btn-comment-delete" th:if="${comment.member_id == userInfo.member_id}">삭제</button>
+                <input type="hidden" class="comment-id" th:value="${comment.commentId}">
+                <input type="hidden" class="comment-member-id" th:value="${comment.member_id}">
+                <input type="hidden" class="userInfo-id" th:value="${userInfo.member_id}">
             </div>
         </section>
     </section>

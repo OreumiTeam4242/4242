@@ -33,7 +33,8 @@ header ul {
 }
 
 .header-nav-logout,
-.header-nav-info {
+.header-nav-info,
+.logo-top {
     cursor: pointer;
 }
 
