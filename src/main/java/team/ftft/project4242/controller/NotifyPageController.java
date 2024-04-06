@@ -12,7 +12,7 @@ public class NotifyPageController {
     }
 
     //    신고글 상세 조회
-    @GetMapping("/page/notify_post_detail")
+    @GetMapping("/page/notify_detail")
     public String notifyDetail(){
         return "notify_post_detail";
     }

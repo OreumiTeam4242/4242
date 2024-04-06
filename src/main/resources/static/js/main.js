@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
 // -------------모집 공고 생성 버튼 클릭 시
 document.getElementById('create').addEventListener('click', function () {
     // 내 정보 페이지로 리다이렉트
