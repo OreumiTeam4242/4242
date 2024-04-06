@@ -1,17 +1,22 @@
 package team.ftft.project4242.service;
 
 import jakarta.annotation.Nullable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Notify;
 import team.ftft.project4242.dto.NotifyRequestDto;
+import team.ftft.project4242.dto.NotifyResponseDto;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.repository.NotifyRepository;
 import team.ftft.project4242.service.file.AwsS3Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NotifyService {
@@ -39,8 +44,13 @@ public class NotifyService {
     }
 
     // GET : 신청글 목록 조회
-    public List<Notify> findAllNotify() {
-        return notifyRepository.findAll();
+    public Page<NotifyResponseDto> findAllNotify(Pageable pageable) {
+        Page<Notify> notifies = notifyRepository.findAll(pageable);
+        List<NotifyResponseDto> notifyList = notifies.stream()
+                .map(NotifyResponseDto::new)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(notifyList,pageable,notifies.getTotalElements());
     }
 
     public Notify findById(Long notify_id) {
