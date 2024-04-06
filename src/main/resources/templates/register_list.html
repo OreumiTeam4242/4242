@@ -2,74 +2,78 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/register_list.css">
-    <title>신청글 목록 - 4242(팀장)</title>
+    <link rel="stylesheet" th:href="@{/register_list.css}">
+    <title>신청글 목록</title>
 </head>
 <body>
 <header>
     <div class="logo">
         <a class="logo_top" href="">
-            <img src="../static/image/logo.png" alt="사이사이 로고">
+            <img src="/image/logo.png" alt="사이사이 로고">
         </a>
         <nav class="menu_top">
             <button class="login_top" type="button">로그인</button>
-            <button class="logout_top" type="button">로그아웃</button>
-            <button class="mypage" type="button">내 정보</button>
+            <button id="logout" class="logout_top" type="button">로그아웃</button>
+            <button id="my-info" class="mypage" type="button">내 정보</button>
         </nav>
     </div>
 </header>
 <main>
-    <button class="go_back" type="button">뒤로가기</button>
-    <div class="main_title">
-        <h1>스터디 / 프로젝트 신청글 목록</h1>
-        <p class="study_field">수학</p>
-        <p class="study_group">스터디</p>
-    </div>
-    <div class="main_content">
-        <div class="register_list">
-            <a href="">
-                <h1>수학스터디 신청합니다</h1>
-                <div class="register_h2">
-                    <h2>닉네임</h2>
-                    <h2>등급</h2>
-                </div>
-            </a>
-            <a href="">신청글2</a>
-            <a href="">
-                <h1>수학스터디 신청합니다</h1>
-                <div class="register_h2">
-                    <h2>닉네임</h2>
-                    <h2>등급</h2>
-                </div>
-            </a>
+    <div class="title-wrap">
 
-            <a href="">신청글4</a>
-            <a href="">신청글5</a>
-            <a href="">
-                <h1>수학스터디 신청합니다</h1>
-                <div class="register_h2">
-                    <h2>닉네임</h2>
-                    <h2>등급</h2>
-                </div>
-            </a>
-
-            <a href="">신청글7</a>
-            <a href="">신청글8</a>
-            <a href="">
-                <h1>수학스터디 신청합니다</h1>
-                <div class="register_h2">
-                    <h2>닉네임</h2>
-                    <h2>등급</h2>
-                </div>
-            </a>
+        <button id="go-back"class="go_back" type="button">뒤로가기</button>
+        <div class="main_title">
+            <h1>스터디 / 프로젝트 신청글 목록</h1>
+            <p class="study_field" th:text="${post.major}">수학</p>
+            <p class="study_group" th:text="${post.type}">스터디</p>
         </div>
-    </div>
-    <div class="main_paging">
-        <button type="button">1</button>
-        <button type="button">2</button>
-        <button type="button">3</button>
-        <button type="button">4</button>
-        <button type="button">5</button>
+        <div class="main-container-wrapper">
+        <div class="main_content">
+            <div class="register_list" th:each="apply : ${applyList}">
+                <!--            TODO : 링크 추가 (apply 상세 조회-->
+                <a th:href="@{/page/main}">
+                    <h1 th:text="${apply.title}">수학스터디 신청합니다</h1>
+                    <div class="register_h2">
+                        <h2 th:text="${apply.nickname}">닉네임</h2>
+                        <h2 th:text="${apply.role}">등급</h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+        <!-- 페이징 -->
+        <div class="pagination-wrapper">
+            <div th:if="${!applyList.isEmpty()}">
+                <ul class="pagination"
+                    th:with="
+                    pageNumber = ${applyList.pageable.pageNumber},
+                    pageSize = ${applyList.pageable.pageSize},
+                    totalPages = ${applyList.totalPages},
+                    startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+                    tempEndPage = ${startPage + pageSize - 1},
+                    endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+
+                    <li th:classappend="${applyList.first} ? 'disabled'" class="page-item">
+                        <a class="page-link" th:href="@{/page/post/{postId}/apply-list(page=${pageNumber - 1},postId=${post.id})}">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+
+                    <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+                        th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
+                        <a th:text="${page}" class="page-link"
+                           th:href="@{/page/post/{postId}/apply-list(page=${page - 1},postId=${post.id})}"></a>
+                    </li>
+
+                    <li th:classappend="${applyList.last} ? 'disabled'" class="page-item">
+                        <a class="page-link" th:href="@{/page/post/{postId}/apply-list(page=${pageNumber + 1},postId=${post.id})}"
+                           aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </main>
 <footer>
@@ -79,5 +83,7 @@
         <button class="about_4242" type="button">4242</button>
     </nav>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/register_list.js"></script>
 </body>
 </html>
