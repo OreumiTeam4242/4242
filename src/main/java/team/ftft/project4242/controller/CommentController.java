@@ -30,7 +30,7 @@ public class CommentController {
     }
     // use_yn 사용 -> db에서 영구적으로 삭제가 아닌 사용만 제한
     @DeleteMapping("/api/posts/{postId}/comments/{commentId}")
-    public ResponseEntity<CommentResponseDto> deleteComment(@PathVariable Long commentId){
+    public ResponseEntity<CommentResponseDto> deleteComment(@PathVariable Long postId, @PathVariable Long commentId){
         CommentResponseDto response = commentService.deleteComment(commentId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);

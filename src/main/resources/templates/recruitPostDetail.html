@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <img src="/image/4242-logo.png" alt="4242 로고">
+        <img src="/image/4242-logo.png" alt="4242 로고" class="logo-top">
 
         <ul class="header-nav">
             <li><a class="header-nav-logout">로그아웃</a></li>
@@ -21,7 +21,8 @@
             <input type="hidden" id="post-id" th:value="${post.id}">
             <div class="recruit-post-header-box">
                 <p class="recruit-post-title" th:text="${post.title}">수학 스터디 모집합니다</p>
-                <div class="study-recruit" th:text="${now.isBefore(post.start_date) ? '모집중입니다' : '모집이 마감되었습니다'}"></div>
+                <div class="study-recruit" th:text="${now.isBefore(post.start_date) ? '모집중입니다' : '모집이 마감되었습니다'}"
+                     th:style="${now.isBefore(post.start_date) ? '' : 'background-color: #B9B9B9;'}"></div>
             </div>
             <div class="under-title">
                 <div class="writer-info">
@@ -42,13 +43,13 @@
                 </div>
                 <div class="btn-scrap-and-edit">
                     <button class="btn btn-edit"
-                        th:if="${userInfo.member_id} == ${writer.member_id}" style="display: block">수정</button>
-                    <button class="btn btn-edit-complete"
-                            th:if="${userInfo.member_id} == ${writer.member_id}" style="display: none">완료</button>
-                    <button class="btn btn-edit-cancel"
-                            th:if="${userInfo.member_id} == ${writer.member_id}" style="display: none">취소</button>
+                        th:if="${userInfo.member_id} == ${writer.member_id} and ${!now.isAfter(post.start_date)}">수정</button>
+                    <button class="btn btn-edit-complete">완료</button>
+                    <button class="btn btn-edit-cancel">취소</button>
 
-                    <button class="btn-scrap" th:if="${userInfo.member_id} == ${writer.member_id}" style="display: none"><img src="/image/empty-heart.png" alt="스크랩 하트 버튼" id = "image"></button>
+                    <button class="btn-scrap" th:if="${userInfo.member_id} != ${writer.member_id}">
+                        <img src="/image/empty-heart.png" alt="스크랩 하트 버튼" id = "image" class="scrap-heart">
+                    </button>
                 </div>
             </div>
         </section>
@@ -87,14 +88,11 @@
                 <textarea class="recruit-post-text2" name="editedContent" placeholder="수정할 내용을 입력하세요."></textarea>
                 <input type="file" name="file" id="fileInput">
             </form>
-            <ul class="upload-files">
-                <li>스프링 스터디.pdf</li>
-                <li>(253.1KB)</li>
-                <li><button>다운로드</button></li>
-            </ul>
-
-            <button class="btn btn-apply" th:if="${userInfo.member_id} == ${writer.member_id}" style="display: none">신청하러 가기</button>
-            <button class="btn btn-apply-end">모집 마감</button>
+            <button class="btn btn-apply"
+                    th:style="${userInfo.nickname != post.nickname and now.isBefore(post.start_date)} ? '' : 'background-color: #B9B9B9;'"
+                    th:text="${userInfo.nickname != post.nickname and now.isBefore(post.start_date)} ? '신청하러 가기' : '모집 마감'"
+                    th:disabled="${!now.isBefore(post.start_date)}">
+            </button>
         </section>
     </main>
 
@@ -105,11 +103,15 @@
             <button class="btn btn-comment-register">댓글 등록</button>
         </section>
         <section class="comment-exist">
-            <div class="comment-detail" th:each="comment:${post.commentList}">
+            <input type="hidden" class="user-info-nickname" th:value="${userInfo.nickname}">
+            <div class="comment-detail" th:each="comment, commentIndex : ${post.commentList}">
                 <p class="comment-nickname" th:text="${comment.nickname}"></p>
                 <p class="comment-time" th:text="${#temporals.format(comment.created_at, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 <p class="comment-content" th:text="${comment.content}"></p>
-                <button class="btn-comment-delete" th:if="${comment.nickname} != ${userInfo.nickname}" style="display:none">삭제</button>
+                <button class="btn-comment-delete" th:if="${comment.member_id == userInfo.member_id}">삭제</button>
+                <input type="hidden" class="comment-id" th:value="${comment.commentId}">
+                <input type="hidden" class="comment-member-id" th:value="${comment.member_id}">
+                <input type="hidden" class="userInfo-id" th:value="${userInfo.member_id}">
             </div>
         </section>
     </section>
