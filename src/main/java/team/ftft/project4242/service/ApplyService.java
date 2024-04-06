@@ -2,6 +2,9 @@ package team.ftft.project4242.service;
 
 import jakarta.annotation.Nullable;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Apply;
@@ -9,13 +12,14 @@ import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.domain.Team;
 import team.ftft.project4242.dto.ApplyRequestDto;
+import team.ftft.project4242.dto.ApplyResponseDto;
 import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.repository.PostRepository;
 import team.ftft.project4242.repository.TeamRepository;
 import team.ftft.project4242.service.file.AwsS3Service;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ApplyService {
@@ -46,8 +50,14 @@ public class ApplyService {
     }
 
     // GET : 신청글 목록 조회
-    public List<Apply> findAllApply() {
-        return applyRepository.findAll();
+    public Page<ApplyResponseDto> findAllApply(Long postId, Pageable pageable)
+    {
+        Page<Apply> applies = applyRepository.findAllByPostId(postId,pageable);
+        List<ApplyResponseDto> applyList = applies.stream()
+                .map(ApplyResponseDto::new)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(applyList,pageable,applies.getTotalElements());
     }
 
     public Apply findById(Long apply_id) {

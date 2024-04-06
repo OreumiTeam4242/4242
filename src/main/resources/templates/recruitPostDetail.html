@@ -89,9 +89,12 @@
                 <input type="file" name="file" id="fileInput">
             </form>
             <button class="btn btn-apply"
-                    th:style="${userInfo.nickname != post.nickname and now.isBefore(post.start_date)} ? '' : 'background-color: #B9B9B9;'"
-                    th:text="${userInfo.nickname != post.nickname and now.isBefore(post.start_date)} ? '신청하러 가기' : '모집 마감'"
-                    th:disabled="${!now.isBefore(post.start_date)}">
+                    th:style="${now.isBefore(post.start_date)} ? '' : (${userInfo.nickname==post.nickname}? '' : 'background-color: #B9B9B9;')"
+                    th:text="${userInfo.nickname != post.nickname and now.isBefore(post.start_date)} ? '신청하러 가기' : (${userInfo.nickname == post.nickname} ? '신청글 목록' : '모집 마감')"
+                    th:disabled="${userInfo.nickname != post.nickname and !now.isBefore(post.start_date)}"
+                    th:data-userInfoNickname= "${userInfo.nickname}"
+                    th:data-postNickname="${post.nickname}"
+                    th:data-startDate="${post.start_date}">
             </button>
         </section>
     </main>

@@ -38,15 +38,6 @@ public class NotifyController {
                 .body(response);
     }
 
-    // GET : 신고글 목록 조회 - 관리자 권한 부여해야함
-    @GetMapping("/api/notifies")
-    public ResponseEntity<List<NotifyResponseDto>> showAllNotify() {
-        List<Notify> notifyList = notifyService.findAllNotify();
-        List<NotifyResponseDto> notifyResponseList = notifyList.stream()
-                .map(NotifyResponseDto::new)
-                .toList();
-        return ResponseEntity.ok(notifyResponseList);
-    }
 
     // GET : 신고글 상세 조회 - 관리자 권한 부여해야함
     @GetMapping("/api/notify/{notify_id}")

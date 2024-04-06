@@ -178,11 +178,22 @@ document.addEventListener('DOMContentLoaded', function () {
 // 신청하기 버튼
 const applyButton = document.querySelector(".btn-apply");
 
-if(applyButton) {
-    applyButton.addEventListener('click', () =>
-        window.location.href = `/page/post/`+postId+`/apply`
-    )
-}
+// if(applyButton) {
+//     applyButton.addEventListener('click', () =>
+//         window.location.href = `/page/post/`+postId+`/apply`
+//     )
+// }
+applyButton.addEventListener('click', () => {
+    const userInfoNickname = applyButton.dataset.userInfoNickname;
+    const postNickname = applyButton.dataset.postNickname;
+    const startDate = applyButton.dataset.start_date;
+
+    if(userInfoNickname !== postNickname && new Date() < new Date(startDate)) {
+        window.location.href = `/page/post/`+postId+`/apply`;
+    } else if(userInfoNickname === postNickname) {
+        window.location.href = `/page/post/`+postId+`/apply-list`;
+    }
+});
 
 // 댓글 등록 버튼
 const commentRegisterButton = document.querySelector(".btn-comment-register");

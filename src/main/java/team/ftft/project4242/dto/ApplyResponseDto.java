@@ -19,10 +19,12 @@ public class ApplyResponseDto {
     private String available_day;
     private String file_url;
     private String nickname;
+    private String role;
     private LocalDateTime createdAt;
 
     public ApplyResponseDto(Apply apply) {
         id = apply.getApply_id();
+        role = apply.getMember().getRole().value();
         title = apply.getTitle();
         content = apply.getContent();
         available_time = apply.getAvailable_time();

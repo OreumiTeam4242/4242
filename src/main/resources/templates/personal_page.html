@@ -85,7 +85,7 @@
       <button type="button" id="go_left3" class="go_left">
         <img src="/image/to_left.png" alt="왼쪽으로 보여주기">
       </button>
-      <div class="row4">
+      <div class="row">
         <div th:each="scrap, iterStat : ${scrapList}" class="scrapItem"  th:href="@{/page/post/{id}(id=${scrap.id})}" >
           <button type="button" class="favorite" th:data-scrap-id="${scrap.id}" >
             <img src="/image/filled-heart.png" alt="프로젝트 즐겨찾기">

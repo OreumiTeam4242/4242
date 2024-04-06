@@ -62,6 +62,4 @@ public class ApplyController {
         TeamMemberResponseDto teamMemberResponseDto = new TeamMemberResponseDto(teamMember);
         return ResponseEntity.status(HttpStatus.CREATED).body(teamMemberResponseDto);
     }
-
-
 }
