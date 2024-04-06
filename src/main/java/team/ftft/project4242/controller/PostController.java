@@ -3,6 +3,7 @@ package team.ftft.project4242.controller;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,8 @@ import team.ftft.project4242.dto.PostRequestDto;
 import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -127,4 +130,9 @@ public class PostController {
         return ResponseEntity.ok(responseList);
     }
 
+    // 매일 자정에 자동으로 is_closed 변경
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void closePosts() {
+        postService.closePosts();
+    }
 }
