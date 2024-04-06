@@ -54,7 +54,7 @@ header .logo {
 }
 
 /*로그인, 로그아웃 버튼 스위칭하기: 디스플레이 안되게 설정*/
-.logo .logout_top {
+.logo  {
     display: none;
 }
 
