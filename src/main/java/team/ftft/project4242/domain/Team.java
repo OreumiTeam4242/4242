@@ -27,7 +27,6 @@ public class Team {
     @Column(name="is_completed")
     private boolean is_completed;
 
-    // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
     @JoinColumn(name = "post_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

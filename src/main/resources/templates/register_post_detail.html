@@ -6,8 +6,7 @@
 </head>
 <body>
 <header>
-    <img src="/image/4242-logo.png" alt="4242 로고">
-
+    <img class=logo src="/image/4242-logo.png" alt="4242 로고">
     <ul class="header-nav">
         <li><a class="header-nav-logout">로그아웃</a></li>
         <li><a class="header-nav-info">내 정보</a></li>
@@ -17,7 +16,8 @@
 <main>
     <section class="register-post-header">
         <a class="msg-go-back">뒤로가기</a>
-        <div class="register-post-header-box" th:value="${apply.id}">
+        <div class="register-post-header-box" th:data-apply-id="${apply.id}">
+
             <p class="register-post-title" th:text="*{apply.title}">신청</p>
         </div>
         <div class="writer-info">
@@ -60,7 +60,6 @@
             <p class = available-time-list th:text="${apply.available_time}">
         </div>
         <button class="btn btn-register-accept">수락</button>
-        <button class="btn btn-register-refuse">거절</button>
     </section>
 </main>
 

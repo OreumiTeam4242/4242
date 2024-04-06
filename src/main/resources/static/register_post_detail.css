@@ -31,6 +31,10 @@ p {
     font-weight : 600;
 }
 
+.logo {
+    cursor: pointer;
+}
+
 header {
     display : flex;
     justify-content: space-between;

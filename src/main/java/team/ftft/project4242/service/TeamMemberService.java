@@ -21,8 +21,18 @@ public class TeamMemberService {
         Member member = apply.getMember();
         Post post = apply.getPost();
         Team team = post.getTeam();
+
+        if (team == null) {
+            throw new IllegalStateException("Team not found for the given apply: " + apply_id);
+        }
+
         TeamMember teamMember = new TeamMember(member, team);
         return teamMemberRepository.save(teamMember);
 
+    }
+
+    public TeamMember addTeamMember(Member member, Team team) {
+        TeamMember teamMember = new TeamMember(member, team);
+        return teamMemberRepository.save(teamMember);
     }
 }

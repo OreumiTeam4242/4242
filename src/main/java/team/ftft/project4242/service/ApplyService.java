@@ -1,15 +1,18 @@
 package team.ftft.project4242.service;
 
 import jakarta.annotation.Nullable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.domain.Apply;
 import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
+import team.ftft.project4242.domain.Team;
 import team.ftft.project4242.dto.ApplyRequestDto;
 import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.repository.PostRepository;
+import team.ftft.project4242.repository.TeamRepository;
 import team.ftft.project4242.service.file.AwsS3Service;
 
 import java.util.List;
@@ -20,11 +23,13 @@ public class ApplyService {
     private final PostRepository postRepository;
     private final AwsS3Service awsS3Service;
     private final MemberRepository memberRepository;
-    public ApplyService(ApplyRepository applyRepository, PostRepository postRepository, AwsS3Service awsS3Service, MemberRepository memberRepository) {
+    private final TeamRepository teamRepository;
+    public ApplyService(ApplyRepository applyRepository, PostRepository postRepository, AwsS3Service awsS3Service, MemberRepository memberRepository, TeamRepository teamRepository) {
         this.applyRepository = applyRepository;
         this.postRepository = postRepository;
         this.awsS3Service = awsS3Service;
         this.memberRepository = memberRepository;
+        this.teamRepository = teamRepository;
     }
 
     // POST : 신청글 생성

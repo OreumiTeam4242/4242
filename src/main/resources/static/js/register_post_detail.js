@@ -39,15 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// 거절 버튼 클릭 시 신청글 리스트 페이지로 이동
-const refuseButton = document.querySelector(".btn-register-refuse");
-
-if (refuseButton) {
-    refuseButton.addEventListener('click', () =>
-        location.replace("/page/register_list")
-    );
-}
-
 // 뒤로 가기 버튼
 const goBackButton = document.querySelector(".msg-go-back");
 
@@ -67,16 +58,21 @@ if (infoButton) {
     });
 }
 
-// 수락 버튼 클릭 시 모달 열기
+
+// ---------------- 수락 버튼 눌렀을 때
 document.addEventListener("DOMContentLoaded", function () {
     const acceptButton = document.querySelector(".btn.btn-register-accept"); // 수락 버튼 선택
 
     if (acceptButton) {
         acceptButton.addEventListener("click", function () {
-            const postId = document.querySelector(".register-post-header-box").getAttribute("th:value"); // 신청글 ID 가져오기
-
-            // AJAX 요청을 통해 팀원 추가
-            addTeamMember(postId);
+            const postIdElement = document.querySelector(".register-post-header-box");
+            const postId = postIdElement.getAttribute('data-apply-id'); // data-apply-id 속성에서 postId 가져오기
+            if (postId) {
+                // AJAX 요청을 통해 팀원 추가
+                addTeamMember(postId);
+            } else {
+                console.error("postId is not defined in the element");
+            }
         });
     }
 
@@ -122,4 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 });
+
+
+
 

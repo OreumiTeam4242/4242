@@ -2,6 +2,7 @@ package team.ftft.project4242.dto;
 
 import lombok.*;
 import team.ftft.project4242.domain.Apply;
+import team.ftft.project4242.domain.Team;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +22,7 @@ public class ApplyResponseDto {
     private LocalDateTime createdAt;
 
     public ApplyResponseDto(Apply apply) {
+        id = apply.getApply_id();
         title = apply.getTitle();
         content = apply.getContent();
         available_time = apply.getAvailable_time();

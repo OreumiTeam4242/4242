@@ -97,14 +97,15 @@ public class Post {
     @Column(name="end_date")
     private LocalDate end_date;
 
-    // 팀 생성을 위한 post, team 매핑 - 현진
     @OneToOne
+    @JoinColumn(name = "post_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Team team;
 
     private Long viewCount;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Member member,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type,String file_url) {
+    public Post(String title, String content, PostType postType, PostMajor postMajor,Member member,Team team,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type,String file_url) {
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -114,6 +115,7 @@ public class Post {
         this.is_closed = false;
         this.use_yn = true;
         this.member = member;
+        this.team = team;
         this.start_date = start_date;
         this.end_date = end_date;
         this.member_cnt = member_cnt;

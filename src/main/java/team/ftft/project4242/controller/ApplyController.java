@@ -6,13 +6,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.commons.security.CustomUserDetails;
-import team.ftft.project4242.domain.Apply;
-import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.TeamMember;
-import team.ftft.project4242.dto.ApplyRequestDto;
-import team.ftft.project4242.dto.ApplyResponseDto;
-import team.ftft.project4242.dto.PostRequestDto;
-import team.ftft.project4242.dto.PostResponseDto;
+import team.ftft.project4242.domain.*;
+import team.ftft.project4242.dto.*;
+import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.service.ApplyService;
 import team.ftft.project4242.service.TeamMemberService;
 
@@ -22,18 +18,20 @@ import java.util.List;
 public class ApplyController {
     private ApplyService applyService;
     private TeamMemberService teamMemberService;
+    private ApplyRepository applyRepository;
 
-    public ApplyController(ApplyService applyService, TeamMemberService teamMemberService) {
+    public ApplyController(ApplyService applyService, TeamMemberService teamMemberService, ApplyRepository applyRepository) {
         this.applyService = applyService;
         this.teamMemberService = teamMemberService;
+        this.applyRepository = applyRepository;
     }
 
     // POST : 신청글 생성
     @PostMapping("/api/post/{post_id}/apply")
     public ResponseEntity<ApplyResponseDto> addApply(@RequestPart ApplyRequestDto request,
                                                      @RequestPart(value = "file", required = false) MultipartFile file,
-                                                     @PathVariable Long post_id
-                                                    ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+                                                     @PathVariable Long post_id,
+                                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
         Apply apply = applyService.saveApply(request, post_id, file, memberId);
         ApplyResponseDto response = apply.toResponse();
@@ -51,11 +49,19 @@ public class ApplyController {
         return ResponseEntity.ok(applyResponseList);
     }
 
-    // POST : 스터디 팀원 추가
+    // POST: 스터디 팀원 추가
     @PostMapping("/api/apply/{apply_id}/accept")
-    public ResponseEntity<TeamMember> PostTeamMember(@PathVariable Long apply_id) {
-        TeamMember teamMember = teamMemberService.findById(apply_id);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(teamMember);
+    public ResponseEntity<TeamMemberResponseDto> acceptApply(@PathVariable Long apply_id) {
+        Apply apply = applyRepository.findById(apply_id)
+                .orElseThrow(() -> new IllegalArgumentException("Apply not found with id: " + apply_id));
+
+        Member member = apply.getMember();
+        Team team = apply.getPost().getTeam();
+
+        TeamMember teamMember = teamMemberService.addTeamMember(member, team);
+        TeamMemberResponseDto teamMemberResponseDto = new TeamMemberResponseDto(teamMember);
+        return ResponseEntity.status(HttpStatus.CREATED).body(teamMemberResponseDto);
     }
+
+
 }
