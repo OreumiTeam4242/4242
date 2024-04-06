@@ -40,9 +40,7 @@
 
     <section class="register-post-detail">
         <p class="register-post-introduce">신청 동기</p>
-        <div class="register-post-text" th:text="${apply.content}">
-            수학 공부가 너무 하고싶어요
-        </div>
+        <div class="register-post-text" th:text="${apply.content}"></div>
 
         <ul class="upload-files">
             <li>작업물1.pdf</li>
@@ -55,13 +53,12 @@
     <section class="available-info">
         <div class="available-day">
             <p class="available-day-text">활동 가능 요일</p>
-            <p class="available-day-list" th:text="${available_day}"></p>
+            <p class="available-day-list" th:text="${apply.available_day}"></p>
         </div>
         <div class="available-time">
             <p class="available-time-text">활동 가능 시간</p>
-            <p th:text="${available_time}">
+            <p class = available-time-list th:text="${apply.available_time}">
         </div>
-
         <button class="btn btn-register-accept">수락</button>
         <button class="btn btn-register-refuse">거절</button>
     </section>
@@ -79,18 +76,15 @@
     <img src="/image/keyboard_arrow_up.png" alt="위로가기 버튼">
 </button>
 
-<section class="modal-register-accept">
-    <div class="modal-box">
-        <button class="btn btn-modal-close"><img src="/image/close.png" alt="모달창 닫기 버튼"></button>
-        <div class="modal-inner">
-            <img src="/image/info.png" alt="정보 아이콘">
-            <p>신청이 수락되었습니다.</p>
-        </div>
+<section class="modal" style="display: none">
+    <div class="modal-content">
+        <img class="modal-notice-img" src="/image/info.png" alt="팝업창 알림 아이콘 이미지">
+        <p class="modal-content-text">신청이 수락되었습니다.</p>
+        <input type="button" class="modal-close-img">
     </div>
 </section>
 
 <link rel="stylesheet" href="/register_post_detail.css">
-<script src="/js/common.js"></script>
-<script src="/js/register_detail.js"></script>
+<script src="/js/register_post_detail.js"></script>
 </body>
 </html>
