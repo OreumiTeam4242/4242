@@ -47,4 +47,8 @@ public class NotifyService {
         return notifyRepository.findById(notify_id)
                 .orElseThrow(() -> new IllegalArgumentException("not found id" + notify_id));
     }
+
+    public boolean isMemberExists(String nickname){
+        return memberRepository.findByNickname(nickname).isPresent();
+    }
 }

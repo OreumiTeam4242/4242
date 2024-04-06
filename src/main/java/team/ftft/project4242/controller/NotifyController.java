@@ -1,8 +1,10 @@
 package team.ftft.project4242.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.commons.security.CustomUserDetails;
@@ -22,10 +24,14 @@ public class NotifyController {
 
     // POST : 신고글 생성
     @PostMapping("/api/notify")
-    public ResponseEntity<NotifyResponseDto> addNotify (@RequestPart NotifyRequestDto request,
+    public ResponseEntity<?> addNotify (@RequestPart NotifyRequestDto request,
                                                         @RequestPart(value="file",required = false) MultipartFile file
                                                         ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
+
+        if(!notifyService.isMemberExists(request.getNotifyMemberName())){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         Notify notify = notifyService.saveNotify(request,file,memberId);
         NotifyResponseDto response = notify.toResponse();
         return ResponseEntity.status(HttpStatus.CREATED)
