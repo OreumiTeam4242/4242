@@ -12,6 +12,7 @@ import team.ftft.project4242.domain.TeamMember;
 import team.ftft.project4242.dto.ApplyRequestDto;
 import team.ftft.project4242.dto.ApplyResponseDto;
 import team.ftft.project4242.dto.PostRequestDto;
+import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.ApplyService;
 import team.ftft.project4242.service.TeamMemberService;
 
@@ -50,12 +51,13 @@ public class ApplyController {
         return ResponseEntity.ok(applyResponseList);
     }
 
-    // GET : 신청 모집글 상세 조회
-    @GetMapping("/api/apply/{apply_id}")
-    public ResponseEntity<ApplyResponseDto> showOneApply(@PathVariable Long apply_id) {
-        Apply apply = applyService.findById(apply_id);
-        return ResponseEntity.ok(apply.toResponse());
-    }
+//    // GET : 신청 모집글 상세 조회
+//    @GetMapping("/api/apply/{apply_id}")
+//    public ResponseEntity<ApplyResponseDto> showOneApply(@PathVariable Long apply_id) {
+//        Apply apply = applyService.findById(apply_id);
+//        ApplyResponseDto response = apply.toResponse();
+//        return ResponseEntity.ok(response);
+//    }
 
     // POST : 스터디 팀원 추가
     @PostMapping("/api/apply/{apply_id}/accept")

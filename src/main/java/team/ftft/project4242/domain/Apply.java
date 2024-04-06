@@ -20,7 +20,7 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@SQLDelete(sql = "UPDATE apply SET use_yn = false WHERE apply_id = ?")
+//@SQLDelete(sql = "UPDATE apply SET use_yn = false WHERE apply_id = ?")
 @SQLRestriction("use_yn = true")
 public class Apply {
     @Id
@@ -58,8 +58,7 @@ public class Apply {
 
     private Boolean use_yn;
     @Builder
-    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day,String file_url) {
-        this.apply_id = apply_id;
+    public Apply(String title, String content, Post post, Member member, String available_time, String available_day,String file_url) {
         this.title = title;
         this.content = content;
         this.post = post;
@@ -73,8 +72,11 @@ public class Apply {
 
     public ApplyResponseDto toResponse() {
         return ApplyResponseDto.builder()
+                .id(apply_id)
                 .title(title)
                 .content(content)
+                .nickname(member.getNickname())
+                .createdAt(createdAt)
                 .available_time(available_time)
                 .available_day(available_day)
                 .file_url(file_url)
