@@ -46,5 +46,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.use_yn = true and p.member.member_id = :memberId")
     List<Post> findAllByMemberId(Long memberId);
 
-
+    @Modifying
+    @Query("update Post p set p.is_closed = true where p.start_date <= CURRENT_DATE and p.is_closed = false")
+    void closePosts();
 }

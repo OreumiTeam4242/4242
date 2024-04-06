@@ -1,3 +1,14 @@
+const postId = document.getElementById("post-id").value;
+
+// 로고 클릭
+const logoImage = document.querySelector(".logo_top");
+
+if(logoImage) {
+    logoImage.addEventListener('click', () => {
+        window.location.href = "/page/main";
+    });
+}
+
 // 뒤로 가기
 const goBackButton = document.querySelector(".msg-go-back");
 
@@ -8,65 +19,75 @@ if (goBackButton) {
 }
 
 
-
 // 스크랩 버튼
-const scrapButton = document.querySelector(".btn-scrap");
-const image = document.getElementById("image");
-const postId = document.getElementById("post-id").value;
+let image = document.querySelector(".scrap-heart");
 
-// 서버로부터 스크랩 상태를 가져와 UI를 업데이트합니다.
-async function updateScrapStatus() {
-    try {
-        const response = await fetch(`/api/posts/${postId}/scraps/status`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
+document.addEventListener('DOMContentLoaded', async function() {
+    const scrapButton = document.querySelector(".btn-scrap");
+
+    // 서버로부터 스크랩 상태를 가져와 UI를 업데이트합니다.
+    async function updateScrapStatus() {
+        try {
+            if (!image) { // 이미지가 없는 경우에만 이미지를 찾습니다.
+                console.error('Image element not found');
+                return;
+            }
+
+            const response = await fetch(`/api/posts/${postId}/scraps/status`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const isScrapped = await response.json();
+            image.src = isScrapped ? '/image/filled-heart.png' : '/image/empty-heart.png';
+
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    }
+
+    // 스크랩 상태 업데이트
+    await updateScrapStatus();
+
+    // 스크랩 버튼 클릭 이벤트 핸들러
+    if (scrapButton) {
+        scrapButton.addEventListener('click', async function() {
+            const currentSrc = image.src;
+
+            let scrapStatusChanged = false; // 스크랩 상태가 변경되었는지 여부
+
+            // 스크랩 상태 변경 요청을 보냅니다.
+            try {
+                const response = await fetch(`/api/posts/${postId}/scraps`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: currentSrc.includes('empty-heart.png') ? JSON.stringify({}) : null
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                scrapStatusChanged = true;
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+
+            // 스크랩 상태가 변경되었을 때만 이미지 소스를 업데이트합니다.
+            if (scrapStatusChanged) {
+                await updateScrapStatus();
             }
         });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const isScrapped = await response.json();
-        image.src = isScrapped ? '/image/filled-heart.png' : '/image/empty-heart.png';
-
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-}
-
-scrapButton.addEventListener('click', async function() {
-    const currentSrc = image.src;
-
-    let scrapStatusChanged = false; // 스크랩 상태가 변경되었는지 여부
-
-    // 스크랩 상태 변경 요청을 보냅니다.
-    try {
-        const response = await fetch(`/api/posts/${postId}/scraps`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: currentSrc.includes('empty-heart.png') ? JSON.stringify({}) : null
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        scrapStatusChanged = true;
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-
-    // 스크랩 상태가 변경되었을 때만 이미지 소스를 업데이트합니다.
-    if (scrapStatusChanged) {
-        await updateScrapStatus();
     }
 });
-
-updateScrapStatus();
 
 // 수정하기 버튼
 document.addEventListener('DOMContentLoaded', function () {
@@ -110,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // FormData 객체 생성
         const formData = new FormData();
-        var request = {
+        let request = {
             content : $('.recruit-post-text2').val()
             // content : document.querySelector(".recruit-post-text2").value
         };
@@ -135,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 // 성공적으로 업데이트된 데이터를 처리하는 코드 작성
                 alert('수정이 완료되었습니다');
                 window.location.href = '/page/post/'+postId;
-                // location.replace(`/page/post/${postId}`);
             })
             .catch(error => {
                 console.error('There was a problem updating the data:', error);
@@ -157,15 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
-
 // 신청하기 버튼
 const applyButton = document.querySelector(".btn-apply");
 
 if(applyButton) {
     applyButton.addEventListener('click', () =>
-        location.replace(`/page/apply-form`)
-    );
+        window.location.href = `/page/post/`+postId+`/apply`
+    )
 }
 
 // 댓글 등록 버튼
@@ -241,5 +259,8 @@ modalCloseButton.addEventListener('click', () => {
 modalCheckButton.addEventListener('click', () => {
     commentModal.style.display = "none";
 });
+
+// is_closed를 위한 호출
+
 
 

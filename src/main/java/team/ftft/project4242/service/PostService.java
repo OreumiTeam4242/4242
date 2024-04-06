@@ -122,4 +122,8 @@ public class PostService {
     }
 
     public List<Post> findMyPosts(Long memberId){return postRepository.findAllByMemberId(memberId);}
+
+    public void closePosts() {
+        postRepository.closePosts();
+    }
 }
