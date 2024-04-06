@@ -6,7 +6,7 @@
 </head>
 <body>
 <header>
-    <img src="/image/4242-logo.png" alt="4242 로고">
+    <img src="/image/4242-logo.png" alt="4242 로고" class="logo-top">
 
     <ul class="header-nav">
         <li><a class="header-nav-logout">로그아웃</a></li>
@@ -23,39 +23,31 @@
         <div class="writer-info">
             <ul>
                 <li>작성자 : </li>
-                <li class="bold-text">닉네임</li>
+                <li class="bold-text" th:text="${notify.post_member_nickname}"></li>
             </ul>
 
             <ul>
                 <li>등급 : </li>
-                <li class="bold-text">주니어</li>
+                <li class="bold-text" th:text="${notify.post_member_role}"></li>
             </ul>
 
             <ul>
                 <li>작성일시 : </li>
-                <li class="bold-text">2024.03.23</li>
+                <li class="bold-text" th:text="${#temporals.format(notify.createdAt, 'yyyy.MM.dd')}"></li>
             </ul>
         </div>
     </section>
 
     <section class="notified-user-info">
-        <p class="notified-user">신고 유저 : <span class="notified-user-nickname">치알김추</span></p>
+        <p class="notified-user">신고 유저 : <span class="notified-user-nickname" th:text="${notify.notify_member_nickname}"></span></p>
     </section>
 
     <section class="notify-post-detail">
         <p class="notify-post-introduce">사유</p>
-        <div class="notify-post-text">
-            일단 신고합니다. 일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해
-
-            일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요
-
-            일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요
-
-
-            일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요일단 신고해요
+        <div class="notify-post-text" th:text="${notify.content}">
         </div>
     </section>
-
+    <input type="hidden" id="notify-member-id" th:value="${notify.notify_member_id}">
     <button class="btn-user-suspend">신고 유저 정지하기</button>
 </main>
 
@@ -71,8 +63,8 @@
     <img src="/image/keyboard_arrow_up.png" alt="위로가기 버튼">
 </button>
 
-<link rel="stylesheet" href="../static/notify_post_detail.css">
-<script src="../static/js/common.js"></script>
-<script src="../static/js/notify_detail.js"></script>
+<link rel="stylesheet" href="/notify_post_detail.css">
+<script src="/js/common.js"></script>
+<script src="/js/notify_detail.js"></script>
 </body>
 </html>

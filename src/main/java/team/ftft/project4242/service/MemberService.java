@@ -2,6 +2,7 @@ package team.ftft.project4242.service;
 
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,9 @@ import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.repository.MemberRepository;
 import team.ftft.project4242.service.file.AwsS3Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static team.ftft.project4242.domain.Role.ROLE_NEW_BIE;
 
@@ -72,19 +75,32 @@ public class MemberService {
 
     }
 
+    @Transactional
     public MemberResponseDto disabled(Long memberId){
-        // TODO : 삭제가 아닌 use_yn value 변경
+        // TODO : 삭제가 아닌 is_suspended value 변경
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()->new IllegalArgumentException("member_id doesn't exist"));
+        memberRepository.toggleSuspend(memberId);
         member.disabled();
         return member.toResponse();
     }
 
+    @Transactional
     public MemberResponseDto enable(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("member_id doesn't exist"));
-        member.enable();  // use_yn 값을 true로 변경
+        memberRepository.toggleSuspend(memberId);  // use_yn 값을 true로 변경
+        member.enable();
         return member.toResponse();
+    }
+
+    @Scheduled(cron = "0 0 0 * * *")
+    public void checkAndUnsuspendMembers() {
+        LocalDate now = LocalDate.now();
+        LocalDate sevenDaysLater = now.plusDays(7);
+
+        // 7일 후가 되면 is_suspended 값을 false로 변경합니다.
+        memberRepository.updateSuspendedMembers(sevenDaysLater);
     }
 
     public MemberResponseDto delete(Long memberId){
