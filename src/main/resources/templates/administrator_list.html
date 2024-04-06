@@ -10,7 +10,7 @@
 <header>
     <div class="logo">
         <a class="logo_top" href="">
-            <img src="../static/image/logo.png" alt="사이사이 로고">
+            <img src="/image/logo.png" alt="사이사이 로고">
         </a>
         <nav class="menu_top">
             <a class="login_top" href="#">로그인</a>
@@ -18,10 +18,15 @@
             <a class="mypage" href="#">내 정보</a>
         </nav>
     </div>
+    <nav class="menu_top">
+        <button id="logout" class="logout" type="button">로그아웃</button>
+        <button id="my-info" class="mypage" type="button">내 정보</button>
+    </nav>
 </header>
 <main>
     <a class="go_back" href="#">뒤로가기</a>
     <div class="main_title">
+
         <h1>관리자 전용 페이지</h1><br>
         <hr>
         <h1>신고글 목록</h1>
@@ -30,16 +35,16 @@
         <div class="main_content">
             <div class="notify_list" th:each="notify : ${notifyList}">
                 <a th:href="@{/page/main/{postId}(postId=${notify.id})}">
-                    <h1 th:text="|신고 대상 : ${notify.notifyNickname}|">신고합니다.</h1>
+                    <h1 th:text="|신고 대상 : ${notify.notifyNickname}|">신고 대상</h1>
                     <div class="notify_h2">
                         <h2 th:text="${notify.createdAt}">생성일</h2>
                         <h2 th:text="${notify.postNickname}">작성자</h2>
                     </div>
                 </a>
+
             </div>
         </div>
     </div>
-
     <div class="pagination-wrapper">
         <div th:if="${!notifyList.isEmpty()}">
             <ul class="pagination"
