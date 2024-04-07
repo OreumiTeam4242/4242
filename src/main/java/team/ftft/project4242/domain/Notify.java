@@ -45,7 +45,8 @@ public class Notify {
     private String file_url;
 
     @Builder
-    public Notify(String title, String content, Member postMember, Member notifyMember, String file_url) {
+    public Notify(Long notify_id, String title, String content, Member postMember, Member notifyMember, String file_url) {
+        this.notify_id = notify_id;
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
