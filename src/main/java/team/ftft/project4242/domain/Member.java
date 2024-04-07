@@ -80,7 +80,8 @@ public class Member {
     private LocalDate suspendedUntil;
 
     @Builder
-    public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url,Role role) {
+    public Member(Long member_id, String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url,Role role) {
+        this.member_id = member_id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
