@@ -13,6 +13,7 @@ import team.ftft.project4242.dto.MemberResponseDto;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -94,6 +95,7 @@ public class Member {
                 .updatedAt(updatedAt)
                 .img_url(img_url)
                 .role(role.value())
+                .isAdmin(Objects.equals(role.value(), "관리자"))
                 .build();
     }
 

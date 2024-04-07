@@ -56,7 +56,7 @@ public class PostPageController {
 
     // 메인 페이지 조회
     @GetMapping("/page/main")
-    public String showMain(Model model) {
+    public String showMain(Model model,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         List<Post> postList = postService.findAllAble();
         List<PostResponseDto> allpostList = postList.stream()
                         .map(PostResponseDto::new)
@@ -68,6 +68,10 @@ public class PostPageController {
                         .map(PostResponseDto::new)
                                 .toList();
         model.addAttribute("hotPostList", allhotPostList);
+
+        Long memberId = customUserDetails.getMemberId();
+        MemberResponseDto userInfo =memberService.findById(memberId);
+        model.addAttribute("userinfo",userInfo);
 
         return "main";
     }
