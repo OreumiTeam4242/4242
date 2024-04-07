@@ -6,8 +6,7 @@
 </head>
 <body>
 <header>
-    <img src="/image/4242-logo.png" alt="4242 로고">
-
+    <img class=logo src="/image/4242-logo.png" alt="4242 로고">
     <ul class="header-nav">
         <li><a class="header-nav-logout">로그아웃</a></li>
         <li><a class="header-nav-info">내 정보</a></li>
@@ -17,63 +16,48 @@
 <main>
     <section class="register-post-header">
         <a class="msg-go-back">뒤로가기</a>
-        <div class="register-post-header-box" th:object="${apply}">
-<!--            <p class="register-post-title">수학 스터디 신청합니다</p>-->
-            <p class="register-post-title" th:text="*{title}"></p>
+        <div class="register-post-header-box" th:data-apply-id="${apply.id}">
+
+            <p class="register-post-title" th:text="*{apply.title}">신청</p>
         </div>
         <div class="writer-info">
             <ul>
                 <li>작성자 : </li>
-                <li class="bold-text">닉네임</li>
+                <li class="bold-text" th:text="${apply.nickname}">닉네임</li>
             </ul>
 
             <ul>
                 <li>등급 : </li>
-                <li class="bold-text">주니어</li>
+                <li class="bold-text" th:text="${writer.role}"></li>
             </ul>
 
             <ul>
                 <li>작성일시 : </li>
-                <li class="bold-text" th:text="${#temporals.format(today, 'yyyy-MM-dd')}"></li>
-<!--                <li class="bold-text">2024.03.23</li>-->
+                <li class="bold-text" th:text="${#temporals.format(apply.createdAt, 'yyyy-MM-dd')}"></li>
             </ul>
         </div>
     </section>
 
     <section class="register-post-detail">
         <p class="register-post-introduce">신청 동기</p>
-        <div class="register-post-text" th:text="${content}">
-            수학 공부가 너무 하고싶어요
-            수학수학수학
-
-            수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수학공부수             학공부수학공부수학공부수학공부수학공부수학공부
-            수학공부수학공부수학공부
-
-            수학공부수학공부수학공부수학공부수학공부수학공부 읽어주셔서 감사합니다.
-        </div>
+        <div class="register-post-text" th:text="${apply.content}"></div>
 
         <ul class="upload-files">
-            <li>작업물1.pdf</li>
-            <li>(683.4KB)</li>
-            <li><button>다운로드</button></li>
-            <li th:text="${file_url}"></li>
+            <li class="file-url" th:text="${file_url}" style="display: none;"></li>
+            <li><button class="btn-download">다운로드</button></li>
         </ul>
     </section>
 
     <section class="available-info">
         <div class="available-day">
             <p class="available-day-text">활동 가능 요일</p>
-            <p class="available-day-list">월, 화, 목, 토</p>
-            <p class="available-day-list" th:text="${available_day}"></p>
+            <p class="available-day-list" th:text="${apply.available_day}"></p>
         </div>
         <div class="available-time">
             <p class="available-time-text">활동 가능 시간</p>
-            <p class="available-time-list">아침 시간대 (05:00 ~ 10:59), 점심 시간대 (11:00 ~ 16:59)</p>
-            <p th:text="${available_time}">
+            <p class = available-time-list th:text="${apply.available_time}">
         </div>
-
         <button class="btn btn-register-accept">수락</button>
-        <button class="btn btn-register-refuse">거절</button>
     </section>
 </main>
 
@@ -89,18 +73,16 @@
     <img src="/image/keyboard_arrow_up.png" alt="위로가기 버튼">
 </button>
 
-<section class="modal-register-accept">
-    <div class="modal-box">
-        <button class="btn btn-modal-close"><img src="/image/close.png" alt="모달창 닫기 버튼"></button>
-        <div class="modal-inner">
-            <img src="/image/info.png" alt="정보 아이콘">
-            <p>신청이 수락되었습니다.</p>
-        </div>
+<section class="modal" style="display: none">
+    <div class="modal-content">
+        <img class="modal-notice-img" src="/image/info.png" alt="팝업창 알림 아이콘 이미지">
+        <p class="modal-content-text">신청이 수락되었습니다.</p>
+        <input type="button" class="modal-close-img">
     </div>
 </section>
 
 <link rel="stylesheet" href="/register_post_detail.css">
-<script src="/js/common.js"></script>
-<script src="/js/register_detail.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/register_post_detail.js"></script>
 </body>
 </html>

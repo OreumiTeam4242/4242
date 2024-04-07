@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import team.ftft.project4242.domain.Apply;
 import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
+import team.ftft.project4242.domain.Team;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ApplyRequestDto {
     private String available_day;
     private String file_url;
 
-    public Apply toEntity(Post post,Member member) {
+    public Apply toEntity(Post post, Member member) {
         return Apply.builder()
                 .title(title)
                 .content(content)
