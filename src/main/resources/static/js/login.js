@@ -26,7 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     // 401 에러가 발생한 경우의 처리
                     alert("이메일 또는 비밀번호를 다시 확인해주세요.");
                     window.location.href = '/page/login';
-                } else {
+                } else if(response.status === 403) {
+                    alert("정지된 회원입니다");
+                    window.location.href = '/page/login';
+                }
+                else {
                     // 기타 다른 에러가 발생한 경우의 처리
                     alert("로그인에 실패했습니다. 다시 시도해주세요.");
                     window.location.href = '/page/login';

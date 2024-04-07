@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import team.ftft.project4242.dto.MemberResponseDto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,13 @@ public class Member {
 
     @Column(name="post_count")
     private Integer postCount;
+
+    @Column(name="is_suspended")
+    private boolean is_suspended;
+
+    @Column(name="suspended_until")
+    private LocalDate suspendedUntil;
+
     @Builder
     public Member(String email, String password, String nickname, boolean use_yn, LocalDateTime createdAt, LocalDateTime updatedAt,String img_url,Role role) {
         this.email = email;
@@ -82,6 +90,7 @@ public class Member {
         this.img_url = img_url;
         this.role = role;
         this.postCount = 0;
+        this.is_suspended = false;
     }
     public MemberResponseDto toResponse(){
         return MemberResponseDto
@@ -108,11 +117,13 @@ public class Member {
     }
 
     public void disabled(){
-        this.use_yn = false;
+        this.is_suspended = true;
+        this.suspendedUntil = LocalDate.now().plusDays(7);
     }
 
     public void enable() {
-        this.use_yn = true;
+        this.is_suspended = false;
+        this.suspendedUntil = null;
     }
     public void increasePostCount(){
         this.postCount++;
