@@ -29,37 +29,48 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-document.getElementById('admin').addEventListener('click', function () {
-    // 내 정보 페이지로 리다이렉트
-    window.location.href = '/page/admin';
-});
 
-// -------------모집 공고 생성 버튼 클릭 시
-document.getElementById('create').addEventListener('click', function () {
-    // 내 정보 페이지로 리다이렉트
-    window.location.href = '/page/post-form';
-});
-
-// -----------신고하기 버튼 클릭 시
-document.getElementById('notify').addEventListener('click', function () {
-    // 내 정보 페이지로 리다이렉트
-    window.location.href = '/page/notify-form';
-});
-
-// ------------------내 정보 버튼 클릭 시
-
-document.getElementById('my-info').addEventListener('click', function () {
-    // 내 정보 페이지로 리다이렉트
-    window.location.href = '/page/my_page';
-});
-
-
-// ------------------로그아웃 버튼 클릭 시
-// main.js
 document.addEventListener("DOMContentLoaded", function() {
-    var logoutButton = document.getElementById("logout");
+    // -------------admin 페이지 버튼 클릭 시
+    var adminButton = document.getElementById('admin');
+    if (adminButton) {
+        adminButton.addEventListener('click', function () {
+            // admin 페이지로 리다이렉트
+            window.location.href = '/page/admin';
+        });
+    }
+
+    // -------------모집 공고 생성 버튼 클릭 시
+    var createButton = document.getElementById('create');
+    if (createButton) {
+        createButton.addEventListener('click', function () {
+            // 모집 공고 생성 페이지로 리다이렉트
+            window.location.href = '/page/post-form';
+        });
+    }
+
+    // -----------신고하기 버튼 클릭 시
+    var notifyButton = document.getElementById('notify');
+    if (notifyButton) {
+        notifyButton.addEventListener('click', function () {
+            // 신고글 생성 페이지로 리다이렉트
+            window.location.href = '/page/notify-form';
+        });
+    }
+
+    // ------------------내 정보 버튼 클릭 시
+    var myInfoButton = document.getElementById('my-info');
+    if (myInfoButton) {
+        myInfoButton.addEventListener('click', function () {
+            // 내 정보 페이지로 리다이렉트
+            window.location.href = '/page/my_page';
+        });
+    }
+
+    // ------------------로그아웃 버튼 클릭 시
+    var logoutButton = document.getElementById('logout');
     if (logoutButton) {
-        logoutButton.addEventListener("click", function() {
+        logoutButton.addEventListener('click', function () {
             // 서버의 로그아웃 엔드포인트 호출
             fetch("/api/auth/logout", {
                 method: "POST",
@@ -80,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
 // ------------------모집분야별
 

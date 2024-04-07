@@ -2,6 +2,9 @@ package team.ftft.project4242.dto;
 
 import lombok.*;
 import team.ftft.project4242.domain.Apply;
+import team.ftft.project4242.domain.Team;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -17,15 +20,17 @@ public class ApplyResponseDto {
     private String file_url;
     private String nickname;
     private String role;
+    private LocalDateTime createdAt;
 
     public ApplyResponseDto(Apply apply) {
+        id = apply.getApply_id();
         role = apply.getMember().getRole().value();
-        nickname = apply.getMember().getNickname();
-        id =apply.getApply_id();
         title = apply.getTitle();
         content = apply.getContent();
         available_time = apply.getAvailable_time();
         available_day = apply.getAvailable_day();
         file_url = apply.getFile_url();
+        nickname = apply.getMember().getNickname();
+        createdAt = apply.getCreatedAt();
     }
 }

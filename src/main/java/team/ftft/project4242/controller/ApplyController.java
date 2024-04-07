@@ -6,12 +6,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.commons.security.CustomUserDetails;
-import team.ftft.project4242.domain.Apply;
-import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.TeamMember;
-import team.ftft.project4242.dto.ApplyRequestDto;
-import team.ftft.project4242.dto.ApplyResponseDto;
-import team.ftft.project4242.dto.PostRequestDto;
+import team.ftft.project4242.domain.*;
+import team.ftft.project4242.dto.*;
+import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.service.ApplyService;
 import team.ftft.project4242.service.TeamMemberService;
 
@@ -21,18 +18,20 @@ import java.util.List;
 public class ApplyController {
     private ApplyService applyService;
     private TeamMemberService teamMemberService;
+    private ApplyRepository applyRepository;
 
-    public ApplyController(ApplyService applyService, TeamMemberService teamMemberService) {
+    public ApplyController(ApplyService applyService, TeamMemberService teamMemberService, ApplyRepository applyRepository) {
         this.applyService = applyService;
         this.teamMemberService = teamMemberService;
+        this.applyRepository = applyRepository;
     }
 
     // POST : 신청글 생성
     @PostMapping("/api/post/{post_id}/apply")
     public ResponseEntity<ApplyResponseDto> addApply(@RequestPart ApplyRequestDto request,
                                                      @RequestPart(value = "file", required = false) MultipartFile file,
-                                                     @PathVariable Long post_id
-                                                    ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+                                                     @PathVariable Long post_id,
+                                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
         Apply apply = applyService.saveApply(request, post_id, file, memberId);
         ApplyResponseDto response = apply.toResponse();
@@ -40,18 +39,10 @@ public class ApplyController {
                 .body(response);
     }
 
-    // GET : 신청 모집글 상세 조회
-    @GetMapping("/api/apply/{apply_id}")
-    public ResponseEntity<ApplyResponseDto> showOneApply(@PathVariable Long apply_id) {
-        Apply apply = applyService.findById(apply_id);
-        return ResponseEntity.ok(apply.toResponse());
-    }
-
-    // POST : 스터디 팀원 추가
+    // POST: 스터디 팀원 추가
     @PostMapping("/api/apply/{apply_id}/accept")
-    public ResponseEntity<TeamMember> PostTeamMember(@PathVariable Long apply_id) {
-        TeamMember teamMember = teamMemberService.findById(apply_id);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(teamMember);
+    public ResponseEntity<?> acceptApply(@PathVariable Long apply_id) {
+        teamMemberService.findById(apply_id);
+        return ResponseEntity.ok().build();
     }
 }
