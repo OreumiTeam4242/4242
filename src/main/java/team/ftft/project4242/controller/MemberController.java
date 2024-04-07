@@ -59,11 +59,17 @@ public class MemberController {
         // 인증 객체 생성
         Authentication authentication
                 = new UsernamePasswordAuthenticationToken(userDetails, loginRequestDto.getPassword(), new ArrayList<>());
+
+        if(!userDetails.isEnabled()) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
         try {
             authenticationManager.authenticate(authentication);
         } catch (AuthenticationException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+
         // SecurityContextHolder : Authentication을 감싸는 객체
         SecurityContextHolder.getContext().setAuthentication(authentication);
         HttpSession session = request.getSession();

@@ -56,19 +56,16 @@ public class Post {
     @Column(name="use_yn")
     private boolean use_yn;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "major_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private PostMajor postMajor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "type_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private PostType postType;
 
     @ManyToOne
     @JoinColumn(name="member_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)

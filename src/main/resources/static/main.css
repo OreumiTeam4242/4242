@@ -21,7 +21,7 @@
     margin-top: -30px;
 }
 
-#logout, #notify {
+#logout, #notify ,#admin{
     border: none;
     outline: none;
     background-color: inherit ;

@@ -20,7 +20,7 @@ public class PostMajor {
     @Column(name="major_nm")
     private String major_nm;
 
-    @OneToMany(mappedBy = "postMajor")
+    @OneToMany(mappedBy = "postMajor", cascade = CascadeType.REMOVE)
     private List<Post> postList = new ArrayList<Post>();
 }
 
