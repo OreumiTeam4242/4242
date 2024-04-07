@@ -4,15 +4,18 @@ import org.springframework.stereotype.Service;
 import team.ftft.project4242.domain.*;
 import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.repository.TeamMemberRepository;
+import team.ftft.project4242.repository.TeamRepository;
 
 @Service
 public class TeamMemberService {
     private final TeamMemberRepository teamMemberRepository;
     private final ApplyRepository applyRepository;
+    private final TeamRepository teamRepository;
 
-    public TeamMemberService(TeamMemberRepository teamMemberRepository, ApplyRepository applyRepository) {
+    public TeamMemberService(TeamMemberRepository teamMemberRepository, ApplyRepository applyRepository, TeamRepository teamRepository) {
         this.teamMemberRepository = teamMemberRepository;
         this.applyRepository = applyRepository;
+        this.teamRepository = teamRepository;
     }
 
     public TeamMember findById(Long apply_id) {
@@ -20,7 +23,7 @@ public class TeamMemberService {
                 .orElseThrow(() -> new IllegalArgumentException("not found id" + apply_id));
         Member member = apply.getMember();
         Post post = apply.getPost();
-        Team team = post.getTeam();
+        Team team = teamRepository.findByPostId(post);
 
         if (team == null) {
             throw new IllegalStateException("Team not found for the given apply: " + apply_id);
@@ -29,10 +32,5 @@ public class TeamMemberService {
         TeamMember teamMember = new TeamMember(member, team);
         return teamMemberRepository.save(teamMember);
 
-    }
-
-    public TeamMember addTeamMember(Member member, Team team) {
-        TeamMember teamMember = new TeamMember(member, team);
-        return teamMemberRepository.save(teamMember);
     }
 }

@@ -58,67 +58,50 @@ if (infoButton) {
     });
 }
 
-
-// ---------------- 수락 버튼 눌렀을 때
+// 파일 다운로드
 document.addEventListener("DOMContentLoaded", function () {
-    const acceptButton = document.querySelector(".btn.btn-register-accept"); // 수락 버튼 선택
+    const downloadButton = document.querySelector(".btn-download");
 
-    if (acceptButton) {
-        acceptButton.addEventListener("click", function () {
-            const postIdElement = document.querySelector(".register-post-header-box");
-            const postId = postIdElement.getAttribute('data-apply-id'); // data-apply-id 속성에서 postId 가져오기
-            if (postId) {
-                // AJAX 요청을 통해 팀원 추가
-                addTeamMember(postId);
+    if (downloadButton) {
+        downloadButton.addEventListener("click", function () {
+            const fileUrl = document.querySelector(".file-url").textContent;
+            if (fileUrl) {
+                window.location.href = fileUrl; // 파일 URL로 이동하여 다운로드
             } else {
-                console.error("postId is not defined in the element");
+                console.error("File URL is not defined.");
             }
         });
-    }
-
-    const modalCloseButton = document.querySelector(".modal-close-img");
-    if (modalCloseButton) {
-        modalCloseButton.addEventListener("click", function () {
-            const modalAccept = document.querySelector(".modal");
-            if (modalAccept) {
-                modalAccept.style.display = "none"; // 모달 숨기기
-            }
-        });
-    }
-
-    // 팀원 추가 함수
-    function addTeamMember(postId) {
-        const url = `/api/apply/${postId}/accept`;
-
-        // AJAX를 이용한 POST 요청
-        fetch(url, {
-            method: "POST",
-            credentials: "same-origin", // 쿠키를 함께 전송
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error("팀원 추가 실패");
-            })
-            .then(data => {
-                console.log("팀원 추가 완료:", data);
-
-                // 모달 열기
-                const modalAccept = document.querySelector(".modal");
-                if (modalAccept) {
-                    modalAccept.style.display = "block";
-                }
-            })
-            .catch(error => {
-                console.error("팀원 추가 실패:", error.message);
-            });
     }
 });
 
+
+// ---------------- 수락 버튼 눌렀을 때
+$('.btn.btn-register-accept').click(function() {
+    // 버튼의 data-apply-id 속성을 통해 신청 ID 가져오기
+    var applyId = $('.register-post-header-box').attr('data-apply-id');
+
+    // AJAX 요청 보내기
+    $.ajax({
+        url: '/api/apply/' + applyId + '/accept',
+        type: 'POST',
+        success: function(response) {
+            // 성공적으로 요청을 보내고 응답을 받았을 때의 처리
+            console.log(response); // 응답을 로그에 출력하거나 필요한 다른 작업 수행
+
+            // 팀원 추가 성공 시 모달 열기
+            $('.modal').css('display', 'block');
+
+            // "닫기" 버튼 클릭 시 모달 숨기기
+            $('.modal-close-img').click(function() {
+                $('.modal').css('display', 'none');
+            });
+        },
+        error: function(xhr, status, error) {
+            // 요청이 실패하거나 에러 응답을 받았을 때의 처리
+            console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
+        }
+    });
+});
 
 
 

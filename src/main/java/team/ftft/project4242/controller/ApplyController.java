@@ -39,27 +39,10 @@ public class ApplyController {
                 .body(response);
     }
 
-    // GET : 신청글 목록 조회
-    @GetMapping("/api/applies")
-    public ResponseEntity<List<ApplyResponseDto>> showAllApply() {
-        List<Apply> applyList = applyService.findAllApply();
-        List<ApplyResponseDto> applyResponseList = applyList.stream()
-                .map(ApplyResponseDto::new)
-                .toList();
-        return ResponseEntity.ok(applyResponseList);
-    }
-
     // POST: 스터디 팀원 추가
     @PostMapping("/api/apply/{apply_id}/accept")
-    public ResponseEntity<TeamMemberResponseDto> acceptApply(@PathVariable Long apply_id) {
-        Apply apply = applyRepository.findById(apply_id)
-                .orElseThrow(() -> new IllegalArgumentException("Apply not found with id: " + apply_id));
-
-        Member member = apply.getMember();
-        Team team = apply.getPost().getTeam();
-
-        TeamMember teamMember = teamMemberService.addTeamMember(member, team);
-        TeamMemberResponseDto teamMemberResponseDto = new TeamMemberResponseDto(teamMember);
-        return ResponseEntity.status(HttpStatus.CREATED).body(teamMemberResponseDto);
+    public ResponseEntity<?> acceptApply(@PathVariable Long apply_id) {
+        teamMemberService.findById(apply_id);
+        return ResponseEntity.ok().build();
     }
 }

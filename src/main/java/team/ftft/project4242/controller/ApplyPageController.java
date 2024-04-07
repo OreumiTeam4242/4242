@@ -4,13 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import team.ftft.project4242.commons.security.CustomUserDetails;
+import team.ftft.project4242.domain.Apply;
+import team.ftft.project4242.dto.ApplyResponseDto;
+import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.ApplyService;
+import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
+
+import java.time.LocalDate;
 
 
 @Controller
@@ -21,8 +29,7 @@ public class ApplyPageController {
     private final MemberService memberService;
 
     @Autowired
-    public ApplyPageController(ApplyService applyService, PostService postService) {
-    public ApplyPageController(ApplyService applyService, MemberService memberService) {
+    public ApplyPageController(ApplyService applyService, PostService postService, MemberService memberService) {
         this.applyService = applyService;
         this.postService = postService;
         this.memberService = memberService;

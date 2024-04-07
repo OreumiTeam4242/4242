@@ -43,10 +43,8 @@
         <div class="register-post-text" th:text="${apply.content}"></div>
 
         <ul class="upload-files">
-            <li>작업물1.pdf</li>
-            <li>(683.4KB)</li>
-            <li><button>다운로드</button></li>
-            <li th:text="${file_url}"></li>
+            <li class="file-url" th:text="${file_url}" style="display: none;"></li>
+            <li><button class="btn-download">다운로드</button></li>
         </ul>
     </section>
 
@@ -84,6 +82,7 @@
 </section>
 
 <link rel="stylesheet" href="/register_post_detail.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/register_post_detail.js"></script>
 </body>
 </html>
