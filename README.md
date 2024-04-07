@@ -30,19 +30,23 @@
     <tr>
 	<td>
 	    - 문서작업<br>
-      - 추가 예정
+      - BE<br>
+      - FE
         </td>
         <td>
 	    - 문서작업<br>
-      - 추가 예정
+      - BE<br>
+      - FE
         </td>
         <td>
 	    - 문서작업<br>
-      - 추가 예정
+      - BE<br>
+      - FE
         </td>
         <td>
 	    - 문서작업<br>
-      - 추가 예정
+      - BE<br>
+      - FE
         </td>
     </tr>
 </table>
@@ -96,4 +100,4 @@
 ![4242요구사항명세서](https://github.com/OreumiTeam4242/4242/assets/94281256/05097210-002f-4817-b3ef-6c43de1b58f5)
 </br>
 ### erd 다이어그램
-![4242erd](https://github.com/OreumiTeam4242/4242/assets/94281256/c8d41d26-fa5e-4909-b01e-46e980a2476d)
+![4242-project](https://github.com/OreumiTeam4242/4242/assets/94281256/15da44ae-4cbf-4345-b886-1630c5081f95)
