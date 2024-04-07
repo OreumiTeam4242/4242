@@ -101,18 +101,19 @@ main {
     align-items: center; /* 수직 가운데 정렬 */
     justify-content: space-between;
 }
+/* 3x3 요소 보이게 하기 */
 .main-container-wrapper{
     height: 900px;
 }
-.register_list {
+.warning_list {
     width: 30%;
     margin-bottom: 20px;
 }
 
-.register_list a {
+.warning_list a {
     all: unset;
     display: inline-block;
-    border: 5px solid #7AC8EC;
+    border: 5px solid #A0A0A0;
     border-radius: 60px;
     width: 300px;
     height: 193px;
@@ -121,26 +122,19 @@ main {
     line-height: 100px;
 }
 
-.register_list h1 {
+.warning_list h1 {
     display: block;
     font-size: 20px;
 }
 
-.register_list h2 {
+.warning_list h2 {
     display: inline-block;
 }
 
-.register_h2 {
+.warning_h2 {
     display: flex;
     justify-content: space-around;
 }
-
-.main_paging {
-    margin: 104px 0;
-    font-size: 20px;
-    text-align: center;
-}
-
 /*푸터*/
 footer {
     background-color: #77A7EE;
@@ -157,6 +151,7 @@ footer {
 .menu_end button {
     margin-left: 60px;
 }
+/* 페이징 처리*/
 .pagination-wrapper {
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
@@ -173,9 +168,9 @@ footer {
     margin-right: 5px;
     margin-left: 5px;
 }
-.pagination a{
+.pagination a {
     text-decoration: none;
-    color:  #77A7EE;
+    color: #77A7EE;
     font-size: 20px;
     font-weight: 400;
 }

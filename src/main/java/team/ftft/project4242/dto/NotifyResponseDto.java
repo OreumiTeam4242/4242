@@ -12,7 +12,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class NotifyResponseDto {
+
     // 신고글 아이디, 제목, 사유, 신고 유저, 작성 유저, 작성 유저 등급, 생성일시, [작성자], [신고유저], 파일 아이디
+    private Long id;
     private String title;
     private String content;
     private Long notify_member_id;
@@ -21,8 +23,11 @@ public class NotifyResponseDto {
     private String post_member_role;
     private LocalDateTime createdAt;
     private String file_url;
+    private String notifyNickname;
+    private String postNickname;
 
     public NotifyResponseDto(Notify notify) {
+        id = notify.getNotify_id();
         title = notify.getTitle();
         content = notify.getContent();
         notify_member_id = notify.getNotifyMember().getMember_id();
@@ -31,5 +36,7 @@ public class NotifyResponseDto {
         post_member_role = String.valueOf(notify.getPostMember().getRole());
         createdAt = notify.getCreatedAt();
         file_url = notify.getFile_url();
+        notifyNickname = notify.getNotifyMember().getNickname();
+        postNickname = notify.getPostMember().getNickname();
     }
 }

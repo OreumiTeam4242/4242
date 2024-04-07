@@ -6,9 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var userPassword = document.querySelector('.input_password').value;
         var userNickname = document.querySelector('.input_nickname').value;
 
-        // 모든 필드가 입력되었는지 확인
+        // 이메일 유효성 검사를 위한 정규식
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // 모든 필드가 입력되었는지 및 이메일 유효성 검사
         if (!userEmail || !userPassword || !userNickname) {
             alert('모든 항목을 입력해주세요.');
+            return; // 폼 제출을 중단
+        } else if (!emailRegex.test(userEmail)) {
+            alert('올바른 이메일 형식이 아닙니다. @를 포함해주세요.');
             return; // 폼 제출을 중단
         }
 

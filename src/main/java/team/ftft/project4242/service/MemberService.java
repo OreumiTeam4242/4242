@@ -55,7 +55,6 @@ public class MemberService {
     }
 
     public MemberResponseDto findById(Long memberId){
-        System.out.println(memberId);
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()->new IllegalArgumentException("member doesn't exist"));
 

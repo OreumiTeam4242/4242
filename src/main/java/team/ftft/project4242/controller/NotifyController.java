@@ -1,8 +1,10 @@
 package team.ftft.project4242.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.commons.security.CustomUserDetails;
@@ -22,25 +24,20 @@ public class NotifyController {
 
     // POST : 신고글 생성
     @PostMapping("/api/notify")
-    public ResponseEntity<NotifyResponseDto> addNotify (@RequestPart NotifyRequestDto request,
+    public ResponseEntity<?> addNotify (@RequestPart NotifyRequestDto request,
                                                         @RequestPart(value="file",required = false) MultipartFile file
                                                         ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getMemberId();
+
+        if(!notifyService.isMemberExists(request.getNotifyMemberName())){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         Notify notify = notifyService.saveNotify(request,file,memberId);
         NotifyResponseDto response = notify.toResponse();
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
     }
 
-    // GET : 신고글 목록 조회 - 관리자 권한 부여해야함
-    @GetMapping("/api/notifies")
-    public ResponseEntity<List<NotifyResponseDto>> showAllNotify() {
-        List<Notify> notifyList = notifyService.findAllNotify();
-        List<NotifyResponseDto> notifyResponseList = notifyList.stream()
-                .map(NotifyResponseDto::new)
-                .toList();
-        return ResponseEntity.ok(notifyResponseList);
-    }
 
     // GET : 신고글 상세 조회 - 관리자 권한 부여해야함
     @GetMapping("/api/notify/{notify_id}")

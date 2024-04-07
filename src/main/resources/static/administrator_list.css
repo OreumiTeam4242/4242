@@ -54,83 +54,73 @@ header .logo {
 }
 
 /*로그인, 로그아웃 버튼 스위칭하기: 디스플레이 안되게 설정*/
-.logo  {
+.logo .logout_top {
     display: none;
 }
 
-button {
+button, .menu_top a {
     all: unset;
     margin-right: 12px;
+    cursor: pointer;
 }
 /*메인*/
 
 main {
-    /*text-align: center;*/
-    width: 100%;
+    margin: 0 185px;
 }
 
 .go_back {
-    margin-top: 87px;
-    margin-bottom: 11px;
-    cursor: pointer;
-}
-.title-wrap{
-    width: 1100px;
-
-    margin : 0 auto;
+    position: absolute;
+    top: 165px;
+    right: 190px;
+    text-decoration: none;
+    color: black;
 }
 
-.main_title h1 {
+.main_title h1:first-child {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.main_title h1:last-child {
     font-size: 36px;
     font-weight: bold;
-    margin-right: 65px;
-    margin-bottom: 8px;
-}
-
-.main_title {
-    display: flex;
-    align-items: center;
+    margin: 20px 20px 0 20px;
 }
 
 .main_title > p {
     font-size: 20px;
 }
-.main_content {
+
+.notify_list {
     display: flex;
     flex-wrap: wrap;
-    align-items: center; /* 수직 가운데 정렬 */
     justify-content: space-between;
 }
-.main-container-wrapper{
-    height: 900px;
-}
-.register_list {
-    width: 30%;
-    margin-bottom: 20px;
-}
 
-.register_list a {
+.notify_list a {
     all: unset;
     display: inline-block;
-    border: 5px solid #7AC8EC;
+    border: 5px solid #A0A0A0;
     border-radius: 60px;
     width: 300px;
     height: 193px;
-    margin-top: 70px;
+    margin-top: 55px;
     text-align: center;
     line-height: 100px;
 }
 
-.register_list h1 {
+.notify_list h1 {
     display: block;
     font-size: 20px;
 }
 
-.register_list h2 {
+.notify_list h2 {
     display: inline-block;
 }
 
-.register_h2 {
+.notify_h2 {
     display: flex;
     justify-content: space-around;
 }
@@ -156,26 +146,4 @@ footer {
 
 .menu_end button {
     margin-left: 60px;
-}
-.pagination-wrapper {
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    margin-top: 50px; /* 필요한 경우 상단 여백 추가 */
-    margin-bottom: 80px;
-}
-
-.pagination{
-    display: flex;
-
-}
-.pagination li{
-    margin-right: 5px;
-    margin-left: 5px;
-}
-.pagination a{
-    text-decoration: none;
-    color:  #77A7EE;
-    font-size: 20px;
-    font-weight: 400;
 }

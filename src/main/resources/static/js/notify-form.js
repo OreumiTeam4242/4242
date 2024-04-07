@@ -27,7 +27,39 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// 뒤로가기 버튼
-document.getElementById('goBack').addEventListener('click', function() {
-    window.history.back();
+
+$(document).ready(function() {
+    $('#modal_confirm').click(function() {
+        var formData = new FormData();
+        var request = {
+            title: $('#title').val(),
+            content: $('#motivation').val(),
+            notifyMemberName : $('#notify-user').val()
+        };
+        formData.append('request', new Blob([JSON.stringify(request)], {type: "application/json"}));
+        formData.append('file', $('#file')[0].files[0]);
+        $.ajax({
+            url: '/api/notify',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log("게시물이 성공적으로 추가되었습니다.");
+                // 필요에 따라 추가적인 처리를 할 수 있습니다.
+                //TODO : 상세 조회로 이동
+                window.location.href = '/page/main';
+            },
+            error: function(xhr, status, error) {
+                if(xhr.status === 404) {
+                    console.error("사용자를 찾을 수 없습니다.");
+                    alert("사용자를 찾을 수 없습니다. 정확한 닉네임을 입력해주세요.");
+                } else {
+                    console.error("게시물 추가에 실패했습니다:", xhr.responseText);
+                    alert("게시물 추가에 실패했습니다. 다시 시도해주세요.");
+                }
+            }
+        });
+    });
 });
+

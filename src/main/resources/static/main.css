@@ -7,7 +7,22 @@
     cursor: pointer;
 }
 
-#logout {
+
+#create {
+    width: 79px;
+    height: 79px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: #77A7EE;
+    color: #FFFFFF;
+    margin-top: -30px;
+}
+
+#logout, #notify {
     border: none;
     outline: none;
     background-color: inherit ;
@@ -61,6 +76,8 @@ ul {
 
 .box-top-content {
     cursor: pointer;
+    margin-top: 60px;
+
 }
 
 /* header */
@@ -125,32 +142,46 @@ header {
 
 .box-top-content {
     display: flex;
-
+    margin-left: 20px;
 }
 
 .box-in-text {
     font-size: 18px;
-    margin-top: 70px;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
 .heart {
+    display: flex;
+    position: absolute;
+    justify-content: flex-end;
     width: 35px;
     height: 36px;
-    margin-left: -25px;
-    margin-top: 10px;
+    margin-left: 220px;
+    margin-top: -40px;
+}
+
+.fire {
+    display: flex;
+    position: absolute;
+    width: 60px;
+    height: 55px;
+    margin-top: -70px;
+    margin-left: -20px;
 }
 
 .box-text-content {
     display: flex;
     justify-content: center;
-    margin-top: 90px;
+    flex-direction: row;
     margin-left: 10px;
+    margin-top: 60px;
 }
 
 .box-text-content-2 {
     display: flex;
     justify-content: center;
+    margin-top: -20px;
 }
 
 .author {
@@ -180,10 +211,17 @@ header {
     margin-top: 80px;
 }
 
+.find-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .boxes {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 1200px;
 }
 
 
@@ -197,6 +235,14 @@ header {
     background-color: #FFFFFF;
     margin: 15px 15px 15px 15px;
 }
+
+@media (max-width: 1024px) {
+    .find-box-content {
+        width: calc(33.33% - 20px); /* 화면 크기가 1024px 이하일 때도 3열 유지 */
+    }
+}
+
+
 
 .boxes {
     display: flex;

@@ -40,16 +40,6 @@ public class ApplyController {
                 .body(response);
     }
 
-    // GET : 신청글 목록 조회
-    @GetMapping("/api/applies")
-    public ResponseEntity<List<ApplyResponseDto>> showAllApply() {
-        List<Apply> applyList = applyService.findAllApply();
-        List<ApplyResponseDto> applyResponseList = applyList.stream()
-                .map(ApplyResponseDto::new)
-                .toList();
-        return ResponseEntity.ok(applyResponseList);
-    }
-
     // GET : 신청 모집글 상세 조회
     @GetMapping("/api/apply/{apply_id}")
     public ResponseEntity<ApplyResponseDto> showOneApply(@PathVariable Long apply_id) {

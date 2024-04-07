@@ -1,9 +1,18 @@
 const $topBtn = document.querySelector(".btn-to-top");
 
+window.addEventListener('scroll', () => {
+    if(document.documentElement.scrollTop > 150 ||
+        document.body.scrollTop > 150) {
+        $topBtn.style.display = 'block';
+    } else {
+        $topBtn.style.display = 'none';
+    }
+});
+
 // 버튼 클릭 시 맨 위로 이동
-$topBtn.onclick = () => {
-    window.scrollTo({top: 0, behavior: "smooth"});
-}
+$topBtn.addEventListener('click', () => {
+    window.scrollTo({top : 0, behavior : "smooth"});
+});
 
 // --------------------- 상세 페이지로 이동
 document.addEventListener('DOMContentLoaded', function () {
@@ -22,7 +31,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// -------------모집 공고 생성 버튼 클릭 시
+document.getElementById('create').addEventListener('click', function () {
+    // 내 정보 페이지로 리다이렉트
+    window.location.href = '/page/post-form';
+});
 
+// -----------신고하기 버튼 클릭 시
+document.getElementById('notify').addEventListener('click', function () {
+    // 내 정보 페이지로 리다이렉트
+    window.location.href = '/page/notify-form';
+});
 
 // ------------------내 정보 버튼 클릭 시
 
@@ -100,9 +119,9 @@ async function fetchAndDisplayPosts() {
                     <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
                 </div>
                 <div class="box-text-content-2">
-                    <p>${post.nickname}</p>
-                    <p>조회수 ${post.viewCount}</p>
-                    <p>댓글 ${post.commentList.length}</p>
+                    <p> ${post.nickname} </p>
+                    <p> 조회수 ${post.viewCount} </p>
+                    <p> 댓글 ${post.commentList.length} </p>
                 </div>
             `;
             findBox.appendChild(postDiv);
@@ -167,9 +186,9 @@ function displayPosts(posts) {
                 <img class="heart" src="/image/empty-heart.png" alt="빈 하트 이미지"/>
             </div>
             <div class="box-text-content-2">
-                <p>${post.nickname}</p>
-                <p>조회수 ${post.viewCount}</p>
-                <p>댓글 ${post.commentList.length}</p>
+                <p> ${post.nickname} </p>
+                <p> 조회수 ${post.viewCount} </p>
+                <p> 댓글 ${post.commentList.length} </p>
             </div>
         `;
         findBox.appendChild(postDiv);
@@ -177,39 +196,71 @@ function displayPosts(posts) {
 }
 
 //-----------Scrap
-// 서버에서 스크랩 상태 가져오기
-function fetchScrapStatus(postId) {
-    $.ajax({
-        url: `/api/posts/${postId}/scraps/status`,
-        type: 'GET',
-        success: function(response) {
-            // 성공적으로 상태를 받아왔을 때의 처리
-            var heartImage = $(`div.box-top-content[th\\:data-post-id='${postId}'] img.heart`);
+// 스크랩 상태를 가져와 UI를 업데이트하는 함수
+// 페이지 로드 시 실행
+window.onload = function() {
+    updateScrapStatus();
+    addHotIconToPosts();
+};
 
-            if (response.scrapped) {
-                heartImage.attr('src', '/image/filled-heart.png'); // 스크랩된 경우 채워진 하트로 변경
-            } else {
-                heartImage.attr('src', '/image/empty-heart.png'); // 스크랩되지 않은 경우 빈 하트로 변경
+// 스크랩 상태를 가져와 UI를 업데이트하는 함수
+async function updateScrapStatus() {
+    const posts = document.querySelectorAll('.box-top-content');
+
+    posts.forEach(async (post) => {
+        const postId = post.getAttribute('data-post-id'); // Thymeleaf 속성을 사용하지 않고 일반적인 속성을 사용
+
+        try {
+            const response = await fetch(`/api/posts/${postId}/scraps/status`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        },
-        error: function(xhr, status, error) {
-            // 요청이 실패하거나 에러 응답을 받았을 때의 처리
-            console.error(xhr.responseText); // 에러 메시지를 콘솔에 출력하거나 다른 에러 처리 작업 수행
+
+            const isScrapped = await response.json();
+            const heartImage = post.querySelector('.heart');
+
+            if (isScrapped) {
+                heartImage.src = '/image/filled-heart.png';
+            } else {
+                heartImage.src = '/image/empty-heart.png';
+            }
+
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
         }
     });
 }
 
-// 각 게시물의 스크랩 상태 확인
-$(document).ready(function() {
-    // HOT 게시물 스크랩 상태 확인
-    $('.hot-box .box-top-content').each(function() {
-        var postId = $(this).attr('th:data-post-id');
-        fetchScrapStatus(postId);
-    });
+//-------------- HOT 게시글 불 이미지 표시
 
-    // 모집중 게시물 스크랩 상태 확인
-    $('.find-box .box-top-content').each(function() {
-        var postId = $(this).attr('th:data-post-id');
-        fetchScrapStatus(postId);
+// hotPostList와 postList를 비교하여 핫 아이콘을 추가하는 함수
+function addHotIconToPosts() {
+    const hotPosts = document.querySelectorAll('.hot-box-content');
+    const findPosts = document.querySelectorAll('.find-box-content');
+
+    hotPosts.forEach(hotPost => {
+        const hotPostId = hotPost.querySelector('.box-top-content').getAttribute('th:data-post-id');
+        const hotPostTitle = hotPost.querySelector('.box-in-text').textContent.trim();
+
+        findPosts.forEach(findPost => {
+            const findPostId = findPost.querySelector('.box-top-content').getAttribute('th:data-post-id');
+            const findPostTitle = findPost.querySelector('.box-in-text').textContent.trim();
+
+            if (hotPostId === findPostId && hotPostTitle === findPostTitle) {
+                const hotIcon = document.createElement('img');
+                hotIcon.setAttribute('src', '/image/fire.png');
+                hotIcon.setAttribute('alt', '핫');
+                hotIcon.classList.add('fire');
+
+                const boxTopContent = findPost.querySelector('.box-top-content');
+                boxTopContent.appendChild(hotIcon);
+            }
+        });
     });
-});
+}
