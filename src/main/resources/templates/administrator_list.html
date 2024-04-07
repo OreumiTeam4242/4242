@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/administrator_list.css">
+    <link rel="stylesheet" th:href="@{/administrator_list.css}">
 <!--    <link rel="stylesheet" th:href="@{/administrator_list.css}">-->
     <title>관리자 전용 페이지</title>
 </head>
@@ -13,18 +13,15 @@
             <img src="/image/logo.png" alt="사이사이 로고">
         </a>
         <nav class="menu_top">
-            <a class="login_top" href="#">로그인</a>
-            <a class="logout_top" href="#">로그아웃</a>
-            <a class="mypage" href="#">내 정보</a>
+            <button id="logout" class="logout" type="button">로그아웃</button>
+            <button id="my-info" class="mypage" type="button">내 정보</button>
         </nav>
     </div>
-    <nav class="menu_top">
-        <button id="logout" class="logout" type="button">로그아웃</button>
-        <button id="my-info" class="mypage" type="button">내 정보</button>
-    </nav>
+
 </header>
 <main>
-    <a class="go_back" href="#">뒤로가기</a>
+    <div class="title-wrap">
+    <a class="go_back" th:href="@{/page/main/}">뒤로가기</a>
     <div class="main_title">
 
         <h1>관리자 전용 페이지</h1><br>
@@ -76,6 +73,7 @@
                 </li>
             </ul>
         </div>
+    </div>
     </div>
 </main>
 <footer>

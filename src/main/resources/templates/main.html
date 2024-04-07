@@ -13,6 +13,7 @@
     <img src="/image/4242-logo.png" alt="4242 로고">
 
     <ul class="header-nav">
+        <li><button id="admin" th:if="${userinfo.isAdmin}">관리자 페이지</button></li>
         <li><button id="create">모집공고</br>생성</button></li>
         <li><button id="notify" >신고하기</button></li>
         <li><button id="logout">로그아웃</button></li>
