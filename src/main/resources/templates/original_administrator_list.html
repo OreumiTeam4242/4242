@@ -1,42 +1,36 @@
+<!--기존의 html 파일입니다. 04.07 css 작업 때문에 새 administrator_list.html 파일 만들었습니다.-->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/administrator_list.css">
-<!--    <link rel="stylesheet" th:href="@{/administrator_list.css}">-->
-    <title>관리자 전용 페이지</title>
+        <link rel="stylesheet" th:href="@{/administrator_list.css}">
+    <title>관리자 페이지</title>
 </head>
 <body>
 <header>
     <div class="logo">
         <a class="logo_top" href="">
-            <img src="/image/logo.png" alt="사이사이 로고">
+            <img src="../static/image/logo.png" alt="사이사이 로고">
         </a>
-        <nav class="menu_top">
-            <a class="login_top" href="#">로그인</a>
-            <a class="logout_top" href="#">로그아웃</a>
-            <a class="mypage" href="#">내 정보</a>
+        <nav>
+            <button id="logout" type="button">로그아웃</button>
+            <button id="my-info" type="button">내 정보</button>
         </nav>
     </div>
-    <nav class="menu_top">
-        <button id="logout" class="logout" type="button">로그아웃</button>
-        <button id="my-info" class="mypage" type="button">내 정보</button>
-    </nav>
 </header>
 <main>
-    <a class="go_back" href="#">뒤로가기</a>
     <div class="main_title">
-
-        <h1>관리자 전용 페이지</h1><br>
-        <hr>
-        <h1>신고글 목록</h1>
+        <h1 class="admin_title">관리자 전용 페이지</h1>
     </div>
+    <a class="go_back" href="#">뒤로가기</a>
     <div class="main-container-wrapper">
+        <h2>신고글 목록</h2>
         <div class="main_content">
-            <div class="notify_list" th:each="notify : ${notifyList}">
+            <div class="warning_list" th:each="notify : ${notifyList}">
                 <a th:href="@{/page/main/{postId}(postId=${notify.id})}">
                     <h1 th:text="|신고 대상 : ${notify.notifyNickname}|">신고 대상</h1>
-                    <div class="notify_h2">
+                    <div class="warning_h2">
                         <h2 th:text="${notify.createdAt}">생성일</h2>
                         <h2 th:text="${notify.postNickname}">작성자</h2>
                     </div>
