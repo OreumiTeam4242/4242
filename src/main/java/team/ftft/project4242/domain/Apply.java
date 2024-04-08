@@ -80,7 +80,6 @@ public class Apply {
                 .available_time(available_time)
                 .available_day(available_day)
                 .file_url(file_url)
-                .id(apply_id)
                 .nickname(member.getNickname())
                 .role(member.getRole().value())
                 .build();
