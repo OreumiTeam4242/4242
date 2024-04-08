@@ -37,8 +37,8 @@ public class PostResponseDto {
         id = post.getPost_id();
         title = post.getTitle();
         content = post.getContent();
-        type = post.getPostType().getType_nm();
-        major = post.getPostMajor().getMajor_nm();
+        type = post.getPostType() != null ? post.getPostType().getType_nm() : null;
+        major = post.getPostMajor() != null ? post.getPostMajor().getMajor_nm() : null;
         createdAt = post.getCreatedAt();
         updatedAt = post.getUpdatedAt();
         commentList = post.getCommentList().stream().map(CommentResponseDto::new).toList();
