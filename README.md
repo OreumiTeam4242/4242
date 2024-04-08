@@ -2,8 +2,15 @@
 ### ✏스터디/프로젝트 모집 게시판 웹 프로젝트
 - 스터디나 프로젝트를 원하는 사람을 쉽게 모집하고 같은 목표를 가진 사람들과 소통할 수 있는 커뮤니티
 - 난이도(등급)별 운영제도로 실력에 맞는 사람들끼리 진행 가능
+
+### 배포 링크
+http://52.79.220.158:8080/page/intro
 </br>
 
+### 시연 영상 링크
+https://drive.google.com/file/d/1Z67N3fCD8K-dYAc562c5fIE1RKHViIDm/view?usp=sharing
+</br>
+</br>
 ## 💫 Team Members
 
 <table>
@@ -97,7 +104,12 @@
 
 ## 📄 Project Docs
 ### 사용자 요구사항 명세서
-![4242요구사항명세서](https://github.com/OreumiTeam4242/4242/assets/94281256/05097210-002f-4817-b3ef-6c43de1b58f5)
+![요구사항명세서](https://github.com/OreumiTeam4242/4242/assets/94281256/bae20c69-8f2f-4d0f-9ef7-7a3d7582de68)
 </br>
 ### erd 다이어그램
+링크 : https://www.erdcloud.com/d/Wz29QcMmB2phTyktZ
 ![4242-project](https://github.com/OreumiTeam4242/4242/assets/94281256/15da44ae-4cbf-4345-b886-1630c5081f95)
+</br>
+### api 설계서
+링크 : http://52.79.220.158:8080/swagger-ui/index.html
+![localhost_8080_swagger-ui_index html](https://github.com/OreumiTeam4242/4242/assets/94281256/a8cd67e9-9223-4204-b8d0-256dcca41e13)
