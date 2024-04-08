@@ -21,7 +21,7 @@
 </header>
 <main>
     <div class="title-wrap">
-    <a class="go_back" th:href="@{/page/main/}">뒤로가기</a>
+    <a class="go_back" th:href="@{/page/main}">뒤로가기</a>
     <div class="main_title">
 
         <h1>관리자 전용 페이지</h1><br>
@@ -31,7 +31,7 @@
     <div class="main-container-wrapper">
         <div class="main_content">
             <div class="notify_list" th:each="notify : ${notifyList}">
-                <a th:href="@{/page/main/{postId}(postId=${notify.id})}">
+                <a th:href="@{/page/notify_post_detail/{postId}(postId=${notify.id})}">
                     <h1 th:text="|신고 대상 : ${notify.notifyNickname}|">신고 대상</h1>
                     <div class="notify_h2">
                         <h2 th:text="${notify.createdAt}">생성일</h2>

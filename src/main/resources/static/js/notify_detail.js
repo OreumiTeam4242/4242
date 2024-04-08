@@ -12,7 +12,7 @@ const goBackButton = document.querySelector(".msg-go-back");
 
 if(goBackButton) {
     goBackButton.addEventListener('click', () =>
-        window.location.href = "/page/administrator_list"
+        window.location.href = "/page/admin"
     );
 }
 
