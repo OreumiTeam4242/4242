@@ -107,7 +107,7 @@ main {
     display: inline-block;
     border: 5px solid #A0A0A0;
     border-radius: 60px;
-    width: 300px;
+    width: 340px;
     height: 193px;
     margin-top: 50px;
     text-align: center;
@@ -120,6 +120,7 @@ main {
 }
 
 .notify_list h2 {
+    height: 20px;
     display: inline-block;
 }
 
@@ -137,7 +138,7 @@ main {
 .main-container-wrapper{
     height: 800px;
 }
-.warning_list {
+.notify_list {
     width: 30%;
     margin-bottom: 20px;
 }
