@@ -20,11 +20,11 @@ goToTopButton.addEventListener('click', () => {
 const logOutText = document.querySelector('.header-nav-logout');
 
 logOutText.addEventListener('click', () =>
-    location.replace("/page/login")
+    window.location.href = '/page/login'
 );
 
 const myInfoText = document.querySelector('.header-nav-info');
 
 myInfoText.addEventListener('click', () =>
-    location.replace("page/personal_page")
+    window.location.href = '/page/my_page'
 );
