@@ -13,9 +13,6 @@ import team.ftft.project4242.dto.TeamResponseDto;
 import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
 import team.ftft.project4242.service.TeamService;
-import team.ftft.project4242.service.MemberService;
-import team.ftft.project4242.service.PostService;
-
 import java.util.List;
 
 @Controller

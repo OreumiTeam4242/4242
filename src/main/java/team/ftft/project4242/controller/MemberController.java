@@ -1,5 +1,7 @@
 package team.ftft.project4242.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import team.ftft.project4242.service.MemberService;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Tag(name = "회원 CUD,로그인/로그아웃,정지")
 @RestController
 public class MemberController {
 
@@ -38,6 +41,7 @@ public class MemberController {
     }
 
 //    회원가입
+    @Operation(summary = "회원가입", description = "등록되지 않은 회원을 등록한다.")
     @PostMapping("/api/members/register")
     public ResponseEntity<?> registerMember(@RequestBody MemberRequestDto request) {
         if (memberService.isEmailExists(request.getEmail())) {
@@ -52,6 +56,7 @@ public class MemberController {
     }
 
 //    로그인
+    @Operation(summary = "로그인", description = "로그인 페이지에서 수행되는 로그인 요청")
     @PostMapping("/api/auth/login")
     public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response,
                                    @RequestBody LoginRequestDto loginRequestDto) throws IOException {
@@ -87,6 +92,7 @@ public class MemberController {
     }
     
 //    로그아웃
+    @Operation(summary = "로그아웃", description = "로그인중인 회원 대상 로그아웃 기능")
     @PostMapping("/api/auth/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
@@ -107,6 +113,7 @@ public class MemberController {
 
 
 //    개인정보 수정
+    @Operation(summary = "개인정보 수정", description = "개인정보 수정 페이지에서의 개인정보 수정 기능 - 닉네임과 이미지를 바꿀 수 있다.")
     @PutMapping("/api/members/update")
     public ResponseEntity<MemberResponseDto> updateMemberInfo(@RequestPart MemberRequestDto request,
                                                               @RequestPart(value="img",required = false) MultipartFile file
@@ -118,6 +125,7 @@ public class MemberController {
     }
 
     // 정지
+    @Operation(summary = "신고 대상 정지", description = "신고글 상세 페이지에서 신고 대상 정지 처리(관리자 권한)")
     @PutMapping("/api/members/{memberId}/disabled")
     public ResponseEntity<MemberResponseDto> disable(@PathVariable("memberId") Long member_id) {
         MemberResponseDto response = memberService.disabled(member_id);
@@ -126,6 +134,7 @@ public class MemberController {
     }
 
 //    신고 유저 정지 해제
+    @Operation(summary = "신고 대상 정지 해제", description = "신고글 상세 페이지에서 신고 대상 정지 해제(관리자 권한)")
     @PutMapping("/api/members/{memberId}/enable")
     public ResponseEntity<MemberResponseDto> enable(
             @PathVariable Long memberId) {
@@ -134,6 +143,7 @@ public class MemberController {
                 .body(response);
     }
     // 탈퇴
+    @Operation(summary = "회원 탈퇴", description = "탈퇴를 원하는 회원의 탈퇴")
     @DeleteMapping("/api/members/delete")
     public ResponseEntity<?> disable(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                         HttpServletRequest request, HttpServletResponse response) {

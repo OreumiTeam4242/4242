@@ -184,14 +184,13 @@ const applyButton = document.querySelector(".btn-apply");
 //     )
 // }
 applyButton.addEventListener('click', () => {
-    const userInfoNickname = applyButton.dataset.userInfoNickname;
-    const postNickname = applyButton.dataset.postNickname;
-    const startDate = applyButton.dataset.start_date;
-
-    if(userInfoNickname !== postNickname && new Date() < new Date(startDate)) {
-        window.location.href = `/page/post/`+postId+`/apply`;
-    } else if(userInfoNickname === postNickname) {
+    let userInfoNickname = applyButton.dataset.userinfonickname;
+    let postNickname = applyButton.dataset.postnickname;
+    let startDate = new Date(applyButton.dataset.startdate);
+    if(userInfoNickname === postNickname) {
         window.location.href = `/page/post/`+postId+`/apply-list`;
+    } else if(userInfoNickname !== postNickname && new Date() < new Date(startDate)) {
+        window.location.href = `/page/post/`+postId+`/apply`;
     }
 });
 

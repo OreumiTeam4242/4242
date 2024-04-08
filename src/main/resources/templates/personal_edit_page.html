@@ -52,6 +52,7 @@
             <input type="text" th:value="${userInfo.email}" disabled>
             <h3>닉네임</h3>
             <input type="text" id="nicknameInput" th:value="${userInfo.nickname}">
+            <button id="delete-user">탈퇴하기</button>
           </form>
         </div>
       </div>
@@ -72,12 +73,19 @@
   </nav>
 </footer>
 
-<!--모달 창 1-->
 <section class="modal">
-  <div class="modal_1">
-    <img class="modal_info" src="../static/image/info.png" alt="정보 아이콘">
-    <p>이미 존재하는 닉네임입니다.</p>
-    <img class="modal_1_close" src="../static/image/close.png" alt="닫기 버튼">
+  <div class="modal-box">
+    <button><img id="modal_close" src="/image/close.png" alt="모달창 닫기 버튼"></button>
+    <div class="modal-inner">
+      <img src="/image/info.png" alt="정보 아이콘">
+      <div id="question">
+        <p>회원 탈퇴 시 같은 계정으로 재생성 불가합니다.</p>
+        <p>그래도 탈퇴하시겠습니까?</p>
+      </div>
+      <button>
+        <img id="modal_confirm" src="/image/Ok.png" alt="체크 버튼">
+      </button>
+    </div>
   </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

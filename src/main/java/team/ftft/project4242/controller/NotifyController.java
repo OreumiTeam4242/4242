@@ -1,10 +1,10 @@
 package team.ftft.project4242.controller;
 
-import jakarta.persistence.EntityNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.commons.security.CustomUserDetails;
@@ -15,6 +15,7 @@ import team.ftft.project4242.service.NotifyService;
 
 import java.util.List;
 
+@Tag(name = "신고글 CUD")
 @RestController
 public class NotifyController {
     private final NotifyService notifyService;
@@ -23,6 +24,7 @@ public class NotifyController {
     }
 
     // POST : 신고글 생성
+    @Operation(summary = "신고글 생성", description = "신고글 생성")
     @PostMapping("/api/notify")
     public ResponseEntity<?> addNotify (@RequestPart NotifyRequestDto request,
                                                         @RequestPart(value="file",required = false) MultipartFile file
@@ -38,11 +40,4 @@ public class NotifyController {
                 .body(response);
     }
 
-
-    // GET : 신고글 상세 조회 - 관리자 권한 부여해야함
-    @GetMapping("/api/notify/{notify_id}")
-    public ResponseEntity<NotifyResponseDto> showOneNotify(@PathVariable Long notify_id) {
-        Notify notify = notifyService.findById(notify_id);
-        return ResponseEntity.ok(notify.toResponse());
-    }
 }

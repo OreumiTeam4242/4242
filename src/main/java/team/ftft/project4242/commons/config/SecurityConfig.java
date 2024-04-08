@@ -35,7 +35,7 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->              // 인증, 인가 설정
-                        auth.requestMatchers("/**").permitAll()
+                        auth.requestMatchers("/**","/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
 //                                .anyRequest().authenticated())
                                 .anyRequest().permitAll())
                 .formLogin(auth -> auth.loginPage("/page/login")// 폼 기반 로그인 설정

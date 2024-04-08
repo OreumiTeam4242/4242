@@ -46,7 +46,8 @@ public class Comment {
     private Member member;
 
     @Builder
-    public Comment(String content, Post post, Member member) {
+    public Comment(Long comment_id, String content, Post post, Member member) {
+        this.comment_id = comment_id;
         this.createdAt = LocalDateTime.now();
         this.content = content;
         this.use_yn = true;
