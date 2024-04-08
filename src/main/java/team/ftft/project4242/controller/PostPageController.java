@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import team.ftft.project4242.commons.security.CustomUserDetails;
-import team.ftft.project4242.domain.Member;
 import team.ftft.project4242.domain.Post;
 import team.ftft.project4242.dto.MemberResponseDto;
 import team.ftft.project4242.dto.PostResponseDto;
