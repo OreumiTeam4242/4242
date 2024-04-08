@@ -27,4 +27,14 @@ public class CommentResponseDto {
         this.use_yn = comment.isUse_yn();
     }
 
+    public CommentResponseDto toResponse(){
+        return CommentResponseDto.builder()
+                .commentId(commentId)  // commentId를 설정
+                .content(content)
+                .nickname(nickname)
+                .created_at(created_at)
+                .use_yn(use_yn)
+                .build();
+    }
+
 }

@@ -58,7 +58,8 @@ public class Apply {
 
     private Boolean use_yn;
     @Builder
-    public Apply(String title, String content, Post post, Member member, String available_time, String available_day,String file_url) {
+    public Apply(Long apply_id, String title, String content, Post post, Member member, String available_time, String available_day,String file_url) {
+        this.apply_id = apply_id;
         this.title = title;
         this.content = content;
         this.post = post;
@@ -80,7 +81,6 @@ public class Apply {
                 .available_time(available_time)
                 .available_day(available_day)
                 .file_url(file_url)
-                .id(apply_id)
                 .nickname(member.getNickname())
                 .role(member.getRole().value())
                 .build();

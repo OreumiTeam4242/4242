@@ -58,12 +58,27 @@ public class CommentServiceTest {
 
     @Test
     public void testDeleteComment() {
-        Comment comment = Comment.builder().comment_id(1L).build();
+        // Given
+        Member member = Member.builder()
+                .member_id(1L)
+                .nickname("testNickname")
+                .build();
+
+        Comment comment = Comment.builder()
+                .comment_id(1L)
+                .member(member)
+                .build();
 
         when(commentRepository.findById(1L)).thenReturn(Optional.of(comment));
 
+        // When
         CommentResponseDto result = commentService.deleteComment(1L);
 
+        // Then
         assertThat(result.getCommentId()).isEqualTo(1L);
+        assertThat(result.getNickname()).isEqualTo("testNickname");
+
+        verify(commentRepository, times(1)).findById(1L);
     }
+
 }

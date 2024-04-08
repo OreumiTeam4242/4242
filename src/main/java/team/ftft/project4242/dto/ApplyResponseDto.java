@@ -33,4 +33,19 @@ public class ApplyResponseDto {
         nickname = apply.getMember().getNickname();
         createdAt = apply.getCreatedAt();
     }
+
+    public ApplyResponseDto toResponse(Apply apply) {
+        return ApplyResponseDto.builder()
+                .id(apply.getApply_id())
+                .role(apply.getMember().getRole().value())
+                .nickname(apply.getMember().getNickname())
+                .title(apply.getTitle())
+                .content(apply.getContent())
+                .available_time(apply.getAvailable_time())
+                .available_day(apply.getAvailable_day())
+                .file_url(apply.getFile_url())
+                .createdAt(apply.getCreatedAt())
+                .build();
+    }
+
 }

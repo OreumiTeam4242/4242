@@ -64,7 +64,15 @@ public class NotifyServiceTest {
 
     @Test
     public void testFindAllNotify() {
-        Notify notify = Notify.builder().title("testTitle").content("testContent").build();
+        Member notifyMember = Member.builder().member_id(1L).nickname("notifyNickname").build();
+        Member postMember = Member.builder().member_id(2L).nickname("postNickname").build();
+
+        Notify notify = Notify.builder()
+                .title("testTitle")
+                .content("testContent")
+                .notifyMember(notifyMember)
+                .postMember(postMember)
+                .build();
 
         when(notifyRepository.findAll(any(Pageable.class)))
                 .thenReturn(new PageImpl<>(Arrays.asList(notify)));
@@ -73,7 +81,12 @@ public class NotifyServiceTest {
 
         assertThat(result.getContent()).hasSize(1);
         assertThat(result.getContent().get(0).getTitle()).isEqualTo("testTitle");
+        assertThat(result.getContent().get(0).getNotify_member_id()).isEqualTo(1L);
+        assertThat(result.getContent().get(0).getNotify_member_nickname()).isEqualTo("notifyNickname");
+        assertThat(result.getContent().get(0).getPost_member_nickname()).isEqualTo("postNickname");
     }
+
+
 
     @Test
     public void testFindById() {
