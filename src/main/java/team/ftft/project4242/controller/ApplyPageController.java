@@ -3,12 +3,10 @@ package team.ftft.project4242.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import team.ftft.project4242.commons.security.CustomUserDetails;
 import team.ftft.project4242.domain.Apply;
 import team.ftft.project4242.dto.ApplyResponseDto;
@@ -17,9 +15,7 @@ import team.ftft.project4242.dto.PostResponseDto;
 import team.ftft.project4242.service.ApplyService;
 import team.ftft.project4242.service.MemberService;
 import team.ftft.project4242.service.PostService;
-
 import java.time.LocalDate;
-
 
 @Controller
 public class ApplyPageController {

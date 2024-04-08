@@ -6,7 +6,7 @@
 </head>
 <body>
 <header>
-    <img class=logo src="/image/4242-logo.png" alt="4242 로고">
+    <img class="logo" src="/image/4242-logo.png" alt="4242 로고">
     <ul class="header-nav">
         <li><a class="header-nav-logout">로그아웃</a></li>
         <li><a class="header-nav-info">내 정보</a></li>
@@ -14,6 +14,7 @@
 </header>
 
 <main>
+    <input type="hidden" th:value="${apply.postId}" id="post-id">
     <section class="register-post-header">
         <a class="msg-go-back">뒤로가기</a>
         <div class="register-post-header-box" th:data-apply-id="${apply.id}">

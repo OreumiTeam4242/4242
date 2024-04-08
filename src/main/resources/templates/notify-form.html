@@ -8,20 +8,20 @@
 <body>
 <nav class="navbar">
     <div>
-        <a href="main.html">
+        <a th:href="@{/page/main}">
             <img id="logo" src="/image/logo.png" alt="로고 이미지"/>
         </a>
     </div>
     <div id="nav-r">
-        <a class='nav-a' th:href="@{page/logout}">로그아웃</a>
-        <a class='nav-a' th:href="@{page/my_page}">내 정보</a>
+        <a class='nav-a' th:href="@{/page/logout}">로그아웃</a>
+        <a class='nav-a' th:href="@{/page/my_page}">내 정보</a>
     </div>
 
 </nav>
 <main>
     <div id="main-wrapper">
         <div>
-            <a th:href="@{page/main}">뒤로가기</a>
+            <a th:href="@{/page/main}">뒤로가기</a>
             <h2 id="apply">신고합니다</h2>
             <hr/>
         </div>

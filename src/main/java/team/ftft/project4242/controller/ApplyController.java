@@ -1,5 +1,7 @@
 package team.ftft.project4242.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,8 +14,8 @@ import team.ftft.project4242.repository.ApplyRepository;
 import team.ftft.project4242.service.ApplyService;
 import team.ftft.project4242.service.TeamMemberService;
 
-import java.util.List;
 
+@Tag(name = "스터디/프로젝트 지원글 CUD")
 @RestController
 public class ApplyController {
     private ApplyService applyService;
@@ -27,6 +29,7 @@ public class ApplyController {
     }
 
     // POST : 신청글 생성
+    @Operation(summary = "신청글 생성", description = "스터디/프로젝트 모집글에 대한 신청글 생성")
     @PostMapping("/api/post/{post_id}/apply")
     public ResponseEntity<ApplyResponseDto> addApply(@RequestPart ApplyRequestDto request,
                                                      @RequestPart(value = "file", required = false) MultipartFile file,
@@ -40,6 +43,7 @@ public class ApplyController {
     }
 
     // POST: 스터디 팀원 추가
+    @Operation(summary = "스터디 팀원 추가", description = "신청글 페이지에서 수행되는 팀원 추가 기능")
     @PostMapping("/api/apply/{apply_id}/accept")
     public ResponseEntity<?> acceptApply(@PathVariable Long apply_id) {
         teamMemberService.findById(apply_id);

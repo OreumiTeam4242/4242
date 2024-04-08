@@ -41,10 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 뒤로 가기 버튼
 const goBackButton = document.querySelector(".msg-go-back");
+const postId = document.getElementById("post-id").value;
 
 if (goBackButton) {
     goBackButton.addEventListener('click', () =>
-        location.replace(`/page/register_list`)
+        location.replace(`/page/post/` +postId + `/apply-list`)
     );
 }
 
@@ -73,6 +74,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+document.querySelector(".logo").addEventListener('click', () =>
+    window.location.href = '/page/main'
+);
 
 
 // ---------------- 수락 버튼 눌렀을 때
