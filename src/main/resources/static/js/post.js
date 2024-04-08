@@ -228,6 +228,7 @@ commentRegisterButton.addEventListener('click', async event => {
 });
 
 
+
 // 댓글 삭제 버튼 및 댓글 삭제 모달창 버튼
 const commentList = document.querySelectorAll(".comment-detail");
 const commentDeleteButtons = document.querySelectorAll(".btn-comment-delete");

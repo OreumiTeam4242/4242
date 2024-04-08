@@ -21,7 +21,6 @@ public class TeamService {
     public TeamService(TeamRepository teamRepository, TeamMemberRepository teamMemberRepository, PostRepository postRepository) {
         this.teamRepository = teamRepository;
         this.teamMemberRepository = teamMemberRepository;
-
         this.postRepository = postRepository;
     }
 

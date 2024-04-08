@@ -20,5 +20,10 @@ public class PostType {
 
     @OneToMany(mappedBy = "postType")
     private List<Post> postList = new ArrayList<Post>();
+
+    @Builder
+    public PostType(String type_nm) {
+        this.type_nm = type_nm;
+    }
 }
 

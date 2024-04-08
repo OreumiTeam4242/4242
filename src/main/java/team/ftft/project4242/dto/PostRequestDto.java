@@ -11,9 +11,9 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PostRequestDto {
     private String title;
     private String content;
@@ -28,6 +28,7 @@ public class PostRequestDto {
     private Integer member_cnt;
     private String process_type;
     private String file_url;
+
     public Post toEntity(Member member, PostType postType, PostMajor postMajor) {
         return Post.builder()
                 .title(title)
@@ -45,4 +46,5 @@ public class PostRequestDto {
     public void updateFileUrl(String file_url){
         this.file_url = file_url;
     }
+
 }

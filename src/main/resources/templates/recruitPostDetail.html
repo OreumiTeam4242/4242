@@ -86,7 +86,10 @@
             <div class="recruit-post-text" th:text="${post.content}"></div>
             <form id="updateForm">
                 <textarea class="recruit-post-text2" name="editedContent" placeholder="수정할 내용을 입력하세요."></textarea>
-                <input type="file" name="file" id="fileInput">
+                <a th:if="${post.file_url != null}"
+                   th:href="@{'/api/file/download'(file=${post.file_url})}"
+                   download="다운로드" class="download-button">첨부파일 다운로드</a>
+
             </form>
             <button class="btn btn-apply"
                     th:style="${now.isBefore(post.start_date)} ? '' : (${userInfo.nickname==post.nickname}? '' : 'background-color: #B9B9B9;')"
@@ -143,8 +146,9 @@
     </section>
 
 <link rel="stylesheet" href="/recruitPostDetail.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/common.js"></script>
 <script src="/js/post.js"></script>
-</body>
 </html>
