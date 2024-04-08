@@ -102,7 +102,8 @@ public class Post {
     private Long viewCount;
 
     @Builder
-    public Post(String title, String content, PostType postType, PostMajor postMajor,Member member,Team team,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type,String file_url) {
+    public Post(Long post_id, String title, String content, PostType postType, PostMajor postMajor,boolean use_yn,Member member,Team team,LocalDate start_date,LocalDate end_date,Integer member_cnt,String process_type, Long viewCount,String file_url) {
+        this.post_id = post_id;
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -139,6 +140,7 @@ public class Post {
                 .file_url(file_url)
                 .type_id(postType.getType_id())
                 .major_id(postMajor.getMajor_id())
+                .viewCount(viewCount)
                 .build();
     }
 

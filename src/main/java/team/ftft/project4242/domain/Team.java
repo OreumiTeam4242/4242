@@ -44,7 +44,8 @@ public class Team {
 
 
     @Builder
-    public Team(boolean is_completed, Long leader_id,Post post) {
+    public Team(Long team_id, boolean is_completed, Long leader_id,Post post) {
+        this.team_id = team_id;
         this.is_completed = is_completed;
         this.leader_id = leader_id;
         this.post = post;
