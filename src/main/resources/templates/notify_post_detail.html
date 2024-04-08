@@ -46,6 +46,9 @@
         <p class="notify-post-introduce">사유</p>
         <div class="notify-post-text" th:text="${notify.content}">
         </div>
+        <a th:if="${notify.file_url != null}"
+           th:href="@{'/api/file/download'(file=${notify.file_url})}"
+           download="다운로드" class="download-button">첨부파일 다운로드</a>
     </section>
     <input type="hidden" id="notify-member-id" th:value="${notify.notify_member_id}">
     <button class="btn-user-suspend">신고 유저 정지하기</button>
