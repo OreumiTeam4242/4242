@@ -190,7 +190,7 @@ public class MemberServiceTest {
 
     @Test
     public void testCheckAndUnsuspendMembers() {
-        // TODO: 해당 메서드의 구현을 직접 호출하여 테스트
+        // 해당 메서드의 구현을 직접 호출하여 테스트
         memberService.checkAndUnsuspendMembers();
     }
 }
