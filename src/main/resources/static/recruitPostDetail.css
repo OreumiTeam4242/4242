@@ -345,3 +345,21 @@ footer{
     justify-content: center;
     align-items: center;
 }
+
+/* 파일 다운로드 */
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff; /* 텍스트 색상 */
+    background-color: #828282; /* 배경 색상 */
+    border: none;
+    border-radius: 15px; /* 버튼 모서리 둥글게 */
+    text-decoration: none; /* 기본 링크 밑줄 제거 */
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
+}
+
+.download-button:hover {
+    background-color: #0056b3; /* 호버 시 배경 색상 */
+    cursor: pointer;
+}

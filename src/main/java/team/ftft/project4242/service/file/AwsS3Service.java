@@ -5,12 +5,11 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.tika.Tika;
+import org.apache.tika.io.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import team.ftft.project4242.commons.utils.file.AwsProperties;
@@ -87,5 +86,20 @@ public class AwsS3Service implements StorageService{
         }
 
         return s3Client.getUrl(bucket, convertedFileName).toString();
+    }
+
+    public byte[] downloadFile(String file) {
+
+        String filename = file.substring(file.lastIndexOf('/') + 1);
+
+        S3Object s3Object = s3Client.getObject(awsProperties.getBucket(), filename);
+        S3ObjectInputStream inputStream = s3Object.getObjectContent();
+        try {
+            byte[] content = IOUtils.toByteArray(inputStream);
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

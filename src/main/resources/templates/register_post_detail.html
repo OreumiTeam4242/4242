@@ -43,10 +43,6 @@
         <p class="register-post-introduce">신청 동기</p>
         <div class="register-post-text" th:text="${apply.content}"></div>
 
-        <ul class="upload-files">
-            <li class="file-url" th:text="${file_url}" style="display: none;"></li>
-            <li><button class="btn-download">다운로드</button></li>
-        </ul>
     </section>
 
     <section class="available-info">
@@ -58,6 +54,9 @@
             <p class="available-time-text">활동 가능 시간</p>
             <p class = available-time-list th:text="${apply.available_time}">
         </div>
+        <a th:if="${apply.file_url != null}"
+           th:href="@{'/api/file/download'(file=${apply.file_url})}"
+           download="다운로드" class="download-button">첨부파일 다운로드</a>
         <button class="btn btn-register-accept">수락</button>
     </section>
 </main>
