@@ -37,7 +37,7 @@
         <div class="profile_desc">
           <h3 th:text="|닉네임 : ${userInfo.nickname}|">닉네임: 사이사이</h3>
           <p th:text="|등급 : ${userInfo.role}|">등급: 뉴비 / 주니어 / 시니어</p>
-          <p>이메일 : abcde@gmail.com</p>
+          <p th:text="|이메일 : ${userInfo.email}|">이메일 : abcde@gmail.com</p>
         </div>
 
         <button class="edit" type="button" th:href="@{/page/my_edit_page}">수정</button>

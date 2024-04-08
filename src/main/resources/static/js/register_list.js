@@ -1,4 +1,4 @@
-document.getElementById('my-info').addEventListener('click', function () {
+document.querySelector(".mypage").addEventListener('click', function () {
     // 내 정보 페이지로 리다이렉트
     window.location.href = '/page/my_page';
 });
