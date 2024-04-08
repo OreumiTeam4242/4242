@@ -5,11 +5,13 @@ const submitButton = document.getElementById('delete-user');
 
 // 제출 버튼 클릭 이벤트
 submitButton.addEventListener('click', function () {
+    event.preventDefault();
     modal.style.display = 'block';
 });
 
 // 모달 닫기 버튼 클릭 이벤트
 modalCloseButton.addEventListener('click', function() {
+    event.preventDefault();
     modal.style.display = 'none';
 });
 
@@ -17,9 +19,11 @@ modalCloseButton.addEventListener('click', function() {
 modalConfirmButton.addEventListener('click', function() {
     // 여기에 제출 로직을 작성할 수 있습니다. 예를 들면, 폼을 서버로 전송하는 코드를 추가할 수 있습니다.
     // formSubmit();
+    event.preventDefault();
     modal.style.display = 'none';
 });
 window.addEventListener('click', function(event) {
+    event.preventDefault();
     if (event.target === modal) {
         modal.style.display = 'none';
     }
