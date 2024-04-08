@@ -1,5 +1,6 @@
 package team.ftft.project4242.service;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
 class TeamMemberServiceTest {
     @InjectMocks
     private TeamMemberService teamMemberService;
@@ -27,8 +29,8 @@ class TeamMemberServiceTest {
     private TeamRepository teamRepository;
 
     @Test
+    @DisplayName("신청글을 수락했을 때 teamMember 테이블에 팀원 member_id, post_id 저장하기")
     void findById() {
-        // todo 신청글을 수락했을 때 teamMember 테이블에 팀원 member_id, post_id 저장하기.
         // given
         Long applyId = 1L;
         Apply apply = Apply.builder()
@@ -42,6 +44,12 @@ class TeamMemberServiceTest {
 
         when(applyRepository.findById(applyId)).thenReturn(Optional.of(apply));
         when(teamRepository.findByPostId(any(Post.class))).thenReturn(team);
+
+        TeamMember mockTeamMember = TeamMember.builder()
+                .member(apply.getMember())
+                .team(team)
+                .build();
+        when(teamMemberRepository.save(any(TeamMember.class))).thenReturn(mockTeamMember);
 
         // when
         TeamMember savedTeamMember = teamMemberService.findById(applyId);

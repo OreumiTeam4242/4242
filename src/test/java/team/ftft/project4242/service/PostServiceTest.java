@@ -1,6 +1,7 @@
 package team.ftft.project4242.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,7 +22,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 class PostServiceTest {
 
     @InjectMocks
@@ -41,18 +42,10 @@ class PostServiceTest {
     private AwsS3Service awsS3Service;
     @Mock
     private TeamMemberRepository teamMemberRepository;
-    @Mock
-    private ScrapRepository scrapRepository;
-
-    @BeforeEach
-    public void setUp() {
-        // 각 테스트 메서드 실행 전 모든 mock 객체들 재설정 해주기
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
+    @DisplayName("글과 team이 잘 저장되는지 확인")
     void save() {
-        // todo save() 에서 Test 할 것 : 각 레포지토리에서 잘 가져오고 잘 저장하는지? + team, teamMember에 잘 저장되는지?
         // given - 데이터 준비
         Long memberId = 1L;
         PostRequestDto requestDto = new PostRequestDto();
@@ -93,8 +86,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("메서드 호출 시 post1과 post2를 잘 가져오는지 확인")
     void findAllAble() {
-        // todo 메서드 호출 시 post1과 post2를 리스트 형태로 가져와야됨.
         // given
         Post post1 = new Post();
         Post post2 = new Post();
@@ -112,8 +105,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("주어진 id에 해당하는 게시글을 찾고, 조회수를 증가시킴.")
     void findById() {
-        // todo 주어진 id에 해당하는 게시글을 찾고, 조회수를 증가시킴.
         // given
         Long postId = 1L;
         Post expectedPosts = new Post();
@@ -130,8 +123,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("글 수정")
     void update() {
-        // todo 글 수정.
         // given
         Long postId = 1L;
         String updatedContent = "Updated content";
@@ -161,8 +154,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("글 안보이게 하기")
     void disablePostById() {
-        // todo 글 안보이게 하기.
         // given
         Long postId = 1L;
 
@@ -174,8 +167,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("type_id로 모집구분별 전체 글 가져오기")
     void findTypePostAll() {
-        // todo type_id로 모집구분별 전체 글 가져오기.
         // given
         Long typeId = 1L;
         List<Post> posts = new ArrayList<>();
@@ -192,8 +185,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("모집분야별 전체 글 가져오기")
     void findMajorPostAll() {
-        // todo major_id로 모집분야별 전체 글 가져오기.
         // given
         Long majorId = 1L;
         List<Post> posts = new ArrayList<>();
@@ -211,8 +204,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("조회수 top3 모집글 찾기")
     void findTop3PostsByViewCount() {
-        // todo 조회수 top3 모집글 찾기.
         // given
         Post post1 = Post.builder()
                 .post_id(1L)
@@ -242,56 +235,8 @@ class PostServiceTest {
     }
 
     @Test
-    void findAllScrap() {
-        // todo memberId로 Scrap 가져오기.
-        // given
-        Long memberId = 1L;
-
-        Member member = Member.builder()
-                .member_id(memberId)
-                .build();
-
-        Post post1 = Post.builder()
-                .post_id(1L)
-                .content("Post 1")
-                .build();
-
-        Post post2 = Post.builder()
-                .post_id(2L)
-                .content("Post 2")
-                .build();
-
-        Scrap scrap1 = Scrap.builder()
-                .post(post1)
-                .member(member)
-                .build();
-
-        Scrap scrap2 = Scrap.builder()
-                .post(post2)
-                .member(member)
-                .build();
-
-        List<Scrap> scrapList = List.of(scrap1, scrap2);
-
-        when(memberRepository.findById(memberId)).thenReturn(Optional.of(member));
-        when(scrapRepository.findAllByMember(member)).thenReturn(Optional.of(scrapList));
-
-        // when
-        List<PostResponseDto> result = postService.findAllScrap(memberId);
-
-        // then
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("Post 1", result.get(0).getContent());
-        assertEquals("Post 2", result.get(1).getContent());
-
-        verify(memberRepository).findById(memberId);
-        verify(scrapRepository).findAllByMember(member);
-    }
-
-    @Test
+    @DisplayName("진행 중인 게시물 리스트 가져오기")
     void findOnGoingPostAll() {
-        // todo 진행 중인 게시물 리스트 가져오기.
         // given
         Post post1 = Post.builder()
                 .title("Post 1")
@@ -319,8 +264,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("완료된 게시물 리스트 가져오기")
     void findFinishPostAll() {
-        // todo 완료된 게시물 리스트 가져오기.
         // given
         Post post1 = Post.builder()
                 .title("Post 1")
@@ -348,8 +293,8 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("member_id가 작성한 게시글 조회")
     void findMyPosts() {
-        // todo member_id가 작성한 게시글 조회.
         // given
         Long memberId = 1L;
         Post post1 = Post.builder()
@@ -376,6 +321,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("모집글 종료")
     void closePosts() {
         // when
         postService.closePosts();

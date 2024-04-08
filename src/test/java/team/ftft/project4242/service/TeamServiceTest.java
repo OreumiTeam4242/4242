@@ -1,15 +1,14 @@
 package team.ftft.project4242.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import team.ftft.project4242.domain.Member;
-import team.ftft.project4242.domain.Post;
-import team.ftft.project4242.domain.Team;
-import team.ftft.project4242.domain.TeamMember;
+import org.springframework.security.core.parameters.P;
+import team.ftft.project4242.domain.*;
 import team.ftft.project4242.dto.TeamResponseDto;
 import team.ftft.project4242.repository.PostRepository;
 import team.ftft.project4242.repository.TeamMemberRepository;
@@ -20,7 +19,9 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
 class TeamServiceTest {
     @InjectMocks
     private TeamService teamService;
@@ -29,17 +30,10 @@ class TeamServiceTest {
     private TeamRepository teamRepository;
     @Mock
     private TeamMemberRepository teamMemberRepository;
-    @Mock
-    private PostRepository postRepository;
-    @BeforeEach
-    public void setUp() {
-        // 각 테스트 메서드 실행 전 모든 mock 객체들 재설정 해주기
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
+    @DisplayName("팀 저장하기")
     void save() {
-        // todo 팀 저장하기.
         // given
         Team inputTeam = Team.builder()
                 .is_completed(false)
@@ -65,8 +59,8 @@ class TeamServiceTest {
 
 
     @Test
+    @DisplayName("팀이 종료되었을 때 상태 업데이트")
     void updateIscompleted() {
-        // todo 팀이 종료되었을 때 상태 업데이트 하기.
         // given
         Long teamId = 1L;
 
@@ -102,24 +96,55 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("진행중인 팀 찾기")
     void findOnGoingTeamAll() {
-        // todo 진행중인 팀 찾기.
         // given
         Long memberId = 1L;
+
+        Member member = Member.builder()
+                .member_id(memberId)
+                .nickname("OnGoing")
+                .build();
+
+        PostType postType = PostType.builder()
+                .type_nm("Type1")
+                .build();
+
+        PostMajor postMajor = PostMajor.builder()
+                .major_nm("Major1")
+                .build();
+
+        Post post1 = Post.builder()
+                .member(member)
+                .postType(postType)
+                .postMajor(postMajor)
+                .build();
+
+        Post post2 = Post.builder()
+                .member(member)
+                .postType(postType)
+                .postMajor(postMajor)
+                .build();
+
         Team team1 = Team.builder()
                 .team_id(1L)
                 .is_completed(false)
+                .post(post1)
                 .build();
         Team team2 = Team.builder()
                 .team_id(2L)
                 .is_completed(false)
+                .post(post2)
                 .build();
 
         TeamMember teamMember1 = TeamMember.builder()
                 .team(team1)
+                .member(member)
                 .build();
+
         TeamMember teamMember2 = TeamMember.builder()
                 .team(team2)
+                .member(member)
                 .build();
 
         when(teamMemberRepository.findOnGoingTeam(memberId))
@@ -132,28 +157,60 @@ class TeamServiceTest {
         assertEquals(2, result.size());
         assertEquals(false, result.get(0).is_completed());
         assertEquals(false, result.get(1).is_completed());
+
+        verify(teamMemberRepository, times(1)).findOnGoingTeam(memberId);
     }
 
     @Test
+    @DisplayName("종료된 팀 찾기")
     void findFinishedTeam() {
-        // todo 종료된 팀 찾기
         // given
         Long memberId = 1L;
+
+        Member member = Member.builder()
+                .member_id(memberId)
+                .nickname("OnGoing")
+                .build();
+
+        PostType postType = PostType.builder()
+                .type_nm("Type1")
+                .build();
+
+        PostMajor postMajor = PostMajor.builder()
+                .major_nm("Major1")
+                .build();
+
+        Post post1 = Post.builder()
+                .member(member)
+                .postType(postType)
+                .postMajor(postMajor)
+                .build();
+
+        Post post2 = Post.builder()
+                .member(member)
+                .postType(postType)
+                .postMajor(postMajor)
+                .build();
 
         Team team1 = Team.builder()
                 .team_id(1L)
                 .is_completed(true)
+                .post(post1)
                 .build();
         Team team2 = Team.builder()
                 .team_id(2L)
                 .is_completed(true)
+                .post(post2)
                 .build();
 
         TeamMember teamMember1 = TeamMember.builder()
                 .team(team1)
+                .member(member)
                 .build();
+
         TeamMember teamMember2 = TeamMember.builder()
                 .team(team2)
+                .member(member)
                 .build();
 
         when(teamMemberRepository.findFinishedTeam(memberId))

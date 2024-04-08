@@ -22,5 +22,10 @@ public class PostMajor {
 
     @OneToMany(mappedBy = "postMajor", cascade = CascadeType.REMOVE)
     private List<Post> postList = new ArrayList<Post>();
+
+    @Builder
+    public PostMajor(String major_nm) {
+        this.major_nm = major_nm;
+    }
 }
 
