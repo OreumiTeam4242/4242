@@ -56,6 +56,7 @@ public class Comment {
     }
     public CommentResponseDto toResponse(){
         return CommentResponseDto.builder()
+                .commentId(comment_id)
                 .content(content)
                 .nickname(member.getNickname())
                 .created_at(createdAt)

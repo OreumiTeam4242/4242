@@ -49,16 +49,41 @@ public class ApplyService {
         return applyRepository.save(request.toEntity(post,member));
     }
 
-    // GET : 신청글 목록 조회
+//    기존 findAllApply 메서드
+//    public Page<ApplyResponseDto> findAllApply(Long postId, Pageable pageable)
+//    {
+//        Page<Apply> applies = applyRepository.findAllByPostId(postId,pageable);
+//        List<ApplyResponseDto> applyList = applies.stream()
+//                .map(ApplyResponseDto::new)
+//                .collect(Collectors.toList());
+//
+//        return new PageImpl<>(applyList,pageable,applies.getTotalElements());
+//    }
+
+    // GET : 신청글 목록 조회, ApplyServiceTest 하며 수정
     public Page<ApplyResponseDto> findAllApply(Long postId, Pageable pageable)
     {
         Page<Apply> applies = applyRepository.findAllByPostId(postId,pageable);
         List<ApplyResponseDto> applyList = applies.stream()
-                .map(ApplyResponseDto::new)
+                .map(apply -> {
+                    return ApplyResponseDto.builder()
+                            .id(apply.getApply_id())
+                            .title(apply.getTitle())
+                            .content(apply.getContent())
+                            .nickname(apply.getMember() != null ? apply.getMember().getNickname() : null)
+                            .createdAt(apply.getCreatedAt())
+                            .available_time(apply.getAvailable_time())
+                            .available_day(apply.getAvailable_day())
+                            .file_url(apply.getFile_url())
+                            .role(apply.getMember() != null ? apply.getMember().getRole().value() : null)
+                            .postId(apply.getPost() != null ? apply.getPost().getPost_id() : null)
+                            .build();
+                })
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(applyList,pageable,applies.getTotalElements());
+        return new PageImpl<>(applyList, pageable, applies.getTotalElements());
     }
+
 
     public Apply findById(Long apply_id) {
         return applyRepository.findById(apply_id)
@@ -67,5 +92,3 @@ public class ApplyService {
 
 
 }
-
-
