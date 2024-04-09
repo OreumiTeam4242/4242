@@ -35,8 +35,10 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->              // 인증, 인가 설정
-                        auth.requestMatchers("/**","/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        auth.requestMatchers("/page/intro","/page/login","/page/join","api/members/register","/api/auth/login",
+                                        "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
 //                                .anyRequest().authenticated())
+                                .requestMatchers("/api/admin/","/page/notify_post_detail/**","/api/members/{memberId}/disabled").hasRole("관리자")
                                 .anyRequest().permitAll())
                 .formLogin(auth -> auth.loginPage("/page/login")// 폼 기반 로그인 설정
                         .defaultSuccessUrl("/page/main"))
