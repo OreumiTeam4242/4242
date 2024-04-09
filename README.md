@@ -112,4 +112,4 @@ https://drive.google.com/file/d/1Z67N3fCD8K-dYAc562c5fIE1RKHViIDm/view?usp=shari
 </br>
 ### api 설계서
 링크 : http://52.79.220.158:8080/swagger-ui/index.html
-![localhost_8080_swagger-ui_index html](https://github.com/OreumiTeam4242/4242/assets/94281256/a8cd67e9-9223-4204-b8d0-256dcca41e13)
+![52 79 220 158_8080_swagger-ui_index html](https://github.com/OreumiTeam4242/4242/assets/94281256/8bb710ef-cd03-4be3-95f3-4b1695acbe44)
