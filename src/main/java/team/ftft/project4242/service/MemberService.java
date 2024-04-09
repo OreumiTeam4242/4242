@@ -94,6 +94,7 @@ public class MemberService {
     }
 
     @Scheduled(cron = "0 0 0 * * *")
+    @Transactional
     public void checkAndUnsuspendMembers() {
         LocalDate now = LocalDate.now();
         LocalDate sevenDaysLater = now.plusDays(7);
